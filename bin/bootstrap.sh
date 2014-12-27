@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 apt-get update -y
 apt-get upgrade -y
-apt-get -y install curl git-core python-software-properties imagemagick libmagickwand-dev memcached
+apt-get -y install curl git-core software-properties-common python-software-properties imagemagick libmagickwand-dev memcached
 apt-get -y install build-essential
 apt-get -y install tklib
 apt-get -y install zlib1g-dev libssl-dev

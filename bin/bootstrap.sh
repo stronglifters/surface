@@ -23,7 +23,7 @@ apt-get -y install nginx
 
 add-apt-repository -y ppa:pitti/postgresql
 apt-get -y update
-apt-get -y install postgresql-9.4 libpq-dev postgresql-contrib-9.4
+apt-get -y install postgresql-9.3 libpq-dev postgresql-contrib-9.3
 
 add-apt-repository -y ppa:chris-lea/node.js
 apt-get -y update

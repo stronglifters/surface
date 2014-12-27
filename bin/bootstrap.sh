@@ -21,11 +21,11 @@ add-apt-repository -y ppa:nginx/stable
 apt-get -y update
 apt-get -y install nginx
 
-add-apt-repository -y ppa:pitti/postgresql
-apt-get -y update
-apt-get -y install postgresql-9.3 libpq-dev postgresql-contrib-9.3
+echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+apt-get install postgresql-9.4
 
-add-apt-repository -y ppa:chris-lea/node.js
+curl -sL https://deb.nodesource.com/setup | sudo bash -
 apt-get -y update
 apt-get -y install nodejs
 

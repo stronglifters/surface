@@ -13,3 +13,4 @@
 /tmp
 .vagrant
 .env
+database.yml

@@ -1,7 +1,15 @@
 language: ruby
 rvm: 2.1.5
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database app_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database app_test;' -U postgres
+deploy:
+  provider: heroku
+  api_key:
+    secure: ERPmKbyLqSCKpZ7uKPoEchI2Er+3a9beGFhs1EpLbfsqsBOszcyzNLqFE8eq3mj9dbhvshSOJWiY1ERiLtwfhlHbpT3yRqnOze6Evhilo5n8OQk1J+5Qp6F9vQuw6na7XYSnU1LxdBT4CDQO9TMv74z/f6brR1W/OZlb0szWAIA=
+  app: supplyapp
+  on:
+    repo: speasley/supply
+  run: "rake db:migrate"

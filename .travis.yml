@@ -1,5 +1,6 @@
 language: ruby
 rvm: 2.1.5
+cache: bundler
 addons:
   postgresql: '9.3'
 before_script:

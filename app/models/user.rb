@@ -1,6 +1,3 @@
-class User
-  include ActiveModel::Model
-
-  attr_accessor :username, :email
-
+class User < ActiveRecord::Base
+  attr_accessor :terms_and_conditions, :password
 end

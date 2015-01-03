@@ -16,6 +16,11 @@
       </label>
     </div> <!-- /.small-12 -->
     <div class="small-12 columns">
+      <label>I Agree
+        <%= f.check_box :terms_and_conditions %>
+      </label>
+    </div> <!-- /.small-12 -->
+    <div class="small-12 columns">
       <%= f.submit "Register", class: "button"  %>
     </div> <!-- /.small-12 -->
 <% end %>

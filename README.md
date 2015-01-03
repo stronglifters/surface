@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/speasley/supply.svg?branch=master)](https://travis-ci.org/speasley/supply)
+[![Code Climate](https://codeclimate.com/github/speasley/supply/badges/gpa.svg)](https://codeclimate.com/github/speasley/supply)
 
 ## README
 

@@ -56,6 +56,8 @@ GEM
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
     dotenv (1.0.2)
+    email_validator (1.5.0)
+      activemodel
     erubis (2.7.0)
     execjs (2.2.2)
     foreman (0.76.0)
@@ -176,6 +178,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
+  email_validator
   foreman
   foundation-rails
   jbuilder (~> 2.0)

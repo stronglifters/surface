@@ -20,4 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  registrations:
+    new:
+      username: "Username"
+      email: "Email"
+      password: "Password"
+      terms_and_conditions: "I Agree"
+      register_button: "Register"

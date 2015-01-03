@@ -4,12 +4,12 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    user = User.new(secure_params)
-    if user.save
-      log_in(user)
+    @user = User.new(secure_params)
+    if @user.save
+      log_in(@user)
       redirect_to dashboard_path
     else
-      flash[:error] = user.errors.full_messages
+      flash.now[:error] = @user.errors.full_messages
       render :new
     end
   end

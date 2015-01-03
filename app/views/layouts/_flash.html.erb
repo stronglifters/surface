@@ -1,0 +1,14 @@
+<% if flash.any? %>
+  <div class="row">
+    <% flash.each do |name, errors| %>
+      <div data-alert class="alert-box <%= name %>">
+        <ul>
+          <% errors.each do |error| %>
+            <%= content_tag :li, error %>
+          <% end %>
+        </ul>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+  </div>
+<% end %>

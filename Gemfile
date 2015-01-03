@@ -45,5 +45,6 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'foreman'
+  gem 'i18n-tasks'
 end
 

@@ -1,27 +1,25 @@
 <div class="row">
 <%= form_for @user, url: registrations_path do |f| %>
-    <div class="small-12 columns">
-      <label>Username
-        <%= f.text_field :username, placeholder: "Username" %>
-      </label>
-    </div> <!-- /.small-12 -->
-    <div class="small-12 columns">
-      <label>Email
-        <%= f.email_field :email, placeholder: "Email" %>
-      </label>
-    </div> <!-- /.small-12 -->
-    <div class="small-12 columns">
-      <label>Password
-        <%= f.password_field :password, placeholder: "Password" %>
-      </label>
-    </div> <!-- /.small-12 -->
-    <div class="small-12 columns">
-      <label>I Agree
-        <%= f.check_box :terms_and_conditions %>
-      </label>
-    </div> <!-- /.small-12 -->
-    <div class="small-12 columns">
-      <%= f.submit "Register", class: "button"  %>
-    </div> <!-- /.small-12 -->
+  <div class="small-12 columns">
+    <label><%= t('.username') %>
+      <%= f.text_field :username, placeholder: t('.username') %>
+    </label>
+  </div> <!-- /.small-12 -->
+  <div class="small-12 columns">
+    <label><%= t('.email') %>
+      <%= f.email_field :email, placeholder: t('.email') %>
+    </label>
+  </div> <!-- /.small-12 -->
+  <div class="small-12 columns">
+    <label><% t('.password') %>
+      <%= f.password_field :password, placeholder: t('.password') %>
+    </label>
+  </div> <!-- /.small-12 -->
+  <div class="small-12 columns">
+    <label> <%= f.check_box :terms_and_conditions %> <%= t('.terms_and_conditions') %> </label>
+  </div> <!-- /.small-12 -->
+  <div class="small-12 columns">
+    <%= f.submit t('.register_button'), class: "button"  %>
+  </div> <!-- /.small-12 -->
 <% end %>
 </div> <!-- /.row -->

@@ -4,8 +4,14 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    log_in(User.create!(secure_params))
-    redirect_to dashboard_path
+    user = User.create!(secure_params)
+    if params[:user][:username].blank?
+      flash[:error] = 'blah'
+      render :new
+    else
+      log_in(user)
+      redirect_to dashboard_path
+    end
   end
 
   private

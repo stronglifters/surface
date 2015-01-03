@@ -1,7 +1,6 @@
 class User
-  
-  def persisted?
-    false
-  end
-  
+  include ActiveModel::Model
+
+  attr_accessor :username, :email
+
 end

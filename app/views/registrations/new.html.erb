@@ -1,22 +1,22 @@
 <div class="row">
-  <form>
+<%= form_for @user, url: root_path do |f| %>
     <div class="small-12 columns">
       <label>Username
-        <input type="text" placeholder="Username" />
+        <%= f.text_field :username, placeholder: "Username" %>
       </label>
     </div> <!-- /.small-12 -->
     <div class="small-12 columns">
       <label>Email
-        <input type="text" placeholder="Email" />
+        <%= f.email_field :email, placeholder: "Email" %>
       </label>
     </div> <!-- /.small-12 -->
     <div class="small-12 columns">
       <label>Password
-        <input type="password" placeholder="Password" />
+        <%= f.password_field :password, placeholder: "Password" %>
       </label>
     </div> <!-- /.small-12 -->
     <div class="small-12 columns">
-      <input type="submit" class="button" value="Register" />
+      <%= f.submit "Register", class: "button"  %>
     </div> <!-- /.small-12 -->
-  </form>
+<% end %>
 </div> <!-- /.row -->

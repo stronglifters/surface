@@ -7,6 +7,7 @@ class RegistrationsController < ApplicationController
     @user = User.new(secure_params)
     if @user.save
       log_in(@user)
+      UserMailer.registration_email(@user).deliver_later
       redirect_to dashboard_path
     else
       flash.now[:error] = @user.errors.full_messages

@@ -14,7 +14,10 @@ describe RegistrationsController do
     let(:email) { 'email@example.com' }
 
     context "when valid params are provided" do
+      let(:mailer) { double(deliver_later: true) }
+
       before :each do
+        allow(UserMailer).to receive(:registration_email).and_return(mailer)
         post :create, user: { username: username, password: password, email: email, terms_and_conditions: true }
       end
 
@@ -35,6 +38,10 @@ describe RegistrationsController do
 
       it 'does not display any errors' do
         expect(flash[:error]).to be_nil
+      end
+
+      it 'sends a user registration email' do
+        expect(mailer).to have_received(:deliver_later)
       end
     end
 

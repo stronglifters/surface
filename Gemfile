@@ -48,3 +48,7 @@ group :development, :test do
   gem 'i18n-tasks'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+

@@ -16,10 +16,14 @@
     </label>
   </div> <!-- /.small-12 -->
   <div class="small-12 columns">
-    <label> <%= f.check_box :terms_and_conditions %> <%= t('.terms_and_conditions') %> </label>
+    <label> <%= f.check_box :terms_and_conditions %> <%= t('.terms_and_conditions') %> <a href="#" data-reveal-id="terms_modal"><%= t('.terms_and_conditions_link') %>.</a></label>
   </div> <!-- /.small-12 -->
   <div class="small-12 columns">
     <%= f.submit t('.register_button'), class: "button"  %>
   </div> <!-- /.small-12 -->
 <% end %>
 </div> <!-- /.row -->
+<div id="terms_modal" class="reveal-modal" data-reveal>
+  <%= render 'layouts/terms_content' %>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

@@ -8,6 +8,7 @@ end
 
 describe "terms route" do
   it 'routes to the terms and conditions page' do
-    expect(get: '/terms').to route_to(controller: 'static_pages', action: 'terms')
+    expect(get: '/terms').
+      to route_to(controller: 'static_pages', action: 'terms')
   end
 end

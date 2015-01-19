@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe UserMailer, :type => :mailer do
+RSpec.describe UserMailer, type: "mailer" do
   describe "registration email" do
     let(:user) { double User, username: "blah", email:"blah@example.com" }
     let(:mail) { UserMailer.registration_email(user) }

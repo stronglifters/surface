@@ -47,5 +47,7 @@ group :development, :test do
   gem 'foreman'
   gem 'i18n-tasks'
   gem 'poltergeist'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
 end
 

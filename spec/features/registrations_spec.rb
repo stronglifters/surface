@@ -17,7 +17,7 @@ feature "Registrations", type: :feature do
     end
 
     context "when the username is taken" do
-      let!(:user) { User.create!(username: 'mo', email: 'mo@example.com', terms_and_conditions: true) }
+      let!(:user) { create(:user) }
 
       it 'displays an error' do
         visit root_path

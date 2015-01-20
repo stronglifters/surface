@@ -14,7 +14,6 @@ describe User do
 
   describe "validations" do
     context "username" do
-
       it 'is invalid when the username is missing' do
         user = User.new(username: nil)
         expect(user).to_not be_valid
@@ -54,6 +53,19 @@ describe User do
 
         expect(second_user.errors[:email]).to_not be_empty
       end
+    end
+
+    describe "terms_and_conditions" do
+      it 'is invalid if terms and conditions is unchecked' do
+        user = User.new(terms_and_conditions: false)
+        expect(user).to_not be_valid
+        expect(user.errors[:terms_and_conditions]).to_not be_empty
+      end
+    end
+
+    it 'is valid when it is' do
+      user = User.new(username: 'coolio', email: 'notblank@example.com', password: 'legit', terms_and_conditions: true)
+      expect(user).to be_valid
     end
   end
 

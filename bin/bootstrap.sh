@@ -25,6 +25,7 @@ echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main"
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 apt-get -y update
 apt-get install -y postgresql-9.4 libpq-dev
+apt-get install -y postgresql-contrib-9.4
 
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 apt-get -y update

@@ -5,6 +5,7 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = User.new(secure_params)
+    @user.terms_and_conditions = params[:terms_and_conditions]
     if @user.save
       log_in(@user)
       redirect_to dashboard_path

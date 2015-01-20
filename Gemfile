@@ -49,5 +49,6 @@ group :development, :test do
   gem 'poltergeist'
   gem 'factory_girl_rails'
   gem 'ffaker'
+  gem 'database_cleaner'
 end
 

@@ -15,7 +15,7 @@ describe RegistrationsController do
 
     context "when valid params are provided" do
       before :each do
-        post :create, user: { username: username, password: password, email: email, terms_and_conditions: true }
+        post :create, user: { username: username, password: password, email: email, terms_and_conditions: '1' }
       end
 
       it 'creates a new user account' do
@@ -40,7 +40,7 @@ describe RegistrationsController do
 
     context "when the parameters provided are invalid" do
       before :each do
-        post :create, user: { username: '', password: password, email: email, terms_and_conditions: true }
+        post :create, user: { username: '', password: password, email: email, terms_and_conditions: '1' }
       end
 
       it 'adds an error to the flash for missing usernames' do

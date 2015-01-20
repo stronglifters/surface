@@ -33,5 +33,13 @@ feature "Registrations", type: :feature do
         expect(page).to have_content("Email has already been taken")
       end
     end
+
+    context "when the terms and conditions are not accepted" do
+      it 'displays an error' do
+        subject.register_with(accept_terms: false)
+
+        expect(page).to have_content("Terms and conditions must be accepted")
+      end
+    end
   end
 end

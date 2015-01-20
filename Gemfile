@@ -46,5 +46,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'foreman'
   gem 'i18n-tasks'
+  gem 'poltergeist'
 end
 

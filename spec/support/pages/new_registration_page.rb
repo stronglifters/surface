@@ -13,7 +13,7 @@ class NewRegistrationPage < PageModel
       fill_in "Username", with: username
       fill_in "Email", with: email
       fill_in "Password", with: password
-      check "I Agree" if accept_terms
+      check "I agree to the" if accept_terms
       click_button "Register"
     end
   end

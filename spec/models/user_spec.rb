@@ -64,7 +64,11 @@ describe User do
     end
 
     it 'is valid when it is' do
-      user = User.new(username: 'coolio', email: 'notblank@example.com', password: 'legit', terms_and_conditions: '1')
+      user = User.new(
+        username: 'coolio',
+        email: 'notblank@example.com',
+        password: 'legit',
+        terms_and_conditions: '1')
       expect(user).to be_valid
     end
   end

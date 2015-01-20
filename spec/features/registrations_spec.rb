@@ -1,17 +1,15 @@
 require "rails_helper"
 
 feature "Registrations", type: :feature do
+  subject { NewRegistrationPage.new }
+
+  before :each do
+    subject.visit_page
+  end
+
   describe "creating a new account" do
     it 'registers a new account' do
-      visit root_path
-      click_link "Register"
-      within "#new_user" do
-        fill_in "Username", with: 'mo'
-        fill_in "Email", with: 'mo@example.com'
-        fill_in "Password", with: 'password'
-        check "I Agree"
-        click_button "Register"
-      end
+      subject.register_with(username: 'mo', email: 'mo@example.com', password: 'password')
 
       expect(current_path).to eql(dashboard_path)
     end
@@ -20,17 +18,18 @@ feature "Registrations", type: :feature do
       let!(:user) { create(:user) }
 
       it 'displays an error' do
-        visit root_path
-        click_link "Register"
-        within "#new_user" do
-          fill_in "Username", with: user.username
-          fill_in "Email", with: user.email
-          fill_in "Password", with: 'password'
-          check "I Agree"
-          click_button "Register"
-        end
+        subject.register_with(username: user.username)
 
         expect(page).to have_content("Username has already been taken")
+      end
+    end
+
+    context "when the email is taken" do
+      let!(:user) { create(:user) }
+
+      it 'displays an error' do
+        subject.register_with(email: user.email)
+
         expect(page).to have_content("Email has already been taken")
       end
     end

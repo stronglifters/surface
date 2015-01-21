@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe RegistrationsController do
   describe "#new" do
@@ -9,16 +9,21 @@ describe RegistrationsController do
   end
 
   describe "#create" do
-    let(:username) {  'username' }
-    let(:password) {  'password' }
-    let(:email) { 'email@example.com' }
+    let(:username) {  "username" }
+    let(:password) {  "password" }
+    let(:email) { "email@example.com" }
 
     context "when valid params are provided" do
       let(:mailer) { double(deliver_later: true) }
 
       before :each do
         allow(UserMailer).to receive(:registration_email).and_return(mailer)
-        post :create, user: { username: username, password: password, email: email, terms_and_conditions: true }
+        post :create, user: {
+          username: username,
+          password: password,
+          email: email,
+          terms_and_conditions: "1"
+        }
       end
 
       it "creates a new user account" do
@@ -51,7 +56,7 @@ describe RegistrationsController do
           username: "",
           password: password,
           email: email,
-          terms_and_conditions: true
+          terms_and_conditions: "1"
         }
       end
 

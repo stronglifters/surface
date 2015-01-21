@@ -46,6 +46,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'foreman'
   gem 'i18n-tasks'
+  gem 'poltergeist'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
+  gem 'database_cleaner'
 end
 
 group :production do

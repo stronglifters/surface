@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, format: { with: USERNAME_REGEX }, uniqueness: true
   validates :email, presence: true, email: true, uniqueness: true
-  validates_acceptance_of :terms_and_conditions, accept: true
+  validates_acceptance_of :terms_and_conditions
 end

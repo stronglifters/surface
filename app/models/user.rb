@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates_acceptance_of :terms_and_conditions
   
   def self.authenticate(username,password)
-    if user = User.find_by(email: username) || User.find_by(username: username)
+    if user = User.where("email = :email OR username = :username", username: username, email: username).first
       user.authenticate(password)
     end
   end

@@ -3,9 +3,10 @@ require "rails_helper"
 describe SessionsController do
   
   describe "#create" do
+    
+    let(:user) { create(:user, password: "password") }
+    
     context "when credentials are correct" do
-      
-      let(:user) { create(:user, password: "password") }
       
       it "logs you in with email" do
         post :create, { username: user.email, password: "password" }
@@ -15,6 +16,20 @@ describe SessionsController do
       it "logs you in with username" do
         post :create, { username: user.username, password: "password" }
         expect(session[:user_id]).to eql(user.id)
+      end
+      
+    end
+    
+    context "when credentials are incorrect" do
+      
+      it "displays errors" do
+        post :create, { username: user.username, password: "wrong" }
+        expect(flash[:warning]).to_not be_empty
+      end
+      
+      it "redirects to the login page" do
+        post :create, { username: user.username, password: "wrong" }
+        expect(response).to redirect_to(new_session_path)
       end
       
     end

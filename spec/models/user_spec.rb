@@ -90,7 +90,7 @@ describe User do
   end
   
   describe "#authenticate" do
-    context "retuns true when credentials are correct" do
+    context "when credentials are correct" do
       
       it "returns true" do
         user = create(:user, password: "password", password_confirmation: "password")
@@ -98,6 +98,23 @@ describe User do
       end
       
     end
+    
+    context "when the email is not registered" do
+      
+      it "returns nil" do
+        expect(User.authenticate("sofake@noteven.com", "password")).to be_nil
+      end
+      
+    end
+    
+    context "when the username is not registered" do
+      
+      it "returns nil" do
+        expect(User.authenticate("sofake", "password")).to be_nil
+      end
+      
+    end
+    
   end
   
 end

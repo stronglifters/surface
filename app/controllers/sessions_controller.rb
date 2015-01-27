@@ -3,8 +3,14 @@ class SessionsController < ApplicationController
   layout "public"
   
   def create
-    session[:user_id] = User.authenticate(params[:username], params[:password]).id
-    render :nothing => true
+    user = User.authenticate(params[:username], params[:password])
+    if user.present?
+      session[:user_id] = user.id
+      render :nothing => true
+    else
+      flash[:warning] = t(".invalid_login")
+      redirect_to new_session_path
+    end
   end
   
   def new

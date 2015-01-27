@@ -30,6 +30,8 @@ en:
       register_button: "Register"
       login_link: "Already have an account?"
   sessions:
+    create:
+      invalid_login: "Sorry, we cannot find that account."
     new:
       username: "Username (or email)"
       password: "Password"

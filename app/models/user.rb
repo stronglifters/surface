@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, email: true, uniqueness: true
   validates_acceptance_of :terms_and_conditions
   
-  def self.authenticate(email,password)
-    if user = User.find_by(email: email)
+  def self.authenticate(username,password)
+    if user = User.find_by(email: username) || User.find_by(username: username)
       user.authenticate(password)
     end
   end

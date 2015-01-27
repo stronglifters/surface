@@ -7,8 +7,13 @@ describe SessionsController do
       
       let(:user) { create(:user, password: "password") }
       
-      it "logs you in" do
-        post :create, { email: user.email, password: "password" }
+      it "logs you in with email" do
+        post :create, { username: user.email, password: "password" }
+        expect(session[:user_id]).to eql(user.id)
+      end
+      
+      it "logs you in with username" do
+        post :create, { username: user.username, password: "password" }
         expect(session[:user_id]).to eql(user.id)
       end
       

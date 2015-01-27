@@ -28,6 +28,10 @@ en:
       terms_and_conditions: "I agree to the"
       terms_and_conditions_link: "Terms and Conditions of Use"
       register_button: "Register"
+      login_link: "Already have an account?"
   sessions:
     new:
-      register_button: "Register"
+      username: "Username (or email)"
+      password: "Password"
+      login_button: "Login"
+      register_link: "Create an account"

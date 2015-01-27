@@ -1,1 +1,18 @@
-<%= link_to t('.register_button'), new_registration_path, class: "button secondary" %>
+<div class="row">
+<%= form_for @user, url: sessions_path do |f| %>
+  <div class="small-12 columns">
+    <label><%= t('.username') %>
+      <%= f.text_field :username, placeholder: t('.username') %>
+    </label>
+  </div> <!-- /.small-12 -->
+  <div class="small-12 columns">
+    <label><%= t('.password') %>
+      <%= f.password_field :password, placeholder: t('.password') %>
+    </label>
+  </div> <!-- /.small-12 -->
+  <div class="small-12 columns">
+    <%= f.submit t('.login_button'), class: "button"  %>
+    <%= link_to t('.register_link'), new_registration_path, class: "button secondary" %>
+  </div> <!-- /.small-12 -->
+<% end %>
+</div> <!-- /.row -->

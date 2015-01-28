@@ -7,8 +7,8 @@ git clone https://github.com/tpope/rbenv-ctags.git ~/.rbenv/plugins/rbenv-ctags
 git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
 git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
 rbenv update
-rbenv install 2.1.5
-rbenv global 2.1.5
+rbenv install 2.2.0
+rbenv global 2.2.0
 gem install bundler --no-ri --no-rdoc
 cd /vagrant
 bundle install -j 2

@@ -1,7 +1,13 @@
 /* ---------------------------------------------- */
 /* Buttons -------------------------------------- */
 /* ---------------------------------------------- */
-.ternary {
-	@extend .button.small.secondary.radius;
+.button.bare, .button.bare:hover, .button.bare:active,
+.button.bare:visited, .button.bare:focus {
 	background-color: transparent;
+	border-color: transparent;
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
+}
+.button.bare:hover {
+	text-decoration: underline;
 }

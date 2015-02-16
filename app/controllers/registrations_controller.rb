@@ -10,6 +10,7 @@ class RegistrationsController < ApplicationController
     if @user.save
       log_in(@user)
       UserMailer.registration_email(@user).deliver_later # TODO change adapter
+      flash[:notice] = "Thank you for registering. Welcome to Supply Crow."
       redirect_to dashboard_path
     else
       flash.now[:error] = @user.errors.full_messages

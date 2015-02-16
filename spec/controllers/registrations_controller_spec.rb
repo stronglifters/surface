@@ -44,6 +44,10 @@ describe RegistrationsController do
       it "does not display any errors" do
         expect(flash[:error]).to be_nil
       end
+      
+      it "shows a flash alert" do
+        expect(flash[:notice]).to_not be_empty
+      end
 
       it "sends a user registration email" do
         expect(mailer).to have_received(:deliver_later)

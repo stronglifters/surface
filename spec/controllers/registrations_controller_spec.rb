@@ -47,7 +47,8 @@ describe RegistrationsController do
 
       it "shows a flash alert" do
         expect(flash[:notice]).to_not be_empty
-        expect(flash[:notice]).to eql("Thank you for registering. Welcome to Supply Crow.")
+        translation = I18n.translate("registrations.create.success")
+        expect(flash[:notice]).to eql(translation)
       end
 
       it "sends a user registration email" do

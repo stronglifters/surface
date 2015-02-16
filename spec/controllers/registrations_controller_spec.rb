@@ -45,6 +45,12 @@ describe RegistrationsController do
         expect(flash[:error]).to be_nil
       end
 
+      it "shows a flash alert" do
+        expect(flash[:notice]).to_not be_empty
+        translation = I18n.translate("registrations.create.success")
+        expect(flash[:notice]).to eql(translation)
+      end
+
       it "sends a user registration email" do
         expect(mailer).to have_received(:deliver_later)
       end

@@ -50,8 +50,9 @@ search:
     - app/
 
   ## Root for resolving relative keys (default)
-  # relative_roots:
-  #   - app/views
+  relative_roots:
+    - app/views
+    - app/controllers
 
   ## File.fnmatch patterns to exclude from search (default)
   # exclude: ["*.jpg", "*.png", "*.gif", "*.svg", "*.ico", "*.eot", "*.ttf", "*.woff", "*.pdf"]

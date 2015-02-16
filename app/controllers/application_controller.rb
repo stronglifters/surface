@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def log_in(user)
     session[:user_id] = user.id
   end
+
+  def translate(key)
+    I18n.translate("#{params[:controller]}.#{params[:action]}#{key}")
+  end
 end

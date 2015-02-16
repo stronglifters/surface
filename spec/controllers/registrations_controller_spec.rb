@@ -44,9 +44,10 @@ describe RegistrationsController do
       it "does not display any errors" do
         expect(flash[:error]).to be_nil
       end
-      
+
       it "shows a flash alert" do
         expect(flash[:notice]).to_not be_empty
+        expect(flash[:notice]).to eql("Thank you for registering. Welcome to Supply Crow.")
       end
 
       it "sends a user registration email" do

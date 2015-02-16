@@ -29,6 +29,8 @@ en:
       terms_and_conditions_link: "Terms and Conditions of Use"
       register_button: "Register"
       login_link: "Already have an account?"
+    create:
+      success: "Thank you for registering. Welcome to Supply Crow."
   sessions:
     create:
       invalid_login: "Sorry, we cannot find that account."

@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   layout "public"
-  
+
   def new
     @user = User.new
   end
@@ -9,8 +9,8 @@ class RegistrationsController < ApplicationController
     @user = User.new(secure_params)
     if @user.save
       log_in(@user)
-      UserMailer.registration_email(@user).deliver_later # TODO change adapter
-      flash[:notice] = "Thank you for registering. Welcome to Supply Crow."
+      UserMailer.registration_email(@user).deliver_later
+      flash[:notice] = translate(".success")
       redirect_to dashboard_path
     else
       flash.now[:error] = @user.errors.full_messages

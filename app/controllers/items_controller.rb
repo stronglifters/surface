@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   def index
+    current_user = User.find(session[:user_id])
+    @items = current_user.items
   end
 
   def show

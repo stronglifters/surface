@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe ItemsController, type: :controller do
-
   context "when logged in" do
     let(:user) { create(:user) }
 
@@ -33,6 +32,34 @@ RSpec.describe ItemsController, type: :controller do
       it 'does not load other peoples items' do
         get :show, id: other_guys_item.id
         expect(response.status).to eql(404)
+      end
+    end
+
+    describe "#new" do
+      it 'loads up an empty item' do
+        get :new
+        expect(assigns(:item)).to_not be_nil
+      end
+    end
+
+    describe "#edit" do
+      let(:my_item) { create(:item, user: user) }
+
+      it 'loads the item to edit' do
+        get :edit, id: my_item.id
+        expect(assigns(:item)).to eql(my_item)
+      end
+
+      context "when attempting to edit someone elses item" do
+        let(:other_item) { create(:item, user: other_user) }
+        let(:other_user) { create(:user) }
+
+        it 'returns a 404' do
+          get :edit, id: other_item.id
+
+          expect(assigns(:item)).to be_nil
+          expect(response.status).to eql(404)
+        end
       end
     end
   end

@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     session[:user_id] = user.id
   end
 
+  def current_user
+    @current_user ||= User.find(session[:user_id])
+  end
+
   def translate(key)
     I18n.translate("#{params[:controller]}.#{params[:action]}#{key}")
   end

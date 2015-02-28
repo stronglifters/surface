@@ -25,10 +25,12 @@ class ItemsController < ApplicationController
   def update
     item = current_user.items.find(params[:id])
     item.update!(secure_params)
-    render nothing: true
+    redirect_to dashboard_path
   end
 
   def destroy
+    current_user.items.destroy(params[:id])
+    redirect_to dashboard_path
   end
 
   private

@@ -93,7 +93,7 @@ RSpec.describe ItemsController, type: :controller do
       let(:my_item) { create(:item, user: user) }
       let(:item_params) { build(:item).attributes }
 
-      it 'updates the item' do
+      it "updates the item" do
         patch :update, id: my_item.id, item: item_params
 
         my_item.reload
@@ -102,6 +102,36 @@ RSpec.describe ItemsController, type: :controller do
         expect(my_item.description).to eql(item_params["description"])
         expect(my_item.serial_number).to eql(item_params["serial_number"])
         expect(my_item.purchase_price).to eql(item_params["purchase_price"])
+      end
+
+      it "redirects to the dashboard" do
+        patch :update, id: my_item.id, item: item_params
+
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "#destroy" do
+      let(:my_item) { create(:item, user: user) }
+      let(:other_item) { create(:item, user: other_user) }
+      let(:other_user) { create(:user) }
+
+      it "deletes the item" do
+        delete :destroy, id: my_item.id
+
+        expect(Item.count).to eql(0)
+      end
+
+      it "cannot delete another persons item" do
+        delete :destroy, id: other_item.id
+
+        expect(response.status).to eql(404)
+      end
+
+      it "redirects to the dashboard" do
+        delete :destroy, id: my_item.id
+
+        expect(response).to redirect_to(dashboard_path)
       end
     end
   end

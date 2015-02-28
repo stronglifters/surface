@@ -23,6 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def update
+    item = current_user.items.find(params[:id])
+    item.update!(secure_params)
+    render nothing: true
   end
 
   def destroy

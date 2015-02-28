@@ -65,7 +65,9 @@ RSpec.describe ItemsController, type: :controller do
 
     describe "#create" do
       let(:exclusions) { ["id", "user_id"] }
-      let(:item_params) { build(:item).attributes.reject { |key, _| exclusions.include?(key) } }
+      let(:item_params) do
+        build(:item).attributes.reject { |key, _| exclusions.include?(key) }
+      end
 
       it "creates the new item" do
         post :create, item: item_params
@@ -84,6 +86,22 @@ RSpec.describe ItemsController, type: :controller do
         put :create, item: item_params
 
         expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    describe "#update" do
+      let(:my_item) { create(:item, user: user) }
+      let(:item_params) { build(:item).attributes }
+
+      it 'updates the item' do
+        patch :update, id: my_item.id, item: item_params
+
+        my_item.reload
+        expect(my_item.user).to eql(user)
+        expect(my_item.name).to eql(item_params["name"])
+        expect(my_item.description).to eql(item_params["description"])
+        expect(my_item.serial_number).to eql(item_params["serial_number"])
+        expect(my_item.purchase_price).to eql(item_params["purchase_price"])
       end
     end
   end

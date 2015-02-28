@@ -6,7 +6,7 @@ RSpec.describe ItemsController, type: :controller do
     let(:user) { create(:user) }
 
     before :each do
-      session[:user_id] = user.id
+      auth_user(user)
     end
 
     describe "#index" do

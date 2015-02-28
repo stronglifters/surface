@@ -18,6 +18,8 @@ class ItemsController < ApplicationController
   end
 
   def create
+    current_user.items.create!(secure_params)
+    redirect_to dashboard_path
   end
 
   def update
@@ -30,5 +32,9 @@ class ItemsController < ApplicationController
 
   def record_not_found
     render text: "404 Not Found", status: 404
+  end
+
+  def secure_params
+    params.require(:item).permit(:name, :description, :serial_number, :purchase_price, :purchased_at)
   end
 end

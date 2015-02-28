@@ -29,14 +29,14 @@ RSpec.describe ItemsController, type: :controller do
         expect(assigns(:item)).to eql(item)
       end
 
-      it 'does not load other peoples items' do
+      it "does not load other peoples items" do
         get :show, id: other_guys_item.id
         expect(response.status).to eql(404)
       end
     end
 
     describe "#new" do
-      it 'loads up an empty item' do
+      it "loads up an empty item" do
         get :new
         expect(assigns(:item)).to_not be_nil
       end
@@ -45,7 +45,7 @@ RSpec.describe ItemsController, type: :controller do
     describe "#edit" do
       let(:my_item) { create(:item, user: user) }
 
-      it 'loads the item to edit' do
+      it "loads the item to edit" do
         get :edit, id: my_item.id
         expect(assigns(:item)).to eql(my_item)
       end
@@ -54,12 +54,36 @@ RSpec.describe ItemsController, type: :controller do
         let(:other_item) { create(:item, user: other_user) }
         let(:other_user) { create(:user) }
 
-        it 'returns a 404' do
+        it "returns a 404" do
           get :edit, id: other_item.id
 
           expect(assigns(:item)).to be_nil
           expect(response.status).to eql(404)
         end
+      end
+    end
+
+    describe "#create" do
+      let(:exclusions) { ["id", "user_id"] }
+      let(:item_params) { build(:item).attributes.reject { |key, _| exclusions.include?(key) } }
+
+      it "creates the new item" do
+        post :create, item: item_params
+
+        expect(Item.count).to eql(1)
+        item = Item.first
+        expect(item.user).to eql(user)
+        expect(item.name).to eql(item_params["name"])
+        expect(item.description).to eql(item_params["description"])
+        expect(item.serial_number).to eql(item_params["serial_number"])
+        expect(item.purchase_price).to eql(item_params["purchase_price"])
+        expect(item.purchased_at.to_i).to eql(item_params["purchased_at"].to_i)
+      end
+
+      it "redirects back to the dashboard" do
+        put :create, item: item_params
+
+        expect(response).to redirect_to(dashboard_path)
       end
     end
   end

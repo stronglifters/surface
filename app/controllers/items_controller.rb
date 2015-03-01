@@ -40,6 +40,12 @@ class ItemsController < ApplicationController
   end
 
   def secure_params
-    params.require(:item).permit(:name, :description, :serial_number, :purchase_price, :purchased_at)
+    params.require(:item).permit(
+      :name,
+      :description,
+      :serial_number,
+      :purchase_price,
+      :purchased_at,
+    )
   end
 end

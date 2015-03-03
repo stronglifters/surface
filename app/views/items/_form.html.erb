@@ -4,34 +4,40 @@
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
       <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
+  <div class="small-12 columns">
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
+  <div class="small-12 columns">
+    <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :serial_number %><br>
+  <div class="small-12 columns">
+    <%= f.label :serial_number %>
     <%= f.text_field :serial_number %>
   </div>
-  <div class="field">
-    <%= f.label :purchase_price %><br>
-    <%= f.text_field :purchase_price %>
+  <div class="small-12 columns">
+    <div class="row">
+      <div class="small-6 columns">
+        <%= f.label :purchase_price %>
+        <%= f.text_field :purchase_price %>
+      </div>
+      <div class="small-6 columns">
+        <%= f.label :purchase_date do %>
+          <%=  t('.purchased_at') %>
+          <%= f.date_field :purchased_at %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :purchased_at %><br>
-    <%= f.datetime_select :purchased_at %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="small-12 columns">
+    <%= f.submit t('.create_button'), class: 'button' %>
   </div>
 <% end %>

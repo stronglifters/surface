@@ -1,35 +1,44 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <!-- Side Bar -->
+  <div class="large-4 small-12 columns">
+    <img src="http://placehold.it/500x500&text=Logo">
 
-<h1>Listing Items</h1>
+    <div class="hide-for-small panel">
+      <h3>Header</h3>
+      <h5 class="subheader">Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Donec dignissim nibh fermentum odio ornare sagittis.
+      </h5>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Serial number</th>
-      <th>Purchase price</th>
-      <th>Purchased at</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <a href="#">
+      <div class="panel callout radius">
+        <h6>99  items in your cart</h6>
+      </div>
+    </a>
+  </div>
+  <!-- End Side Bar -->
 
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.name %></td>
-        <td><%= item.description %></td>
-        <td><%= item.serial_number %></td>
-        <td><%= item.purchase_price %></td>
-        <td><%= item.purchased_at %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <!-- Thumbnails -->
+  <div class="large-8 columns">
+    <div class="row">
+      <% if @items.any? %>
+        <% @items.each do |item| %>
+          <div class="large-4 small-6 columns">
+            <img src="http://placehold.it/1000x1000&text=Thumbnail">
 
-<br>
-
-<%= link_to 'New Item', new_item_path %>
+            <div class="panel">
+              <h5><%= item.name %></h5>
+              <h6 class="subheader"><%= number_to_currency item.purchase_price %></h6>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="small-12 columns">
+          <h1>Your inventory is empty</h1>
+          <%= link_to 'New Item', new_item_path %>
+        </div>
+      <% end %>
+    </div>
+    <!-- End Thumbnails -->
+    </div>
+  </div>
+</div>

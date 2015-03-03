@@ -1,12 +1,29 @@
 <div class="row">
   <!-- Side Bar -->
   <div class="large-4 small-12 columns">
-    <img src="http://placehold.it/500x500&text=Logo">
-
     <div class="hide-for-small panel">
       <h3>Header</h3>
-      <h5 class="subheader">Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Donec dignissim nibh fermentum odio ornare sagittis.
-      </h5>
+      <h5 class="subheader">Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Donec dignissim nibh fermentum odio ornare sagittis.</h5>
+<%= form_for(@item, url: new_item_path, method: :get) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn' %>
+  </div>
+<% end %>
     </div>
 
     <a href="#">

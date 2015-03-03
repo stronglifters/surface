@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = current_user.items
+    @item = Item.new
   end
 
   def show
@@ -10,7 +11,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item = params[:item].present? ? Item.new(secure_params) : Item.new
   end
 
   def edit

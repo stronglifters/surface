@@ -40,6 +40,11 @@ RSpec.describe ItemsController, type: :controller do
         get :new
         expect(assigns(:item)).to_not be_nil
       end
+
+      it "loads up the params for a new item" do
+        get :new, item: { name: 'hammer' }
+        expect(assigns(:item).name).to eql('hammer')
+      end
     end
 
     describe "#edit" do

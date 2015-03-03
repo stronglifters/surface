@@ -92,6 +92,13 @@ RSpec.describe ItemsController, type: :controller do
 
         expect(response).to redirect_to(dashboard_path)
       end
+
+      context "when some of the fields are invalid" do
+        it "displays the errors" do
+          post :create, item: { name: '' }
+          expect(flash[:warning]).to_not be_empty
+        end
+      end
     end
 
     describe "#update" do

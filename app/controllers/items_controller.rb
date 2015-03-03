@@ -19,8 +19,13 @@ class ItemsController < ApplicationController
   end
 
   def create
-    current_user.items.create!(secure_params)
-    redirect_to dashboard_path
+    @item = current_user.items.build(secure_params)
+    if @item.save
+      redirect_to dashboard_path
+    else
+      flash[:warning] = @item.errors.full_messages
+      render :new
+    end
   end
 
   def update

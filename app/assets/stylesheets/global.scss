@@ -1,3 +1,36 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow:700);
+/* ---------------------------------------------- */
+/* Mixins --------------------------------------- */
+/* ---------------------------------------------- */
+@mixin responsive-svg($svgwidth, $svgheight, $containerwidth) {
+	height: 0;
+	margin: 0 auto;
+	padding-top: #{($svgheight/$svgwidth)*$containerwidth};
+	position: relative;
+	width: $containerwidth;
+	svg {
+		left: 0;
+		position: absolute;
+		top: 0;
+	}
+}
+/* ---------------------------------------------- */
+/* Branding ------------------------------------- */
+/* ---------------------------------------------- */
+header {
+	padding: 0.5em 0;
+	h1 {
+		font-family: 'PT Sans Narrow', sans-serif;
+		text-transform: uppercase;
+		.svg-container {
+		  @include responsive-svg(10, 20, .85em); // (width, height, containerWidth)
+			img {
+				margin: 0 0.15em 0 0;
+				width: 18px;
+			}
+		}
+	}
+}
 /* ---------------------------------------------- */
 /* Buttons -------------------------------------- */
 /* ---------------------------------------------- */

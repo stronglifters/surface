@@ -33,7 +33,7 @@
             <img src="http://placehold.it/1000x1000&text=Thumbnail">
 
             <div class="panel">
-              <h5><%= item.name %></h5>
+              <h5><%= link_to item.name, item_path(item) %></h5>
               <h6 class="subheader"><%= number_to_currency item.purchase_price %></h6>
             </div>
           </div>

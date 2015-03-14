@@ -42,8 +42,8 @@ RSpec.describe ItemsController, type: :controller do
       end
 
       it "loads up the params for a new item" do
-        get :new, item: { name: 'hammer' }
-        expect(assigns(:item).name).to eql('hammer')
+        get :new, item: { name: "hammer" }
+        expect(assigns(:item).name).to eql("hammer")
       end
     end
 
@@ -95,7 +95,7 @@ RSpec.describe ItemsController, type: :controller do
 
       context "when some of the fields are invalid" do
         it "displays the errors" do
-          post :create, item: { name: '' }
+          post :create, item: { name: "" }
           expect(flash[:warning]).to_not be_empty
         end
       end
@@ -144,6 +144,15 @@ RSpec.describe ItemsController, type: :controller do
         delete :destroy, id: my_item.id
 
         expect(response).to redirect_to(dashboard_path)
+      end
+    end
+  end
+
+  context "when not logged in" do
+    describe "#index" do
+      it "redirects to the login page" do
+        get :index
+        expect(response).to redirect_to(new_session_path)
       end
     end
   end

@@ -25,6 +25,10 @@ en:
       item_name: 'Item name'
       new_item_button: 'Create item'
     form:
+      name: 'Name'
+      description: 'Description'
+      serial_number: 'Serial Number'
+      purchase_price: 'Purchase Price'
       purchased_at: 'Purchase date'
       create_button: 'Create item'
   registrations:

@@ -1,6 +1,4 @@
 class ItemsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-
   def index
     @items = current_user.items
     @item = Item.new
@@ -40,10 +38,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def record_not_found
-    render text: "404 Not Found", status: 404
-  end
 
   def secure_params
     params.require(:item).permit(

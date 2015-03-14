@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :authorize!
+  before_action :authenticate!
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   protected
 
@@ -18,7 +19,14 @@ class ApplicationController < ActionController::Base
     I18n.translate("#{params[:controller]}.#{params[:action]}#{key}")
   end
 
-  def authorize!
-    redirect_to new_session_path if try(:current_user).nil?
+  def authenticate!
+    return if session[:user_id].present? && current_user.present?
+    redirect_to new_session_path
+  rescue
+    redirect_to new_session_path
+  end
+
+  def record_not_found
+    render text: "404 Not Found", status: 404
   end
 end

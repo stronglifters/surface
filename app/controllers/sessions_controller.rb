@@ -1,6 +1,4 @@
-class SessionsController < ApplicationController
-  layout "public"
-
+class SessionsController < PublicController
   def create
     user = User.authenticate(params[:user][:username], params[:user][:password])
     if user.present?

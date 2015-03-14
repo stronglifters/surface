@@ -3,44 +3,60 @@
 /* Mixins --------------------------------------- */
 /* ---------------------------------------------- */
 @mixin responsive-svg($svgwidth, $svgheight, $containerwidth) {
-	height: 0;
-	margin: 0 auto;
-	padding-top: #{($svgheight/$svgwidth)*$containerwidth};
-	position: relative;
-	width: $containerwidth;
-	svg {
-		left: 0;
-		position: absolute;
-		top: 0;
-	}
+  height: 0;
+  margin: 0 auto;
+  padding-top: #{($svgheight/$svgwidth)*$containerwidth};
+  position: relative;
+  width: $containerwidth;
+  svg {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
 }
 /* ---------------------------------------------- */
 /* Branding ------------------------------------- */
 /* ---------------------------------------------- */
 header {
-	padding: 0.5em 0;
-	h1 {
-		font-family: 'PT Sans Narrow', sans-serif;
-		text-transform: uppercase;
-		.svg-container {
-		  @include responsive-svg(10, 20, .85em); // (width, height, containerWidth)
-			img {
-				margin: 0 0.15em 0 0;
-				width: 18px;
-			}
-		}
-	}
+  padding: 0.5em 0;
+  h1 {
+    font-family: 'PT Sans Narrow', sans-serif;
+    text-transform: uppercase;
+    .svg-container {
+      @include responsive-svg(10, 20, .85em); // (width, height, containerWidth)
+      img {
+        margin: 0 0.15em 0 0;
+        width: 18px;
+      }
+    }
+  }
+}
+nav {
+  h1 {
+    font-family: 'PT Sans Narrow', sans-serif;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  svg {
+    z-index: 100;
+    fill: #fff;
+    position: relative;
+    width: 12px;
+    margin: 5px 8px 0 20px;
+    float: left;
+    display: inline-block;
+  }
 }
 /* ---------------------------------------------- */
 /* Buttons -------------------------------------- */
 /* ---------------------------------------------- */
 .button.bare, .button.bare:hover, .button.bare:active,
 .button.bare:visited, .button.bare:focus {
-	background-color: transparent;
-	border-color: transparent;
-	padding-right: 1.5rem;
-	padding-left: 1.5rem;
+  background-color: transparent;
+  border-color: transparent;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
 }
 .button.bare:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }

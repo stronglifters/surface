@@ -10,6 +10,13 @@
   </head>
   <body>
     <%= render partial: 'layouts/flash' %>
+    <header>
+      <div class="row">
+        <div class="small-12 columns text-center">
+          <h1>Supply <span class="svg-container"><%= image_tag "feather.svg", alt: "Crow feather", class: "feather" %></span>Crow</h1>
+        </div>
+      </div>
+    </header>
     <%= yield %>
     <%= javascript_include_tag "application" %>
   </body>

@@ -31,6 +31,11 @@ en:
       purchase_price: 'Purchase Price'
       purchased_at: 'Purchase date'
       create_button: 'Create item'
+    show:
+      delete_button: 'Delete'
+      delete_confirm: 'Confirm'
+      cancel_button: 'Cancel'
+      edit_button: 'Edit'
   registrations:
     new:
       username: "Username"

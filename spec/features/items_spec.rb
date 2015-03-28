@@ -38,7 +38,7 @@ feature "items", type: :feature do
         purchase_price: "1.99",
         purchased_at: "2015-01-01",
       )
-      expect(subject).to have_content("another item")
+      expect(subject).to have_content("hammer")
     end
   end
 end

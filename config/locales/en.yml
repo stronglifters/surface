@@ -29,7 +29,7 @@ en:
       description: 'Description'
       serial_number: 'Serial Number'
       purchase_price: 'Purchase Price'
-      purchased_at: 'Purchase date'
+      purchase_date: 'Purchase date'
       create_button: 'Create item'
     show:
       delete_button: 'Delete'

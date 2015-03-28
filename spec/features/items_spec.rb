@@ -17,7 +17,7 @@ feature "items", type: :feature do
 
     it "can start to add a new item" do
       subject.add_item("new item")
-      expect(page.find("#item_name")).to have_val("new item")
+      expect(page).to have_selector("input[value='new item']")
     end
   end
 

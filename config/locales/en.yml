@@ -30,6 +30,7 @@ en:
       serial_number: 'Serial Number'
       purchase_price: 'Purchase Price'
       purchase_date: 'Purchase date'
+      purchased_at: 'Purchase date'
       create_button: 'Create item'
     show:
       delete_button: 'Delete'

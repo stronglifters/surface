@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=PT+Sans+Narrow:700);
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display:900);
 /* ---------------------------------------------- */
 /* Mixins --------------------------------------- */
 /* ---------------------------------------------- */
@@ -20,8 +20,7 @@
 header {
   padding: 0.5em 0;
   h1 {
-    font-family: 'PT Sans Narrow', sans-serif;
-    text-transform: uppercase;
+    font-family: 'Playfair Display', sans-serif;
     .svg-container {
       @include responsive-svg(10, 20, .85em); // (width, height, containerWidth)
       img {

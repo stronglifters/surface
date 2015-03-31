@@ -27,6 +27,7 @@ header {
 
     .svg-container {
       @include responsive-svg(10, 20, 0.85em); // (width, height, containerWidth)
+
       img {
         margin: 0 0.15em 0 0;
         width: 18px;

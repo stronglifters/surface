@@ -1,6 +1,4 @@
-class RegistrationsController < ApplicationController
-  layout "public"
-
+class RegistrationsController < PublicController
   def new
     @user = User.new
   end

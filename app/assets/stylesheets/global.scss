@@ -22,20 +22,22 @@
 /* ---------------------------------------------- */
 header {
   padding: 0.5em 0;
-}
 
-header h1 {
-  font-family: 'Playfair Display', sans-serif;
-}
+  h1 {
+    font-family: 'Playfair Display', sans-serif;
+  }
 
-header .svg-container {
-  @include responsive-svg(10, 20, 0.85em); // (width, height, containerWidth)
+  .svg-container {
+    @include responsive-svg(10, 20, 0.85em); // (width, height, containerWidth)
+  }
 
   img {
     margin: 0 0.15em 0 0;
     width: 18px;
   }
 }
+
+
 
 nav h1 {
   font-family: 'PT Sans Narrow', sans-serif;
@@ -56,12 +58,16 @@ nav svg {
 /* Buttons -------------------------------------- */
 /* ---------------------------------------------- */
 .button.bare {
-  &:hover, &:active, &:visited, &:focus {
+  &:hover,
+  &:active,
+  &:visited,
+  &:focus {
     background-color: transparent;
     border-color: transparent;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
+
   &:hover {
     text-decoration: underline;
   }

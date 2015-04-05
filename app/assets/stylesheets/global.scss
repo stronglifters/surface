@@ -24,7 +24,7 @@ header {
   padding: 0.5em 0;
 
   h1 {
-    font-family: 'Playfair Display', sans-serif;
+    font-family: 'Playfair Display', serif;
   }
 
   .svg-container {
@@ -40,8 +40,8 @@ header {
 
 
 nav h1 {
-  font-family: 'PT Sans Narrow', sans-serif;
-  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
+  text-transform: none;
   white-space: nowrap;
 }
 

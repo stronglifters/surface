@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Sessions", type: :feature, js: true do
+feature "Sessions", type: :feature do
   
   describe "Sessions" do
     subject { LoginPage.new }

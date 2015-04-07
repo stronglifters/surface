@@ -53,6 +53,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'database_cleaner'
+  gem 'teaspoon', github: 'modeset/teaspoon', require: 'teaspoon-jasmine'
 end
 
 group :production do

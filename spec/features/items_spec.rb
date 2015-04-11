@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "items", type: :feature do
+feature "items", type: :feature, js: true do
   describe "GET /items" do
     subject { ItemsPage.new }
     let(:user) { create(:user) }

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Registrations", type: :feature do
+feature "Registrations", type: :feature, js: true do
   subject { NewRegistrationPage.new }
 
   before :each do

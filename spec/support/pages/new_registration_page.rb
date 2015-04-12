@@ -5,8 +5,8 @@ class NewRegistrationPage < PageModel
     super(new_registration_path)
   end
 
-  def register_with(username: Faker::Internet.user_name,
-                    email: Faker::Internet.email,
+  def register_with(username: FFaker::Internet.user_name,
+                    email: FFaker::Internet.email,
                     password: "password",
                     accept_terms: true)
     within "#new_user" do

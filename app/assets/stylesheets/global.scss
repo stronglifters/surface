@@ -1,4 +1,5 @@
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:900);
+@import "foundation_and_overrides";
 
 /* ---------------------------------------------- */
 /* Mixins --------------------------------------- */
@@ -45,7 +46,7 @@ nav h1 {
 
 nav svg {
   display: inline-block;
-  fill: #FFFFFF;
+  fill: $white;
   float: left;
   margin: 5px 8px 0 20px;
   position: relative;

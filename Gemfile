@@ -32,6 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Puma as the app server
 gem 'puma'
 gem 'rack-timeout'
+gem 'scale'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/speasley/supplycrow.svg?branch=master)](https://travis-ci.org/speasley/supplycrow)
-[![Code Climate](https://codeclimate.com/github/speasley/supplycrow/badges/gpa.svg)](https://codeclimate.com/github/speasley/supplycrow)
-[![Coverage Status](https://coveralls.io/repos/speasley/supplycrow/badge.svg?branch=master)](https://coveralls.io/r/speasley/supplycrow?branch=master)
+[![Build Status](https://travis-ci.org/stronglifters/surface.svg?branch=master)](https://travis-ci.org/stronglifters/surface)
+[![Code Climate](https://codeclimate.com/github/stronglifters/surface/badges/gpa.svg)](https://codeclimate.com/github/stronglifters/surface)
+[![Coverage Status](https://coveralls.io/repos/stronglifters/surface/badge.svg?branch=master)](https://coveralls.io/r/stronglifters/surface?branch=master)
 
 ## README
 

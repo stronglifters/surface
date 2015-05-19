@@ -1,8 +1,9 @@
 require "rails_helper"
 
-describe "Sessions" do
+feature "Sessions", type: :feature do
   subject { LoginPage.new }
-  let(:user){ create(:user,:password => "password") }
+  let(:user) { create(:user, password: "password") }
+
   context "credentials are correct" do
     it "takes you to your dashboard" do
       subject.visit_page

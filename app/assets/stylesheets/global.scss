@@ -1,13 +1,72 @@
+@import url(//fonts.googleapis.com/css?family=Playfair+Display:900);
+
+/* ---------------------------------------------- */
+/* Mixins --------------------------------------- */
+/* ---------------------------------------------- */
+@mixin responsive-svg($svgwidth, $svgheight, $containerwidth) {
+  height: 0;
+  margin: 0 auto;
+  padding-top: #{($svgheight/$svgwidth)*$containerwidth};
+  position: relative;
+  width: $containerwidth;
+
+  svg {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+
+/* ---------------------------------------------- */
+/* Branding ------------------------------------- */
+/* ---------------------------------------------- */
+header {
+  padding: 0.5em 0;
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .svg-container {
+    @include responsive-svg(10, 20, 0.85em); // (width, height, containerWidth)
+  }
+
+  img {
+    margin: 0 0.15em 0 0;
+    width: 18px;
+  }
+}
+
+nav h1 {
+  font-family: 'Playfair Display', serif;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+nav svg {
+  display: inline-block;
+  fill: $white;
+  float: left;
+  margin: 5px 8px 0 20px;
+  position: relative;
+  width: 12px;
+  z-index: 100;
+}
 /* ---------------------------------------------- */
 /* Buttons -------------------------------------- */
 /* ---------------------------------------------- */
-.button.bare, .button.bare:hover, .button.bare:active,
-.button.bare:visited, .button.bare:focus {
-	background-color: transparent;
-	border-color: transparent;
-	padding-right: 1.5rem;
-	padding-left: 1.5rem;
-}
-.button.bare:hover {
-	text-decoration: underline;
+.button.bare {
+  &:hover,
+  &:active,
+  &:visited,
+  &:focus {
+    background-color: transparent;
+    border-color: transparent;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

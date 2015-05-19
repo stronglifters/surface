@@ -15,4 +15,11 @@ class PageModel
   def on_page?
     current_path == page_path
   end
+
+  def login_with(username, password)
+    LoginPage.new.tap do |login_page|
+      login_page.visit_page
+      login_page.login_with(username, password)
+    end
+  end
 end

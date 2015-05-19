@@ -32,6 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Puma as the app server
 gem 'puma'
 gem 'rack-timeout'
+gem 'scale'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -46,6 +47,8 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'spring-commands-teaspoon'
   gem 'rspec-rails'
   gem 'foreman'
   gem 'i18n-tasks'
@@ -53,6 +56,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'database_cleaner'
+  gem 'teaspoon'
+  gem 'meta_request'
 end
 
 group :production do

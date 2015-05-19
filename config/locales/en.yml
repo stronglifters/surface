@@ -20,23 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  items:
-    index:
-      item_name: 'Item name'
-      new_item_button: 'Create item'
-    form:
-      name: 'Name'
-      description: 'Description'
-      serial_number: 'Serial Number'
-      purchase_price: 'Purchase Price'
-      purchase_date: 'Purchase date'
-      purchased_at: 'Purchase date'
-      create_button: 'Create item'
-    show:
-      delete_button: 'Delete'
-      delete_confirm: 'Confirm'
-      cancel_button: 'Cancel'
-      edit_button: 'Edit'
   registrations:
     new:
       username: "Username"
@@ -47,7 +30,7 @@ en:
       register_button: "Register"
       login_link: "Already have an account?"
     create:
-      success: "Thank you for registering. Welcome to Supply Crow."
+      success: "Thank you for registering."
   sessions:
     create:
       invalid_login: "Sorry, we cannot find that account."

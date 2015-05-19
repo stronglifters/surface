@@ -12,11 +12,9 @@
     <%= render partial: 'layouts/flash' %>
     <div class="row">
       <div class="large-12 columns">
-   
       <!-- Navigation -->
         <div class="row">
           <div class="large-12 columns">
-   
             <nav class="top-bar" data-topbar>
               <ul class="title-area">
                 <!-- Title Area -->
@@ -24,11 +22,10 @@
                   <svg viewBox="0 0 82.515 266.693">
                     <use xlink:href="<%= asset_path "sprite.svg#feather" %>"></use>
                   </svg>
-                  <h1><%= link_to "Supply Crow", dashboard_path %></h1>
+                  <h1><%= link_to "Strong Lifters", dashboard_path %></h1>
                 </li>
                 <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
               </ul>
-           
               <section class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
@@ -80,21 +77,15 @@
             <!-- End Top Bar -->
           </div>
         </div>
-   
       <!-- End Navigation -->
-   
       <%= yield %>
-   
       <!-- Footer -->
-   
         <footer class="row">
           <div class="large-12 columns"><hr />
             <div class="row">
-   
               <div class="large-6 columns">
-                <p>© Copyright no one at all. Go to town.</p>
+                <p>&copy; Copyright no one at all. Go to town.</p>
               </div>
-   
               <div class="large-6 columns">
                 <ul class="inline-list right">
                   <li><a href="#">Link 1</a></li>
@@ -103,13 +94,10 @@
                   <li><a href="#">Link 4</a></li>
                 </ul>
               </div>
-   
             </div>
           </div>
         </footer>
-   
       <!-- End Footer -->
-   
       </div>
     </div>
     <%= javascript_include_tag "application" %>

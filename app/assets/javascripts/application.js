@@ -17,4 +17,4 @@
 //= require_self
 //= require_tree .
 
-var SupplyCrow = SupplyCrow || {};
+var StrongLifters = StrongLifters || {};

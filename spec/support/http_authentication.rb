@@ -1,5 +1,5 @@
 module HttpAuthentication
-  def auth_user(user)
+  def http_login(user)
     session[:user_id] = user.id
   end
 end

@@ -18,7 +18,7 @@ describe ApplicationController, type: :controller do
     let(:user) { create(:user) }
 
     it "allows the action to do it's thing" do
-      auth_user(user)
+      http_login(user)
       get :index
       expect(response.body).to eql("WHAT?")
     end

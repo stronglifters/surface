@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "/dashboard", type: :routing do
+describe "/dashboard", type: :routing do
   it "routes to the items listing" do
-    expect(get: "/dashboard").to route_to("sessions#new")
+    expect(get: "/dashboard").to route_to("training_sessions#index")
   end
 end

@@ -1,0 +1,43 @@
+<div class="row">
+  <!-- Side Bar -->
+  <div class="large-4 small-12 columns">
+    <div class="hide-for-small panel">
+      <div class="row">
+        <%= form_tag(upload_training_sessions_path, method: :post) do %>
+          <div class="small-12 columns">
+            <label><%= t('.backup_file') %>
+              <%= file_field_tag :backup %>
+            </label>
+          </div> <!-- /.small-12 -->
+          <div class="small-12 columns">
+            <%= submit_tag t('.upload_backup_button'), class: 'button' %>
+          </div> <!-- /.small-12 -->
+        <% end %>
+      </div>
+    </div>
+    <a href="#">
+      <div class="panel callout radius">
+        <h6><%= @training_sessions.count %>  training sessions completed</h6>
+      </div>
+    </a>
+  </div>
+  <!-- End Side Bar -->
+
+  <!-- Thumbnails -->
+  <div class="large-8 columns">
+    <div class="row">
+        <% @training_sessions.each do |training_session| %>
+          <div class="large-4 small-6 columns">
+            <img src="http://placehold.it/1000x1000&text=Thumbnail">
+
+            <div class="panel">
+              <h5><%= training_session.created_at %></h5>
+              <h6 class="subheader"><%= training_session.created_at %></h6>
+            </div>
+          </div>
+        <% end %>
+    </div>
+    <!-- End Thumbnails -->
+    </div>
+  </div>
+</div>

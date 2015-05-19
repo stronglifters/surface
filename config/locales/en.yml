@@ -39,3 +39,9 @@ en:
       password: "Password"
       login_button: "Login"
       register_link: "Create an account"
+  training_sessions:
+    index:
+      backup_file: 'File'
+      upload_backup_button: "Upload"
+    upload:
+      success: 'Our minions have been summoned to unpack your backup.'

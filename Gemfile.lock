@@ -235,6 +235,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sqlite3 (1.3.10)
     teaspoon (0.9.1)
       railties (>= 3.2.5, < 5)
     term-ansicolor (1.3.0)
@@ -303,6 +304,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-commands-teaspoon
+  sqlite3
   teaspoon
   turbolinks
   uglifier (>= 1.3.0)

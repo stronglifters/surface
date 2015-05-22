@@ -62,9 +62,7 @@
                   <li class="has-dropdown">
                     <a href="#"><%= gravatar_for(@current_user, size: 16) %> <%= @current_user.username %></a>
                     <ul class="dropdown">
-                      <li><a href="#">Dropdown Option</a></li>
-                      <li><a href="#">Dropdown Option</a></li>
-                      <li><a href="#">Dropdown Option</a></li>
+                      <li><%= link_to "Training Sessions", training_sessions_path %></li>
                       <li class="divider"></li>
                       <li><%= link_to "Log Out", session_path('me'), method: :delete %></li>
                     </ul>

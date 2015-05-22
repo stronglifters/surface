@@ -6,6 +6,10 @@ class TrainingSession < ActiveRecord::Base
   def self.create_workout_from(workout_row)
     program = Program.find_by(name: "StrongLifts 5×5")
     workout = program.workouts.find_by(name: workout_row.workout)
+
+    matching_workouts = where(occurred_at: workout_row.date)
+    return matching_workouts.first if matching_workouts.any?
+
     transaction do
       session = create!(workout: workout, occurred_at: workout_row.date)
 

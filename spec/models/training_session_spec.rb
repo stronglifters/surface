@@ -67,5 +67,10 @@ describe TrainingSession, type: :model do
       expect(row_session.sets[3]).to eql("4")
       expect(row_session.sets[4]).to eql("4")
     end
+
+    it 'excludes items that have already been imported' do
+      training_session = user.training_sessions.create_workout_from(workout_row)
+      expect(user.training_sessions.create_workout_from(workout_row)).to eql(training_session)
+    end
   end
 end

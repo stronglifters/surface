@@ -1,6 +1,6 @@
 <div class="large-4 small-6 columns">
   <div class="panel">
-    <h5><%= training_session.workout.name %></h5>
+    <h5><%= link_to training_session.workout.name, workout_path(training_session.workout.slug) %></h5>
     <h6 class="subheader"><%= distance_of_time_in_words_to_now training_session.occurred_at %> ago</h6>
     <% training_session.exercise_sessions.each do |exercise_session| %>
       <p><%= exercise_session.exercise.name %> @ <%= exercise_session.target_weight %> <%= exercise_session.sets.join(',') %> </p>

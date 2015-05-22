@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="small-12 columns">
+    <div class="row">
+      <h1>Workout <%= link_to @workout.name, workout_path(@workout) %> of <%= link_to @workout.program.name, program_path(@workout.program) %></h1>
+      <%= render @workout.exercise_workouts %>
+    </div>
+    </div>
+  </div>
+</div>

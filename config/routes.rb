@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       post :upload
     end
   end
+  resources :programs, only: [:show]
+  resources :workouts, only: [:show]
   get "/dashboard" => "training_sessions#index", as: :dashboard
   get "/terms" => "static_pages#terms"
 end

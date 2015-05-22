@@ -17,6 +17,7 @@ FactoryGirl.define do
     terms_and_conditions "1"
   end
   factory :workout do
+    association :program
     name { FFaker::Internet.user_name }
   end
 end

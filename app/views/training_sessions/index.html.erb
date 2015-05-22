@@ -26,16 +26,7 @@
   <!-- Thumbnails -->
   <div class="large-8 columns">
     <div class="row">
-        <% @training_sessions.each do |training_session| %>
-          <div class="large-4 small-6 columns">
-            <img src="http://placehold.it/1000x1000&text=Thumbnail">
-
-            <div class="panel">
-              <h5><%= training_session.created_at %></h5>
-              <h6 class="subheader"><%= training_session.created_at %></h6>
-            </div>
-          </div>
-        <% end %>
+      <%= render @training_sessions %>
     </div>
     <!-- End Thumbnails -->
     </div>

@@ -2,7 +2,7 @@ require 'temporary_storage'
 
 class TrainingSessionsController < ApplicationController
   def index
-    @training_sessions = current_user.training_sessions
+    @training_sessions = current_user.training_sessions.order(occurred_at: :desc)
   end
 
   def upload

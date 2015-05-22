@@ -2,7 +2,6 @@ class TrainingSession < ActiveRecord::Base
   belongs_to :user
   belongs_to :workout
   has_many :exercise_sessions
-  attr_accessor :occurred_at
 
   def self.create_workout_from(workout_row)
     program = Program.find_by(name: "StrongLifts 5×5")

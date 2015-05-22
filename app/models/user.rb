@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   validates :email, presence: true, email: true, uniqueness: true
   validates_acceptance_of :terms_and_conditions
 
+  def gravatar_id
+    Digest::MD5::hexdigest(email.downcase)
+  end
+
   def self.authenticate(username,password)
     if user = User.where("email = :email OR username = :username", username: username, email: username).first
       user.authenticate(password)

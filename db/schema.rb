@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522183829) do
+ActiveRecord::Schema.define(version: 20150522201542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150522183829) do
     t.datetime "updated_at",  null: false
     t.uuid     "workout_id",  null: false
     t.datetime "occurred_at", null: false
+    t.float    "body_weight"
   end
 
   add_index "training_sessions", ["user_id"], name: "index_training_sessions_on_user_id", using: :btree

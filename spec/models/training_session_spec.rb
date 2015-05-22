@@ -40,6 +40,7 @@ describe TrainingSession, type: :model do
       expect(training_session).to be_persisted
       expect(training_session.occurred_at).to eql(workout_row.date)
       expect(training_session.workout).to eql(workout_a)
+      expect(training_session.body_weight).to eql(209.0)
       expect(training_session.exercise_sessions.count).to eql(3)
       expect(training_session.exercise_sessions.map { |x| x.exercise.name }).to match_array(["Squat", "Bench Press", "Barbell Row"])
 

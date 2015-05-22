@@ -7,6 +7,7 @@ FactoryGirl.define do
   end
   factory :training_session do
     association :user
+    occurred_at { DateTime.now }
   end
   factory :user do
     username { FFaker::Internet.user_name }

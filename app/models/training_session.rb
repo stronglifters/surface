@@ -11,16 +11,15 @@ class TrainingSession < ActiveRecord::Base
 
       workout.exercise_workouts.each_with_index do |exercise_workout, index|
         exercise_row = workout_row.exercises[index]
+        sets = []
+        1.upto(exercise_workout.sets+1).each do |n|
+          sets.push(exercise_row["set#{n}"].to_i > 0 ? exercise_row["set#{n}"] : 0)
+        end
+
         session.exercise_sessions.create!(
           target_weight: exercise_row['warmup']['targetWeight'],
           exercise_workout: exercise_workout,
-          sets: [
-            exercise_row['set1'].to_i > 0 ? exercise_row['set1'] : 0,
-            exercise_row['set2'].to_i > 0 ? exercise_row['set2'] : 0,
-            exercise_row['set3'].to_i > 0 ? exercise_row['set3'] : 0,
-            exercise_row['set4'].to_i > 0 ? exercise_row['set4'] : 0,
-            exercise_row['set5'].to_i > 0 ? exercise_row['set5'] : 0,
-          ]
+          sets: sets
         )
       end
       session

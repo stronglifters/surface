@@ -2,7 +2,15 @@
   <img src="http://placehold.it/1000x1000&text=Thumbnail">
 
   <div class="panel">
-    <h5><%=  training_session.created_at %></h5>
-    <h6 class="subheader"><%= distance_of_time_in_words_to_now training_session.occurred_at %></h6>
+    <h5><%=  training_session.workout.name %></h5>
+    <h6 class="subheader"><%= distance_of_time_in_words_to_now training_session.occurred_at %> ago</h6>
+    <% training_session.exercise_sessions.each do |exercise_session| %>
+      <p><%= exercise_session.exercise.name %> @ <%= exercise_session.target_weight %></p>
+      <ul>
+        <% exercise_session.sets.each do |set| %>
+          <li><%= set %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </div>

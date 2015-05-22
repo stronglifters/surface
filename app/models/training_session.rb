@@ -12,7 +12,7 @@ class TrainingSession < ActiveRecord::Base
       workout.exercise_workouts.each_with_index do |exercise_workout, index|
         exercise_row = workout_row.exercises[index]
         sets = []
-        1.upto(exercise_workout.sets+1).each do |n|
+        1.upto(exercise_workout.sets).each do |n|
           sets.push(exercise_row["set#{n}"].to_i > 0 ? exercise_row["set#{n}"] : 0)
         end
 

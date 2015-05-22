@@ -3,7 +3,7 @@
   <div class="large-4 small-12 columns">
     <div class="hide-for-small panel">
       <div class="row">
-        <%= form_tag(upload_training_sessions_path, method: :post) do %>
+        <%= form_tag(upload_training_sessions_path, method: :post, multipart: true) do %>
           <div class="small-12 columns">
             <label><%= t('.backup_file') %>
               <%= file_field_tag :backup %>

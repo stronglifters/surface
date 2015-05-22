@@ -19,7 +19,7 @@ describe TrainingSessionsController do
   end
 
   describe "#upload" do
-    let(:backup_file) { Rails.root.join("spec", "fixtures", "stronglifts.backup").to_s }
+    let(:backup_file) { fixture_file_upload("backup.stronglifts") }
 
     before :each do
       allow(ProcessBackupJob).to receive(:perform_later)
@@ -27,7 +27,7 @@ describe TrainingSessionsController do
 
     it "uploads a new backup" do
       post :upload, backup: backup_file
-      expect(ProcessBackupJob).to have_received(:perform_later).with(user, backup_file)
+      expect(ProcessBackupJob).to have_received(:perform_later)
     end
 
     it "redirects to the dashboard" do

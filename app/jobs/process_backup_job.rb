@@ -1,5 +1,5 @@
 class ProcessBackupJob < ActiveJob::Base
-  WORKOUTS_SQL="SELECT * FROM WORKOUTS;"
+  WORKOUTS_SQL="select * from workouts"
   queue_as :default
 
   def perform(user, backup_file)

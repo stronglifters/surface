@@ -35,9 +35,6 @@ gem 'puma'
 gem 'rack-timeout'
 gem 'scale'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :development, :test do
   gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -59,6 +56,11 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'teaspoon'
   gem 'meta_request'
+
+  # Use Capistrano for deployment
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-rbenv', '~> 2.0', require: false
 end
 
 group :production do

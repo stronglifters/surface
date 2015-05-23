@@ -3,6 +3,7 @@ lock '3.4.0'
 
 set :application, 'stronglifters'
 set :repo_url, 'git@github.com:stronglifters/surface.git'
+set :branch, 'master'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -11,7 +12,7 @@ set :repo_url, 'git@github.com:stronglifters/surface.git'
 # set :deploy_to, '/var/www/my_app_name'
 
 # Default value for :scm is :git
-# set :scm, :git
+set :scm, :git
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -23,7 +24,7 @@ set :repo_url, 'git@github.com:stronglifters/surface.git'
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', '.env')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', ".env.#{fetch(:rails_env, "production")}")
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')

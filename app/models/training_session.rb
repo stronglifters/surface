@@ -26,7 +26,7 @@ class TrainingSession < ActiveRecord::Base
         end
 
         session.exercise_sessions.create!(
-          target_weight: exercise_row['warmup']['targetWeight'],
+          target_weight: exercise_row["warmup"]["targetWeight"],
           exercise_workout: exercise_workout,
           sets: sets
         )

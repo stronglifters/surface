@@ -35,7 +35,6 @@ gem 'puma'
 gem 'rack-timeout'
 gem 'scale'
 gem 'dotenv-rails'
-gem 'foreman'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,6 +48,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'spring-commands-teaspoon'
   gem 'rspec-rails'
+  gem 'foreman'
   gem 'i18n-tasks'
   gem 'poltergeist'
   gem 'factory_girl_rails'

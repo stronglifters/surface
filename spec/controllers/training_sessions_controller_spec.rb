@@ -35,7 +35,7 @@ describe TrainingSessionsController do
       expect(response).to redirect_to(dashboard_path)
     end
 
-    it 'displays a friendly message' do
+    it "displays a friendly message" do
       post :upload, backup: backup_file
       translation = I18n.translate("training_sessions.upload.success")
       expect(flash[:notice]).to eql(translation)

@@ -10,7 +10,11 @@ class TrainingSession < ActiveRecord::Base
       if matching_workouts.any?
         session = matching_workouts.first
       else
-        session = create!(workout: workout, occurred_at: workout_row.date, body_weight: workout_row.body_weight.to_f)
+        session = create!(
+          workout: workout,
+          occurred_at: workout_row.date,
+          body_weight: workout_row.body_weight.to_f
+        )
       end
 
       session.exercise_sessions.destroy_all
@@ -18,7 +22,7 @@ class TrainingSession < ActiveRecord::Base
         exercise_row = workout_row.exercises[index]
         sets = []
         1.upto(exercise_workout.sets).each do |n|
-          sets.push(exercise_row["set#{n}"].to_i > 0 ? exercise_row["set#{n}"] : 0)
+          sets << exercise_row["set#{n}"].to_i > 0 ? exercise_row["set#{n}"] : 0
         end
 
         session.exercise_sessions.create!(

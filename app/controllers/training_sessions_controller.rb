@@ -1,13 +1,19 @@
-require 'temporary_storage'
+require "temporary_storage"
 
 class TrainingSessionsController < ApplicationController
   def index
-    @training_sessions = current_user.training_sessions.order(occurred_at: :desc)
+    @training_sessions = current_user.training_sessions.
+      order(occurred_at: :desc)
   end
 
   def upload
-    temporary_storage = TemporaryStorage.new
-    ProcessBackupJob.perform_later(current_user, temporary_storage.store(params[:backup]))
-    redirect_to dashboard_path, notice: t('.success')
+    ProcessBackupJob.perform_later(current_user, storage.store(params[:backup]))
+    redirect_to dashboard_path, notice: t(".success")
+  end
+
+  private
+
+  def storage
+    @storage ||= TemporaryStorage.new
   end
 end

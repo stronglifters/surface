@@ -13,13 +13,11 @@ Once you have vagrant installed you can run:
 ```
 
 The first time you run the above command it may take a while to get
-things set up. After that you can ssh into your vagrant instance and run
-the setup script.
+things set up. After that you can ssh into your vagrant instance.
 
 ```bash
   $ vagrant ssh
   $ cd /vagrant
-  $ bin/setup
 ```
 
 The last step is to run the application. From the vagrant ssh shell run:

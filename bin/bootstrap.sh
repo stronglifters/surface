@@ -15,6 +15,7 @@ apt-get -y install libreadline-gplv2-dev
 apt-get -y install libxml2 libxml2-dev libxslt1-dev
 apt-get -y install curl libcurl3 libcurl3-gnutls libcurl4-openssl-dev
 apt-get -y install exuberant-ctags
+apt-get -y install unzip
 apt-get -y autoremove
 
 add-apt-repository -y ppa:nginx/stable

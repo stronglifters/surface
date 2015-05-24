@@ -30,6 +30,9 @@ You should now have a fully running instance of the application. The
 /vagrant folder in the VM is mounted to match your working directory on
 your host machine. So you are free to use whatever editor you like.
 
+You can access the application by opening a browser window to
+http://localhost:3000/
+
 ## Contributing
 
 1. Fork it

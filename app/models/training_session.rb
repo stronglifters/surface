@@ -22,7 +22,11 @@ class TrainingSession < ActiveRecord::Base
         exercise_row = workout_row.exercises[index]
         sets = []
         1.upto(exercise_workout.sets).each do |n|
-          sets << exercise_row["set#{n}"].to_i > 0 ? exercise_row["set#{n}"] : 0
+          sets << (
+            exercise_row["set#{n}"].to_i > 0 ?
+            exercise_row["set#{n}"] :
+            0
+          )
         end
 
         session.exercise_sessions.create!(

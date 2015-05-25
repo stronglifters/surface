@@ -60,17 +60,13 @@
                   <li><a href="#">Main Item 2</a></li>
                   <li class="divider"></li>
                   <li class="has-dropdown">
-                    <a href="#">Main Item 3</a>
+                    <a href="#"><%= gravatar_for(@current_user, size: 16) %> <%= @current_user.username %></a>
                     <ul class="dropdown">
-                      <li><a href="#">Dropdown Option</a></li>
-                      <li><a href="#">Dropdown Option</a></li>
-                      <li><a href="#">Dropdown Option</a></li>
+                      <li><%= link_to "Training Sessions", training_sessions_path %></li>
                       <li class="divider"></li>
-                      <li><a href="#">See all →</a></li>
+                      <li><%= link_to "Log Out", session_path('me'), method: :delete %></li>
                     </ul>
                   </li>
-                  <li class="divider"></li>
-                  <li><%# link_to "Logout", session_destroy_path(current_user), method: :delete %></li>
                 </ul>
               </section>
             </nav>

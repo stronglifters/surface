@@ -4,29 +4,39 @@
 
 ## README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The easiest way to get up and running is to use [vagrant](https://www.vagrantup.com/).
 
-Things you may want to cover:
+Once you have vagrant installed you can run:
 
-* Ruby version
+```bash
+  $ vagrant up
+```
 
-* System dependencies
+The first time you run the above command it may take a while to get
+things set up. After that you can ssh into your vagrant instance.
 
-* Configuration
+```bash
+  $ vagrant ssh
+  $ cd /vagrant
+```
 
-* Database creation
+The last step is to run the application. From the vagrant ssh shell run:
 
-* Database initialization
+```bash
+  $ bin/foreman start
+```
 
-* How to run the test suite
+You should now have a fully running instance of the application. The
+/vagrant folder in the VM is mounted to match your working directory on
+your host machine. So you are free to use whatever editor you like.
 
-* Services (job queues, cache servers, search engines, etc.)
+You can access the application by opening a browser window to
+http://localhost:3000/
 
-* Deployment instructions
+## Contributing
 
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request

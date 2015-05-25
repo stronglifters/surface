@@ -26,7 +26,7 @@ set :scm, :git
 # Default value for :linked_files is []
 set :linked_files, fetch(:linked_files, []).push(
   "config/database.yml",
-  ".env.#{fetch(:rails_env, "production")}",
+  ".env.#{fetch(:rails_env, 'production')}",
 )
 
 # Default value for linked_dirs is []

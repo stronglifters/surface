@@ -8,9 +8,8 @@ before_script:
 - cp config/database.yml.travis config/database.yml
 - psql -c 'create database app_test;' -U postgres
 after_success:
-  - "openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa"
-  - "echo $TRAVIS_BRANCH"
-  - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production deploy"
+- openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa
+- test $TRAVIS_BRANCH == "master" && bundle exec cap production deploy
 env:
   global:
     secure: aCZHh17t7XnV6Y7URW29V2UBO4T9zWgV7v69LmZ3fyY/SnznbJu1IS28soVaykxYdul82WB/Mzbh2cPyse9qNWYnql++Xdi89jCbifxqf6gnX8BbJKAemRUGESG99qXJgURJkeN+WJAwFLWEWsVSQcUtVsfp7KNdq1wK7THe+2cSI0+SYXItUJN2Qg0ns3w8A0q/cRBnFDcx35iwYmiklOg46Rrb8CWPPKq+bbURUeuzW47xVv57rL9CFPs+jqkefbuXrNecOZwHnkqapf5c0wu8Rjz6cvFnZ/JIad6soHfttwGZ6h+YYnoW/7CpDBaRLctruUOlaSoxnIUvkgwHzG53e60mCQIpzeJvTPTRhQX5SLqHogTiJw1U8jn1k1kz5E/U/kQIwxT/IdUb14xP58Wd/Zv2fI8HUjpUH3XYTVxPlBybZX/YeAAgS23w6D0EUkg2lCC+z2L6b5PbZCJqyQwuHiu6X4umwKnDfgLqZbZOT7FhSerqVlqEbP03G5Tbmt6QhXnCNdszOx/mK035w3K80PA1ePVnTFLqhJbwp9gytF1sND1pP4S7+QwZD9jhJJ3jkVVpfIJl1BUqgH36GZAYFtnxV/fwBY674zNWbe1CDn8hY5oa9/QukJVHM6rDSTZOHpns5i1ZZ2jCts3UBQnAIYQ+k1EQc9it/AaYZZE=

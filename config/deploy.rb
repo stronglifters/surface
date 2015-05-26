@@ -45,11 +45,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-if File.exist?("config/deploy_id_rsa")
-  set :ssh_options, keys: ["config/deploy_id_rsa"]
-else
-  set :ssh_options, forward_agent: true
-end
+set :ssh_options, forward_agent: true
 set :rbenv_type, :system
 set :rbenv_ruby, "2.2.2"
 

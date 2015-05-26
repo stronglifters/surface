@@ -46,7 +46,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
 # set :keep_releases, 5
 
 if File.exist?("config/deploy_id_rsa")
-  set :ssh_options, keys: ["config/deploy_id_rsa"]
+  set :ssh_options, keys: ["config/deploy_id_rsa"], forward_agent: true
 else
   set :ssh_options, forward_agent: true
 end

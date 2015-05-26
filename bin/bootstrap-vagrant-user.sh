@@ -1,3 +1,5 @@
+set -e
+cd $HOME
 git clone https://github.com/sstephenson/rbenv.git $HOME/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.bash_profile
 echo 'eval "$(rbenv init -)"' >> $HOME/.bash_profile

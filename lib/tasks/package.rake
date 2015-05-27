@@ -1,6 +1,6 @@
 namespace :package do
   desc "create a build package"
-  task build: :environment do
+  task :build => "assets:precompile" do
     require "rake/packagetask"
 
     Rake::PackageTask.new("stronglifters", :noversion) do |p|

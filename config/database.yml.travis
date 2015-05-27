@@ -3,3 +3,9 @@ test:
   database: app_test
   encoding: unicode
   username: postgres
+
+production:
+  adapter: postgresql
+  database: app_test
+  encoding: unicode
+  username: postgres

@@ -3,9 +3,10 @@ namespace :package do
   task :build => "assets:precompile" do
     require "rake/packagetask"
 
-    Rake::PackageTask.new("stronglifters", :noversion) do |p|
-      p.need_tar_gz = true
-      p.package_files.add %w(
+    version = DateTime.now.strftime("%Y-%m-%d-%H-%M-%S")
+    Rake::PackageTask.new("stronglifters", version) do |package|
+      package.need_tar_gz = true
+      package.package_files.add %w(
       app/**/*
       config/**/*
       db/**/*
@@ -19,11 +20,11 @@ namespace :package do
       Procfile
       config.ru
       )
-      p.package_files.exclude do |path|
-        path.start_with?("app/assets/") ||
-          path.start_with?("config/deploy")
+      package.package_files.exclude do |path|
+        path.start_with?("app/assets/") || path.start_with?("config/deploy")
       end
     end
-    Rake::Task["package"].invoke
+    Rake::Task["repackage"].invoke
+    FileUtils.rm_rf(File.join(Rails.root, 'pkg', "stronglifters-#{version}"))
   end
 end

@@ -11,8 +11,10 @@ set :branch, "master"
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
 
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 # Default value for :scm is :git
-set :scm, :git
+#set :scm, :git
+set :scm, :s3
 
 # Default value for :format is :pretty
 # set :format, :pretty

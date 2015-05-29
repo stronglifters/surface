@@ -5,8 +5,6 @@ namespace :s3 do
 
   set :s3_environmental_variables, ->() {
     {
-      aws_access_key_id: fetch(:aws_access_key_id),
-      aws_secret_access_key: fetch(:aws_secret_access_key),
       bucket_name: fetch(:s3_bucket),
       build_revision: fetch(:build_revision),
     }

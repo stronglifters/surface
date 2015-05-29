@@ -17,7 +17,7 @@ class Capistrano::S3 < Capistrano::SCM
     end
 
     def check
-      s3 'ls stronglifters'
+      s3 "ls #{bucket_name}"
     end
 
     def clone
@@ -25,14 +25,24 @@ class Capistrano::S3 < Capistrano::SCM
     end
 
     def update
-      build = "stronglifters-2015-05-29-03-07-33.tar.gz"
-      s3 "cp s3://stronglifters/production/#{build} #{repo_path}/#{build}"
+      s3 "cp s3://#{bucket_name}/#{rails_env}/#{build_revision} #{repo_path}/#{build_revision}"
     end
 
     def release
-      build = "stronglifters-2015-05-29-03-07-33.tar.gz"
       context.execute("mkdir -p #{release_path}")
-      context.execute("tar -xvzf #{repo_path}/#{build} --strip-components=1 -C #{release_path}")
+      context.execute("tar -xvzf #{repo_path}/#{build_revision} --strip-components=1 -C #{release_path}")
+    end
+
+    def bucket_name
+      fetch(:bucket_name)
+    end
+
+    def rails_env
+      fetch(:rails_env)
+    end
+
+    def build_revision
+      "stronglifters-2015-05-29-03-07-33.tar.gz"
     end
   end
 end

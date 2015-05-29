@@ -3,13 +3,6 @@ namespace :s3 do
     @strategy ||= Capistrano::S3.new(self, Capistrano::S3::DefaultStrategy)
   end
 
-  set :s3_environmental_variables, ->() {
-    {
-      bucket_name: fetch(:s3_bucket),
-      build_revision: fetch(:build_revision),
-    }
-  }
-
   task :wrapper do
     on release_roles :all do
     end
@@ -19,9 +12,7 @@ namespace :s3 do
   task check: :'s3:wrapper' do
     fetch(:branch)
     on release_roles :all do
-      with fetch(:s3_environmental_variables) do
-        strategy.check
-      end
+      strategy.check
     end
   end
 
@@ -32,9 +23,7 @@ namespace :s3 do
         info t(:mirror_exists, at: repo_path)
       else
         within deploy_path do
-          with fetch(:s3_environmental_variables) do
-            strategy.clone
-          end
+          strategy.clone
         end
       end
     end
@@ -44,9 +33,7 @@ namespace :s3 do
   task update: :'s3:clone' do
     on release_roles :all do
       within repo_path do
-        with fetch(:s3_environmental_variables) do
-          strategy.update
-        end
+        strategy.update
       end
     end
   end
@@ -54,11 +41,9 @@ namespace :s3 do
   desc 'Copy repo to releases'
   task create_release: :'s3:update' do
     on release_roles :all do
-      with fetch(:s3_environmental_variables) do
-        within repo_path do
-          execute :mkdir, '-p', release_path
-          strategy.release
-        end
+      within repo_path do
+        execute :mkdir, '-p', release_path
+        strategy.release
       end
     end
   end
@@ -67,9 +52,7 @@ namespace :s3 do
   task :set_current_revision do
     on release_roles :all do
       within repo_path do
-        with fetch(:s3_environmental_variables) do
-          set :current_revision, fetch(:build_revision)
-        end
+        set :current_revision, fetch(:build_revision)
       end
     end
   end

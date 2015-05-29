@@ -42,7 +42,7 @@ class Capistrano::S3 < Capistrano::SCM
     end
 
     def build_revision
-      "stronglifters-2015-05-29-03-07-33.tar.gz"
+      fetch(:build_revision)
     end
   end
 end

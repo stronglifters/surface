@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :training_sessions
+  has_many :exercise_sessions, through: :training_sessions
   USERNAME_REGEX=/\A[-a-z0-9_.]*\z/i
 
   validates :username, presence: true, format: { with: USERNAME_REGEX }, uniqueness: true
@@ -13,6 +14,10 @@ class User < ActiveRecord::Base
 
   def to_param
     username
+  end
+
+  def personal_record(exercise)
+    exercise_sessions.joins(:exercise).where(exercises: { name: exercise.name }).pluck(:target_weight).max
   end
 
   def self.authenticate(username,password)

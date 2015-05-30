@@ -31,6 +31,9 @@ en:
       login_link: "Already have an account?"
     create:
       success: "Thank you for registering."
+  profiles:
+    show:
+      workouts_completed: "%{count} workouts completed."
   sessions:
     create:
       invalid_login: "Sorry, we cannot find that account."

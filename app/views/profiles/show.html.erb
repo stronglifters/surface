@@ -1,0 +1,19 @@
+<div class="small-12 columns">
+<div class="row">
+  <div class="small-3 columns">
+    &nbsp;
+  </div>
+  <div class="small-6 columns">
+    <%= gravatar_for(@user) %>
+    <h1><%= link_to @user.username, profile_path(@user) %></h1>
+    <p><%= t('.workouts_completed', count: @user.training_sessions.count) %></p>
+
+    <% @program.exercises.uniq.each do |exercise| %>
+      <p> <strong><%= exercise.name %></strong>: <%= @user.personal_record(exercise) %> lbs</p>
+    <% end %>
+  </div>
+  <div class="small-3 columns">
+    &nbsp;
+  </div>
+</div>
+</div>

@@ -7,6 +7,12 @@ class Program < ActiveRecord::Base
     slug
   end
 
+  class << self
+    def stronglifts
+      @stronglifts ||= Program.find_by(name: "StrongLifts 5×5")
+    end
+  end
+
   private
 
   def save_slug

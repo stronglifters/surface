@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
     Digest::MD5::hexdigest(email.downcase)
   end
 
+  def to_param
+    username
+  end
+
   def self.authenticate(username,password)
     if user = User.where("email = :email OR username = :username", username: username, email: username).first
       user.authenticate(password)

@@ -88,33 +88,32 @@ describe User do
       expect(User::USERNAME_REGEX).to match("username1")
     end
   end
-  
+
   describe "#authenticate" do
     context "when credentials are correct" do
-      
       it "returns true" do
         user = create(:user, password: "password", password_confirmation: "password")
         expect(User.authenticate(user.email, "password")).to eql(user)
       end
-      
     end
-    
+
     context "when the email is not registered" do
-      
       it "returns nil" do
         expect(User.authenticate("sofake@noteven.com", "password")).to be_nil
       end
-      
     end
-    
+
     context "when the username is not registered" do
-      
       it "returns nil" do
         expect(User.authenticate("sofake", "password")).to be_nil
       end
-      
     end
-    
   end
-  
+
+  describe "#to_param" do
+    it "returns the username as the uniq identifier" do
+      user = build(:user)
+      expect(user.to_param).to eql(user.username)
+    end
+  end
 end

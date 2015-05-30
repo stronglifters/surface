@@ -116,4 +116,29 @@ describe User do
       expect(user.to_param).to eql(user.username)
     end
   end
+
+  describe "#personal_record" do
+    include_context "stronglifts_program"
+    let(:user) { create(:user) }
+    let(:exercise_workout) { workout_a.exercise_workouts.first }
+    let(:exercise) { exercise_workout.exercise }
+
+    before :each do
+      training_session = user.training_sessions.create!(
+        workout: workout_a,
+        occurred_at: DateTime.now.utc
+      )
+      1.upto(5) do |n|
+        training_session.exercise_sessions.create!(
+          target_weight: (200 + n),
+          exercise_workout: exercise_workout,
+          sets: [5, 5, 5, 5, 5]
+        )
+      end
+    end
+
+    it "returns the users maximum amount of weight lifted" do
+      expect(user.personal_record(exercise)).to eql(205.0)
+    end
+  end
 end

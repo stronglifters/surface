@@ -16,7 +16,6 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 #set :scm, :git
 set :scm, :s3
 set :bucket_name, "stronglifters"
-set :build_revision, "stronglifters-2015-05-29-03-07-33.tar.gz"
 
 # Default value for :format is :pretty
 # set :format, :pretty

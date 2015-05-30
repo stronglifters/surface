@@ -52,7 +52,7 @@ namespace :s3 do
   task :set_current_revision do
     on release_roles :all do
       within repo_path do
-        set :current_revision, fetch(:build_revision)
+        set :current_revision, strategy.build_revision
       end
     end
   end

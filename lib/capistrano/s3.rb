@@ -4,11 +4,10 @@ require 'capistrano/scm'
 
 class Capistrano::S3 < Capistrano::SCM
   def s3(*args)
-    puts args.inspect
-    args.unshift '--profile default'
+    args.unshift "--profile default"
     args.unshift :s3
     args.unshift :aws
-    context.execute *args
+    context.execute(*args)
   end
 
   module DefaultStrategy
@@ -42,7 +41,7 @@ class Capistrano::S3 < Capistrano::SCM
     end
 
     def build_revision
-      fetch(:build_revision)
+      context.capture(:aws, "s3 ls #{bucket_name}/#{rails_env}/ | sort | tail -n1 | awk '{ print $4 }'").strip
     end
   end
 end

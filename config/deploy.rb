@@ -1,5 +1,6 @@
 # config valid only for current version of Capistrano
 lock "3.4.0"
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 
 set :application, "stronglifters"
 set :repo_url, "git@github.com:stronglifters/surface.git"
@@ -12,7 +13,9 @@ set :branch, "master"
 # set :deploy_to, "/var/www/my_app_name"
 
 # Default value for :scm is :git
-set :scm, :git
+# set :scm, :git
+set :scm, :s3
+set :bucket_name, "stronglifters"
 
 # Default value for :format is :pretty
 # set :format, :pretty

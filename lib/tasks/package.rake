@@ -3,7 +3,7 @@ namespace :package do
   task :build => "assets:precompile" do
     require "rake/packagetask"
 
-    version = DateTime.now.strftime("%Y-%m-%d-%H-%M-%S")
+    version = DateTime.now.utc.strftime("%Y-%m-%d-%H-%M-%S")
     Rake::PackageTask.new("stronglifters", version) do |package|
       package.need_tar_gz = true
       package.package_files.add %w(

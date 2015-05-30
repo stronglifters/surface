@@ -3,14 +3,8 @@ namespace :s3 do
     @strategy ||= Capistrano::S3.new(self, Capistrano::S3::DefaultStrategy)
   end
 
-  task :wrapper do
-    on release_roles :all do
-    end
-  end
-
   desc 'Check that the repository is reachable'
-  task check: :'s3:wrapper' do
-    fetch(:branch)
+  task :check do
     on release_roles :all do
       strategy.check
     end

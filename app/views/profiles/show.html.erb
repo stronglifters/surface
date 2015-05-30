@@ -3,14 +3,29 @@
   <div class="small-3 columns">
     &nbsp;
   </div>
-  <div class="small-6 columns">
-    <%= gravatar_for(@user) %>
+  <div class="small-6 columns text-center">
+    <%= link_to profile_path(@user), class: 'th [radius]' do %>
+      <%= gravatar_for(@user, size: 128) %>
+    <% end %>
     <h1><%= link_to @user.username, profile_path(@user) %></h1>
     <p><%= t('.workouts_completed', count: @user.training_sessions.count) %></p>
 
-    <% @program.exercises.uniq.each do |exercise| %>
-      <p> <strong><%= exercise.name %></strong>: <%= @user.personal_record(exercise) %> lbs</p>
-    <% end %>
+    <h2>Personal Records</h2>
+    <table role="grid">
+      <thead>
+        <tr>
+          <th>Exercise</th>
+          <th>Maximum Achieved</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @program.exercises.uniq.each do |exercise| %>
+          <tr>
+            <td> <strong><%= exercise.name %></strong></td><td><%= @user.personal_record(exercise) %> lbs</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
   <div class="small-3 columns">
     &nbsp;

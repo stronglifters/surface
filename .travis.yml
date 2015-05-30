@@ -31,3 +31,4 @@ deploy:
   acl: private
   on:
     repo: stronglifters/surface
+    branch: master

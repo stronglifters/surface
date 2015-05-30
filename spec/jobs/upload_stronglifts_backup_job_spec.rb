@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ProcessBackupJob, type: :job do
+describe UploadStrongliftsBackupJob, type: :job do
   include_context "stronglifts_program"
   let(:user) { create(:user) }
 

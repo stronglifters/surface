@@ -1,4 +1,4 @@
-class ProcessBackupJob < ActiveJob::Base
+class UploadStrongliftsBackupJob < ActiveJob::Base
   WORKOUTS_SQL = "select * from workouts"
   queue_as :default
 

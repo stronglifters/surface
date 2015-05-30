@@ -23,12 +23,12 @@ describe TrainingSessionsController do
     let(:backup_file) { fixture_file_upload("android-backup.stronglifts") }
 
     before :each do
-      allow(ProcessBackupJob).to receive(:perform_later)
+      allow(UploadStrongliftsBackupJob).to receive(:perform_later)
     end
 
     it "uploads a new backup" do
       post :upload, backup: backup_file
-      expect(ProcessBackupJob).to have_received(:perform_later)
+      expect(UploadStrongliftsBackupJob).to have_received(:perform_later)
     end
 
     it "redirects to the dashboard" do

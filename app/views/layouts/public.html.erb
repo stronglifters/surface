@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= content_for?(:title) ? yield(:title) : "Strong Lifters" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Stronglifters" %></title>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
@@ -13,7 +13,7 @@
     <header>
       <div class="row">
         <div class="small-12 columns text-center">
-          <h1>Strong <span class="svg-container"><%= image_tag "sprite.svg#feather", alt: "Strong Lifters", class: "feather" %></span>Lifters</h1>
+          <h1><span class="svg-container"><%= image_tag "logos.svg#lg", alt: "Stronglifters", class: "lg" %></span></h1>
         </div>
       </div>
     </header>

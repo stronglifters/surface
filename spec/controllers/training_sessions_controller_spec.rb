@@ -19,7 +19,7 @@ describe TrainingSessionsController do
   end
 
   describe "#upload" do
-    let(:backup_file) { fixture_file_upload("backup.stronglifts") }
+    let(:backup_file) { fixture_file_upload("android-backup.stronglifts") }
 
     before :each do
       allow(ProcessBackupJob).to receive(:perform_later)

@@ -13,10 +13,9 @@ rbenv install 2.2.2
 rbenv global 2.2.2
 gem install bundler --no-ri --no-rdoc
 cd /vagrant
-bundle install -j 2
+createdb
 if [ ! -f .env ]; then
   ln -s .env.example .env
 fi
-createdb
-bundle exec rake db:create db:migrate db:seed
+bin/setup
 RAILS_ENV=test bundle exec rake db:create db:migrate db:seed

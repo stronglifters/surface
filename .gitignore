@@ -16,3 +16,6 @@
 database.yml
 vendor/bundle
 coverage
+config/deploy_id_rsa
+pkg
+public/assets

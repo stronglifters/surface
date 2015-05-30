@@ -1,5 +1,6 @@
 # config valid only for current version of Capistrano
 lock "3.4.0"
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 
 set :application, "stronglifters"
 set :repo_url, "git@github.com:stronglifters/surface.git"
@@ -12,7 +13,9 @@ set :branch, "master"
 # set :deploy_to, "/var/www/my_app_name"
 
 # Default value for :scm is :git
-set :scm, :git
+# set :scm, :git
+set :scm, :s3
+set :bucket_name, "stronglifters"
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -45,7 +48,11 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :ssh_options, forward_agent: true
+if File.exist?("config/deploy_id_rsa")
+  set :ssh_options, keys: ["config/deploy_id_rsa"], forward_agent: true
+else
+  set :ssh_options, forward_agent: true
+end
 set :rbenv_type, :system
 set :rbenv_ruby, "2.2.2"
 

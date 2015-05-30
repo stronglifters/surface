@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522201542) do
+ActiveRecord::Schema.define(version: 20150530181053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,9 +62,11 @@ ActiveRecord::Schema.define(version: 20150522201542) do
   add_index "training_sessions", ["user_id"], name: "index_training_sessions_on_user_id", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string "username",        null: false
-    t.string "email",           null: false
-    t.string "password_digest"
+    t.string   "username",                                        null: false
+    t.string   "email",                                           null: false
+    t.string   "password_digest"
+    t.datetime "created_at",      default: '2015-05-30 18:13:17', null: false
+    t.datetime "updated_at",      default: '2015-05-30 18:13:17', null: false
   end
 
   create_table "workouts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

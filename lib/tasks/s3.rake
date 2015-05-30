@@ -11,7 +11,7 @@ namespace :s3 do
   end
 
   desc 'Clone the repo to the cache'
-  task clone: :'s3:wrapper' do
+  task :clone do
     on release_roles :all do
       if strategy.test
         info t(:mirror_exists, at: repo_path)

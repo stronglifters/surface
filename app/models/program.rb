@@ -1,4 +1,5 @@
 class Program < ActiveRecord::Base
+  STRONG_LIFTS="StrongLifts 5×5"
   has_many :exercises, through: :workouts
   has_many :workouts
   before_save :save_slug
@@ -9,7 +10,7 @@ class Program < ActiveRecord::Base
 
   class << self
     def stronglifts
-      @stronglifts ||= Program.find_by(name: "StrongLifts 5×5")
+      Program.find_by(name: STRONG_LIFTS)
     end
   end
 

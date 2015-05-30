@@ -3,7 +3,7 @@ class TrainingSession < ActiveRecord::Base
   belongs_to :workout
   has_many :exercise_sessions
 
-  def self.create_workout_from(workout_row, program: Program.stronglifts)
+  def self.create_workout_from(workout_row, program)
     transaction do
       workout = program.workouts.find_by(name: workout_row.workout)
       matching_workouts = where(occurred_at: workout_row.date)

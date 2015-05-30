@@ -7,7 +7,10 @@ class TrainingSessionsController < ApplicationController
   end
 
   def upload
-    ProcessBackupJob.perform_later(current_user, storage.store(params[:backup]))
+    ProcessBackupJob.perform_later(current_user,
+                                   storage.store(params[:backup]),
+                                   Program.stronglifts
+                                  )
     redirect_to dashboard_path, notice: t(".success")
   end
 

@@ -2,12 +2,12 @@ class ProcessBackupJob < ActiveJob::Base
   WORKOUTS_SQL = "select * from workouts"
   queue_as :default
 
-  def perform(user, backup_file)
+  def perform(user, backup_file, program)
     tmp_dir do |dir|
       `unzip #{backup_file} -d #{dir}`
       database(dir) do |db|
         db.execute(WORKOUTS_SQL) do |row|
-          user.training_sessions.create_workout_from(map_from(row))
+          user.training_sessions.create_workout_from(map_from(row), program)
         end
       end
     end

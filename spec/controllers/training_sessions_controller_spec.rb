@@ -19,6 +19,7 @@ describe TrainingSessionsController do
   end
 
   describe "#upload" do
+    include_context "stronglifts_program"
     let(:backup_file) { fixture_file_upload("android-backup.stronglifts") }
 
     before :each do

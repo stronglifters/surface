@@ -35,7 +35,7 @@ describe TrainingSession, type: :model do
     end
 
     it 'creates a new workout' do
-      training_session = user.training_sessions.create_workout_from(workout_row)
+      training_session = user.training_sessions.create_workout_from(workout_row, program)
 
       expect(training_session).to be_persisted
       expect(training_session.occurred_at).to eql(workout_row.date)
@@ -70,8 +70,8 @@ describe TrainingSession, type: :model do
     end
 
     it 'excludes items that have already been imported' do
-      training_session = user.training_sessions.create_workout_from(workout_row)
-      expect(user.training_sessions.create_workout_from(workout_row)).to eql(training_session)
+      training_session = user.training_sessions.create_workout_from(workout_row, program)
+      expect(user.training_sessions.create_workout_from(workout_row, program)).to eql(training_session)
     end
   end
 end

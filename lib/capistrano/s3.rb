@@ -1,6 +1,6 @@
 load File.expand_path("../../tasks/s3.rake", __FILE__)
 
-require 'capistrano/scm'
+require "capistrano/scm"
 
 class Capistrano::S3 < Capistrano::SCM
   def s3(*args)
@@ -24,12 +24,16 @@ class Capistrano::S3 < Capistrano::SCM
     end
 
     def update
-      s3 "cp s3://#{bucket_name}/#{rails_env}/#{build_revision} #{repo_path}/#{build_revision}"
+      source = "s3://#{bucket_name}/#{rails_env}/#{build_revision}"
+      destination = "#{repo_path}/#{build_revision}"
+      s3 "cp #{source} #{destination}"
     end
 
     def release
       context.execute("mkdir -p #{release_path}")
-      context.execute("tar -xvzf #{repo_path}/#{build_revision} --strip-components=1 -C #{release_path}")
+      path = "#{repo_path}/#{build_revision}"
+      strip = "--strip-components=1"
+      context.execute("tar -xvzf #{path} #{strip} -C #{release_path}")
     end
 
     def bucket_name
@@ -41,7 +45,9 @@ class Capistrano::S3 < Capistrano::SCM
     end
 
     def build_revision
-      context.capture(:aws, "s3 ls #{bucket_name}/#{rails_env}/ | sort | tail -n1 | awk '{ print $4 }'").strip
+      awk = "awk '{ print $4 }'"
+      command = "s3 ls #{bucket_name}/#{rails_env}/ | sort | tail -n1 | #{awk}"
+      context.capture(:aws, command).strip
     end
   end
 end

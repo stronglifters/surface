@@ -17,7 +17,11 @@ class User < ActiveRecord::Base
   end
 
   def personal_record(exercise)
-    exercise_sessions.joins(:exercise).where(exercises: { name: exercise.name }).pluck(:target_weight).max
+    exercise_sessions.
+      joins(:exercise).
+      where(exercises: { name: exercise.name }).
+      pluck(:target_weight).
+      max
   end
 
   def self.authenticate(username,password)

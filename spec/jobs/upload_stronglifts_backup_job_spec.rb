@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe UploadStrongliftsBackupJob, type: :job do
   include_context "stronglifts_program"
@@ -6,7 +6,9 @@ describe UploadStrongliftsBackupJob, type: :job do
 
   describe "#perform" do
     context "android backup" do
-      let(:backup_file) { Rails.root.join("spec", "fixtures", "android-backup.stronglifts").to_s }
+      let(:backup_file) do
+        Rails.root.join("spec", "fixtures", "android-backup.stronglifts").to_s
+      end
 
       it "adds each workout to the list of training sessions for the user" do
         subject.perform(user, backup_file, program)

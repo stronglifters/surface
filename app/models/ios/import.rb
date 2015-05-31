@@ -13,38 +13,39 @@ class Ios::Import
   def import_from(directory)
     database(directory) do |db|
       db.execute("SELECT * FROM ZBASEWORKOUT") do |row|
+        puts ["base workout", row].inspect
         workout_name = row[5] == 1 ? "A" : "B"
         workout = program.workouts.find_by(name: workout_name)
         training_session = user.begin_workout(workout, DateTime.parse(row[8]), row[7].to_f)
 
         workout_id = row[0]
-        Rails.logger.debug [ "workout_id", workout_id].inspect
+        puts [ "workout_id", workout_id].inspect
         db.execute("SELECT * FROM ZEXERCISESETS WHERE ZWORKOUT = '#{workout_id}';") do |exercise_set_row|
-          Rails.logger.debug ["exercise set", exercise_set_row].inspect
+          puts ["exercise set", exercise_set_row].inspect
 
           exercise = nil
           target_weight = nil
 
           exercise_id = exercise_set_row[4]
-          Rails.logger.debug ["exercise id", exercise_id].inspect
+          puts ["exercise id", exercise_id].inspect
           db.execute("SELECT * FROM ZEXERCISE WHERE ZTYPE = '#{exercise_id}';") do |exercise_row|
-            Rails.logger.debug ["exercise row", exercise_row].inspect
+            puts ["exercise row", exercise_row].inspect
             exercise = exercise_from(exercise_row)
           end
 
           weight_id = exercise_set_row[13]
-          Rails.logger.debug ["weight id", weight_id].inspect
+          puts ["weight id", weight_id].inspect
           db.execute("SELECT * FROM ZWEIGHT where Z_PK = '#{weight_id}'") do |weight_row|
-            Rails.logger.debug ["weight row", weight_row].inspect
+            puts ["weight row", weight_row].inspect
             target_weight = weight_row[6]
           end
 
           sets = [
-            row[6],
-            row[7],
-            row[8],
-            row[9] == -3 ? nil : row[9],
-            row[10] == -3 ? nil : row[10]
+            exercise_set_row[6],
+            exercise_set_row[7],
+            exercise_set_row[8],
+            exercise_set_row[9] == -3 ? nil : exercise_set_row[9],
+            exercise_set_row[10] == -3 ? nil : exercise_set_row[10]
           ]
           if exercise
             training_session.train(

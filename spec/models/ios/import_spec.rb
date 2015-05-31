@@ -44,7 +44,9 @@ describe Ios::Import do
 
     it "imports each training session" do
       subject.import_from(directory)
-      expect(user.training_sessions.first.exercise_sessions.count).to eql(3)
+      first_exercises = user.training_sessions.first.exercise_sessions
+      expect(first_exercises.count).to eql(3)
+      expect(first_exercises.first.sets).to eql(["5", "5", "5", "5", "5"])
     end
   end
 end

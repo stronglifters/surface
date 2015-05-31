@@ -35,9 +35,7 @@ class Android::Import
 
   def create_workout_from(workout_row, program)
     ActiveRecord::Base.transaction do
-      workout = program.workouts.find_by(name: workout_row.workout)
-      user.begin_workout(workout, workout_row.date, workout_row.body_weight.to_f).
-        tap do |training_session|
+      training_session_for(workout_row) do |training_session, workout|
         training_session.exercise_sessions.destroy_all
         workout.exercise_workouts.each_with_index do |exercise_workout, index|
           exercise_row = workout_row.exercises[index]
@@ -48,6 +46,18 @@ class Android::Import
           )
         end
       end
+    end
+  end
+
+  def training_session_for(workout_row)
+    workout = program.workouts.find_by(name: workout_row.workout)
+    user.begin_workout(
+      workout,
+      workout_row.date,
+      workout_row.body_weight.to_f
+    ).tap do |training_session|
+      yield training_session, workout
+      training_session
     end
   end
 

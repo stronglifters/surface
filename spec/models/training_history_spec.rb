@@ -12,7 +12,7 @@ describe TrainingHistory do
 
     before :each do
       session = user.begin_workout(workout_a, date, body_weight)
-      session.train(squat, target_weight, [5,5,5,5,5])
+      session.train(squat, target_weight, [5, 5, 5, 5, 5])
     end
 
     it "returns the history in the format required for the chart" do

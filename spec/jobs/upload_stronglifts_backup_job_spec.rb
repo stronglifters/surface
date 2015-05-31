@@ -22,7 +22,7 @@ describe UploadStrongliftsBackupJob, type: :job do
         Rails.root.join("spec", "fixtures", "backup.ios.stronglifts").to_s
       end
 
-      it "adds each workout to the list of training sessions for the user" do
+      xit "adds each workout to the list of training sessions for the user" do
         subject.perform(user, backup_file, program)
 
         expect(user.training_sessions.count).to eql(31)

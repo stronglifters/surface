@@ -20,6 +20,6 @@ class UploadStrongliftsBackupJob < ActiveJob::Base
     [
       Android::Import.new(user, program),
       Ios::Import.new(user, program)
-    ].find { |x| x.can_parse?(directory) }
+    ].detect { |x| x.can_parse?(directory) }
   end
 end

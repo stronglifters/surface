@@ -7,6 +7,7 @@
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <script type="text/javascript" charset="utf-8">
       $(function(){ $(document).foundation(); });
     </script>
@@ -67,6 +68,7 @@
                     <a href="#"><%= gravatar_for(@current_user, size: 16) %> <%= @current_user.username %></a>
                     <ul class="dropdown">
                       <li><%= link_to "Training Sessions", training_sessions_path %></li>
+                      <li><%= link_to "My Public Profile", profile_path(@current_user) %></li>
                       <li class="divider"></li>
                       <li><%= link_to "Log Out", session_path('me'), method: :delete %></li>
                     </ul>

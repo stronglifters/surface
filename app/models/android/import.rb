@@ -28,27 +28,27 @@ class Android::Import
   def create_workout_from(workout_row, program)
     ActiveRecord::Base.transaction do
       workout = program.workouts.find_by(name: workout_row.workout)
-      session = user.begin_workout(workout, workout_row.date, workout_row.body_weight.to_f)
-
-      session.exercise_sessions.destroy_all
-      workout.exercise_workouts.each_with_index do |exercise_workout, index|
-        exercise_row = workout_row.exercises[index]
-        sets = []
-        1.upto(exercise_workout.sets).each do |n|
-          if exercise_row["set#{n}"].to_i > 0
-            sets << exercise_row["set#{n}"]
-          else
-            sets << 0
+      user.begin_workout(workout, workout_row.date, workout_row.body_weight.to_f).
+        tap do |training_session|
+        training_session.exercise_sessions.destroy_all
+        workout.exercise_workouts.each_with_index do |exercise_workout, index|
+          exercise_row = workout_row.exercises[index]
+          sets = []
+          1.upto(exercise_workout.sets).each do |n|
+            if exercise_row["set#{n}"].to_i > 0
+              sets << exercise_row["set#{n}"]
+            else
+              sets << 0
+            end
           end
-        end
 
-        session.train(
-          exercise_workout.exercise,
-          exercise_row["warmup"]["targetWeight"],
-          sets
-        )
+          training_session.train(
+            exercise_workout.exercise,
+            exercise_row["warmup"]["targetWeight"],
+            sets
+          )
+        end
       end
-      session
     end
   end
 

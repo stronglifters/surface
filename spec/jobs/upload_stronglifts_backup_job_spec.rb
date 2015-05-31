@@ -16,5 +16,17 @@ describe UploadStrongliftsBackupJob, type: :job do
         expect(user.training_sessions.count).to eql(31)
       end
     end
+
+    context "ios backup" do
+      let(:backup_file) do
+        Rails.root.join("spec", "fixtures", "backup.ios.stronglifts").to_s
+      end
+
+      it "adds each workout to the list of training sessions for the user" do
+        subject.perform(user, backup_file, program)
+
+        expect(user.training_sessions.count).to eql(31)
+      end
+    end
   end
 end

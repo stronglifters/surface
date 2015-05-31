@@ -7,7 +7,7 @@ describe UploadStrongliftsBackupJob, type: :job do
   describe "#perform" do
     context "android backup" do
       let(:backup_file) do
-        Rails.root.join("spec", "fixtures", "android-backup.stronglifts").to_s
+        Rails.root.join("spec", "fixtures", "backup.android.stronglifts").to_s
       end
 
       it "adds each workout to the list of training sessions for the user" do

@@ -12,22 +12,10 @@ class AndroidImport
 
   private
 
-  # refactor this to use the new api to add a workout
-  # training_session = user.begin(workout_a)
-  # training_session.train(squat, 200, [5,5,5,5,5])
   def create_workout_from(workout_row, program)
     ActiveRecord::Base.transaction do
       workout = program.workouts.find_by(name: workout_row.workout)
-      matching_workouts = user.training_sessions.where(occurred_at: workout_row.date)
-      if matching_workouts.any?
-        session = matching_workouts.first
-      else
-        session = user.training_sessions.create!(
-          workout: workout,
-          occurred_at: workout_row.date,
-          body_weight: workout_row.body_weight.to_f
-        )
-      end
+      session = user.begin_workout(workout, workout_row.date, workout_row.body_weight.to_f)
 
       session.exercise_sessions.destroy_all
       workout.exercise_workouts.each_with_index do |exercise_workout, index|
@@ -41,10 +29,10 @@ class AndroidImport
           end
         end
 
-        session.exercise_sessions.create!(
-          target_weight: exercise_row["warmup"]["targetWeight"],
-          exercise_workout: exercise_workout,
-          sets: sets
+        session.train(
+          exercise_workout.exercise,
+          exercise_row["warmup"]["targetWeight"],
+          sets
         )
       end
       session

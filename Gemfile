@@ -65,6 +65,8 @@ group :development, :test do
   gem 'capistrano-rbenv', '~> 2.0', require: false
   gem 'rails-erd'
   gem 'bullet'
+  gem 'rack-mini-profiler'
+  gem 'flamegraph'
 end
 
 group :production do

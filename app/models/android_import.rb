@@ -1,4 +1,5 @@
 class AndroidImport
+  WORKOUTS_SQL = "select * from workouts"
   attr_reader :user, :program
 
   def initialize(user, program)
@@ -6,11 +7,23 @@ class AndroidImport
     @program = program
   end
 
+  def import_from(directory)
+    database(directory) do |db|
+      db.execute(WORKOUTS_SQL) do |row|
+        import(row)
+      end
+    end
+  end
+
   def import(row)
     create_workout_from(map_from(row), program)
   end
 
   private
+
+  def database(dir)
+    yield SQLite3::Database.new("#{dir}/stronglifts.db")
+  end
 
   def create_workout_from(workout_row, program)
     ActiveRecord::Base.transaction do

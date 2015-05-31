@@ -24,6 +24,17 @@ class User < ActiveRecord::Base
       max
   end
 
+  def history_for(exercise)
+    exercise_sessions.
+      includes(:training_session).
+      joins(:exercise).
+      where(exercises: { name: exercise.name }).
+      inject({}) do |memo, session|
+        memo[session.training_session.occurred_at] = session.target_weight
+        memo
+      end
+  end
+
   def self.authenticate(username,password)
     if user = User.where("email = :email OR username = :username", username: username, email: username).first
       user.authenticate(password)

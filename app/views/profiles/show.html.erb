@@ -1,9 +1,9 @@
 <div class="small-12 columns">
 <div class="row">
-  <div class="small-3 columns">
+  <div class="small-2 columns">
     &nbsp;
   </div>
-  <div class="small-6 columns text-center">
+  <div class="small-8 columns text-center">
     <%= link_to profile_path(@user), class: 'th [radius]' do %>
       <%= gravatar_for(@user, size: 128) %>
     <% end %>
@@ -26,8 +26,14 @@
         <% end %>
       </tbody>
     </table>
+
+    <h2>Training History</h2>
+    <% @program.exercises.uniq.each do |exercise| %>
+      <p><%= exercise.name %></p>
+      <%= line_chart @user.history_for(exercise) %>
+    <% end %>
   </div>
-  <div class="small-3 columns">
+  <div class="small-2 columns">
     &nbsp;
   </div>
 </div>

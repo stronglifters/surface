@@ -6,6 +6,10 @@
     <title><%= content_for?(:title) ? "Strong Lifters | #{yield(:title)}" : "Strong Lifters" %></title>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application" %>
+    <script type="text/javascript" charset="utf-8">
+      $(function(){ $(document).foundation(); });
+    </script>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -84,7 +88,7 @@
               </div>
               <div class="large-6 columns">
                 <ul class="inline-list right">
-                  <li><a href="#">Link 1</a></li>
+                  <li><a href="https://twitter.com/StrongLifters/">Twitter</a></li>
                   <li><a href="#">Link 2</a></li>
                   <li><a href="#">Link 3</a></li>
                   <li><a href="#">Link 4</a></li>
@@ -96,9 +100,5 @@
       <!-- End Footer -->
       </div>
     </div>
-    <%= javascript_include_tag "application" %>
-    <script type="text/javascript" charset="utf-8">
-      $(function(){ $(document).foundation(); });
-    </script>
   </body>
 </html>

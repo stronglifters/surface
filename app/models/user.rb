@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
     username
   end
 
+  # extract a personal record object
   def personal_record(exercise)
     exercise_sessions.
       joins(:exercise).

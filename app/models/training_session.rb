@@ -3,6 +3,20 @@ class TrainingSession < ActiveRecord::Base
   belongs_to :workout
   has_many :exercise_sessions
 
+  def train(exercise, target_weight, completed_sets)
+    recommendation = workout.
+      exercise_workouts.
+      find_by(exercise: exercise)
+    exercise_sessions.create!(
+      target_weight: target_weight,
+      exercise_workout: recommendation,
+      sets: completed_sets
+    )
+  end
+
+  # refactor this to use the new api to add a workout
+  # training_session = user.begin(workout_a)
+  # training_session.train(squat, 200, [5,5,5,5,5])
   def self.create_workout_from(workout_row, program)
     transaction do
       workout = program.workouts.find_by(name: workout_row.workout)

@@ -6,22 +6,19 @@ describe TrainingHistory do
   let(:user) { create(:user) }
 
   describe "#to_line_chart" do
-    before :each do
-      workout_a.exercise_workouts.each do |recommendation|
-        user.exercise_sessions.create!(
-          target_weight: 200,
-          exercise_workout: recommendation,
-          sets: [5,5,5,5,5]
-        )
+    let(:date) { DateTime.now.utc }
+    let(:target_weight) { rand(300) }
+    let(:body_weight) { 210 }
 
-        session = user.begin(workout_a)
-        session.train(squat, 200, [5,5,5,5,5])
-      end
+    before :each do
+      session = user.begin_workout(workout_a, date, body_weight)
+      session.train(squat, target_weight, [5,5,5,5,5])
     end
 
     it "returns the history in the format required for the chart" do
       result = subject.to_line_chart
       expect(result).to_not be_nil
+      expect(result[date.to_i]).to eql(target_weight.to_f)
     end
   end
 end

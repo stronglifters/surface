@@ -1,4 +1,4 @@
-class AndroidImport
+class Android::Import
   WORKOUTS_SQL = "select * from workouts"
   attr_reader :user, :program
 
@@ -53,7 +53,7 @@ class AndroidImport
   end
 
   def map_from(row)
-    WorkoutRow.new(
+    Android::WorkoutRow.new(
       id: row[0],
       date: DateTime.parse(row[1]),
       workout: row[2],

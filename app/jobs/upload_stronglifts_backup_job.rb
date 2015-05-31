@@ -17,6 +17,6 @@ class UploadStrongliftsBackupJob < ActiveJob::Base
   end
 
   def importer_for(directory, user, program)
-    AndroidImport.new(user, program)
+    Android::Import.new(user, program)
   end
 end

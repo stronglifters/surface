@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe AndroidImport do
+describe Android::Import do
   include_context "stronglifts_program"
-  subject { AndroidImport.new(user, program) }
+  subject { Android::Import.new(user, program) }
   let(:user) { create(:user) }
 
   describe "#import" do

@@ -20,7 +20,7 @@ class Android::Import
   end
 
   def import(row)
-    create_workout_from(map_from(row), program)
+    create_workout_from(map_from(row))
   end
 
   private
@@ -33,7 +33,7 @@ class Android::Import
     yield SQLite3::Database.new(database_file(dir))
   end
 
-  def create_workout_from(workout_row, program)
+  def create_workout_from(workout_row)
     ActiveRecord::Base.transaction do
       training_session_for(workout_row) do |training_session, workout|
         training_session.exercise_sessions.destroy_all

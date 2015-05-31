@@ -33,23 +33,26 @@ class Android::Import
         training_session.exercise_sessions.destroy_all
         workout.exercise_workouts.each_with_index do |exercise_workout, index|
           exercise_row = workout_row.exercises[index]
-          sets = []
-          1.upto(exercise_workout.sets).each do |n|
-            if exercise_row["set#{n}"].to_i > 0
-              sets << exercise_row["set#{n}"]
-            else
-              sets << 0
-            end
-          end
-
           training_session.train(
             exercise_workout.exercise,
             exercise_row["warmup"]["targetWeight"],
-            sets
+            sets_from(exercise_workout, exercise_row)
           )
         end
       end
     end
+  end
+
+  def sets_from(exercise_workout, exercise_row)
+    sets = []
+    1.upto(exercise_workout.sets).each do |n|
+      if exercise_row["set#{n}"].to_i > 0
+        sets << exercise_row["set#{n}"]
+      else
+        sets << 0
+      end
+    end
+    sets
   end
 
   def map_from(row)

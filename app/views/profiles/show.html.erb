@@ -29,8 +29,7 @@
 
     <h2>Training History</h2>
     <% @program.exercises.uniq.each do |exercise| %>
-      <%= line_chart @user.history_for(exercise) %>
-      <p><%= exercise.name %></p>
+      <%= render @user.history_for(exercise) %>
     <% end %>
   </div>
   <div class="small-2 columns">

@@ -25,14 +25,20 @@ class User < ActiveRecord::Base
   end
 
   def history_for(exercise)
-    exercise_sessions.
-      includes(:training_session).
-      joins(:exercise).
-      where(exercises: { name: exercise.name }).
-      inject({}) do |memo, session|
-        memo[session.training_session.occurred_at] = session.target_weight
-        memo
-      end
+    TrainingHistory.new(self, exercise)
+  end
+
+  def begin_workout(workout, date, body_weight)
+    matching_workouts = training_sessions.where(occurred_at: date)
+    if matching_workouts.any?
+      matching_workouts.first
+    else
+      training_sessions.create!(
+        workout: workout,
+        occurred_at: date,
+        body_weight: body_weight.to_f
+      )
+    end
   end
 
   def self.authenticate(username,password)

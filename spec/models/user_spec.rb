@@ -141,4 +141,31 @@ describe User do
       expect(user.personal_record(exercise)).to eql(205.0)
     end
   end
+
+  describe "#begin_workout" do
+    subject { create(:user) }
+    let(:workout) { create(:workout) }
+    let(:today) { DateTime.now }
+
+    it "creates a new training session" do
+      result = subject.begin_workout(workout, today, 200)
+      expect(result).to be_persisted
+      expect(subject.training_sessions.count).to eql(1)
+      expect(subject.training_sessions.first).to eql(result)
+      expect(result.workout).to eql(workout)
+      expect(result.occurred_at).to eql(today.utc)
+      expect(result.body_weight).to eql(200.0)
+    end
+
+    it "returns the existing workout for that day" do
+      result = subject.begin_workout(workout, today, 200)
+      expect(subject.begin_workout(workout, today, 200)).to eql(result)
+    end
+
+    it "returns different sessions for different days" do
+      todays_result = subject.begin_workout(workout, today, 200)
+      tomorrows_result = subject.begin_workout(workout, DateTime.tomorrow, 200)
+      expect(todays_result).to_not eql(tomorrows_result)
+    end
+  end
 end

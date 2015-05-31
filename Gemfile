@@ -61,6 +61,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'capistrano-rbenv', '~> 2.0', require: false
+  gem 'rails-erd'
 end
 
 group :production do

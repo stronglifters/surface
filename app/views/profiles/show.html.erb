@@ -8,7 +8,7 @@
       <%= gravatar_for(@user, size: 128) %>
     <% end %>
     <h1><%= link_to @user.username, profile_path(@user) %></h1>
-    <p><%= t('.workouts_completed', count: @user.training_sessions.count) %></p>
+    <p><%= t('.workouts_completed', count: @user.training_sessions.count, first_session: l(@user.training_sessions.order(occurred_at: :asc).first.occurred_at, format: :long)) %></p>
 
     <h2>Personal Records</h2>
     <table role="grid">

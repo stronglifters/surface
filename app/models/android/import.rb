@@ -7,6 +7,10 @@ class Android::Import
     @program = program
   end
 
+  def can_parse?(directory)
+    File.exist?(database_file(directory))
+  end
+
   def import_from(directory)
     database(directory) do |db|
       db.execute(WORKOUTS_SQL) do |row|
@@ -21,8 +25,12 @@ class Android::Import
 
   private
 
+  def database_file(dir)
+    "#{dir}/stronglifts.db"
+  end
+
   def database(dir)
-    yield SQLite3::Database.new("#{dir}/stronglifts.db")
+    yield SQLite3::Database.new(database_file(dir))
   end
 
   def create_workout_from(workout_row, program)

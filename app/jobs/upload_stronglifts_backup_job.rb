@@ -17,6 +17,8 @@ class UploadStrongliftsBackupJob < ActiveJob::Base
   end
 
   def importer_for(directory, user, program)
-    Android::Import.new(user, program)
+    [
+      Android::Import.new(user, program)
+    ].find { |x| x.can_parse?(directory) }
   end
 end

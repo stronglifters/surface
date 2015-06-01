@@ -19,11 +19,11 @@ class Android::Import
     end
   end
 
+  private
+
   def import(row)
     create_workout_from(map_from(row))
   end
-
-  private
 
   def database_file(dir)
     "#{dir}/stronglifts.db"

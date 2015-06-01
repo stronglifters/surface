@@ -38,8 +38,8 @@ describe Android::Import do
       subject.import_from(directory)
 
       training_session = user.training_sessions.order(:occurred_at).first
-      squat_session = training_session.exercise_sessions.
-        find_by(exercise_workout: squat_workout)
+      squat_session = training_session.progress_for(squat)
+
       expect(squat_session.target_weight).to eql(45.0)
       expect(squat_session.sets[0]).to eql("5")
       expect(squat_session.sets[1]).to eql("5")
@@ -52,8 +52,7 @@ describe Android::Import do
       subject.import_from(directory)
 
       training_session = user.training_sessions.order(:occurred_at).first
-      bench_session = training_session.exercise_sessions.
-        find_by(exercise_workout: bench_workout)
+      bench_session = training_session.progress_for(bench_press)
       expect(bench_session.target_weight).to eql(65.0)
       expect(bench_session.sets[0]).to eql("5")
       expect(bench_session.sets[1]).to eql("5")
@@ -66,8 +65,7 @@ describe Android::Import do
       subject.import_from(directory)
 
       training_session = user.training_sessions.order(:occurred_at).first
-      row_session = training_session.exercise_sessions.
-        find_by(exercise_workout: row_workout)
+      row_session = training_session.progress_for(barbell_row)
       expect(row_session.target_weight).to eql(65.0)
       expect(row_session.sets[0]).to eql("5")
       expect(row_session.sets[1]).to eql("5")

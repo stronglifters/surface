@@ -1,8 +1,9 @@
 require "rails_helper"
 
 describe TrainingSession, type: :model do
+  subject { create(:training_session) }
+
   describe "#train" do
-    subject { create(:training_session) }
     let(:workout) { subject.workout }
     let(:sets) { [5, 5, 5, 5, 5] }
     let(:target_weight) { 200 }
@@ -18,6 +19,23 @@ describe TrainingSession, type: :model do
       expect(result.target_weight).to eql(target_weight.to_f)
       expect(result.exercise).to eql(squat)
       expect(result.sets).to eql(sets.map { |x| x.to_s })
+    end
+  end
+
+  describe "#progress_for" do
+    let(:exercise) { create(:exercise) }
+    let(:workout) { subject.workout }
+
+    before :each do
+      workout.add_exercise(exercise)
+      subject.train(exercise, 100, [5, 5])
+    end
+
+    it "returns the progress for the specific exercise" do
+      result = subject.progress_for(exercise)
+      expect(result.exercise).to eql(exercise)
+      expect(result.sets).to eql(["5", "5"])
+      expect(result.target_weight).to eql(100.0)
     end
   end
 end

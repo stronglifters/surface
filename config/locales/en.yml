@@ -52,3 +52,5 @@ en:
       upload_backup_button: "Upload"
     upload:
       success: 'Our minions have been summoned to unpack your backup.'
+    training_session:
+      body_weight: Body Weight

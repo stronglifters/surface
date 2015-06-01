@@ -15,7 +15,8 @@ class Ios::Import
       db.execute("SELECT * FROM ZBASEWORKOUT") do |row|
         workout_name = row[5] == 1 ? "A" : "B"
         workout = program.workouts.find_by(name: workout_name)
-        training_session = user.begin_workout(workout, DateTime.parse(row[8]), row[7].to_f)
+        training_session = user.
+          begin_workout(workout, DateTime.parse(row[8]), row[7].to_f)
 
         workout_id = row[0]
         db.execute("SELECT * FROM ZEXERCISESETS WHERE ZWORKOUT = '#{workout_id}';") do |exercise_set_row|

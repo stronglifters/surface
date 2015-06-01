@@ -35,6 +35,7 @@ en:
     show:
       exercise_header: Exercise
       maximum_achieved: Maximum Achieved
+      no_workouts_completed: 0 workouts completed
       personal_records: Personal Records
       training_history: Training History
       workouts_completed: "%{count} workouts completed since %{first_session}."

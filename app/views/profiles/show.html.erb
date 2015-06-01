@@ -10,12 +10,12 @@
     <h1><%= link_to @user.username, profile_path(@user) %></h1>
     <p><%= t('.workouts_completed', count: @user.training_sessions.count, first_session: l(@user.training_sessions.order(occurred_at: :asc).first.occurred_at, format: :long)) %></p>
 
-    <h2>Personal Records</h2>
+    <h2><%= t('.personal_records') %></h2>
     <table role="grid">
       <thead>
         <tr>
-          <th>Exercise</th>
-          <th>Maximum Achieved</th>
+          <th><%= t('.exercise_header') %></th>
+          <th><%= t('.maximum_achieved') %></th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +27,7 @@
       </tbody>
     </table>
 
-    <h2>Training History</h2>
+    <h2><%= t('.training_history') %></h2>
     <% @program.exercises.uniq.each do |exercise| %>
       <%= render @user.history_for(exercise) %>
     <% end %>

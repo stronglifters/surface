@@ -32,13 +32,12 @@ class Ios::Import
             target_weight = weight_row[6]
           end
 
-          sets = [
-            exercise_set_row[6] == -3 ? nil : exercise_set_row[6],
-            exercise_set_row[7] == -3 ? nil : exercise_set_row[7],
-            exercise_set_row[8] == -3 ? nil : exercise_set_row[8],
-            exercise_set_row[9] == -3 ? nil : exercise_set_row[9],
-            exercise_set_row[10] == -3 ? nil : exercise_set_row[10]
-          ]
+          sets = []
+          6.upto(10) do |n|
+            if exercise_set_row[n] && exercise_set_row[n] != -3
+              sets << exercise_set_row[n]
+            end
+          end
           if exercise
             training_session.train(
               exercise,

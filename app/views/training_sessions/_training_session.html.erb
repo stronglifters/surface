@@ -3,7 +3,7 @@
     <div class="panel">
       <h5>
         <%= training_session.occurred_at.strftime("%a, %d %b") %>
-        (<%= link_to training_session.workout.name, program_path(training_session.workout.program.slug, anchor: training_session.workout.slug) %>)
+        (<%= link_to training_session.workout, program_path(training_session.program, anchor: training_session.workout) %>)
       </h5>
       <% training_session.exercise_sessions.each do |exercise_session| %>
         <p><strong><%= exercise_session.exercise.name %></strong></p>

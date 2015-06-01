@@ -1,6 +1,7 @@
 class TrainingSession < ActiveRecord::Base
   belongs_to :user
   belongs_to :workout
+  has_one :program, through: :workout
   has_many :exercise_sessions
 
   def train(exercise, target_weight, completed_sets)

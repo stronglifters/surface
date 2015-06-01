@@ -7,7 +7,7 @@ describe ProfilesController do
     let(:user) { create(:user) }
 
     it "loads the users profile" do
-      get :show, id: user.username
+      get :show, id: user.to_param
       expect(assigns(:user)).to eql(user)
       expect(assigns(:program)).to eql(Program.stronglifts)
     end

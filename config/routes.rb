@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :programs, only: [:show]
   resources :profiles, only: [:show]
+  get "/u/:id" => "profiles#show"
   get "/dashboard" => "training_sessions#index", as: :dashboard
   get "/terms" => "static_pages#terms"
 end

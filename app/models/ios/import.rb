@@ -12,34 +12,35 @@ class Ios::Import
 
   def import_from(directory)
     database(directory) do |db|
-      db.execute("SELECT * FROM ZBASEWORKOUT") do |row|
-        workout_name = row[5] == 1 ? "A" : "B"
+      db[:ZBASEWORKOUT].each do |row|
+        workout_name = row[:ZTYPE] == 1 ? "A" : "B"
         workout = program.workouts.find_by(name: workout_name)
         training_session = user.begin_workout(
           workout,
-          DateTime.parse(row[8]),
-          row[7].to_f
+          DateTime.parse(row[:ZLOGDATE]),
+          row[:ZBODYWEIGHT].to_f
         )
 
-        workout_id = row[0]
-        db.execute("SELECT * FROM ZEXERCISESETS WHERE ZWORKOUT = '#{workout_id}';") do |exercise_set_row|
+        workout_id = row[:Z_PK]
+        db[:ZEXERCISESETS].where(ZWORKOUT: workout_id).each do |exercise_set_row|
           exercise = nil
           target_weight = nil
 
-          exercise_id = exercise_set_row[4]
-          db.execute("SELECT * FROM ZEXERCISE WHERE ZTYPE = '#{exercise_id}';") do |exercise_row|
+          exercise_id = exercise_set_row[:ZEXERCISETYPE]
+          db[:ZEXERCISE].where(ZTYPE: exercise_id).each do |exercise_row|
             exercise = exercise_from(exercise_row)
           end
 
-          weight_id = exercise_set_row[13]
-          db.execute("SELECT * FROM ZWEIGHT where Z_PK = '#{weight_id}'") do |weight_row|
-            target_weight = weight_row[6]
+          weight_id = exercise_set_row[:ZWEIGHT]
+          db[:ZWEIGHT].where(Z_PK: weight_id).each do |weight_row|
+            target_weight = weight_row[:ZVAL]
           end
 
           sets = []
-          6.upto(10) do |n|
-            if exercise_set_row[n] && exercise_set_row[n] != -3
-              sets << exercise_set_row[n]
+          1.upto(5) do |n|
+            column = "ZSET#{n}".to_sym
+            if exercise_set_row[column] && exercise_set_row[column] != -3
+              sets << exercise_set_row[column]
             end
           end
           if exercise
@@ -61,7 +62,7 @@ class Ios::Import
   end
 
   def database(directory)
-    yield SQLite3::Database.new(database_file(directory))
+    yield Sequel.sqlite(database_file(directory))
   end
 
   def exercise_from(exercise_row)
@@ -73,6 +74,6 @@ class Ios::Import
       5 => "Deadlift",
     }
 
-    program.exercises.find_by(name: mapping[exercise_row[4]])
+    program.exercises.find_by(name: mapping[exercise_row[:ZTYPE]])
   end
 end

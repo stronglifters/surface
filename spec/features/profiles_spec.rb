@@ -16,7 +16,8 @@ feature "Profiles", type: :feature do
     end
 
     it "displays the number of workouts completed" do
-      expect(page).to have_content(I18n.translate("profiles.show.no_workouts_completed"))
+      translations = I18n.translate("profiles.show.no_workouts_completed")
+      expect(page).to have_content(translations)
     end
   end
 end

@@ -7,7 +7,7 @@ describe Android::Import do
 
   describe "#import_from" do
     let(:directory) { Dir.mktmpdir }
-    let(:backup_file) do 
+    let(:backup_file) do
       Rails.root.join("spec", "fixtures", "backup.android.stronglifts")
     end
 

@@ -15,7 +15,7 @@ class TrainingSession < ActiveRecord::Base
 
   def progress_for(exercise)
     exercise_sessions.
-      joins(:exercise_workout => :exercise).
-      find_by(exercise_workouts: {exercise_id: exercise.id})
+      joins(exercise_workout: :exercise).
+      find_by(exercise_workouts: { exercise_id: exercise.id })
   end
 end

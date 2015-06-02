@@ -27,7 +27,9 @@ describe Ios::Import do
 
   describe "#import_from" do
     let(:directory) { Dir.mktmpdir }
-    let(:backup_file) { Rails.root.join("spec", "fixtures", "backup.ios.stronglifts") }
+    let(:backup_file) do 
+      Rails.root.join("spec", "fixtures", "backup.ios.stronglifts")
+    end
 
     before :each do
       `unzip #{backup_file} -d #{directory}`

@@ -1,62 +1,44 @@
-@import url(//fonts.googleapis.com/css?family=Playfair+Display:900);
-
-/* ---------------------------------------------- */
-/* Mixins --------------------------------------- */
-/* ---------------------------------------------- */
-@mixin responsive-svg($svgwidth, $svgheight, $containerwidth) {
-  height: 0;
-  margin: 0 auto;
-  padding-top: #{($svgheight/$svgwidth)*$containerwidth};
-  position: relative;
-  width: $containerwidth;
-
-  svg {
-    left: 0;
-    position: absolute;
-    top: 0;
-  }
-}
-
 /* ---------------------------------------------- */
 /* Branding ------------------------------------- */
 /* ---------------------------------------------- */
 header {
   padding: 0.5em 0;
-
   h1 {
-    font-family: 'Playfair Display', serif;
-  }
-
-  .svg-container {
-    @include responsive-svg(10, 20, 0.85em); // (width, height, containerWidth)
-  }
-
-  img {
-    margin: 0 0.15em 0 0;
-    width: 18px;
+	  background: asset-url('logos.svg');
+		height: 150px;
+		background-position: 0 -676px;
+		background-repeat: no-repeat;
+		margin: 5px auto 0 auto;
+		width: 150px;
+		span {
+			display: block;
+			overflow: hidden;
+			text-indent: 100%;
+			white-space: nowrap;
+		}
   }
 }
-
-nav h1 {
-  font-family: 'Playfair Display', serif;
-  text-transform: none;
-  white-space: nowrap;
+@media only screen and (min-width: 40.063em) {
+	header h1 {
+		background-position: 0 -338px;
+		height: 135px;
+		margin: 25px auto 0 auto;
+		width: 336px;
+	}
 }
-
-nav svg {
-  display: inline-block;
-  fill: $white;
-  float: left;
-  margin: 5px 8px 0 20px;
-  position: relative;
-  width: 12px;
-  z-index: 100;
+@media only screen and (min-width: 64.063em) {
+	header h1 {
+		background-position: 0 0;
+		height: 250px;
+		margin: 15px auto 0 auto;
+	}
 }
 /* ---------------------------------------------- */
 /* Buttons -------------------------------------- */
 /* ---------------------------------------------- */
 .button.bare {
-  &:hover,
+  &:link,
+	&:hover,
   &:active,
   &:visited,
   &:focus {

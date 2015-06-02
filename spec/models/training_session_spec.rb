@@ -18,7 +18,7 @@ describe TrainingSession, type: :model do
       expect(result).to be_persisted
       expect(result.target_weight).to eql(target_weight.to_f)
       expect(result.exercise).to eql(squat)
-      expect(result.sets).to eql(sets.map { |x| x.to_s })
+      expect(result.sets).to eql(sets.map(&:to_s))
     end
   end
 

@@ -7,9 +7,7 @@ feature "Training Sessions", type: :feature do
   let!(:training_session) { create(:training_session, user: user, workout: workout_a, occurred_at: DateTime.now, body_weight: 210.0) }
 
   before :each do
-    login_page = LoginPage.new
-    login_page.visit_page
-    login_page.login_with(user.username, "password")
+    subject.login_with(user.username, "password")
     subject.visit_page
   end
 

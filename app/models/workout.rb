@@ -11,6 +11,10 @@ class Workout < ActiveRecord::Base
     slug
   end
 
+  def to_s
+    name
+  end
+
   def add_exercise(exercise, sets: 5, repetitions: 5)
     exercise_workouts.create!(
       exercise: exercise,

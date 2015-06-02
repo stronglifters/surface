@@ -7,7 +7,9 @@ FactoryGirl.define do
   end
   factory :training_session do
     association :user
+    association :workout
     occurred_at { DateTime.now }
+    body_weight { rand(250) }
   end
   factory :user do
     username { FFaker::Internet.user_name }

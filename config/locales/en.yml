@@ -31,6 +31,14 @@ en:
       login_link: "Already have an account?"
     create:
       success: "Thank you for registering."
+  profiles:
+    show:
+      exercise_header: Exercise
+      maximum_achieved: Maximum Achieved
+      no_workouts_completed: 0 workouts completed
+      personal_records: Personal Records
+      training_history: Training History
+      workouts_completed: "%{count} workouts completed since %{first_session}."
   sessions:
     create:
       invalid_login: "Sorry, we cannot find that account."
@@ -45,3 +53,5 @@ en:
       upload_backup_button: "Upload"
     upload:
       success: 'Our minions have been summoned to unpack your backup.'
+    training_session:
+      body_weight: Body Weight

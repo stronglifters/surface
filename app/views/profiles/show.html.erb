@@ -1,0 +1,43 @@
+<div class="small-12 columns">
+<div class="row">
+  <div class="small-2 columns">
+    &nbsp;
+  </div>
+  <div class="small-8 columns text-center">
+    <%= link_to profile_path(@user), class: 'th [radius]' do %>
+      <%= gravatar_for(@user, size: 128) %>
+    <% end %>
+    <h1><%= link_to @user.username, profile_path(@user) %></h1>
+    <% if @user.training_sessions.any? %>
+      <p><%= t('.workouts_completed', count: @user.training_sessions.count, first_session: l(@user.training_sessions.order(occurred_at: :asc).first.occurred_at, format: :long)) %></p>
+    <% else %>
+      <p><%= t('.no_workouts_completed') %></p>
+    <% end %>
+
+    <h2><%= t('.personal_records') %></h2>
+    <table role="grid">
+      <thead>
+        <tr>
+          <th><%= t('.exercise_header') %></th>
+          <th><%= t('.maximum_achieved') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @program.exercises.uniq.each do |exercise| %>
+          <tr>
+            <td> <strong><%= exercise.name %></strong></td><td><%= @user.personal_record(exercise) %> lbs</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <h2><%= t('.training_history') %></h2>
+    <% @program.exercises.uniq.each do |exercise| %>
+      <%= render @user.history_for(exercise) %>
+    <% end %>
+  </div>
+  <div class="small-2 columns">
+    &nbsp;
+  </div>
+</div>
+</div>

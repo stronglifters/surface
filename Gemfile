@@ -35,6 +35,9 @@ gem 'puma'
 gem 'rack-timeout'
 gem 'scale'
 gem 'dotenv-rails'
+gem 'chartkick'
+gem 'groupdate'
+gem 'dalli'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -61,9 +64,12 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'capistrano-rbenv', '~> 2.0', require: false
+  gem 'rails-erd'
+  gem 'bullet'
+  gem 'rack-mini-profiler'
+  gem 'flamegraph'
 end
 
 group :production do
   gem 'rails_12factor'
 end
-

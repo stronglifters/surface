@@ -6,9 +6,14 @@
     <title><%= content_for?(:title) ? "Strong Lifters | #{yield(:title)}" : "Strong Lifters" %></title>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+    <script type="text/javascript" charset="utf-8">
+      $(function(){ $(document).foundation(); });
+    </script>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <%= render partial: 'layouts/flash' %>
     <div class="row">
       <div class="large-12 columns">
@@ -63,6 +68,7 @@
                     <a href="#"><%= gravatar_for(@current_user, size: 16) %> <%= @current_user.username %></a>
                     <ul class="dropdown">
                       <li><%= link_to "Training Sessions", training_sessions_path %></li>
+                      <li><%= link_to "My Public Profile", profile_path(@current_user) %></li>
                       <li class="divider"></li>
                       <li><%= link_to "Log Out", session_path('me'), method: :delete %></li>
                     </ul>
@@ -84,8 +90,8 @@
               </div>
               <div class="large-6 columns">
                 <ul class="inline-list right">
-                  <li><a href="#">Link 1</a></li>
-                  <li><a href="#">Link 2</a></li>
+                  <li><a href="https://twitter.com/Stronglifters/">Twitter</a></li>
+                  <li><a href="https://github.com/stronglifters">Github</a></li>
                   <li><a href="#">Link 3</a></li>
                   <li><a href="#">Link 4</a></li>
                 </ul>
@@ -96,9 +102,5 @@
       <!-- End Footer -->
       </div>
     </div>
-    <%= javascript_include_tag "application" %>
-    <script type="text/javascript" charset="utf-8">
-      $(function(){ $(document).foundation(); });
-    </script>
   </body>
 </html>

@@ -5,4 +5,4 @@ chmod 600 ~/.ssh/id_rsa
 echo -e "Host www.stronglifters.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 eval "$(ssh-agent)"
 ssh-add
-'[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bundle exec cap production deploy || false'
+[ "${TRAVIS_PULL_REQUEST}" = "false" ] && bundle exec cap production deploy || false

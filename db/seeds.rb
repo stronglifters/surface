@@ -1,11 +1,6 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-program =  Program.create!(name: "StrongLifts 5×5")
+program =  Program.create!(name: Program::STRONG_LIFTS)
 squat =  Exercise.create!(name: "Squat")
 bench_press = Exercise.create!(name: "Bench Press")
 barbell_row = Exercise.create!(name: "Barbell Row")

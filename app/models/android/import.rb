@@ -1,5 +1,4 @@
 class Android::Import
-  WORKOUTS_SQL = "select * from workouts"
   attr_reader :user, :program
 
   def initialize(user, program)
@@ -13,7 +12,7 @@ class Android::Import
 
   def import_from(directory)
     database(directory) do |db|
-      db.execute(WORKOUTS_SQL) do |row|
+      db[:workouts].each do |row|
         import(row)
       end
     end
@@ -29,8 +28,8 @@ class Android::Import
     "#{dir}/stronglifts.db"
   end
 
-  def database(dir)
-    yield SQLite3::Database.new(database_file(dir))
+  def database(directory)
+    yield Sequel.sqlite(database_file(directory))
   end
 
   def create_workout_from(workout_row)
@@ -74,17 +73,17 @@ class Android::Import
   end
 
   def map_from(row)
-    Android::WorkoutRow.new(
-      id: row[0],
-      date: DateTime.parse(row[1]),
-      workout: row[2],
-      exercise_1: JSON.parse(row[3]),
-      exercise_2: JSON.parse(row[4]),
-      exercise_3: JSON.parse(row[5]),
-      note: row[6],
-      body_weight: row[7],
-      arm_work: row[8].present? ? JSON.parse(row[8]) : nil,
-      temp: row[9]
+    Android::Workout.new(
+      id: row[:id],
+      date: row[:date],
+      workout: row[:workout],
+      exercise_1: JSON.parse(row[:e1]),
+      exercise_2: JSON.parse(row[:e2]),
+      exercise_3: JSON.parse(row[:e3]),
+      note: row[:note],
+      body_weight: row[:bodyWeight],
+      arm_work: row[:armWork].present? ? JSON.parse(row[:armWork]) : nil,
+      temp: row[:temp]
     )
   end
 end

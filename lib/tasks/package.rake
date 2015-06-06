@@ -7,7 +7,7 @@ namespace :package do
     Rake::PackageTask.new("stronglifters", version) do |package|
       package.need_tar_gz = true
       package.package_files.add %w(
-      app/**/*
+      app/**/**/*
       config/**/*
       db/**/*
       lib/**/*

@@ -40,7 +40,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
   "tmp/sockets",
   "vendor/bundle",
   "public/system",
-  "public/assets",
 )
 
 # Default value for default_env is {}

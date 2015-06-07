@@ -7,7 +7,7 @@ namespace :package do
     Rake::PackageTask.new("stronglifters", version) do |package|
       package.need_tar_gz = true
       package.package_files.add %w(
-      app/**/**/*
+      app/**/*
       config/**/*
       db/**/*
       lib/**/*
@@ -21,7 +21,7 @@ namespace :package do
       config.ru
       )
       package.package_files.exclude do |path|
-        path.start_with?("app/assets/") || path.start_with?("config/deploy")
+        path.start_with?("config/deploy")
       end
     end
     Rake::Task["repackage"].invoke

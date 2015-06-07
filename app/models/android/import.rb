@@ -75,7 +75,7 @@ class Android::Import
   def map_from(row)
     Android::Workout.new(
       id: row[:id],
-      date: row[:date],
+      date: row[:date].utc,
       workout: row[:workout],
       exercise_1: JSON.parse(row[:e1]),
       exercise_2: JSON.parse(row[:e2]),

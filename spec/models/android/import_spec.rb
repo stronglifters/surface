@@ -24,7 +24,7 @@ describe Android::Import do
       training_session = user.training_sessions.order(:occurred_at).first
 
       expect(training_session).to be_persisted
-      expected_date = DateTime.parse("Mon, 02 Mar 2015 16:28:26 UTC +00:00")
+      expected_date = DateTime.new(2015, 03, 02, 16, 28, 26)
       expect(training_session.occurred_at.to_i).to eql(expected_date.to_i)
       expect(training_session.workout).to eql(workout_a)
       expect(training_session.body_weight).to eql(205.0)

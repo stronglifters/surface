@@ -1,6 +1,6 @@
 namespace :package do
   desc "create a build package"
-  task build: "assets:precompile" do
+  task :build do
     require "rake/packagetask"
 
     version = DateTime.now.utc.strftime("%Y-%m-%d-%H-%M-%S")
@@ -12,6 +12,7 @@ namespace :package do
       db/**/*
       lib/**/*
       public/**/*
+      public/assets/.*manifest*
       bin/**/*
       Gemfile
       Gemfile.lock

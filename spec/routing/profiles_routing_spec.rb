@@ -16,4 +16,17 @@ describe "/profiles" do
       id: "mokha"
     )
   end
+
+  it 'routes to /profiles/<username> with funky usernames' do
+    expect(get: "/profiles/mo.kha").to route_to(
+      controller: "profiles",
+      action: "show",
+      id: "mo.kha"
+    )
+    expect(get: "/u/mo.kha").to route_to(
+      controller: "profiles",
+      action: "show",
+      id: "mo.kha"
+    )
+  end
 end

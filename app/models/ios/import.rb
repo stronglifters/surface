@@ -15,28 +15,25 @@ class Ios::Import
       db[:ZBASEWORKOUT].each do |row|
         workout_name = row[:ZTYPE] == 1 ? "A" : "B"
         workout = program.workouts.find_by(name: workout_name)
-        occurred_at = DateTime.parse(row[:ZLOGDATE])
+        time = row[:ZDATE].to_s.split(' ')
+        date_string = "#{row[:ZLOGDATE]} #{time[1]} #{time[2]}"
+        occurred_at = DateTime.parse(date_string)
         body_weight = row[:ZBODYWEIGHT].to_f
         training_session = user.begin_workout(workout, occurred_at, body_weight)
 
         db[:ZEXERCISESETS].where(ZWORKOUT: row[:Z_PK]).
           each do |exercise_set_row|
-          exercise = nil
-          target_weight = nil
-
           db[:ZEXERCISE].where(ZTYPE: exercise_set_row[:ZEXERCISETYPE]).
             each do |exercise_row|
             exercise = exercise_from(exercise_row)
-          end
-
-          db[:ZWEIGHT].
-            where(Z_PK: exercise_set_row[:ZWEIGHT]).each do |weight_row|
-            target_weight = weight_row[:ZVAL]
-          end
-
-          if exercise
-            sets = sets_from(exercise_set_row)
-            training_session.train(exercise, target_weight, sets)
+            if exercise
+              db[:ZWEIGHT].
+                where(Z_PK: exercise_set_row[:ZWEIGHT]).each do |weight_row|
+                target_weight = weight_row[:ZVAL]
+                sets = sets_from(exercise_set_row)
+                training_session.train(exercise, target_weight, sets)
+              end
+            end
           end
         end
       end

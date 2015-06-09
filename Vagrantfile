@@ -40,6 +40,6 @@ Vagrant.configure("2") do |config|
   # end
   config.vm.provider :vmware_workstation do |vm|
     vm.gui = false
-    vm.vmx["displayname"] = "app"
+    vm.vmx["displayname"] = "stronglifters"
   end
 end

@@ -25,7 +25,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4', group: :doc
 gem 'foundation-rails'
 gem 'email_validator'
-gem 'coveralls', require: false
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
@@ -70,6 +69,8 @@ group :development, :test do
   gem 'rack-mini-profiler'
   gem 'flamegraph'
   gem 'stackprof'
+  gem 'coveralls', require: false
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :production do

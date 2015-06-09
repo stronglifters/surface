@@ -49,7 +49,6 @@ class Android::Import
   end
 
   def training_session_for(workout_row)
-    puts workout_row.date.inspect
     workout = program.workouts.find_by(name: workout_row.workout)
     user.begin_workout(
       workout,
@@ -74,9 +73,11 @@ class Android::Import
   end
 
   def map_from(row)
+    utc_date = DateTime.parse(row[:date].to_s).utc
+    puts [row[:date].to_s, utc_date].inspect
     Android::Workout.new(
       id: row[:id],
-      date: row[:date],
+      date: utc_date,
       workout: row[:workout],
       exercise_1: JSON.parse(row[:e1]),
       exercise_2: JSON.parse(row[:e2]),

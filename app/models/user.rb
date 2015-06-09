@@ -29,14 +29,13 @@ class User < ActiveRecord::Base
   end
 
   def begin_workout(workout, date, body_weight)
-    utc_date = date.to_datetime.utc
-    matching_workouts = training_sessions.where(occurred_at: utc_date)
+    matching_workouts = training_sessions.where(occurred_at: date)
     if matching_workouts.any?
       matching_workouts.first
     else
       training_sessions.create!(
         workout: workout,
-        occurred_at: utc_date,
+        occurred_at: date,
         body_weight: body_weight.to_f
       )
     end

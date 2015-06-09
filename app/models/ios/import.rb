@@ -23,22 +23,17 @@ class Ios::Import
 
         db[:ZEXERCISESETS].where(ZWORKOUT: row[:Z_PK]).
           each do |exercise_set_row|
-          exercise = nil
-          target_weight = nil
-
           db[:ZEXERCISE].where(ZTYPE: exercise_set_row[:ZEXERCISETYPE]).
             each do |exercise_row|
             exercise = exercise_from(exercise_row)
-          end
-
-          db[:ZWEIGHT].
-            where(Z_PK: exercise_set_row[:ZWEIGHT]).each do |weight_row|
-            target_weight = weight_row[:ZVAL]
-          end
-
-          if exercise
-            sets = sets_from(exercise_set_row)
-            training_session.train(exercise, target_weight, sets)
+            if exercise
+              db[:ZWEIGHT].
+                where(Z_PK: exercise_set_row[:ZWEIGHT]).each do |weight_row|
+                target_weight = weight_row[:ZVAL]
+                sets = sets_from(exercise_set_row)
+                training_session.train(exercise, target_weight, sets)
+              end
+            end
           end
         end
       end

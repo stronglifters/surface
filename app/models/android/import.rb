@@ -73,7 +73,8 @@ class Android::Import
   end
 
   def map_from(row)
-    utc_date = DateTime.parse(row[:date].to_s).utc
+    #utc_date = DateTime.parse(row[:date].to_s).utc
+    utc_date = user.timezone.local_to_utc(row[:date])
     puts [row[:date].to_s, utc_date].inspect
     Android::Workout.new(
       id: row[:id],

@@ -23,7 +23,6 @@ describe Android::Import do
       subject.import_from(directory)
       training_session = user.training_sessions.order(:occurred_at).first
 
-      expect(training_session).to be_persisted
       expected_date = DateTime.new(2015, 03, 02, 16, 28, 26)
       expect(training_session.occurred_at.to_i).to eql(expected_date.to_i)
       expect(training_session.workout).to eql(workout_a)

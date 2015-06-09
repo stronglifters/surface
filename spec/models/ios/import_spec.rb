@@ -52,7 +52,7 @@ describe Ios::Import do
       expect(first_exercises.count).to eql(3)
       expect(first_exercises.first.sets).to eql(["5", "5", "5", "5", "5"])
 
-      expected_date = DateTime.new(2015, 05, 02)
+      expected_date = DateTime.new(2015, 05, 02, 23, 27, 05)
       expect(training_session.occurred_at.to_i).to eql(expected_date.to_i)
       expect(training_session.workout).to eql(workout_a)
       expect(training_session.body_weight).to eql(160.0)

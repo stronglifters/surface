@@ -15,7 +15,9 @@ class Ios::Import
       db[:ZBASEWORKOUT].each do |row|
         workout_name = row[:ZTYPE] == 1 ? "A" : "B"
         workout = program.workouts.find_by(name: workout_name)
-        occurred_at = DateTime.parse(row[:ZLOGDATE])
+        time = row[:ZDATE].to_s.split(' ')
+        date_string = "#{row[:ZLOGDATE]} #{time[1]} #{time[2]}"
+        occurred_at = DateTime.parse(date_string)
         body_weight = row[:ZBODYWEIGHT].to_f
         training_session = user.begin_workout(workout, occurred_at, body_weight)
 

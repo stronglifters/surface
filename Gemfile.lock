@@ -250,6 +250,7 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     ruby-graphviz (1.2.2)
+    rubyzip (1.1.7)
     sass (3.4.14)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -365,6 +366,7 @@ DEPENDENCIES
   rails-erd
   rails_12factor
   rspec-rails
+  rubyzip
   sass-rails (~> 5.0)
   scale
   sdoc (~> 0.4)

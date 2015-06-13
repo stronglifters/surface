@@ -12,7 +12,7 @@ namespace :package do
       db/**/*
       lib/**/*
       public/**/*
-      public/assets/.*manifest*
+      public/assets/.sprockets-manifest-*
       bin/**/*
       Gemfile
       Gemfile.lock

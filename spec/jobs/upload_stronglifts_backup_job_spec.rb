@@ -34,9 +34,8 @@ describe UploadStrongliftsBackupJob, type: :job do
       let(:unknown_file) { __FILE__ }
 
       it "does not raise an error" do
-        expect(->{
-          subject.perform(user, unknown_file, program)
-        }).to_not raise_error
+        expect(-> { subject.perform(user, unknown_file, program) }).
+          to_not raise_error
       end
     end
   end

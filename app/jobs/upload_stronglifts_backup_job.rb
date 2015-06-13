@@ -26,7 +26,7 @@ class UploadStrongliftsBackupJob < ActiveJob::Base
   end
 
   def extract!(backup_file, dir)
-    #`unzip #{backup_file} -d #{dir}`
+    # `unzip #{backup_file} -d #{dir}`
     Zip::File.open(backup_file) do |zip_file|
       zip_file.each do |entry|
         entry.extract(File.join(dir, entry.name))
@@ -39,11 +39,11 @@ class UploadStrongliftsBackupJob < ActiveJob::Base
   end
 
   class UnknownFile
-    def can_parse?(directory)
+    def can_parse?(_directory)
       true
     end
 
-    def import_from(directory)
+    def import_from(_directory)
     end
   end
 end

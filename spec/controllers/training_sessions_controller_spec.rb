@@ -41,5 +41,16 @@ describe TrainingSessionsController do
       translation = I18n.translate("training_sessions.upload.success")
       expect(flash[:notice]).to eql(translation)
     end
+
+    context "when the file is not a backup file" do
+      let(:unknown_file) { fixture_file_upload("unknown.file") }
+
+      it "displays an error" do
+        post :upload, backup: unknown_file
+        translation = I18n.translate("training_sessions.upload.failure")
+        expect(flash[:alert]).to eql(translation)
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
   end
 end

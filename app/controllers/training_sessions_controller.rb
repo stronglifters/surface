@@ -7,17 +7,25 @@ class TrainingSessionsController < ApplicationController
   end
 
   def upload
-    UploadStrongliftsBackupJob.perform_later(
-      current_user,
-      storage.store(params[:backup]),
-      Program.stronglifts
-    )
-    redirect_to dashboard_path, notice: t(".success")
+    if legitimate_file?(params[:backup])
+      UploadStrongliftsBackupJob.perform_later(
+        current_user,
+        storage.store(params[:backup]),
+        Program.stronglifts
+      )
+      redirect_to dashboard_path, notice: t(".success")
+    else
+      redirect_to dashboard_path, alert: t(".failure")
+    end
   end
 
   private
 
   def storage
     @storage ||= TemporaryStorage.new
+  end
+
+  def legitimate_file?(file)
+    file.original_filename.end_with?(".stronglifts")
   end
 end

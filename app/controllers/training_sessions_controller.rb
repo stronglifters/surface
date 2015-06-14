@@ -17,6 +17,11 @@ class TrainingSessionsController < ApplicationController
     redirect_to dashboard_path, notice: t(".success")
   end
 
+  def drive_upload
+    DownloadFromDriveJob.perform_later(params)
+    redirect_to dashboard_path, notice: t(".success")
+  end
+
   private
 
   def storage

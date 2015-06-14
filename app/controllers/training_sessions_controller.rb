@@ -18,7 +18,7 @@ class TrainingSessionsController < ApplicationController
   end
 
   def drive_upload
-    DownloadFromDriveJob.perform_later(params)
+    DownloadFromDriveJob.perform_later(current_user, params)
     redirect_to dashboard_path, notice: t(".success")
   end
 

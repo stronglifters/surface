@@ -18,7 +18,6 @@ class Stronglifters.GoogleDrive
 
   handleAuthResult: (authResult) =>
     if (authResult)
-      #console.dir(authResult)
       gapi.load('drive-share', @initializeDrive)
     else
       @checkAuth()
@@ -31,19 +30,14 @@ class Stronglifters.GoogleDrive
       'q': "title contains '.stronglifts' and title contains 'backup'"
     })
     request.execute (response) =>
-      console.dir(response)
       if !response.error
         item = response.items[0]
-        console.log('Title: ' + item.title)
-        console.log('Description: ' + item.description)
-        console.log('MIME type: ' + item.mimeType)
-        fileId = item.id
-        downloadUrl = item.downloadUrl
-        $.post( "/training_sessions/drive_upload", item)
-          .done (data) ->
-            console.dir(data)
+        $.post("/training_sessions/drive_upload", {
+          accessToken: gapi.auth.getToken().access_token,
+          data: item
+        }).done (data) ->
+          window.location.reload()
       else if (item.error.code == 401)
-        #// Access token might have expired.
         @checkAuth()
       else
         console.log('An error occured: ' + response.error.message)

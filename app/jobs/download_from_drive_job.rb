@@ -1,29 +1,42 @@
 class DownloadFromDriveJob < ActiveJob::Base
   queue_as :default
-  require 'google/api_client'
 
-  CLIENT_ID = "241601222378-kscpfqhpmc6059704mfcq8ckcp799dvn.apps.googleusercontent.com"
-  CLIENT_SECRET = ENV['GOOGLE_CLIENT_SECRET']
-  REDIRECT_URI = ENV['GOOGLE_REDIRECT_URI']
-  SCOPES = [
-    'https://www.googleapis.com/auth/drive',
-    'https://www.googleapis.com/auth/drive.install',
-    'https://www.googleapis.com/auth/drive.file',
-    'https://www.googleapis.com/auth/drive.readonly',
-    'https://www.googleapis.com/auth/drive.apps.readonly',
-  ]
+  def perform(user, params)
+    Dir.mktmpdir do |dir|
+      download_path = File.join(dir, params[:data][:title])
+      execute(create_command(
+        params[:data][:downloadUrl].strip,
+        download_path,
+        params[:accessToken]
+      ))
+      UploadStrongliftsBackupJob.perform_later(
+        user,
+        storage.store(File.new(download_path)),
+        Program.stronglifts
+      )
+    end
+  end
 
-  def perform(params)
-    puts params.inspect
+  private
 
-    drive = GoogleDrive.new
-    drive.build_client(drive.get_credentials())
+  def storage
+    @storage ||= TemporaryStorage.new
+  end
 
-    #Dir.mktmpdir do |dir|
-      #download_path = File.join(dir, params[:title])
-      #`wget -O #{download_path} #{params[:downloadUrl]}`
-    #end
+  def create_command(download_url, download_path, access_token)
+    command = <<-COMMAND
+curl '#{download_url}' \
+-o '#{download_path}' \
+-H 'Authorization: Bearer #{access_token}' \
+-H 'Referer: http://stronglifters.dev/dashboard' \
+-H 'Origin: http://stronglifters.dev' \
+-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36' \
+--compressed
+COMMAND
+    command
+  end
+
+  def execute(command)
+    `#{command}`
   end
 end
-
- 

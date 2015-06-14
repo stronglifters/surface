@@ -13,6 +13,9 @@
           </div> <!-- /.small-12 -->
         <% end %>
       </div>
+      <div class="row">
+        <button onclick="googleDriver.showSettingsDialog()">Share</button>
+      </div>
     </div>
     <div class="panel callout radius">
       <h6><%= @training_sessions.count %> training sessions completed</h6>
@@ -27,10 +30,14 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
+  var googleDriver = new Stronglifters.GoogleDrive();
   $(function(){
     window.onload = function() {
-      var driver = new Stronglifters.GoogleDrive();
-      gapi.load('drive-share', driver.initialize);
     };
   });
+  function handleClientLoad() {
+    googleDriver.checkAuth()
+  }
 </script>
+<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+

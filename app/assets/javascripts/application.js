@@ -18,8 +18,3 @@
 //= require_tree .
 
 var Stronglifters = Stronglifters || {};
-
-//init = function() {
-  //s = new gapi.drive.share.ShareClient('<YOUR_APP_ID>');
-  //s.setItemIds(["<FILE_ID>"]);
-//};

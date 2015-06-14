@@ -1,6 +1,8 @@
 require "temporary_storage"
 
 class TrainingSessionsController < ApplicationController
+  after_action :allow_google_iframe
+
   def index
     @training_sessions = current_user.training_sessions.
       order(occurred_at: :desc)
@@ -19,5 +21,9 @@ class TrainingSessionsController < ApplicationController
 
   def storage
     @storage ||= TemporaryStorage.new
+  end
+
+  def allow_google_iframe
+    response.headers["X-Frame-Options"] = "ALLOW-FROM https://drive.google.com"
   end
 end

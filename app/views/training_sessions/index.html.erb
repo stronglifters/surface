@@ -25,3 +25,12 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    window.onload = function() {
+      var driver = new Stronglifters.GoogleDrive();
+      gapi.load('drive-share', driver.initialize);
+    };
+  });
+</script>

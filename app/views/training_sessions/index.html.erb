@@ -13,6 +13,9 @@
           </div> <!-- /.small-12 -->
         <% end %>
       </div>
+      <div class="row">
+        <button id='google-sync-button'>Sync with Google Drive</button>
+      </div>
     </div>
     <div class="panel callout radius">
       <h6><%= @training_sessions.count %> training sessions completed</h6>
@@ -27,10 +30,14 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-  var googleDriver = new Stronglifters.GoogleDrive();
-  function handleClientLoad() {
-    googleDriver.checkAuth();
-  }
+  $(function(){
+    $('#google-sync-button').click(function(){
+      new Stronglifters.GoogleDrive({
+        client_id: '<%= ENV['GOOGLE_CLIENT_ID'] %>',
+        drive_upload_path: '<%= drive_upload_training_sessions_path %>'
+      }).syncFile();
+    });
+  });
 </script>
-<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+<script type="text/javascript" src="https://apis.google.com/js/client.js"></script>
 

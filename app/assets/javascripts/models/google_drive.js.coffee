@@ -1,6 +1,8 @@
 class Stronglifters.GoogleDrive
-  constructor: () ->
-    @client_id = "241601222378-kscpfqhpmc6059704mfcq8ckcp799dvn.apps.googleusercontent.com"
+  constructor: (options) ->
+    @google = gapi
+    @client_id = options.client_id
+    @drive_upload_path = options.drive_upload_path
     @scopes = [
       'https://www.googleapis.com/auth/drive',
       'https://www.googleapis.com/auth/drive.install',
@@ -9,35 +11,30 @@ class Stronglifters.GoogleDrive
       'https://www.googleapis.com/auth/drive.apps.readonly',
     ]
 
-  initializeDrive: () =>
-    @loadClient =>
-      @printFile()
+  syncFile: () =>
+    query = "title contains '.stronglifts' and title contains 'backup'"
+    @searchFor query, @uploadFile
 
-  checkAuth: () ->
-    gapi.auth.authorize({'client_id': @client_id, 'scope': @scopes, 'immediate': false}, @handleAuthResult)
+  searchFor: (query, callback) =>
+    @loadDrive () =>
+      @google.client.drive.files.list({ 'q': query }).execute(callback)
 
-  handleAuthResult: (authResult) =>
-    if (authResult)
-      gapi.load('drive-share', @initializeDrive)
-    else
-      @checkAuth()
+  uploadFile: (response) =>
+    item = response.items[0]
+    $.post(@drive_upload_path, {
+      accessToken: @google.auth.getToken().access_token,
+      data: item
+    }).done (data) ->
+      window.location.reload()
 
-  loadClient: (callback) ->
-    gapi.client.load('drive', 'v2', callback)
+  authorize: (callback) ->
+    @google.auth.authorize({
+      'client_id': @client_id,
+      'scope': @scopes,
+      'immediate': false
+    }, callback)
 
-  printFile: () =>
-    request = gapi.client.drive.files.list({
-      'q': "title contains '.stronglifts' and title contains 'backup'"
-    })
-    request.execute (response) =>
-      if !response.error
-        item = response.items[0]
-        $.post("/training_sessions/drive_upload", {
-          accessToken: gapi.auth.getToken().access_token,
-          data: item
-        }).done (data) ->
-          window.location.reload()
-      else if (item.error.code == 401)
-        @checkAuth()
-      else
-        console.log('An error occured: ' + response.error.message)
+  loadDrive: (callback) =>
+    @authorize (response) =>
+      @google.load 'drive-share', () =>
+        @google.client.load 'drive', 'v2', callback

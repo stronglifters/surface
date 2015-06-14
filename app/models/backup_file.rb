@@ -17,7 +17,7 @@ class BackupFile
   end
 
   def valid?
-    backup_file.original_filename.end_with?(".stronglifts")
+    File.extname(backup_file.path).start_with?(".stronglifts")
   end
 
   private

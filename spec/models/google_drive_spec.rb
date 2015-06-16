@@ -11,7 +11,7 @@ describe GoogleDrive do
         accessToken: access_token,
         data: {
           title: filename,
-          downloadUrl: "https://www.stronglifters.com/"
+          downloadUrl: "https://www.google.com/"
         },
       }
     end

@@ -9,17 +9,23 @@ class GoogleDrive
   def download(params)
     Dir.mktmpdir do |dir|
       download_path = File.join(dir, params[:data][:title])
-      download_url = params[:data][:downloadUrl].strip
+      url = params[:data][:downloadUrl].strip
       access_token = params[:accessToken]
-      curl = Shell.new('curl')
-      curl << "'#{download_url}'"
-      curl << "-o '#{download_path}'"
-      curl << "-H 'Authorization: Bearer #{access_token}'"
-      curl << "-H 'Referer: #{@referrer_domain}/dashboard'"
-      curl << "-H 'Origin: #{@referrer_domain}'"
-      curl << "--compressed"
-      curl.run
-      yield BackupFile.new(user, File.new(download_path))
+      yield BackupFile.new(user, curl(url, download_path, access_token))
     end
+  end
+
+  private
+
+  def curl(download_url, download_path, access_token)
+    curl = Shell.new("curl")
+    curl << "'#{download_url}'"
+    curl << "-o '#{download_path}'"
+    curl << "-H 'Authorization: Bearer #{access_token}'"
+    curl << "-H 'Referer: #{@referrer_domain}/dashboard'"
+    curl << "-H 'Origin: #{@referrer_domain}'"
+    curl << "--compressed"
+    curl.run
+    File.new(download_path)
   end
 end

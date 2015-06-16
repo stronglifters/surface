@@ -9,19 +9,12 @@ class DownloadFromDriveJob < ActiveJob::Base
         download_path,
         params[:accessToken]
       ))
-      UploadStrongliftsBackupJob.perform_later(
-        user,
-        storage.store(File.new(download_path)),
-        Program.stronglifts
-      )
+      backup_file = BackupFile.new(user, File.new(download_path))
+      backup_file.process_later(Program.stronglifts)
     end
   end
 
   private
-
-  def storage
-    @storage ||= TemporaryStorage.new
-  end
 
   def create_command(download_url, download_path, access_token)
     command = <<-COMMAND
@@ -32,7 +25,7 @@ curl '#{download_url}' \
 -H 'Origin: http://stronglifters.dev' \
 -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36' \
 --compressed
-COMMAND
+    COMMAND
     command
   end
 

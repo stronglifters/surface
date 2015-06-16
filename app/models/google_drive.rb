@@ -1,7 +1,7 @@
 class GoogleDrive
   attr_reader :user
 
-  def initialize(user, referrer_domain: ENV['GOOGLE_REFERRER_DOMAIN'])
+  def initialize(user, referrer_domain: ENV["GOOGLE_REFERRER_DOMAIN"])
     @user = user
     @referrer_domain = referrer_domain
   end

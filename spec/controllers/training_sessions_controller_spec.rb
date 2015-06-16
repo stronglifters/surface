@@ -19,7 +19,8 @@ describe TrainingSessionsController do
 
     it "allows iframes from google for the google drive popup" do
       get :index
-      expect(response.headers["X-Frame-Options"]).to eql("ALLOW-FROM https://drive.google.com")
+      allowed_url = "ALLOW-FROM https://drive.google.com"
+      expect(response.headers["X-Frame-Options"]).to eql(allowed_url)
     end
   end
 
@@ -61,7 +62,9 @@ describe TrainingSessionsController do
 
   describe "#drive_upload" do
     let(:params) { {} }
-    let(:success_message) { I18n.translate("training_sessions.drive_upload.success") }
+    let(:success_message) do
+      I18n.translate("training_sessions.drive_upload.success")
+    end
 
     before :each do
       allow(DownloadFromDriveJob).to receive(:perform_later)

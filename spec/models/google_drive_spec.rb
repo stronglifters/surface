@@ -3,7 +3,7 @@ require "rails_helper"
 describe GoogleDrive do
   subject { GoogleDrive.new(user) }
   let(:user) { build(:user) }
-  let(:referrer_domain) { 'https://www.stronglifters.com' }
+  let(:referrer_domain) { "https://www.stronglifters.com" }
 
   describe "#download" do
     let(:params) do
@@ -11,7 +11,7 @@ describe GoogleDrive do
         accessToken: access_token,
         data: {
           title: filename,
-          downloadUrl: 'https://www.stronglifters.com/'
+          downloadUrl: "https://www.stronglifters.com/"
         },
       }
     end

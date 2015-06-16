@@ -15,8 +15,6 @@ class Shell
   private
 
   def build_command
-    result = "#{@program} #{@options.join(" ")}"
-    puts result.inspect
-    result
+    "#{@program} #{@options.join(' ')}"
   end
 end

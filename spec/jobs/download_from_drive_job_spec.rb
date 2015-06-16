@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe DownloadFromDriveJob, type: :job do
   describe "#perform" do
     let(:user) { build(:user) }
-    let(:params) { { } }
+    let(:params) { {} }
     let(:backup_file) { double(process_later: true) }
     let(:drive) { instance_double(GoogleDrive) }
 

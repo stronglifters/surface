@@ -9,7 +9,7 @@ RSpec.describe DownloadFromDriveJob, type: :job do
 
     it "downloads the file for further processing" do
       allow(user).to receive(:google_drive).and_return(drive)
-      allow(drive).to receive(:download).with(params).and_return(backup_file)
+      allow(drive).to receive(:download).with(params).and_yield(backup_file)
       subject.perform(user, params)
       expect(backup_file).to have_received(:process_later).with(Program.stronglifts)
     end

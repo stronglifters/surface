@@ -20,7 +20,11 @@ describe GoogleDrive do
     let(:access_token) { FFaker::Internet.user_name }
 
     it "downloads the specified google drive file" do
-      result = subject.download(params)
+      result = nil
+      subject.download(params) do |backup_file|
+        result = backup_file
+      end
+      expect(result).to_not be_nil
       expect(result.user).to eql(user)
       expect(result.backup_file.path).to end_with(filename)
     end

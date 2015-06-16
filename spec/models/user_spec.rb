@@ -168,4 +168,12 @@ describe User do
       expect(todays_result).to_not eql(tomorrows_result)
     end
   end
+
+  describe "#google_drive" do
+    it "returns the users google drive" do
+      result = subject.google_drive
+      expect(result).to be_instance_of(GoogleDrive)
+      expect(result.user).to eql(subject)
+    end
+  end
 end

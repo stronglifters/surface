@@ -5,7 +5,7 @@
         <%= form_tag(upload_training_sessions_path, method: :post, multipart: true) do %>
           <div class="small-12 columns">
             <label><%= t('.backup_file') %>
-              <%= file_field_tag :backup %>
+              <%= file_field_tag :backup, required: true %>
             </label>
           </div> <!-- /.small-12 -->
           <div class="small-12 columns">

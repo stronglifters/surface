@@ -11,12 +11,12 @@ class Stronglifters.GoogleDrive
       'https://www.googleapis.com/auth/drive.apps.readonly',
     ]
 
-  syncFile: () =>
+  syncFile: =>
     query = "title contains '.stronglifts' and title contains 'backup'"
     @searchFor query, @uploadFile
 
   searchFor: (query, callback) =>
-    @loadDrive () =>
+    @loadDrive =>
       @google.client.drive.files.list({ 'q': query }).execute(callback)
 
   uploadFile: (response) =>
@@ -36,5 +36,5 @@ class Stronglifters.GoogleDrive
 
   loadDrive: (callback) =>
     @authorize (response) =>
-      @google.load 'drive-share', () =>
+      @google.load 'drive-share', =>
         @google.client.load 'drive', 'v2', callback

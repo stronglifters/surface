@@ -16,6 +16,11 @@ describe TrainingSessionsController do
       get :index
       expect(assigns(:training_sessions)).to match_array([training_session_a, training_session_b])
     end
+
+    it "allows iframes from google for the google drive popup" do
+      get :index
+      expect(response.headers["X-Frame-Options"]).to eql("ALLOW-FROM https://drive.google.com")
+    end
   end
 
   describe "#upload" do

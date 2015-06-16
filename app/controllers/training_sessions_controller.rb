@@ -1,7 +1,7 @@
 require "temporary_storage"
 
 class TrainingSessionsController < ApplicationController
-  after_action :allow_google_iframe
+  after_action :allow_google_iframe, only: [:index]
 
   def index
     @training_sessions = current_user.training_sessions.

@@ -26,6 +26,7 @@ describe TrainingSessionsController do
   describe "#upload" do
     include_context "stronglifts_program"
     let(:backup_file) { fixture_file_upload("backup.android.stronglifts") }
+    let(:translation) { I18n.translate("training_sessions.upload.success") }
 
     before :each do
       allow(UploadStrongliftsBackupJob).to receive(:perform_later)
@@ -43,8 +44,31 @@ describe TrainingSessionsController do
 
     it "displays a friendly message" do
       post :upload, backup: backup_file
-      translation = I18n.translate("training_sessions.upload.success")
       expect(flash[:notice]).to eql(translation)
+    end
+  end
+
+  describe "#drive_upload" do
+    let(:params) { {} }
+    let(:success_message) { I18n.translate("training_sessions.drive_upload.success") }
+
+    before :each do
+      allow(DownloadFromDriveJob).to receive(:perform_later)
+    end
+
+    it "schedules a job to suck down the latest backup from google drive" do
+      post :drive_upload, params
+      expect(DownloadFromDriveJob).to have_received(:perform_later)
+    end
+
+    it "redirects to the dashboard" do
+      post :drive_upload, params
+      expect(response).to redirect_to(dashboard_path)
+    end
+
+    it "displays a success message" do
+      post :drive_upload, params
+      expect(flash[:notice]).to eql(success_message)
     end
   end
 end

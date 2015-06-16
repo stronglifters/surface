@@ -1,8 +1,9 @@
 class GoogleDrive
   attr_reader :user
 
-  def initialize(user)
+  def initialize(user, referrer_domain: ENV['GOOGLE_REFERRER_DOMAIN'])
     @user = user
+    @referrer_domain = referrer_domain
   end
 
   def download(params)
@@ -24,8 +25,8 @@ class GoogleDrive
 curl '#{download_url}' \
 -o '#{download_path}' \
 -H 'Authorization: Bearer #{access_token}' \
--H 'Referer: http://stronglifters.dev/dashboard' \
--H 'Origin: http://stronglifters.dev' \
+-H 'Referer: #{@referrer_domain}/dashboard' \
+-H 'Origin: #{@referrer_domain}' \
 -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36' \
 --compressed
     COMMAND

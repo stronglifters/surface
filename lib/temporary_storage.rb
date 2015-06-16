@@ -1,7 +1,7 @@
 class TemporaryStorage
   def store(file)
     "#{tmp_dir}/#{File.basename(file.path).parameterize}".tap do |new_path|
-      puts ("Copying... #{file.path} to #{new_path}")
+      Rails.logger.debug("Copying... #{file.path} to #{new_path}")
       FileUtils.mv(file.path, new_path)
     end
   end

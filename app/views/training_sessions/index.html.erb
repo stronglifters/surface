@@ -13,9 +13,7 @@
           </div> <!-- /.small-12 -->
         <% end %>
       </div>
-      <div class="row">
-        <%= fa_icon "camera-retro" %>
-        <button id='google-sync-button'>Sync with Google Drive</button>
+      <div id='google-sync' class="row">
       </div>
     </div>
     <div class="panel callout radius">
@@ -32,11 +30,12 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function(){
-    $('#google-sync-button').click(function(){
-      new Stronglifters.GoogleDrive({
+    new Stronglifters.GoogleSyncButton({
+      el: '#google-sync',
+      data: {
         client_id: '<%= ENV['GOOGLE_CLIENT_ID'] %>',
         drive_upload_path: '<%= drive_upload_training_sessions_path %>'
-      }).syncFile();
+      }
     });
   });
 </script>

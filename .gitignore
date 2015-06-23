@@ -12,7 +12,7 @@
 !/log/.keep
 /tmp
 .vagrant
-.env
+.env*
 database.yml
 vendor/bundle
 coverage

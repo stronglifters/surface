@@ -1,5 +1,6 @@
+#= require models/google_drive
 Stronglifters.GoogleSyncButton = Ractive.extend
-  template: "<button on-click='synchronize'><i class='fa {{icon}}'></i> {{text}}</button>",
+  template: RactiveTemplates["templates/google_sync_button"]
   oninit: ->
     @set(text: 'Sync with Google', icon: 'fa-camera-retro')
     @on 'synchronize', (event) ->
@@ -10,7 +11,7 @@ Stronglifters.GoogleSyncButton = Ractive.extend
     @drive().syncFile()
 
   drive: ->
-    @drive ||= new Stronglifters.GoogleDrive
+    @_drive ||= new Stronglifters.GoogleDrive
       client_id: @get('client_id')
       drive_upload_path: @get('drive_upload_path')
 

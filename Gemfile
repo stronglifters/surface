@@ -40,6 +40,7 @@ gem 'dalli'
 gem 'sequel'
 gem 'rubyzip', require: "zip"
 gem 'font-awesome-rails'
+gem 'ractive-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-ractive'

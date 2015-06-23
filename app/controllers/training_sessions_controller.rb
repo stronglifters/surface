@@ -2,7 +2,9 @@ class TrainingSessionsController < ApplicationController
   after_action :allow_google_iframe, only: [:index]
 
   def index
-    @training_sessions = current_user.training_sessions.
+    @training_sessions = current_user.
+      training_sessions.
+      includes(:workout, :program, exercise_sessions: [:exercise]).
       order(occurred_at: :desc)
   end
 

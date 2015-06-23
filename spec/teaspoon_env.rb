@@ -42,7 +42,7 @@ Teaspoon.configure do |config|
     # Note: If no version is specified, the latest is assumed.
     #
     # Available: jasmine[1.3.1, 2.0.0], mocha[1.10.0, 1.17.1] qunit[1.12.0, 1.14.0]
-    suite.use_framework :jasmine, "1.3.1"
+    suite.use_framework :jasmine, "2.2.0"
 
     # Specify a file matcher as a regular expression and all matching files will be loaded when the suite is run. These
     # files need to be within an asset path. You can add asset paths using the `config.asset_paths`.

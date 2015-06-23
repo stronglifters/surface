@@ -14,8 +14,8 @@ rbenv global 2.2.2
 gem install bundler --no-ri --no-rdoc
 cd /vagrant
 createdb
-if [ ! -f .env ]; then
-  ln -s .env.example .env
+if [ ! -f .env.local ]; then
+  cp .env.example .env.local
 fi
 bin/setup
 RAILS_ENV=test bundle exec rake db:create db:migrate db:seed

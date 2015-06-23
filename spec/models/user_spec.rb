@@ -176,4 +176,19 @@ describe User do
       expect(result.user).to eql(subject)
     end
   end
+
+  describe "when destroying a training session" do
+    include_context "stronglifts_program"
+    subject { create(:user) }
+
+    it "removes all the associations" do
+      training_session = subject.begin_workout(workout_a, Date.today, 200)
+      training_session.train(squat, 200, [5, 5, 5, 5, 5])
+
+      subject.training_sessions.destroy_all
+
+      expect(TrainingSession.all).to be_empty
+      expect(ExerciseSession.all).to be_empty
+    end
+  end
 end

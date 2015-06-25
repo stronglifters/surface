@@ -5,7 +5,6 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/.bash_profile
 echo 'eval "$(rbenv init -)"' >> $HOME/.bash_profile
 source $HOME/.bash_profile
 git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
-git clone https://github.com/tpope/rbenv-ctags.git $HOME/.rbenv/plugins/rbenv-ctags
 git clone https://github.com/rkh/rbenv-update.git $HOME/.rbenv/plugins/rbenv-update
 git clone https://github.com/sstephenson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
 rbenv update

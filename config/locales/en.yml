@@ -48,6 +48,8 @@ en:
       login_button: "Login"
       register_link: "Create an account"
   training_sessions:
+    drive_upload:
+      success: 'Our minions have been summoned to fetch your backup.'
     index:
       backup_file: 'File'
       upload_backup_button: "Upload"

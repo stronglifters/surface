@@ -1,6 +1,10 @@
 class TrainingSessionsController < ApplicationController
+  after_action :allow_google_iframe, only: [:index]
+
   def index
-    @training_sessions = current_user.training_sessions.
+    @training_sessions = current_user.
+      training_sessions.
+      includes(:workout, :program, exercise_sessions: [:exercise]).
       order(occurred_at: :desc)
   end
 
@@ -13,5 +17,16 @@ class TrainingSessionsController < ApplicationController
     else
       redirect_to dashboard_path, alert: t(".failure")
     end
+  end
+
+  def drive_upload
+    DownloadFromDriveJob.perform_later(current_user, params)
+    redirect_to dashboard_path, notice: t(".success")
+  end
+
+  private
+
+  def allow_google_iframe
+    response.headers["X-Frame-Options"] = "ALLOW-FROM https://drive.google.com"
   end
 end

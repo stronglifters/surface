@@ -41,6 +41,7 @@ gem 'sequel'
 gem 'rubyzip', require: "zip"
 gem 'font-awesome-rails'
 gem 'ractive-rails'
+gem 'sidekiq'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-ractive'

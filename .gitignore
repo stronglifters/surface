@@ -15,6 +15,7 @@
 .env
 database.yml
 vendor/bundle
+vendor/cache
 coverage
 config/deploy_id_rsa
 pkg

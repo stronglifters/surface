@@ -7,7 +7,7 @@ feature "Profiles", type: :feature do
   let(:user) { create(:user) }
 
   before :each do
-    http_login(user)
+    page.set_rack_session(user_id: user.id)
     subject.visit_page
   end
 

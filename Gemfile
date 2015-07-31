@@ -59,6 +59,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'teaspoon-jasmine'
   gem 'meta_request'
+  gem 'rack_session_access'
 
   # Use Capistrano for deployment
   gem 'capistrano-rails'

@@ -1,9 +1,6 @@
-<div class="small-12 columns">
 <div class="row">
-  <div class="small-2 columns">
-    &nbsp;
-  </div>
-  <div class="small-8 columns text-center">
+    
+  <div class="small-12 medium-4 columns small-text-center medium-text-left">
     <%= link_to profile_path(@user), class: 'th [radius]' do %>
       <%= gravatar_for(@user, size: 128) %>
     <% end %>
@@ -13,7 +10,9 @@
     <% else %>
       <p><%= t('.no_workouts_completed') %></p>
     <% end %>
+  </div>
 
+  <div class="small-12 medium-8 columns small-text-center medium-text-left">
     <h2><%= t('.personal_records') %></h2>
     <table role="grid">
       <thead>
@@ -30,14 +29,17 @@
         <% end %>
       </tbody>
     </table>
+  </div>
+  
+</div>
 
+<div>
+
+  <div class="small-12 columns small-text-center medium-text-left">
     <h2><%= t('.training_history') %></h2>
     <% @program.exercises.uniq.each do |exercise| %>
       <%= render @user.history_for(exercise) %>
     <% end %>
   </div>
-  <div class="small-2 columns">
-    &nbsp;
-  </div>
-</div>
+
 </div>

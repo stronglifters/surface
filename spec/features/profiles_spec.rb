@@ -7,6 +7,7 @@ feature "Profiles", type: :feature do
   let(:user) { create(:user) }
 
   before :each do
+    http_login(user)
     subject.visit_page
   end
 

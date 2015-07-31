@@ -20,6 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  nav:
+    user:
+      training_sessions: "Training sessions"
+      log_out: "Log out"
+      profile_edit: "Edit profile"
+      profile_view: "View profile"
   registrations:
     new:
       username: "Username"
@@ -49,9 +55,11 @@ en:
       register_link: "Create an account"
   training_sessions:
     index:
-      backup_file: 'File'
+      backup_file: "File"
       upload_backup_button: "Upload"
     upload:
-      success: 'Our minions have been summoned to unpack your backup.'
+      success: "Our minions have been summoned to unpack your backup."
     training_session:
       body_weight: Body Weight
+  footer:
+    copyright: "© Copyright stronglifters.com. All rights reserved."

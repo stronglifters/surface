@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :profile do
+    
+  end
+
   factory :exercise do
     name { FFaker::Internet.user_name }
   end

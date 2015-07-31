@@ -1,0 +1,12 @@
+<div class="row">
+    
+  <div class="small-12 columns text-center">
+    <%= gravatar_for(@user, size: 128) %>
+    <h1><%= @user.username %></h1>
+    <%= form_for @user do |f| %>
+      <%= f.input :gender %>
+      <%= f.input :social_tolerance %>
+    <% end %>
+  </div>
+  
+</div>

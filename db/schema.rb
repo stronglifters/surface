@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20150616021904) do
 
   create_table "profiles", force: :cascade do |t|
     t.uuid     "user_id",                      null: false
-    t.boolean  "gender"
+    t.integer  "gender",           default: 0
     t.integer  "social_tolerance", default: 0
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false

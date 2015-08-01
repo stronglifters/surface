@@ -38,6 +38,17 @@ en:
     create:
       success: "Thank you for registering."
   profiles:
+    edit:
+      gender:
+        gender: Gender
+        female: Female
+        male: Male
+        other: Other
+      social_tolerance:
+        low: Low
+        medium: Medium
+        high: High
+        social_tolerance: Social Tolerance
     show:
       exercise_header: Exercise
       maximum_achieved: Maximum Achieved

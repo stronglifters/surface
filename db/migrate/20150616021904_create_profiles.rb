@@ -2,7 +2,7 @@ class CreateProfiles < ActiveRecord::Migration
   def change
     create_table :profiles do |t|
       t.uuid :user_id, null: false
-      t.boolean :gender
+      t.integer :gender, default: 0
       t.integer :social_tolerance, default: 0
       t.timestamps null: false
     end

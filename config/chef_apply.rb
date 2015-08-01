@@ -32,16 +32,7 @@ package packages do
   action :install
 end
 
-execute "add-apt-repository_nginx" do
-  command "add-apt-repository -y ppa:nginx/stable"
-end
-
-package "nginx" do
-  action :install
-end
-
 phantomjs = "phantomjs-1.9.8-linux-x86_64"
-
 remote_file "/tmp/#{phantomjs}.tar.bz2" do
   source "https://bitbucket.org/ariya/phantomjs/downloads/#{phantomjs}.tar.bz2"
   action :create
@@ -51,7 +42,7 @@ bash "install_phantomjs" do
   user "root"
   cwd "/tmp"
   not_if { ::File.exist?("/usr/local/bin/phantomjs") }
-  command <<-SCRIPT
+  code <<-SCRIPT
     tar xvjf #{phantomjs}.tar.bz2
     mv #{phantomjs} /usr/local/share
   SCRIPT
@@ -62,20 +53,21 @@ link "/usr/local/bin/phantomjs" do
 end
 
 bash "install postgres" do
+  user "root"
   not_if { ::File.exist?("/etc/apt/sources.list.d/pgdg.list") }
-  command <<-SCRIPT
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ \
-      $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+  code <<-SCRIPT
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
       | apt-key add -
     apt-get update -y
-    apt-get install -y postgresql-9.4 libpq-dev postgresql-contrib-9.4
+    apt-get install -y postgresql-9.4 libpq-dev \
+      postgresql-contrib-9.4 postgresql-client-common
   SCRIPT
 end
 
 bash "create_vagrant_db" do
   user "vagrant"
-  command <<-SCRIPT
+  code <<-SCRIPT
     createdb
   SCRIPT
 end
@@ -89,7 +81,7 @@ package ["nodejs"] do
 end
 
 bash "create_postgres_user" do
-  command <<-SCRIPT
+  code <<-SCRIPT
     createuser -s -e -w vagrant
   SCRIPT
 end
@@ -144,4 +136,8 @@ bash "copy_env_local" do
   code <<-EOH
     cp .env.example .env.local
   EOH
+end
+
+service "redis-server" do
+  action [:enable, :start]
 end

@@ -42,11 +42,11 @@ ActiveRecord::Schema.define(version: 20150616021904) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.uuid     "user_id",          null: false
+    t.uuid     "user_id",                      null: false
     t.boolean  "gender"
-    t.integer  "social_tolerance"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.integer  "social_tolerance", default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree

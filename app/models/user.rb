@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates :username, presence: true, format: { with: USERNAME_REGEX }, uniqueness: true
   validates :email, presence: true, email: true, uniqueness: true
   validates_acceptance_of :terms_and_conditions
+  
+  after_create :create_profile
 
   def timezone
     TZInfo::Timezone.get('Canada/Mountain')
@@ -51,4 +53,13 @@ class User < ActiveRecord::Base
       user.authenticate(password)
     end
   end
+  
+  private
+  
+    def create_profile
+      self.profile = Profile.create!(user: self)
+      self.profile.social_tolerance = nil
+      self.save!
+    end
+  
 end

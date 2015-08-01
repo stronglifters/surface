@@ -40,8 +40,10 @@ package "nginx" do
   action :install
 end
 
-remote_file "/tmp/phantomjs-1.9.8-linux-x86_64.tar.bz2" do
-  source "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2"
+phantomjs = "phantomjs-1.9.8-linux-x86_64"
+
+remote_file "/tmp/#{phantomjs}.tar.bz2" do
+  source "https://bitbucket.org/ariya/phantomjs/downloads/#{phantomjs}.tar.bz2"
   action :create
 end
 
@@ -50,8 +52,8 @@ bash "install_phantomjs" do
   cwd "/tmp"
   not_if { ::File.exist?("/usr/local/bin/phantomjs") }
   command <<-SCRIPT
-    tar xvjf phantomjs-1.9.8-linux-x86_64.tar.bz2
-    mv phantomjs-1.9.8-linux-x86_64 /usr/local/share
+    tar xvjf #{phantomjs}.tar.bz2
+    mv #{phantomjs} /usr/local/share
   SCRIPT
 end
 
@@ -62,8 +64,10 @@ end
 bash "install postgres" do
   not_if { ::File.exist?("/etc/apt/sources.list.d/pgdg.list") }
   command <<-SCRIPT
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ \
+      $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
+      | apt-key add -
     apt-get update -y
     apt-get install -y postgresql-9.4 libpq-dev postgresql-contrib-9.4
   SCRIPT
@@ -80,7 +84,7 @@ execute "install_node" do
   command "curl -sL https://deb.nodesource.com/setup | bash -"
 end
 
-package ['nodejs'] do
+package ["nodejs"] do
   action :install
 end
 

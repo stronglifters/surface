@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   
     def create_profile
       self.profile = Profile.create!(user: self)
-      self.profile.social_tolerance = nil
+      self.profile.gender = self.profile.social_tolerance = nil
       self.save!
     end
   

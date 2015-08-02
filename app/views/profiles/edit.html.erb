@@ -3,25 +3,26 @@
   <div class="small-12 columns text-center">
     <%= gravatar_for(@user, size: 128) %>
     <h1><%= @user.username %></h1>
-    <%= form_for :profile do |f| %>
+    <%= form_for(:profile, method: :patch) do |f| %>
       <fieldset>
         <legend><%= t("profiles.edit.gender.gender") %></legend>
         <%= radio_button_tag(:gender, "female") %>
-        <%= label_tag(:gender_f, t("profiles.edit.gender.female")) %>
+        <%= label_tag(:gender_female, t("profiles.edit.gender.female")) %>
         <%= radio_button_tag(:gender, "male") %>
-        <%= label_tag(:gender_m, t("profiles.edit.gender.male")) %>
+        <%= label_tag(:gender_male, t("profiles.edit.gender.male")) %>
         <%= radio_button_tag(:gender, "other") %>
-        <%= label_tag(:gender_m, t("profiles.edit.gender.other")) %>
+        <%= label_tag(:gender_other, t("profiles.edit.gender.other")) %>
       </fieldset>
       <fieldset>
         <legend><%= t("profiles.edit.social_tolerance.social_tolerance") %></legend>
         <%= radio_button_tag(:social_tolerance, "low") %>
-        <%= label_tag(:social_low, t("profiles.edit.social_tolerance.low")) %>
+        <%= label_tag(:social_tolerance_low, t("profiles.edit.social_tolerance.low")) %>
         <%= radio_button_tag(:social_tolerance, "medium") %>
-        <%= label_tag(:social_med, t("profiles.edit.social_tolerance.medium")) %>
+        <%= label_tag(:social_tolerance_medium, t("profiles.edit.social_tolerance.medium")) %>
         <%= radio_button_tag(:social_tolerance, "high") %>
-        <%= label_tag(:social_high, t("profiles.edit.social_tolerance.high")) %>
+        <%= label_tag(:social_tolerance_high, t("profiles.edit.social_tolerance.high")) %>
       </fieldset>
+      <%= f.submit t("profiles.edit.save"), class: "button"  %>
     <% end %>
   </div>
   

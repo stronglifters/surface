@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
   end
   resources :programs, only: [:show]
-  resources :profiles, only: [:new, :create, :show, :edit], constraints: { id: /[^\/]+/ }
+  resources :profiles, only: [:new, :create, :show, :edit, :patch], constraints: { id: /[^\/]+/ }
   get "/u/:id" => "profiles#show", constraints: { id: /[^\/]+/ }
   get "/dashboard" => "training_sessions#index", as: :dashboard
   get "/terms" => "static_pages#terms"

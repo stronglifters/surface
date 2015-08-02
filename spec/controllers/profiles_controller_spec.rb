@@ -50,6 +50,23 @@ describe ProfilesController do
       
     end
     
+    describe "#update" do
+      include_context "stronglifts_program"
+
+      let(:user) { create(:user) }
+      
+      before :each do
+        http_login(user)
+      end
+      
+      it "updates the user profile" do
+        patch :update, id: user.to_param, profile: {gender: "male"}
+        user.reload
+        expect(user.profile.gender).to eql("male")
+      end
+      
+    end
+    
   end
   
   describe "unauthenticated" do

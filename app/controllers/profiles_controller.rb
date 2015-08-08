@@ -6,13 +6,13 @@ class ProfilesController < ApplicationController
   end
   
   def edit
-    @user = User.find_by(username: params[:id]) if @current_user.username == params[:id]
+    @user = @current_user
     @program = Program.stronglifts
   end
   
   def update
-    @user = User.find_by(username: params[:id]) if @current_user.username == params[:id]
-    if @user.profile.update_attributes(profile_params)
+#    @user = User.find_by(username: params[:id]) if @current_user.username == params[:id]
+    if @current_user.profile.update_attributes(profile_params)
       flash[:notice] = "Updated profile. This is how your public profile appears."
       redirect_to "/u/#{params[:id]}"
     else
@@ -23,7 +23,7 @@ class ProfilesController < ApplicationController
   private
 
     def profile_params
-      params.require(:profile).permit(:gender, :social_tolerance)
+      params.require(:profile).permit([:gender, :social_tolerance])
     end
       
 end

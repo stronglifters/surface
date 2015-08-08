@@ -44,7 +44,7 @@ describe ProfilesController do
       
       it "will not load the other user's profile into an edit view" do
         get :edit, id: other_user.to_param
-        expect(assigns(:user)).to eql(nil)
+        expect(assigns(:user)).to eql(user)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
       
@@ -62,7 +62,7 @@ describe ProfilesController do
       it "updates the user profile" do
         patch :update, id: user.to_param, profile: {gender: "male"}
         user.reload
-        expect(user.profile.gender).to eql("male")
+        expect(user.profile.male?).to be_truthy
       end
       
     end

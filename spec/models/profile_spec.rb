@@ -12,7 +12,7 @@ describe Profile do
   
   describe "gender" do
     it "defaults to unset" do
-      expect(user.profile.gender).to eql(nil)
+      expect(user.profile.other?).to be_truthy
     end
   end
   

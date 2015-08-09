@@ -12,9 +12,10 @@ class ProfilesController < ApplicationController
   
   def update
     if @current_user.profile.update_attributes(profile_params)
-      flash[:notice] = t("profiles.edit.profile_updated")
+      flash[:notice] = t("profiles.edit.profile_update_success")
       redirect_to "/u/#{params[:id]}"
     else
+      flash[:notice] = t("profiles.edit.profile_updated_error")
       render 'edit'
     end
   end

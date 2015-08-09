@@ -11,9 +11,8 @@ class ProfilesController < ApplicationController
   end
   
   def update
-#    @user = User.find_by(username: params[:id]) if @current_user.username == params[:id]
     if @current_user.profile.update_attributes(profile_params)
-      flash[:notice] = "Updated profile. This is how your public profile appears."
+      flash[:notice] = t("profiles.edit.profile_updated")
       redirect_to "/u/#{params[:id]}"
     else
       render 'edit'
@@ -23,7 +22,7 @@ class ProfilesController < ApplicationController
   private
 
     def profile_params
-      params.require(:profile).permit([:gender, :social_tolerance])
+      params.require(:profile).permit(:gender, :social_tolerance)
     end
       
 end

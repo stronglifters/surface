@@ -63,6 +63,7 @@ describe ProfilesController do
         patch :update, id: user.to_param, profile: {gender: "male"}
         user.reload
         expect(user.profile.male?).to be_truthy
+        expect(response).to redirect_to(profile_path(user.profile))
       end
       
     end

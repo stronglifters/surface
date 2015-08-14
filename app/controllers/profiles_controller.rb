@@ -2,18 +2,22 @@ class ProfilesController < ApplicationController
   
   def show
     @user = User.find_by(username: params[:id])
+    @profile = @user.profile
     @program = Program.stronglifts
   end
   
   def edit
     @user = @current_user
+    @profile = @user.profile
     @program = Program.stronglifts
   end
   
   def update
-    if @current_user.profile.update_attributes(profile_params)
+    if @current_user
+      @profile = @current_user.profile
+      @profile.update_attributes(profile_params)
       flash[:notice] = t("profiles.edit.profile_update_success")
-      redirect_to "/u/#{params[:id]}"
+      redirect_to profile_path(@profile)
     else
       flash[:notice] = t("profiles.edit.profile_updated_error")
       render 'edit'

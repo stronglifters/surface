@@ -41,7 +41,7 @@ end
 bash "install_phantomjs" do
   user "root"
   cwd "/tmp"
-  not_if { ::File.exist?("/usr/local/bin/phantomjs") }
+  not_if { ::Dir.exist?("/usr/local/share/#{phantomjs}") }
   code <<-SCRIPT
     tar xvjf #{phantomjs}.tar.bz2
     mv #{phantomjs} /usr/local/share
@@ -49,7 +49,7 @@ bash "install_phantomjs" do
 end
 
 link "/usr/local/bin/phantomjs" do
-  to "/usr/local/share/bin/phantomjs"
+  to "/usr/local/share/#{phantomjs}/bin/phantomjs"
 end
 
 bash "install postgres" do
@@ -65,13 +65,6 @@ bash "install postgres" do
   SCRIPT
 end
 
-bash "create_vagrant_db" do
-  user "vagrant"
-  code <<-SCRIPT
-    createdb
-  SCRIPT
-end
-
 execute "install_node" do
   command "curl -sL https://deb.nodesource.com/setup | bash -"
 end
@@ -81,8 +74,17 @@ package ["nodejs"] do
 end
 
 bash "create_postgres_user" do
+  user "postgres"
   code <<-SCRIPT
-    createuser -s -e -w vagrant
+    psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='vagrant'" | grep -q 1 || createuser -s -e -w vagrant
+  SCRIPT
+end
+
+bash "create_vagrant_db" do
+  user "vagrant"
+  not_if { "psql postgres -tAc \"SELECT 1 FROM pg_roles WHERE rolname='vagrant'\" | grep -q 1" }
+  code <<-SCRIPT
+    createdb
   SCRIPT
 end
 
@@ -139,5 +141,9 @@ bash "copy_env_local" do
 end
 
 service "redis-server" do
+  action [:enable, :start]
+end
+
+service "postgresql" do
   action [:enable, :start]
 end

@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
       flash[:notice] = t("profiles.edit.profile_update_success")
       redirect_to profile_path(@profile)
     else
-      flash[:notice] = t("profiles.edit.profile_updated_error")
+      flash[:notice] = t("profiles.edit.profile_update_error")
       render 'edit'
     end
   end

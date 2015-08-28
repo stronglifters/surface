@@ -1,6 +1,6 @@
 class CreateProfiles < ActiveRecord::Migration
   def change
-    create_table :profiles do |t|
+    create_table :profiles, id: :uuid do |t|
       t.uuid :user_id, null: false
       t.integer :gender, default: nil
       t.integer :social_tolerance, default: 0

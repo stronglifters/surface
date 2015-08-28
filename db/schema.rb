@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20150814004716) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
+  create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "user_id",                      null: false
-    t.integer  "gender",           default: 0
+    t.integer  "gender"
     t.integer  "social_tolerance", default: 0
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false

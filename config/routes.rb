@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :training_sessions, only: [:index] do
     collection do
       post :upload
+      post :drive_upload
     end
   end
   resources :programs, only: [:show]

@@ -5,7 +5,7 @@
         <%= form_tag(upload_training_sessions_path, method: :post, multipart: true) do %>
           <div class="small-12 columns">
             <label><%= t('.backup_file') %>
-              <%= file_field_tag :backup %>
+              <%= file_field_tag :backup, required: true %>
             </label>
           </div> <!-- /.small-12 -->
           <div class="small-12 columns">
@@ -13,15 +13,28 @@
           </div> <!-- /.small-12 -->
         <% end %>
       </div>
+      <div id='google-sync' class="row">
+      </div>
     </div>
     <div class="panel callout radius">
       <h6><%= @training_sessions.count %> training sessions completed</h6>
     </div>
   </div>
-
   <div class="large-9 columns">
     <div class="row">
       <%= render @training_sessions %>
     </div>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  $(function(){
+    new Stronglifters.GoogleSyncButton({
+      el: '#google-sync',
+      data: {
+        client_id: '<%= ENV['GOOGLE_CLIENT_ID'] %>',
+        drive_upload_path: '<%= drive_upload_training_sessions_path %>'
+      }
+    });
+  });
+</script>

@@ -28,5 +28,15 @@ describe UploadStrongliftsBackupJob, type: :job do
         expect(user.training_sessions.count).to eql(9)
       end
     end
+
+    context "unknown filetype" do
+      let(:mailer) { double(deliver_later: true) }
+      let(:unknown_file) { __FILE__ }
+
+      it "does not raise an error" do
+        expect(-> { subject.perform(user, unknown_file, program) }).
+          to_not raise_error
+      end
+    end
   end
 end

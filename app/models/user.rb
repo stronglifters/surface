@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def google_drive
+    GoogleDrive.new(self)
+  end
+
   def self.authenticate(username,password)
     if user = User.where("email = :email OR username = :username", username: username, email: username).first
       user.authenticate(password)

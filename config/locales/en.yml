@@ -68,11 +68,14 @@ en:
       login_button: "Login"
       register_link: "Create an account"
   training_sessions:
+    drive_upload:
+      success: 'Our minions have been summoned to fetch your backup.'
     index:
       backup_file: "File"
       upload_backup_button: "Upload"
     upload:
       success: "Our minions have been summoned to unpack your backup."
+      failure: "We don't know how to unpack this type of file."
     training_session:
       body_weight: Body Weight
   footer:

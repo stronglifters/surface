@@ -20,6 +20,7 @@ namespace :package do
       Rakefile
       Procfile
       config.ru
+      vendor/cache/*
       )
       package.package_files.exclude do |path|
         path.start_with?("config/deploy")

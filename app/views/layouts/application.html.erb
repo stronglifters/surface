@@ -68,10 +68,11 @@
                   <li class="has-dropdown">
                     <a href="#"><%= gravatar_for(@current_user, size: 16) %> <%= @current_user.username %></a>
                     <ul class="dropdown">
-                      <li><%= link_to "Training Sessions", training_sessions_path %></li>
-                      <li><%= link_to "My Public Profile", profile_path(@current_user) %></li>
+                      <li><%= link_to t("nav.user.training_sessions"), training_sessions_path %></li>
+                      <li><%= link_to t("nav.user.profile_edit"), edit_profile_path(@current_user) %></li>
+                      <li><%= link_to t("nav.user.profile_view"), profile_path(@current_user) %></li>
                       <li class="divider"></li>
-                      <li><%= link_to "Log Out", session_path('me'), method: :delete %></li>
+                      <li><%= link_to t("nav.user.log_out"), session_path('me'), method: :delete %></li>
                     </ul>
                   </li>
                 </ul>
@@ -81,13 +82,15 @@
           </div>
         </div>
       <!-- End Navigation -->
+      <!-- START CONTENT -->
       <%= yield %>
+      <!-- END CONTENT -->
       <!-- Footer -->
         <footer class="row">
           <div class="large-12 columns"><hr />
             <div class="row">
               <div class="large-6 columns">
-                <p>&copy; Copyright no one at all. Go to town.</p>
+                <p><%= t("footer.copyright") %></p>
               </div>
               <div class="large-6 columns">
                 <ul class="inline-list right">

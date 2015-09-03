@@ -20,6 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  nav:
+    user:
+      training_sessions: "Training sessions"
+      log_out: "Log out"
+      profile_edit: "Edit profile"
+      profile_view: "View profile"
   registrations:
     new:
       username: "Username"
@@ -32,6 +38,20 @@ en:
     create:
       success: "Thank you for registering."
   profiles:
+    edit:
+      gender:
+        gender: Gender
+        female: Female
+        male: Male
+        other: Other
+      social_tolerance:
+        low: Low
+        medium: Medium
+        high: High
+        social_tolerance: Social Tolerance
+      save: Save Profile
+      profile_update_error: "Your profile could not be updated."
+      profile_update_success: "Profile updated. This is how your public profile appears."
     show:
       exercise_header: Exercise
       maximum_achieved: Maximum Achieved
@@ -51,10 +71,12 @@ en:
     drive_upload:
       success: 'Our minions have been summoned to fetch your backup.'
     index:
-      backup_file: 'File'
+      backup_file: "File"
       upload_backup_button: "Upload"
     upload:
-      success: 'Our minions have been summoned to unpack your backup.'
+      success: "Our minions have been summoned to unpack your backup."
       failure: "We don't know how to unpack this type of file."
     training_session:
       body_weight: Body Weight
+  footer:
+    copyright: "© Copyright stronglifters.com. All rights reserved."

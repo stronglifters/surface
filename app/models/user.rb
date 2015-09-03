@@ -2,11 +2,15 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :training_sessions
   has_many :exercise_sessions, through: :training_sessions
+  has_one :profile
+  accepts_nested_attributes_for(:profile, update_only: true)
   USERNAME_REGEX=/\A[-a-z0-9_.]*\z/i
 
   validates :username, presence: true, format: { with: USERNAME_REGEX }, uniqueness: true
   validates :email, presence: true, email: true, uniqueness: true
   validates_acceptance_of :terms_and_conditions
+  
+  after_create :create_profile
 
   def timezone
     TZInfo::Timezone.get('Canada/Mountain')
@@ -54,4 +58,11 @@ class User < ActiveRecord::Base
       user.authenticate(password)
     end
   end
+  
+  private
+  
+    def create_profile
+      self.profile = Profile.create!(user: self, gender: nil, social_tolerance: nil)
+    end
+  
 end

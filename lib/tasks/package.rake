@@ -18,7 +18,6 @@ namespace :package do
       Gemfile.lock
       README.md
       Rakefile
-      Procfile
       config.ru
       vendor/cache/*
       )

@@ -3,8 +3,8 @@ lock "3.4.0"
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 
 set :application, "stronglifters"
-set :repo_url, "git@github.com:stronglifters/surface.git"
-set :branch, "master"
+#set :repo_url, "git@github.com:stronglifters/surface.git"
+#set :branch, "master"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -21,7 +21,7 @@ set :bucket_name, "stronglifters"
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :warn
 
 # Default value for :pty is false
 # set :pty, true
@@ -54,12 +54,13 @@ else
   set :ssh_options, forward_agent: true
 end
 set :rbenv_type, :system
-set :rbenv_ruby, "2.2.2"
+set :rbenv_ruby, "2.2.3"
 
 namespace :deploy do
   task :restart do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       execute :service, "puma restart"
+      #execute :sv, "reload puma"
     end
   end
 

@@ -14,10 +14,10 @@ set :keep_releases, 5
 # set :pty, true
 
 # Default value for :linked_files is []
-#set :linked_files, fetch(:linked_files, []).push(
-  #"config/database.yml",
+set :linked_files, fetch(:linked_files, []).push(
+  "config/database.yml",
   #".env.#{fetch(:rails_env, 'production')}",
-#)
+)
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push(

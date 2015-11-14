@@ -21,16 +21,22 @@ class UploadStrongliftsBackupJob < ActiveJob::Base
     [
       Android::Import.new(user, program),
       Ios::Import.new(user, program),
+      Csv::Import.new(user, program),
       UnknownFile.new
     ].detect { |x| x.can_parse?(directory) }
   end
 
   def extract!(backup_file, dir)
     # `unzip #{backup_file} -d #{dir}`
-    Zip::File.open(backup_file) do |zip_file|
-      zip_file.each do |entry|
-        entry.extract(File.join(dir, entry.name))
+    extension = File.extname(backup_file)
+    if extension.eql?(".stronglifts")
+      Zip::File.open(backup_file) do |zip_file|
+        zip_file.each do |entry|
+          entry.extract(File.join(dir, entry.name))
+        end
       end
+    else
+      `cp #{backup_file} #{dir}`
     end
     true
   rescue StandardError => error

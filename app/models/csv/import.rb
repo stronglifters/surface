@@ -9,7 +9,7 @@ class Csv::Import
   end
 
   def can_parse?(directory)
-    File.exist?(database_file(directory))
+    database_file(directory).present?
   end
 
   def import_from(directory)
@@ -23,7 +23,7 @@ class Csv::Import
   private
 
   def database_file(dir)
-    "#{dir}/spreadsheet-stronglifts.csv"
+    Dir.glob("#{dir}/spreadsheet-stronglifts*csv*").first
   end
 
   def import(row)

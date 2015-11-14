@@ -13,7 +13,7 @@ describe BackupFile do
       expect(subject).to be_valid
     end
 
-    it 'returns true for csv exports' do
+    it "returns true for csv exports" do
       csv_export = fixture_file("spreadsheet-stronglifts.csv")
       subject = BackupFile.new(user, csv_export)
       expect(subject).to be_valid

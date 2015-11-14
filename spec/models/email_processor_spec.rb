@@ -19,7 +19,8 @@ describe EmailProcessor do
 
       subject.process
 
-      expect(backup_file).to have_received(:process_later).with(Program.stronglifts)
+      expect(backup_file).to have_received(:process_later).
+        with(Program.stronglifts)
     end
   end
 end

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Csv::Import do
   include_context "stronglifts_program"

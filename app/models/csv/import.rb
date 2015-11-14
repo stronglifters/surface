@@ -36,7 +36,7 @@ class Csv::Import
       workout_row.body_weight_lb.to_f)
     training_session.exercise_sessions.destroy_all
     workout.exercise_workouts.each do |exercise_workout|
-      row = workout_row.exercises.find do |x|
+      row = workout_row.exercises.detect do |x|
         x.name.downcase == exercise_workout.exercise.name.downcase
       end
       training_session.train(

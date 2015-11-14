@@ -13,9 +13,9 @@ describe EmailProcessor do
     end
 
     it "imports the csv attachment" do
-      allow(BackupFile).to receive(:new)
-        .with(user, email.attachments.first)
-        .and_return(backup_file)
+      allow(BackupFile).to receive(:new).
+        with(user, email.attachments.first).
+        and_return(backup_file)
 
       subject.process
 

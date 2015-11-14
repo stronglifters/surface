@@ -47,7 +47,6 @@ FactoryGirl.define do
           filename: 'spreadsheet-stronglifts.csv',
           type: 'text/plain',
           tempfile: File.new("#{File.expand_path(File.dirname(__FILE__))}/fixtures/spreadsheet-stronglifts.csv")
-          #tempfile: fixture_file_upload("spreadsheet-stronglifts.csv")
         })
       ]}
     end

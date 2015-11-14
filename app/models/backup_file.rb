@@ -17,7 +17,9 @@ class BackupFile
   end
 
   def valid?
-    File.extname(backup_file.path).start_with?(".stronglifts")
+    extension = File.extname(backup_file.path)
+    extension.start_with?(".stronglifts") ||
+      extension.start_with?(".csv")
   end
 
   private

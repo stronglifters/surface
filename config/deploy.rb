@@ -43,10 +43,10 @@ set :rbenv_ruby, "2.2.3"
 namespace :deploy do
   task :restart do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      sudo :sv, "reload puma"
+      sudo :sv, "restart puma"
     end
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      sudo :sv, "reload sidekiq"
+      sudo :sv, "restart sidekiq"
     end
   end
 

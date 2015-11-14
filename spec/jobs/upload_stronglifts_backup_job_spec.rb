@@ -29,6 +29,18 @@ describe UploadStrongliftsBackupJob, type: :job do
       end
     end
 
+    context "csv export" do
+      let(:backup_file) do
+        Rails.root.join("spec", "fixtures", "spreadsheet-stronglifts.csv").to_s
+      end
+
+      it "adds each workout to the list of training sessions for the user" do
+        subject.perform(user, backup_file, program)
+
+        expect(user.training_sessions.count).to eql(100)
+      end
+    end
+
     context "unknown filetype" do
       let(:mailer) { double(deliver_later: true) }
       let(:unknown_file) { __FILE__ }

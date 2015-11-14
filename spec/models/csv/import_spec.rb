@@ -10,7 +10,8 @@ describe Csv::Import do
 
     context "when the directory contains a csv export" do
       before :each do
-        FileUtils.touch("#{directory}/spreadsheet-stronglifts.csv")
+        file_path = "#{directory}/spreadsheet-stronglifts-csv20151114-1138"
+        FileUtils.touch(file_path)
       end
 
       it "returns true" do
@@ -32,7 +33,7 @@ describe Csv::Import do
     end
 
     before :each do
-      `cp #{backup_file} #{directory}`
+      `cp #{backup_file} #{directory}/spreadsheet-stronglifts.csv#{rand}`
     end
 
     after :each do

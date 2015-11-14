@@ -118,8 +118,8 @@ bash "install_ruby" do
   not_if { ::File.exist?("/usr/local/rbenv/shims/ruby") }
   code <<-EOH
     source /etc/profile.d/rbenv.sh
-    rbenv install 2.2.2
-    rbenv global 2.2.2
+    rbenv install 2.2.3
+    rbenv global 2.2.3
   EOH
 end
 

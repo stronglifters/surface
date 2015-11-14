@@ -43,6 +43,8 @@ gem 'rubyzip', require: "zip"
 gem 'font-awesome-rails'
 gem 'ractive-rails'
 gem 'sidekiq'
+gem 'griddler'
+gem 'griddler-mandrill'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-ractive'

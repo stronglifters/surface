@@ -3,6 +3,6 @@ class Exercise < ActiveRecord::Base
   has_many :workouts, through: :exercise_workouts
 
   def short_name
-    name.gsub(/[^A-Z]/, '')
+    name.gsub(/[^A-Z]/, "")
   end
 end

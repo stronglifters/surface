@@ -10,6 +10,16 @@ describe User do
       expect(saved_user.email).to eql(user.email)
       expect(saved_user.password).to be_nil
     end
+
+    it "lowercases the username" do
+      user = create(:user, username: "UpCASE")
+      expect(user.reload.username).to eql("upcase")
+    end
+
+    it "lowercases the email" do
+      user = create(:user, email: FFaker::Internet.email.upcase)
+      expect(user.reload.email).to eql(user.email.downcase)
+    end
   end
 
   describe "validations" do
@@ -93,7 +103,16 @@ describe User do
     context "when credentials are correct" do
       it "returns true" do
         user = create(:user, password: "password", password_confirmation: "password")
-        expect(User.authenticate(user.email, "password")).to eql(user)
+        expect(User.authenticate(user.email.upcase, "password")).to eql(user)
+      end
+
+      it "is case in-sensitive for username" do
+        user = create(:user,
+                      username: "upcase",
+                      password: "password",
+                      password_confirmation: "password"
+                     )
+        expect(User.authenticate("UPcase", "password")).to eql(user)
       end
     end
 

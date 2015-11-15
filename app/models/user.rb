@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates_acceptance_of :terms_and_conditions
 
   after_create :create_profile
+  before_validation :lowercase_account_fields
 
   def timezone
     TZInfo::Timezone.get('Canada/Mountain')
@@ -53,8 +54,13 @@ class User < ActiveRecord::Base
     GoogleDrive.new(self)
   end
 
-  def self.authenticate(username,password)
-    if user = User.where("email = :email OR username = :username", username: username, email: username).first
+  def self.authenticate(username, password)
+    user = User.where(
+      "email = :email OR username = :username",
+      username: username.downcase,
+      email: username.downcase
+    ).first
+    if user.present?
       user.authenticate(password)
     end
   end
@@ -63,5 +69,10 @@ class User < ActiveRecord::Base
 
   def create_profile
     self.profile = Profile.create!(user: self)
+  end
+
+  def lowercase_account_fields
+    self.username.downcase! if self.username.present?
+    self.email.downcase! if self.email.present?
   end
 end

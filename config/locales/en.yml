@@ -43,15 +43,16 @@ en:
   profiles:
     edit:
       gender:
-        gender: Gender
+        title: Gender
         female: Female
         male: Male
+        transgender: Transgender
         other: Other
       social_tolerance:
         low: Low
         medium: Medium
         high: High
-        social_tolerance: Social Tolerance
+        title: Social Tolerance
       save: Save Profile
       profile_update_success: "Profile updated. This is how your public profile appears."
     show:

@@ -191,4 +191,14 @@ describe User do
       expect(ExerciseSession.all).to be_empty
     end
   end
+
+  describe "#profile" do
+    let(:user) { create(:user) }
+
+    it "creates a new profile" do
+      expect(user.profile).to be_present
+      expect(user.profile.other?).to be_truthy
+      expect(user.profile.social_tolerance).to be_nil
+    end
+  end
 end

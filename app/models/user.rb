@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
 
   private
 
-    def create_profile
-      self.profile = Profile.create!(user: self, gender: nil, social_tolerance: nil)
-    end
+  def create_profile
+    self.profile = Profile.create!(user: self)
+  end
 end

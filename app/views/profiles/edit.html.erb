@@ -1,8 +1,7 @@
 <div class="row">
-    
   <div class="small-12 columns text-center">
-    <%= gravatar_for(@user, size: 128) %>
-    <h1><%= @user.username %></h1>
+    <%= gravatar_for(@current_user, size: 128) %>
+    <h1><%= @current_user.username %></h1>
     <%= form_for(@profile, method: :patch) do |f| %>
       <fieldset>
         <legend><%= t("profiles.edit.gender.gender") %></legend>
@@ -25,5 +24,4 @@
       <%= f.submit t("profiles.edit.save"), class: "button"  %>
     <% end %>
   </div>
-  
 </div>

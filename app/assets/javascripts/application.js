@@ -19,10 +19,7 @@
 //= require_tree .
 //= require turbolinks
 
-$(document).on('page:fetch', function() {
-  $(".loading-indicator").show();
-});
-$(document).on('page:change', function() {
-  $(".loading-indicator").hide();
-});
 var Stronglifters = Stronglifters || {};
+$(function(){
+  new Stronglifters.Startup().start();
+});

@@ -2,16 +2,16 @@ require "rails_helper"
 
 feature "Profiles", type: :feature do
   include_context "stronglifts_program"
-
-  subject { ProfilePage.new(user) }
   let(:user) { create(:user) }
 
-  before :each do
-    page.set_rack_session(user_id: user.id)
-    subject.visit_page
-  end
-
   context "when the user has not completed any workouts" do
+    subject { ProfilePage.new(user) }
+
+    before :each do
+      page.set_rack_session(user_id: user.id)
+      subject.visit_page
+    end
+
     it "displays the users username" do
       expect(page).to have_content(user.username)
     end
@@ -19,6 +19,24 @@ feature "Profiles", type: :feature do
     it "displays the number of workouts completed" do
       translations = I18n.translate("profiles.show.no_workouts_completed")
       expect(page).to have_content(translations)
+    end
+  end
+
+  context "editing my profile" do
+    subject { EditProfilePage.new(user) }
+
+    before :each do
+      page.set_rack_session(user_id: user.id)
+      subject.visit_page
+    end
+
+    it "allows me to edit my profile" do
+      subject.change(gender: :male, social_tolerance: :low)
+
+      expect(page).to have_content(user.username)
+      expect(page).to have_content(
+        I18n.translate("profiles.edit.profile_update_success")
+      )
     end
   end
 end

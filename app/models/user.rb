@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   has_many :training_sessions
   has_many :exercise_sessions, through: :training_sessions
   has_one :profile
-  accepts_nested_attributes_for(:profile, update_only: true)
   USERNAME_REGEX=/\A[-a-z0-9_.]*\z/i
 
   validates :username, presence: true, format: { with: USERNAME_REGEX }, uniqueness: true
@@ -11,6 +10,7 @@ class User < ActiveRecord::Base
   validates_acceptance_of :terms_and_conditions
 
   after_create :create_profile
+  before_validation :lowercase_account_fields
 
   def timezone
     TZInfo::Timezone.get('Canada/Mountain')
@@ -53,15 +53,25 @@ class User < ActiveRecord::Base
     GoogleDrive.new(self)
   end
 
-  def self.authenticate(username,password)
-    if user = User.where("email = :email OR username = :username", username: username, email: username).first
+  def self.authenticate(username, password)
+    user = User.find_by(
+      "email = :email OR username = :username",
+      username: username.downcase,
+      email: username.downcase
+    )
+    if user.present?
       user.authenticate(password)
     end
   end
 
   private
 
-    def create_profile
-      self.profile = Profile.create!(user: self, gender: nil, social_tolerance: nil)
-    end
+  def create_profile
+    self.profile = Profile.create!(user: self)
+  end
+
+  def lowercase_account_fields
+    username.downcase! if username.present?
+    email.downcase! if email.present?
+  end
 end

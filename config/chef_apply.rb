@@ -1,25 +1,33 @@
-execute "apt-get_update" do
-  command "apt-get update -y"
-end
-
-execute "apt-get_upgrade" do
-  command "apt-get upgrade -y"
-end
+execute "apt-get update -y"
+execute "apt-get upgrade -y"
 
 packages = %w{
+  bison
   build-essential
   curl
   exuberant-ctags
+  flex
+  g++
   git-core
+  gperf
   libcurl4-openssl-dev
   libffi-dev
+  libfontconfig1-dev
+  libfreetype6
+  libicu-dev
+  libjpeg-dev
+  libpng-dev
   libreadline-dev
   libsqlite3-dev
   libssl-dev
+  libx11-dev
+  libxext-dev
   libxml2-dev
   libxslt1-dev
   libyaml-dev
   memcached
+  perl
+  python
   python-software-properties
   redis-server
   software-properties-common
@@ -28,9 +36,7 @@ packages = %w{
   zlib1g-dev
 }
 
-package packages do
-  action :install
-end
+package packages
 
 phantomjs = "phantomjs-1.9.8-linux-x86_64"
 remote_file "/tmp/#{phantomjs}.tar.bz2" do
@@ -39,7 +45,6 @@ remote_file "/tmp/#{phantomjs}.tar.bz2" do
 end
 
 bash "install_phantomjs" do
-  user "root"
   cwd "/tmp"
   not_if { ::Dir.exist?("/usr/local/share/#{phantomjs}") }
   code <<-SCRIPT
@@ -65,85 +70,64 @@ bash "install postgres" do
   SCRIPT
 end
 
-execute "install_node" do
-  command "curl -sL https://deb.nodesource.com/setup | bash -"
-end
+execute "curl -sL https://deb.nodesource.com/setup | bash -"
+package "nodejs"
 
-package ["nodejs"] do
-  action :install
-end
-
-bash "create_postgres_user" do
+sql = "SELECT 1 FROM pg_roles WHERE rolname='vagrant'"
+create_user = "createuser -s -e -w vagrant"
+execute "psql postgres -tAc \"#{sql}\" | grep -q 1 || #{create_user}" do
   user "postgres"
-  code <<-SCRIPT
-    psql postgres -tAc "SELECT 1 FROM pg_roles WHERE rolname='vagrant'" | grep -q 1 || createuser -s -e -w vagrant
-  SCRIPT
 end
 
-bash "create_vagrant_db" do
+sql = "SELECT 1 FROM pg_roles WHERE rolname='vagrant'"
+execute "createdb" do
   user "vagrant"
-  not_if { "psql postgres -tAc \"SELECT 1 FROM pg_roles WHERE rolname='vagrant'\" | grep -q 1" }
-  code <<-SCRIPT
-    createdb
-  SCRIPT
+  not_if { "psql postgres -tAc \"#{sql}\" | grep -q 1" }
 end
 
 git "/usr/local/rbenv" do
   repository "https://github.com/sstephenson/rbenv.git"
-  action :sync
 end
 
-bash "install_rbenv" do
-  user "root"
-  cwd "/tmp"
-  not_if { ::File.exist?("/etc/profile.d/rbenv.sh") }
-  code <<-EOH
-    echo 'export RBENV_ROOT="/usr/local/rbenv"' >> /etc/profile.d/rbenv.sh
-    echo 'export PATH="/usr/local/rbenv/bin:$PATH"' >> /etc/profile.d/rbenv.sh
-    echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
-  EOH
+file "/etc/profile.d/rbenv.sh" do
+  content <<-CONTENT
+export RBENV_ROOT="/usr/local/rbenv"
+export PATH="/usr/local/rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+CONTENT
 end
 
-directory "/usr/local/rbenv/plugins" do
-  action :create
-end
-
+directory "/usr/local/rbenv/plugins"
 git "/usr/local/rbenv/plugins/ruby-build" do
   repository "https://github.com/sstephenson/ruby-build.git"
-  action :sync
 end
 
 bash "install_ruby" do
   user "root"
   not_if { ::File.exist?("/usr/local/rbenv/shims/ruby") }
   code <<-EOH
-    source /etc/profile.d/rbenv.sh
-    rbenv install 2.2.3
-    rbenv global 2.2.3
-  EOH
+source /etc/profile.d/rbenv.sh
+rbenv install 2.2.3
+rbenv global 2.2.3
+EOH
 end
 
 bash "install_bundler" do
   user "root"
   code <<-EOH
-    source /etc/profile.d/rbenv.sh
-    gem install bundler --no-ri --no-rdoc
-  EOH
+source /etc/profile.d/rbenv.sh
+gem install bundler --no-ri --no-rdoc
+EOH
 end
 
-bash "copy_env_local" do
+execute "cp .env.example .env.local" do
   user "vagrant"
   cwd "/vagrant"
   not_if { ::File.exist?("/vagrant/.env.local") }
-  code <<-EOH
-    cp .env.example .env.local
-  EOH
 end
 
-service "redis-server" do
-  action [:enable, :start]
-end
-
-service "postgresql" do
-  action [:enable, :start]
+["redis-server", "postgresql"].each do |service_name|
+  service service_name do
+    action [:enable, :start]
+  end
 end

@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  layouts:
+    application:
+      loading: "Loading..."
   nav:
     user:
       training_sessions: "Training sessions"
@@ -50,14 +53,12 @@ en:
         high: High
         social_tolerance: Social Tolerance
       save: Save Profile
-      profile_update_error: "Your profile could not be updated."
       profile_update_success: "Profile updated. This is how your public profile appears."
     show:
       exercise_header: Exercise
       maximum_achieved: Maximum Achieved
       no_workouts_completed: 0 workouts completed
       personal_records: Personal Records
-      training_history: Training History
       workouts_completed: "%{count} workouts completed since %{first_session}."
   sessions:
     create:
@@ -70,9 +71,6 @@ en:
   training_sessions:
     drive_upload:
       success: 'Our minions have been summoned to fetch your backup.'
-    index:
-      backup_file: "File"
-      upload_backup_button: "Upload"
     upload:
       success: "Our minions have been summoned to unpack your backup."
       failure: "We don't know how to unpack this type of file."

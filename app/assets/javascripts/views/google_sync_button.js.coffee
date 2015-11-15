@@ -14,4 +14,3 @@ Stronglifters.GoogleSyncButton = Ractive.extend
     @_drive ||= new Stronglifters.GoogleDrive
       client_id: @get('client_id')
       drive_upload_path: @get('drive_upload_path')
-

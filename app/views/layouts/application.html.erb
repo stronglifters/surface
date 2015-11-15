@@ -10,10 +10,6 @@
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <%= javascript_include_tag "//apis.google.com/js/api.js" %>
     <%= javascript_include_tag "//apis.google.com/js/client.js" %>
-    <script type="text/javascript" charset="utf-8">
-      $(function(){
-        $(document).foundation();
-      });
     </script>
     <%= csrf_meta_tags %>
   </head>
@@ -24,7 +20,7 @@
       <!-- Navigation -->
         <div class="row">
           <div class="large-12 columns">
-            <nav class="top-bar" data-topbar>
+            <nav class="top-bar" data-topbar role="navigation">
               <ul class="title-area">
                 <!-- Title Area -->
                 <li class="name">
@@ -83,6 +79,11 @@
         </div>
       <!-- End Navigation -->
       <!-- START CONTENT -->
+      <div class="row loading-indicator hide">
+        <div class="large-12 columns small-text-center">
+          <p><i class="fa fa-spinner fa-pulse"></i> <%= t('.loading') %></p>
+        </div>
+      </div>
       <%= yield %>
       <!-- END CONTENT -->
       <!-- Footer -->

@@ -11,11 +11,15 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
-//= require turbolinks
 //= require ractive
 //= require_self
 //= require_tree .
+//= require turbolinks
 
 var Stronglifters = Stronglifters || {};
+$(function(){
+  new Stronglifters.Startup().start();
+});

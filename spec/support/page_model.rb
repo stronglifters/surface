@@ -22,4 +22,10 @@ class PageModel
       login_page.login_with(username, password)
     end
   end
+
+  private
+
+  def translate(key)
+    I18n.translate(key)
+  end
 end

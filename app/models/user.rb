@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   has_many :training_sessions
   has_many :exercise_sessions, through: :training_sessions
   has_one :profile
-  accepts_nested_attributes_for(:profile, update_only: true)
   USERNAME_REGEX=/\A[-a-z0-9_.]*\z/i
 
   validates :username, presence: true, format: { with: USERNAME_REGEX }, uniqueness: true

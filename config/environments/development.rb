@@ -54,4 +54,5 @@ Rails.application.configure do
     Bullet.enable = true
     Bullet.console = true
   end
+  config.web_console.whitelisted_ips = '172.16.0.0/16'
 end

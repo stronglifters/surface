@@ -24,7 +24,7 @@
       <!-- Navigation -->
         <div class="row">
           <div class="large-12 columns">
-            <nav class="top-bar" data-topbar data-no-turbolink role="navigation">
+            <nav class="top-bar" data-topbar role="navigation">
               <ul class="title-area">
                 <!-- Title Area -->
                 <li class="name">
@@ -83,6 +83,11 @@
         </div>
       <!-- End Navigation -->
       <!-- START CONTENT -->
+      <div class="row loading-indicator hide">
+        <div class="large-12 columns small-text-center">
+          <p><i class="fa fa-spinner fa-pulse"></i> <%= t('.loading') %></p>
+        </div>
+      </div>
       <%= yield %>
       <!-- END CONTENT -->
       <!-- Footer -->

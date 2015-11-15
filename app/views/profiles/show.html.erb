@@ -1,5 +1,4 @@
 <div class="row">
-    
   <div class="small-12 medium-4 columns small-text-center medium-text-left">
     <%= link_to profile_path(@user), class: "th [radius] gender_#{@profile.gender} social_#{@profile.social_tolerance}" do %>
       <%= gravatar_for(@user, size: 128) %>
@@ -30,16 +29,12 @@
       </tbody>
     </table>
   </div>
-  
 </div>
 
 <div>
-
   <div class="small-12 columns small-text-center medium-text-left">
-    <h2><%= t('.training_history') %></h2>
     <% @program.exercises.uniq.each do |exercise| %>
       <%= render @user.history_for(exercise) %>
     <% end %>
   </div>
-
 </div>

@@ -73,13 +73,16 @@ end
 execute "curl -sL https://deb.nodesource.com/setup | bash -"
 package "nodejs"
 
-execute "psql postgres -tAc \"SELECT 1 FROM pg_roles WHERE rolname='vagrant'\" | grep -q 1 || createuser -s -e -w vagrant" do
+sql = "SELECT 1 FROM pg_roles WHERE rolname='vagrant'"
+create_user = "createuser -s -e -w vagrant"
+execute "psql postgres -tAc \"#{sql}\" | grep -q 1 || #{create_user}" do
   user "postgres"
 end
 
+sql = "SELECT 1 FROM pg_roles WHERE rolname='vagrant'"
 execute "createdb" do
   user "vagrant"
-  not_if { "psql postgres -tAc \"SELECT 1 FROM pg_roles WHERE rolname='vagrant'\" | grep -q 1" }
+  not_if { "psql postgres -tAc \"#{sql}\" | grep -q 1" }
 end
 
 git "/usr/local/rbenv" do
@@ -123,7 +126,7 @@ execute "cp .env.example .env.local" do
   not_if { ::File.exist?("/vagrant/.env.local") }
 end
 
-[ "redis-server", "postgresql" ].each do |service_name|
+["redis-server", "postgresql"].each do |service_name|
   service service_name do
     action [:enable, :start]
   end

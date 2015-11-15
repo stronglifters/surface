@@ -54,11 +54,11 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(username, password)
-    user = User.where(
+    user = User.find_by(
       "email = :email OR username = :username",
       username: username.downcase,
       email: username.downcase
-    ).first
+    )
     if user.present?
       user.authenticate(password)
     end
@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   end
 
   def lowercase_account_fields
-    self.username.downcase! if self.username.present?
-    self.email.downcase! if self.email.present?
+    username.downcase! if username.present?
+    email.downcase! if email.present?
   end
 end

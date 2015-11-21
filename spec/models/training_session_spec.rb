@@ -20,6 +20,25 @@ describe TrainingSession, type: :model do
       expect(result.exercise).to eql(squat)
       expect(result.sets).to eql(sets.map(&:to_s))
     end
+
+    it "updates a completed exercise" do
+      subject.train(squat, target_weight, sets)
+
+      new_weight = target_weight + 10
+      new_sets = [5, 5, 5]
+      result = subject.train(squat, new_weight, new_sets)
+      expect(result).to be_persisted
+      expect(result.target_weight).to eql(new_weight.to_f)
+      expect(result.exercise).to eql(squat)
+      expect(result.sets).to eql(new_sets.map(&:to_s))
+    end
+
+    it "cannot save a duplicate exercise" do
+      result = subject.train(squat, target_weight, sets)
+      subject.train(squat, target_weight, sets)
+      expect(subject.exercise_sessions.count).to eql(1)
+      expect(subject.exercise_sessions).to match_array([result])
+    end
   end
 
   describe "#progress_for" do

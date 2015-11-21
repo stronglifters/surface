@@ -7,4 +7,8 @@ class Csv::Exercise
       send("#{attribute.first}=", attribute.last)
     end
   end
+
+  def matches?(exercise)
+    name.downcase == exercise.name.downcase
+  end
 end

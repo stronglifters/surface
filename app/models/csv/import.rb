@@ -33,17 +33,11 @@ class Csv::Import
     training_session = user.begin_workout(
       workout,
       workout_row.date,
-      workout_row.body_weight_lb.to_f)
-    training_session.exercise_sessions.destroy_all
-    workout.exercise_workouts.each do |exercise_workout|
-      row = workout_row.exercises.detect do |x|
-        x.name.downcase == exercise_workout.exercise.name.downcase
-      end
-      training_session.train(
-        exercise_workout.exercise,
-        row.weight_lb,
-        row.sets
-      )
+      workout_row.body_weight_lb
+    )
+    workout.exercises.each do |exercise|
+      exercise_row = workout_row.find(exercise)
+      training_session.train(exercise, exercise_row.weight_lb, exercise_row.sets)
     end
   end
 end

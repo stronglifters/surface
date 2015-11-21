@@ -10,6 +10,12 @@ class Csv::Workout
     @exercises = []
   end
 
+  def find(exercise)
+    exercises.detect do |x|
+      x.matches?(exercise)
+    end
+  end
+
   def self.map_from(row, user)
     day, month, year = row[0].split("/")
     year = "20#{year}"

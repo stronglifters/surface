@@ -20,6 +20,6 @@ class Workout < ActiveRecord::Base
       exercise: exercise,
       sets: sets,
       repetitions: repetitions
-    )
+    ) unless exercises.include?(exercise)
   end
 end

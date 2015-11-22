@@ -100,4 +100,19 @@ describe Csv::Import do
       expect(user.training_sessions.count).to eql(100)
     end
   end
+
+  describe "#import" do
+    it "imports dips" do
+      row = ["06/11/15", "", "A", "97.4", "215", "Squat", "120", "265", "5", "5", "5", nil, nil, "Bench press", "77.5", "170", "5", "5", "5", "5", "5", "Barbell row", "67.5", "150", "5", "5", "5", "5", "5", "Dips", "5", "12.5", "5", "5", "5"]
+      subject.import(row)
+
+      training_session = user.training_sessions.first
+      session = training_session.progress_for(dips)
+      expect(session).to_not be_nil
+      expect(session.target_weight).to eql(12.5)
+      expect(session.sets[0]).to eql("5")
+      expect(session.sets[1]).to eql("5")
+      expect(session.sets[2]).to eql("5")
+    end
+  end
 end

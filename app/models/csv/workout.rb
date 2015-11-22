@@ -35,6 +35,17 @@ class Csv::Workout
         sets: slice[3..(slice.size)],
       )
     end
+
+    # import additional exercises
+    row[(5 + (3 * 8))..(row.size)].each_slice(6) do |slice|
+      next if slice[0].nil?
+      workout.exercises << Csv::Exercise.new(
+        name: slice[0],
+        weight_kg: slice[1],
+        weight_lb: slice[2],
+        sets: slice[3..(slice.size)],
+      )
+    end
     workout
   end
 end

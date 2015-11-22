@@ -3,6 +3,7 @@ class TrainingSession < ActiveRecord::Base
   belongs_to :workout
   has_one :program, through: :workout
   has_many :exercise_sessions, dependent: :destroy
+  has_many :exercises, through: :exercise_sessions
 
   def train(exercise, target_weight, completed_sets)
     recommendation = workout.exercise_workouts.find_by(exercise: exercise)

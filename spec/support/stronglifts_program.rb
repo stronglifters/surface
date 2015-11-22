@@ -5,9 +5,11 @@ shared_context "stronglifts_program" do
   let!(:workout_a) { program.workouts.create name: "A" }
   let!(:bench_press) { create(:exercise, name: "Bench Press") }
   let!(:barbell_row) { create(:exercise, name: "Barbell Row") }
+  let!(:dips) { create(:exercise, name: "Dips") }
   let!(:squat_workout) { workout_a.add_exercise(squat, sets: 5, repetitions: 5) }
   let!(:bench_workout) { workout_a.add_exercise(bench_press, sets: 5, repetitions: 5) }
   let!(:row_workout) { workout_a.add_exercise(barbell_row, sets: 5, repetitions: 5) }
+  let!(:dips_workout) { workout_a.add_exercise(dips, sets: 3, repetitions: 5) }
 
   let!(:workout_b) { program.workouts.create name: "B" }
   let!(:overhead_press) { create(:exercise, name: "Overhead Press") }

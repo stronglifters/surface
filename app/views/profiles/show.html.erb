@@ -23,7 +23,7 @@
       <tbody>
         <% @program.exercises.uniq.each do |exercise| %>
           <tr>
-            <td> <strong><%= exercise.name %></strong></td><td><%= @user.personal_record(exercise) %> lbs</td>
+            <td> <strong><%= exercise.name %></strong></td><td><%= @user.personal_record_for(exercise) %> lbs</td>
           </tr>
         <% end %>
       </tbody>

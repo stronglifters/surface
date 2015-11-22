@@ -20,12 +20,6 @@ class Csv::Import
     end
   end
 
-  private
-
-  def database_file(dir)
-    Dir.glob("#{dir}/spreadsheet-stronglifts*csv*").first
-  end
-
   def import(row)
     workout_row = Csv::Workout.map_from(row, user)
 
@@ -37,7 +31,15 @@ class Csv::Import
     )
     workout.exercises.each do |exercise|
       exercise_row = workout_row.find(exercise)
+      next if exercise_row.nil?
       training_session.train(exercise, exercise_row.weight_lb, exercise_row.sets)
     end
   end
+
+  private
+
+  def database_file(dir)
+    Dir.glob("#{dir}/spreadsheet-stronglifts*csv*").first
+  end
+
 end

@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
     username
   end
 
-  def personal_record(exercise)
+  def personal_record_for(exercise)
     exercise_sessions.
       joins(:exercise).
       where(exercises: { name: exercise.name }).

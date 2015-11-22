@@ -114,5 +114,18 @@ describe Csv::Import do
       expect(session.sets[1]).to eql("5")
       expect(session.sets[2]).to eql("5")
     end
+
+    it "imports chinups" do
+      row = ["14/03/15", "", "B", "92.87", "205", "Squat", "37.5", "85", "5", "5", "5", "5", "5", "Overhead press", "32.5", "70", "5", "5", "5", "5", "5", "Deadlift", "52.5", "115", "5", nil, nil, nil, nil, "Chinups", "0", "0", "5", "3", "2"]
+      subject.import(row)
+
+      training_session = user.training_sessions.first
+      session = training_session.progress_for(chinups)
+      expect(session).to_not be_nil
+      expect(session.target_weight).to eql(0.0)
+      expect(session.sets[0]).to eql("5")
+      expect(session.sets[1]).to eql("3")
+      expect(session.sets[2]).to eql("2")
+    end
   end
 end

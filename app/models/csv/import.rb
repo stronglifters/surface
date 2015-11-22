@@ -41,5 +41,4 @@ class Csv::Import
   def database_file(dir)
     Dir.glob("#{dir}/spreadsheet-stronglifts*csv*").first
   end
-
 end

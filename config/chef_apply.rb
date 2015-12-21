@@ -104,11 +104,11 @@ end
 
 bash "install_ruby" do
   user "root"
-  not_if { ::File.exist?("/usr/local/rbenv/shims/ruby") }
+  not_if { ::Dir.exist?("/usr/local/rbenv/versions/2.2.4") }
   code <<-EOH
 source /etc/profile.d/rbenv.sh
-rbenv install 2.2.3
-rbenv global 2.2.3
+rbenv install 2.2.4
+rbenv global 2.2.4
 EOH
 end
 

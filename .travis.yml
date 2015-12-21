@@ -2,7 +2,7 @@ language: ruby
 cache: bundler
 sudo: false
 rvm:
-  - 2.2.3
+  - 2.2.4
 addons:
   postgresql: '9.4'
 services:
@@ -11,8 +11,8 @@ env:
   global:
     - secure: QOnNDieI+NdqXYLxqaxjSBDYnmVnH40btrGKub/DAe7Q6xq0JKd7MUE828bwM+Q64UTD2umTGEZgeqXu3bt/pn8RbjRNv/dZLCC5vKogGgZ8YPGal8eUbmccYlYgLY640wHzZift0u3fMYYNCKtNWeL+05rRHdJgO5NBATWgFGHcPLplw8aoHMskcDWR9ZC5LqIjQq7W58a+Qx3xmtBlr3v8+MnBetUv4YL56qjZXi8YcgSs42vAb6YtvyTXTpxnJniacaFmx52xosuJR5wnel6ZZ6ZH5cODp9O5aLF9HYiPRYa2nrSM82khG5yWqO5fVFEhcvJG0uKgkbm/k8535wKSC9s6CBv89ULN3Mz4w8H2nymTkVTinStKrX0Zc8hhJBQOGQwXCJFxlAIQMYmuJiNbPF4Dd58gT+xU9EWkXvnVXhJtUrn39z9A30zAfrSH6s4e8+p9CMYGOUxq+Xmj+vfTCkDE9y2t2D6QYw/IFeTqKYHJMDPYVCp9USZUNx/PjsRpx2974C22Aun3QnYSxfGNnHMcMmadGRK5IuR/ewC+OGt3X8d6FgNlEU0Czi+ratUniEJgoM+qh5InbxCneo5KvHJcFijc3mAt8anRK+Mk2Uw8rS2RBcPR+ursQ7pzVvRED6vLAFe4a0olDInd3ijNt78iLBKzgMVQPLu9dhg=
   matrix:
-    - TEST_SUITE='rake spec'
-    - TEST_SUITE='rake teaspoon'
+    - TEST_SUITE='bundle exec rake spec'
+    - TEST_SUITE='bundle exec rake teaspoon'
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database app_test;' -U postgres

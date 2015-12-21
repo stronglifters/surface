@@ -1,7 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-program =  Program.find_or_create_by!(name: Program::STRONG_LIFTS)
-squat =  Exercise.find_or_create_by!(name: "Squat")
+program = Program.find_or_create_by!(name: Program::STRONG_LIFTS)
+squat = Exercise.find_or_create_by!(name: "Squat")
 bench_press = Exercise.find_or_create_by!(name: "Bench Press")
 barbell_row = Exercise.find_or_create_by!(name: "Barbell Row")
 overhead_press = Exercise.find_or_create_by!(name: "Overhead Press")

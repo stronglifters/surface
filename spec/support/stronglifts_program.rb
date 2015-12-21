@@ -18,5 +18,7 @@ shared_context "stronglifts_program" do
   let!(:squat_workout_b) { workout_b.add_exercise(squat, sets: 5, repetitions: 5) }
   let!(:overhead_press_workout) { workout_b.add_exercise(overhead_press, sets: 5, repetitions: 5) }
   let!(:deadlift_workout) { workout_b.add_exercise(deadlift, sets: 1, repetitions: 5) }
-  let!(:chinups_workout) { workout_b.add_exercise(chinups, sets: 3, repetitions: 5) }
+  let!(:chinups_workout) do
+    workout_b.add_exercise(chinups, sets: 3, repetitions: 5)
+  end
 end

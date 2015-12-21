@@ -1,5 +1,4 @@
 language: ruby
-cache: bundler
 sudo: false
 rvm:
   - 2.2.4
@@ -16,6 +15,7 @@ env:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database app_test;' -U postgres
+  - RAILS_ENV=test bin/rake db:migrate
 script: bundle exec $TEST_SUITE
 before_deploy: ./bin/precompile.sh
 deploy:

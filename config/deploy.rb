@@ -38,7 +38,7 @@ else
   set :ssh_options, forward_agent: true
 end
 set :rbenv_type, :system
-set :rbenv_ruby, "2.2.3"
+set :rbenv_ruby, "2.2.4"
 
 namespace :deploy do
   task :restart do

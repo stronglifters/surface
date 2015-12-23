@@ -13,6 +13,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, inline: $fix_vmware_tools_script
   config.vm.provision :chef_apply do |chef|
     chef.recipe = File.read("config/chef_apply.rb")
+    chef.version = "latest"
+    chef.install = "force"
   end
   config.vm.provider :vmware_workstation do |vm|
     vm.vmx["memsize"] = "2048"

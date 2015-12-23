@@ -136,7 +136,7 @@ describe User do
     end
   end
 
-  describe "#personal_record" do
+  describe "#personal_record_for" do
     include_context "stronglifts_program"
     let(:user) { create(:user) }
     let(:exercise_workout) { workout_a.exercise_workouts.first }
@@ -157,7 +157,7 @@ describe User do
     end
 
     it "returns the users maximum amount of weight lifted" do
-      expect(user.personal_record(exercise)).to eql(205.0)
+      expect(user.personal_record_for(exercise)).to eql(205.0)
     end
   end
 

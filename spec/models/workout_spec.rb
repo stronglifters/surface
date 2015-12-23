@@ -26,5 +26,12 @@ describe Workout do
       subject.add_exercise(exercise)
       expect(subject.exercise_workouts.first.exercise).to eql(exercise)
     end
+
+    it "does not add a duplicate exercise" do
+      subject.add_exercise(exercise)
+      subject.add_exercise(exercise)
+      expect(subject.exercises.count).to eql(1)
+      expect(subject.exercise_workouts.count).to eql(1)
+    end
   end
 end

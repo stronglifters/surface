@@ -21,5 +21,6 @@
 
 var Stronglifters = Stronglifters || {};
 $(function(){
+  Ractive.DEBUG = false;
   new Stronglifters.Startup().start();
 });

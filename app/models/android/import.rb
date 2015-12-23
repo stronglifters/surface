@@ -12,8 +12,10 @@ class Android::Import
 
   def import_from(directory)
     database(directory) do |db|
-      db[:workouts].each do |row|
-        import(row)
+      ActiveRecord::Base.transaction do
+        db[:workouts].each do |row|
+          import(row)
+        end
       end
     end
   end
@@ -33,17 +35,15 @@ class Android::Import
   end
 
   def create_workout_from(workout_row)
-    ActiveRecord::Base.transaction do
-      training_session_for(workout_row) do |training_session, workout|
-        training_session.exercise_sessions.destroy_all
-        workout.exercise_workouts.each_with_index do |exercise_workout, index|
-          exercise_row = workout_row.exercises[index]
-          training_session.train(
-            exercise_workout.exercise,
-            exercise_row["warmup"]["targetWeight"],
-            sets_from(exercise_workout, exercise_row)
-          )
-        end
+    training_session_for(workout_row) do |training_session, workout|
+      workout.exercise_workouts.each_with_index do |exercise_workout, index|
+        exercise_row = workout_row.exercises[index]
+        next if exercise_row.nil?
+        training_session.train(
+          exercise_workout.exercise,
+          exercise_row["warmup"]["targetWeight"],
+          sets_from(exercise_workout, exercise_row)
+        )
       end
     end
   end

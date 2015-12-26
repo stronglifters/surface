@@ -102,13 +102,14 @@ git "/usr/local/rbenv/plugins/ruby-build" do
   repository "https://github.com/sstephenson/ruby-build.git"
 end
 
+ruby_version = `cat .ruby-version`.strip
 bash "install_ruby" do
   user "root"
-  not_if { ::Dir.exist?("/usr/local/rbenv/versions/2.2.4") }
+  not_if { ::Dir.exist?("/usr/local/rbenv/versions/#{ruby_version}") }
   code <<-EOH
 source /etc/profile.d/rbenv.sh
-rbenv install 2.2.4
-rbenv global 2.2.4
+rbenv install #{ruby_version}
+rbenv global #{ruby_version}
 EOH
 end
 

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+ENDPOINT="https://www.stronglifters.com/"
+REQUEST_COUNT="1000"
+THREAD_COUNT="10"
+FILENAME="$REQUEST_COUNT.$THREAD_COUNT.$(date +%s)"
+
+mkdir -p tmp/data
+ab -n $REQUEST_COUNT \
+  -c $THREAD_COUNT \
+  -g "tmp/data/$FILENAME.dat" \
+  -s 600 \
+  $ENDPOINT
+
+mkdir -p tmp/graphs
+gnuplot << EOF
+  # output as png image
+  set terminal png
+  set output "tmp/graphs/$FILENAME.png"
+  set title "$REQUEST_COUNT requests on $THREAD_COUNT thread(s)"
+  set size 1,0.7
+  set grid y
+  set xlabel "Request"
+  set ylabel "Total time (ms)"
+  plot "tmp/data/$FILENAME.dat" using 9 smooth frequency with lines title "frequency"
+EOF
+
+echo "\nResults are in tmp/graphs/$FILENAME.png\n"

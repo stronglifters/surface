@@ -45,9 +45,14 @@ class Capistrano::S3 < Capistrano::SCM
     end
 
     def build_revision
-      awk = "awk '{ print $4 }'"
-      command = "s3 ls #{bucket_name}/#{rails_env}/ | sort | tail -n1 | #{awk}"
-      context.capture(:aws, command).strip
+      command = [
+        "s3 ls #{bucket_name}/#{rails_env}/",
+        "grep tar.gz",
+        "sort",
+        "tail -n1",
+        "awk '{ print $4 }'"
+      ]
+      context.capture(:aws, command.join(" | ")).strip
     end
   end
 end

@@ -20,6 +20,7 @@ namespace :package do
       Rakefile
       config.ru
       vendor/cache/*
+      .ruby-version
       )
       package.package_files.exclude do |path|
         path.start_with?("config/deploy")

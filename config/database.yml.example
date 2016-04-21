@@ -83,3 +83,6 @@ production:
   database: stronglifters_production
   username: stronglifters
   password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test

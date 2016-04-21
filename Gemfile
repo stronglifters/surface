@@ -10,6 +10,7 @@ source 'https://rubygems.org' do
   gem 'codeclimate-test-reporter', require: nil, group: :test
   gem 'coffee-rails', '~> 4.1'
   gem 'coveralls', require: false, group: :test
+  gem 'cucumber-rails', require: false, group: :test
   gem 'dalli'
   gem 'database_cleaner', group: :test
   gem 'dotenv-rails'

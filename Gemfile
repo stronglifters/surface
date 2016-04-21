@@ -7,7 +7,7 @@ gem 'dalli'
 gem 'dotenv-rails'
 gem 'email_validator'
 gem 'font-awesome-rails'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.5'
 gem 'griddler'
 gem 'griddler-mandrill'
 gem 'groupdate'
@@ -30,6 +30,7 @@ gem 'sqlite3'
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
+gem 'web-console', '~> 2.0', group: :development
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-ractive'
@@ -37,7 +38,6 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-commands-teaspoon'

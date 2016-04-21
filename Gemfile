@@ -2,6 +2,7 @@ source 'https://rubygems.org' do
   gem 'bcrypt', '~> 3.1.7'
   gem 'bullet', group: [:development, :test]
   gem 'byebug', group: [:development, :test]
+  gem 'capistrano', '3.4.1'
   gem 'capistrano-bundler', '~> 1.1', require: false, group: :development
   gem 'capistrano-rails', group: :development
   gem 'capistrano-rbenv', '~> 2.0', require: false, group: :development

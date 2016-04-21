@@ -313,6 +313,8 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     spring (1.7.1)
+    spring-commands-cucumber (1.0.1)
+      spring (>= 0.9.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     spring-commands-teaspoon (0.0.2)
@@ -420,6 +422,7 @@ DEPENDENCIES
   sequel!
   sidekiq!
   spring!
+  spring-commands-cucumber!
   spring-commands-rspec!
   spring-commands-teaspoon!
   sprockets-rails (= 2.3.3)!

@@ -13,6 +13,7 @@ env:
   matrix:
     - TEST_SUITE='rake spec'
     - TEST_SUITE='rake teaspoon'
+    - TEST_SUITE='rake cucumber'
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database app_test;' -U postgres

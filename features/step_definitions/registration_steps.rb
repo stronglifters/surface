@@ -4,7 +4,6 @@ Given /^the user is on the registration page$/ do
 end
 
 When /^they enter a (.*), (.*) and (.*)$/ do |username, email, password|
-  puts [username, email, password].inspect
   @subject.register_with(
     username: username,
     email: email,
@@ -12,6 +11,14 @@ When /^they enter a (.*), (.*) and (.*)$/ do |username, email, password|
   )
 end
 
-Then /^it should take them to the dashboard$/ do
+When /^the (.*) is already registered$/ do |username|
+  FactoryGirl.create(:user, username: username)
+end
+
+Then /^it redirects them to the dashboard$/ do
   expect(@subject.current_path).to eql(dashboard_path)
+end
+
+Then /^it displays the following (.*)$/ do |text|
+  expect(@subject).to have_content(text.gsub(/["'<>]/, ''))
 end

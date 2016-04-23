@@ -1,4 +1,4 @@
-test:
+test: &test
   adapter: postgresql
   database: app_test
   encoding: unicode

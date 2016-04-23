@@ -11,8 +11,12 @@ When /^they enter a (.*), (.*) and (.*)$/ do |username, email, password|
   )
 end
 
-When /^the (.*) is already registered$/ do |username|
+When /^the username (.*) is already registered$/ do |username|
   FactoryGirl.create(:user, username: username)
+end
+
+When /^the email (.*) is already registered$/ do |email|
+  FactoryGirl.create(:user, email: email)
 end
 
 Then /^it redirects them to the dashboard$/ do

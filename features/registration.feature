@@ -15,9 +15,20 @@ Feature: Registration
 
   Scenario Outline:: The username is taken
     Given the user is on the registration page
-    When the <username> is already registered
+    When the username <username> is already registered
     And they enter a <username>, <email> and <password>
     Then it displays the following "Username has already been taken"
+
+    Examples:
+      | username | email          | password |
+      | mo       | mo@example.org | password |
+      | joe      | joe@example.org | the secret |
+
+  Scenario Outline:: The email address is already registered
+    Given the user is on the registration page
+    When the email <email> is already registered
+    And they enter a <username>, <email> and <password>
+    Then it displays the following "Email has already been taken"
 
     Examples:
       | username | email          | password |

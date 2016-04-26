@@ -2,20 +2,7 @@ version: '2'
 services:
   app:
     build: .
-    command: sidekiq
-    volumes:
-      - .:/app
-    links:
-      - redis
-      - db
-    depends_on:
-      - redis
-      - db
-    environment:
-      REDIS_URL: 'redis://redis:6379/12'
-  web:
-    build: .
-    command: 'rails s -b 0.0.0.0'
+    command: foreman start
     volumes:
       - .:/app
     ports:

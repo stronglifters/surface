@@ -1,5 +1,5 @@
-class Gym
-  # name, address, latitude, longitude
+class Gym < ActiveRecord::Base
   def self.closest_to(user)
+    all
   end
 end

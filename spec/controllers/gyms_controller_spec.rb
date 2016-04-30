@@ -8,14 +8,10 @@ describe GymsController do
   end
 
   describe "#index" do
-    let(:sait) { double }
-    let(:world_health) { double }
+    let(:sait) { create(:gym, name: 'sait') }
+    let(:world_health) { create(:gym, name: 'world health') }
 
     it 'returns a list of gyms' do
-      allow(Gym).to receive(:closest_to).
-        with(user).
-        and_return([sait, world_health])
-
       get :index
 
       expect(assigns(:gyms)).to match_array([sait, world_health])

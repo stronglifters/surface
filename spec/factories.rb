@@ -53,4 +53,11 @@ FactoryGirl.define do
       ]}
     end
   end
+  factory :gym do
+    name { FFaker::Internet.user_name }
+    address { FFaker::Address.street_address }
+    city { FFaker::AddressCA.city }
+    state { FFaker::AddressCA.city }
+    country { FFaker::Address.country }
+  end
 end

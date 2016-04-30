@@ -30,8 +30,10 @@ en:
           log_out: "Log out"
           profile_edit: "Edit profile"
           profile_view: "View profile"
+      title: Stronglifters
   gyms:
     index:
+      title: Gyms
       view_map: View map
   registrations:
     new:

@@ -1,6 +1,10 @@
+<% content_for(:title) do %>
+  <%= t(".title") %>
+<% end %>
+
 <div class="row">
   <div class="large-12 columns">
-    <h1>Gyms</h1>
+    <h1><%= t(".title") %></h1>
     <table>
       <% @gyms.each do |gym| %>
         <tr>

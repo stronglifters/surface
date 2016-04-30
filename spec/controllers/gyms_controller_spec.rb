@@ -12,7 +12,9 @@ describe GymsController do
     let(:world_health) { double }
 
     it 'returns a list of gyms' do
-      allow(Gym).to receive(:latest).and_return([sait, world_health])
+      allow(Gym).to receive(:closest_to).
+        with(user).
+        and_return([sait, world_health])
 
       get :index
 

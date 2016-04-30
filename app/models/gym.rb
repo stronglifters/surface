@@ -1,4 +1,5 @@
 class Gym
-  def self.latest
+  # name, address, latitude, longitude
+  def self.closest_to(user)
   end
 end

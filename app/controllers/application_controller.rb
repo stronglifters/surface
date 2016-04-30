@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate!
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  helper_method :current_user
 
   protected
 

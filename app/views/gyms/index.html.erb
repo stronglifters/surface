@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1>Gyms</h1>
+    <table>
+      <% @gyms.each do |gym| %>
+        <tr>
+        <td><%= gym.name %></td>
+        <td><%= gym.address %>, <%= gym.city %>, <%= gym.state %>, <%= gym.country %></td>
+        <td><a href="https://maps.google.com/?q=<%= gym.latitude %>,<%= gym.longitude %>" target="_blank"><%= t('.view_map') %></a></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div>

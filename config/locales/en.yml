@@ -30,6 +30,9 @@ en:
       log_out: "Log out"
       profile_edit: "Edit profile"
       profile_view: "View profile"
+  gyms:
+    index:
+      view_map: View map
   registrations:
     new:
       username: "Username"

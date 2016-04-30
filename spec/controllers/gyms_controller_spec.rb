@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe GymsController do
+  let(:user) { create(:user) }
+
+  before :each do
+    http_login(user)
+  end
+
   describe "#index" do
     let(:sait) { double }
     let(:world_health) { double }

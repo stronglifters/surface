@@ -22,6 +22,7 @@
 en:
   layouts:
     application:
+      gyms: Gyms
       loading: "Loading..."
   nav:
     user:

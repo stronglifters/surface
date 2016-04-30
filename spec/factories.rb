@@ -55,6 +55,19 @@ FactoryGirl.define do
   end
   factory :gym do
     name { FFaker::Internet.user_name }
+  end
+
+  factory :user_session, class: UserSession do
+    association :user
+    ip FFaker::Internet.ip_v4_address
+    factory :active_session do
+      accessed_at Time.current
+    end
+  end
+
+  factory :location do
+    latitude { rand(90.0) }
+    longitude { rand(180.0) }
     address { FFaker::Address.street_address }
     city { FFaker::AddressCA.city }
     region { FFaker::AddressCA.province }

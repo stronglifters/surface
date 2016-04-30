@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   resources :programs, only: [:show]
   resources :profiles, only: [:new, :create, :show, :edit, :update], constraints: { id: /[^\/]+/ }
+  resources :gyms, only: [:index]
   get "/u/:id" => "profiles#show", constraints: { id: /[^\/]+/ }
   get "/dashboard" => "training_sessions#index", as: :dashboard
   get "/terms" => "static_pages#terms"

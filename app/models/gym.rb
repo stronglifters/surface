@@ -7,6 +7,6 @@ class Gym < ActiveRecord::Base
   private
 
   def assign_location
-    self.latitude, self.longitude = Location.from(address, city, state, country)
+    self.latitude, self.longitude = Location.from(address, city, region, country)
   end
 end

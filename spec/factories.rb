@@ -57,7 +57,8 @@ FactoryGirl.define do
     name { FFaker::Internet.user_name }
     address { FFaker::Address.street_address }
     city { FFaker::AddressCA.city }
-    state { FFaker::AddressCA.city }
+    region { FFaker::AddressCA.province }
+    postal_code { FFaker::AddressCA.postal_code }
     country { FFaker::Address.country }
   end
 end

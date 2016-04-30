@@ -20,7 +20,7 @@ describe Gym do
       subject.assign_attributes(
         address: '123 street sw',
         city: 'edmonton',
-        state: 'alberta',
+        region: 'alberta',
         country: 'canada',
       )
       subject.save!

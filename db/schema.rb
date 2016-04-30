@@ -42,15 +42,16 @@ ActiveRecord::Schema.define(version: 20160430041813) do
   end
 
   create_table "gyms", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "name",                                null: false
+    t.string   "name",                                 null: false
     t.string   "address"
     t.string   "city"
-    t.string   "state"
+    t.string   "region"
     t.string   "country"
-    t.decimal  "latitude",   precision: 10, scale: 6
-    t.decimal  "longitude",  precision: 10, scale: 6
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "postal_code"
+    t.decimal  "latitude",    precision: 10, scale: 6
+    t.decimal  "longitude",   precision: 10, scale: 6
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

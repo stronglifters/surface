@@ -1,6 +1,6 @@
 class Location
-  def self.from(address, city, state, country)
-    results = Geocoder.search("#{address}, #{city}, #{state}, #{country}")
+  def self.from(address, city, region, country)
+    results = Geocoder.search("#{address}, #{city}, #{region}, #{country}")
     results.any? ? results.first.coordinates : [nil, nil]
   end
 end

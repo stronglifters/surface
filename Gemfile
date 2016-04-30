@@ -1,5 +1,6 @@
 source 'https://rubygems.org' do
   gem 'bcrypt', '~> 3.1.7'
+  gem 'brakeman', group: :development, require: false
   gem 'bullet', group: [:development, :test]
   gem 'byebug', group: [:development, :test]
   gem 'capistrano', '3.4.1'

@@ -21,6 +21,7 @@ source 'https://rubygems.org' do
   gem 'font-awesome-rails'
   gem 'foreman', group: :development
   gem 'foundation-rails', '~> 5.5'
+  gem 'geocoder'
   gem 'griddler'
   gem 'griddler-mandrill'
   gem 'groupdate'

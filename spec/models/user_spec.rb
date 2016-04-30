@@ -99,35 +99,6 @@ describe User do
     end
   end
 
-  describe "#authenticate" do
-    context "when credentials are correct" do
-      it "returns true" do
-        user = create(:user, password: "password", password_confirmation: "password")
-        expect(User.authenticate(user.email.upcase, "password")).to eql(user)
-      end
-
-      it "is case in-sensitive for username" do
-        user = create(:user,
-                      username: "upcase",
-                      password: "password",
-                      password_confirmation: "password"
-                     )
-        expect(User.authenticate("UPcase", "password")).to eql(user)
-      end
-    end
-
-    context "when the email is not registered" do
-      it "returns nil" do
-        expect(User.authenticate("sofake@noteven.com", "password")).to be_nil
-      end
-    end
-
-    context "when the username is not registered" do
-      it "returns nil" do
-        expect(User.authenticate("sofake", "password")).to be_nil
-      end
-    end
-  end
 
   describe "#to_param" do
     it "returns the username as the uniq identifier" do

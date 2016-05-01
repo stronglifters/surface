@@ -18,4 +18,13 @@ describe GymsController do
       expect(response).to be_ok
     end
   end
+
+  describe "#new" do
+    it 'loads the new page' do
+      get :new
+      expect(response).to be_ok
+      expect(assigns(:gym)).to be_instance_of(Gym)
+      expect(assigns(:gym).location).to be_present
+    end
+  end
 end

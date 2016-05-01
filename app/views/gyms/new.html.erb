@@ -1,0 +1,26 @@
+<% content_for(:title) do %>
+  <%= t(".title") %>
+<% end %>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h1><%= t(".title") %></h1>
+    <%= form_for(@gym) do |form| %>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+      <%= form.fields_for :location do |location_form| %>
+        <%= location_form.label :address %>
+        <%= location_form.text_field :address %>
+        <%= location_form.label :city %>
+        <%= location_form.text_field :city %>
+        <%= location_form.label :region %>
+        <%= location_form.text_field :region %>
+        <%= location_form.label :country %>
+        <%= location_form.text_field :country %>
+        <%= location_form.label :postal_code %>
+        <%= location_form.text_field :postal_code %>
+      <% end %>
+      <%= form.submit %>
+    <% end %>
+  </div>
+</div>

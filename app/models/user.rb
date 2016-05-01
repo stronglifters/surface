@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Flippable
   has_secure_password
   has_many :training_sessions
   has_many :exercise_sessions, through: :training_sessions
@@ -23,10 +24,6 @@ class User < ActiveRecord::Base
 
   def to_param
     username
-  end
-
-  def flipper_id
-    id
   end
 
   def personal_record_for(exercise)

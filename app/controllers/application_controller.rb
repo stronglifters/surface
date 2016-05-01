@@ -8,8 +8,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def current_user(session_id = session[:user_id])
-    @current_user ||= UserSession.authenticate(session_id).try(:user)
+  def current_session(session_id = session[:user_id])
+    @current_session ||= UserSession.authenticate(session_id)
+  end
+
+  def current_user
+    @current_user ||= current_session.try(:user)
   end
 
   def translate(key)

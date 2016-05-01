@@ -27,4 +27,21 @@ describe Gym do
       expect(subject.location.country).to eql('canada')
     end
   end
+
+  describe ".closest_to" do
+    let(:calgary) { create(:calgary) }
+    let(:edmonton) { create(:edmonton) }
+    let!(:calgary_gym) { create(:gym, location: calgary) }
+    let!(:edmonton_gym) { create(:gym, location: edmonton) }
+
+    it 'returns gyms near the location' do
+      results = Gym.closest_to(calgary)
+      expect(results).to match_array([calgary_gym])
+    end
+
+    it 'returns all the gyms' do
+      results = Gym.closest_to(nil)
+      expect(results).to match_array([calgary_gym, edmonton_gym])
+    end
+  end
 end

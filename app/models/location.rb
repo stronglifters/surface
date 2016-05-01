@@ -1,5 +1,14 @@
 class Location < ActiveRecord::Base
+  belongs_to :locatable, polymorphic: true
   before_save :assign_coordinates
+  acts_as_mappable default_units: :kms,
+    distance_field_name: :distance,
+    lat_column_name: :latitude,
+    lng_column_name: :longitude
+
+  def coordinates
+    [latitude, longitude]
+  end
 
   class << self
     def build_from_ip(ip)

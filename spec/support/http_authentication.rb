@@ -1,6 +1,7 @@
 module HttpAuthentication
-  def http_login(user)
+  def http_login(user, user_session = build(:user_session, id: SecureRandom.uuid, user: user))
     allow(controller).to receive(:current_user).and_return(user)
-    session[:user_id] = build(:user_session, id: SecureRandom.uuid, user: user).id
+    allow(controller).to receive(:current_session).and_return(user_session)
+    session[:user_id] = user_session.id
   end
 end

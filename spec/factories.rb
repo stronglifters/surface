@@ -73,5 +73,19 @@ FactoryGirl.define do
     region { FFaker::AddressCA.province }
     postal_code { FFaker::AddressCA.postal_code }
     country { FFaker::Address.country }
+    factory :calgary do
+      latitude { 51.0130333 }
+      longitude { -114.2142365 }
+      city { "Calgary" }
+      region { "AB" }
+      country { "CA" }
+    end
+    factory :edmonton do
+      latitude { 53.5557956 }
+      longitude { -113.6340292 }
+      city { "Edmonton" }
+      region { "AB" }
+      country { "CA" }
+    end
   end
 end

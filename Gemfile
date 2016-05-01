@@ -23,6 +23,7 @@ source 'https://rubygems.org' do
   gem 'foreman', group: :development
   gem 'foundation-rails', '~> 5.5'
   gem 'geocoder'
+  gem 'geokit-rails'
   gem 'griddler'
   gem 'griddler-mandrill'
   gem 'groupdate'

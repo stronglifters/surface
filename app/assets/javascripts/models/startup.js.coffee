@@ -5,4 +5,5 @@ class Stronglifters.Startup
       $(".loading-indicator").show()
     $(document).on 'page:change', ->
       $(".loading-indicator").hide()
+    Foundation.global.namespace = ''
     $(document).foundation()

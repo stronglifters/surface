@@ -30,4 +30,23 @@ describe Location do
       expect(location.longitude).to eql(longitude)
     end
   end
+
+  describe ".build_from_ip" do
+    it 'returns a location from the ip address' do
+      result = Location.build_from_ip("70.173.137.232")
+      expect(result).to be_instance_of(Location)
+      expect(result.address).to include("Las Vegas")
+      expect(result.city).to eql("Las Vegas")
+      expect(result.region).to eql("NV")
+      expect(result.country).to eql("US")
+      expect(result.postal_code).to eql("89101")
+      expect(result.latitude).to be_within(0.1).of(36.1)
+      expect(result.longitude).to be_within(0.1).of(-115.1)
+    end
+
+    it 'returns a location from the ip address' do
+      result = Location.build_from_ip("127.0.0.1")
+      expect(result).to be_instance_of(Location)
+    end
+  end
 end

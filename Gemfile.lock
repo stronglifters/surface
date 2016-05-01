@@ -151,6 +151,10 @@ GEM
     ffaker (2.2.0)
     flamegraph (0.1.0)
       fast_stack
+    flipper (0.7.5)
+    flipper-redis (0.7.5)
+      flipper (~> 0.7.5)
+      redis (>= 2.2, < 4.0.0)
     font-awesome-rails (4.6.1.0)
       railties (>= 3.2, < 5.1)
     foreman (0.80.2)
@@ -422,6 +426,8 @@ DEPENDENCIES
   factory_girl_rails!
   ffaker!
   flamegraph!
+  flipper!
+  flipper-redis!
   font-awesome-rails!
   foreman!
   foundation-rails (~> 5.5)!
@@ -468,4 +474,4 @@ DEPENDENCIES
   web-console (~> 2.0)!
 
 BUNDLED WITH
-   1.11.2
+   1.12.1

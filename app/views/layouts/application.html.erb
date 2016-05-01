@@ -31,8 +31,10 @@
               <section class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
+                  <% if $flipper[:gym].enabled?(current_user) %>
                   <li class="divider"></li>
                   <li><%= link_to t(".gyms"), gyms_path %></li>
+                  <% end %>
                   <li class="divider"></li>
                   <li class="has-dropdown">
                     <a href="#"><%= gravatar_for(current_user, size: 16) %> <%= current_user.username %></a>

@@ -19,6 +19,8 @@ source 'https://rubygems.org' do
   gem 'factory_girl_rails', group: :test
   gem 'ffaker', group: :test
   gem 'flamegraph', group: :development
+  gem 'flipper'
+  gem 'flipper-redis'
   gem 'font-awesome-rails'
   gem 'foreman', group: :development
   gem 'foundation-rails', '~> 5.5'

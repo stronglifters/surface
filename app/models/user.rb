@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
     username
   end
 
+  def flipper_id
+    id
+  end
+
   def personal_record_for(exercise)
     exercise_sessions.
       joins(:exercise).

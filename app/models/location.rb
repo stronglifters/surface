@@ -1,22 +1,29 @@
 class Location < ActiveRecord::Base
   before_save :assign_coordinates
 
-  def self.build_from_ip(ip)
-    result = Geocoder.search(ip).first
-    new(
-      address: result.address,
-      city: result.city,
-      region: result.state_code,
-      country: result.country_code,
-      postal_code: result.postal_code,
-      latitude: result.latitude,
-      longitude: result.longitude,
-    )
-  end
+  class << self
+    def build_from_ip(ip)
+      result = search(ip)
+      new(
+        address: result.address,
+        city: result.city,
+        region: result.state_code,
+        country: result.country_code,
+        postal_code: result.postal_code,
+        latitude: result.latitude,
+        longitude: result.longitude,
+      )
+    end
 
-  def self.from(address, city, region, country)
-    results = Geocoder.search("#{address}, #{city}, #{region}, #{country}")
-    results.any? ? results.first.coordinates : [nil, nil]
+    def from(address, city, region, country)
+      result = search("#{address}, #{city}, #{region}, #{country}")
+      result.present? ? result.coordinates : [nil, nil]
+    end
+
+    def search(query)
+      results = Geocoder.search(query)
+      results.any? ? results.first : nil
+    end
   end
 
   private

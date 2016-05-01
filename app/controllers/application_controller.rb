@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate!
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  helper_method :current_user
+  helper_method :current_user, :feature_available?
 
   protected
 
@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= current_session.try(:user)
+  end
+
+  def feature_available?(feature)
+    $flipper[feature.to_sym].enabled?(current_user)
   end
 
   def translate(key)

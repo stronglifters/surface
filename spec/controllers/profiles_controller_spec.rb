@@ -15,12 +15,14 @@ describe ProfilesController do
       it "loads the user's profile" do
         get :show, id: user.to_param
         expect(assigns(:user)).to eql(user)
+        expect(assigns(:profile)).to eql(user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
 
       it "loads the other user's profile" do
         get :show, id: other_user.to_param
         expect(assigns(:user)).to eql(other_user)
+        expect(assigns(:profile)).to eql(other_user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
     end
@@ -30,13 +32,13 @@ describe ProfilesController do
 
       it "loads the user's profile into an edit view" do
         get :edit, id: user.to_param
-        expect(assigns(:current_user)).to eql(user)
+        expect(assigns(:profile)).to eql(user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
 
       it "will not load the other user's profile into an edit view" do
         get :edit, id: other_user.to_param
-        expect(assigns(:current_user)).to eql(user)
+        expect(assigns(:profile)).to eql(user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
     end

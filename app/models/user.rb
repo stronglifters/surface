@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :training_sessions
   has_many :exercise_sessions, through: :training_sessions
+  has_many :user_sessions, dependent: :destroy
   has_one :profile
   USERNAME_REGEX=/\A[-a-z0-9_.]*\z/i
 
@@ -28,8 +29,7 @@ class User < ActiveRecord::Base
     exercise_sessions.
       joins(:exercise).
       where(exercises: { name: exercise.name }).
-      pluck(:target_weight).
-      max
+      maximum(:target_weight)
   end
 
   def history_for(exercise)
@@ -51,6 +51,18 @@ class User < ActiveRecord::Base
 
   def google_drive
     GoogleDrive.new(self)
+  end
+
+  class << self
+    def login(username, password)
+      user = User.find_by(
+        "email = :email OR username = :username",
+        username: username.downcase,
+        email: username.downcase
+      )
+      return false if user.blank?
+      user.user_sessions.create! if user.authenticate(password)
+    end
   end
 
   private

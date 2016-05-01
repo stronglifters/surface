@@ -8,12 +8,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def log_in(user)
-    session[:user_id] = user.id
-  end
-
-  def current_user
-    @current_user ||= User.find(session[:user_id])
+  def current_user(session_id = session[:user_id])
+    @current_user ||= UserSession.authenticate(session_id).try(:user)
   end
 
   def translate(key)
@@ -21,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
-    return if session[:user_id].present? && current_user.present?
+    return if current_user.present?
     redirect_to new_session_path
   rescue
     redirect_to new_session_path

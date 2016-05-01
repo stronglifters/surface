@@ -14,23 +14,12 @@ class UserSession < ActiveRecord::Base
     self.ip = request.ip
     self.user_agent = request.user_agent
     self.location = Location.build_from_ip(request.ip)
-    id
+    save ? id : nil
   end
 
   class << self
     def authenticate(id)
       active.find_by(id: id)
-    end
-
-    def login(username, password)
-      user = User.find_by(
-        "email = :email OR username = :username",
-        username: username.downcase,
-        email: username.downcase
-      )
-      if user.present?
-        user.authenticate(password)
-      end
     end
   end
 end

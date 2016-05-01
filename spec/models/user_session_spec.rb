@@ -25,6 +25,7 @@ describe UserSession do
     it { expect(subject.user_agent).to eql(request.user_agent) }
     it { expect(subject.location).to_not be_nil }
     it { expect(because).to eql(subject.id) }
+    it { expect(subject).to be_persisted }
   end
 
   describe ".active" do
@@ -54,28 +55,6 @@ describe UserSession do
 
     it "returns nil if the id is not active" do
       expect(UserSession.authenticate('blah')).to be_nil
-    end
-  end
-
-  describe "#login" do
-    context "when credentials are correct" do
-      it "returns true" do
-        user = create(:user, password: "password", password_confirmation: "password")
-        expect(UserSession.login(user.email.upcase, "password")).to eql(user)
-      end
-
-      it "is case in-sensitive for username" do
-        user = create(:user, username: "upcase", password: "password", password_confirmation: "password")
-        expect(UserSession.login("UPcase", "password")).to eql(user)
-      end
-    end
-
-    context "when the email is not registered" do
-      it { expect(UserSession.login("sofake@noteven.com", "password")).to be_nil }
-    end
-
-    context "when the username is not registered" do
-      it { expect(UserSession.login("sofake", "password")).to be_nil }
     end
   end
 end

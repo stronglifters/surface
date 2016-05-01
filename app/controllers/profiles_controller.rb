@@ -6,12 +6,12 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    @profile = @current_user.profile
+    @profile = current_user.profile
     @program = Program.stronglifts
   end
 
   def update
-    profile = @current_user.profile
+    profile = current_user.profile
     profile.update_attributes(profile_params)
     flash[:notice] = t("profiles.edit.profile_update_success")
     redirect_to profile_path(profile)

@@ -11,23 +11,20 @@ describe Gym do
     end
   end
 
-  describe "#before_save" do
-    let(:latitude) { rand(90.0) }
-    let(:longitude) { rand(180.0) }
-
-    it 'updates the latitude/logitude' do
-      allow(Location).to receive(:from).and_return([latitude, longitude])
-      subject.assign_attributes(
+  describe "#location" do
+    it 'updates the location' do
+      subject.location_attributes = {
         address: '123 street sw',
         city: 'edmonton',
         region: 'alberta',
         country: 'canada',
-      )
+      }
       subject.save!
-      subject.reload
 
-      expect(subject.latitude).to eql(latitude)
-      expect(subject.longitude).to eql(longitude)
+      expect(subject.location.address).to eql('123 street sw')
+      expect(subject.location.city).to eql('edmonton')
+      expect(subject.location.region).to eql('alberta')
+      expect(subject.location.country).to eql('canada')
     end
   end
 end

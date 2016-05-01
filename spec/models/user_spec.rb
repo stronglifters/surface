@@ -191,4 +191,30 @@ describe User do
       expect(user.profile.social_tolerance).to be_nil
     end
   end
+
+  describe "#login" do
+    context "when credentials are correct" do
+      it "returns true" do
+        user = create(:user, password: "password", password_confirmation: "password")
+        result = User.login(user.email.upcase, "password")
+        expect(result).to be_instance_of(UserSession)
+        expect(result.user).to eql(user)
+      end
+
+      it "is case in-sensitive for username" do
+        user = create(:user, username: "upcase", password: "password", password_confirmation: "password")
+        result = User.login("UPcase", "password")
+        expect(result).to be_instance_of(UserSession)
+        expect(result.user).to eql(user)
+      end
+    end
+
+    context "when the email is not registered" do
+      it { expect(User.login("sofake@noteven.com", "password")).to be_falsey }
+    end
+
+    context "when the username is not registered" do
+      it { expect(User.login("sofake", "password")).to be_falsey }
+    end
+  end
 end

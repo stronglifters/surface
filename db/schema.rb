@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20160430155822) do
   add_index "training_sessions", ["user_id"], name: "index_training_sessions_on_user_id", using: :btree
 
   create_table "user_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "user_id"
+    t.uuid     "user_id",     null: false
     t.string   "ip"
     t.text     "user_agent"
     t.datetime "accessed_at"

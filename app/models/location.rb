@@ -10,6 +10,10 @@ class Location < ActiveRecord::Base
     latitude == 0.0 && longitude == 0.0 ? [] : [latitude, longitude]
   end
 
+  def url
+    "https://maps.google.com/?q=#{latitude},#{longitude}"
+  end
+
   class << self
     def build_from_ip(ip)
       result = search(ip)

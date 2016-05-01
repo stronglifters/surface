@@ -10,7 +10,7 @@
         <tr>
         <td><%= gym.name %></td>
         <td><%= gym.location.address %>, <%= gym.location.city %>, <%= gym.location.region %>, <%= gym.location.country %></td>
-        <td><a href="https://maps.google.com/?q=<%= gym.location.latitude %>,<%= gym.location.longitude %>" target="_blank"><%= t('.view_map') %></a></td>
+        <td><%= link_to t('.view_map'), gym.location.url %></td>
       </tr>
     <% end %>
     </table>

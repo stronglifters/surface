@@ -87,5 +87,13 @@ FactoryGirl.define do
       region { "AB" }
       country { "CA" }
     end
+    factory :no_where do
+      latitude { 0.0 }
+      longitude { 0.0 }
+      city { "" }
+      region { "" }
+      country { "" }
+      postal_code { "" }
+    end
   end
 end

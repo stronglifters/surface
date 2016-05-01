@@ -4,9 +4,10 @@ class Gym < ActiveRecord::Base
   accepts_nested_attributes_for :location
   acts_as_mappable through: :location
 
-  scope :closest_to, ->(location) do
-    if location.present?
-      joins(:location).within(100, units: :kms, origin: location.coordinates)
+  scope :closest_to, ->(location, distance: 100) do
+    if location.present? && location.coordinates.present?
+      joins(:location).
+        within(distance, units: :kms, origin: location.coordinates)
     else
       all
     end

@@ -49,4 +49,19 @@ describe Location do
       expect(result).to be_instance_of(Location)
     end
   end
+
+  describe "#coordinates" do
+    it 'returns the lat/long' do
+      subject.latitude, subject.longitude = rand(90.0), rand(180.0)
+      expect(subject.coordinates).to eql([
+        subject.latitude,
+        subject.longitude
+      ])
+    end
+
+    it 'returns an empty array' do
+      subject = Location.build_from_ip("172.18.0.1")
+      expect(subject.coordinates).to be_empty
+    end
+  end
 end

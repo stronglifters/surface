@@ -43,5 +43,10 @@ describe Gym do
       results = Gym.closest_to(nil)
       expect(results).to match_array([calgary_gym, edmonton_gym])
     end
+
+    it 'returns all the gym when coordinates are empty' do
+      results = Gym.closest_to(build(:no_where))
+      expect(results).to match_array([calgary_gym, edmonton_gym])
+    end
   end
 end

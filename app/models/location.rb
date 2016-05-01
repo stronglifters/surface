@@ -7,7 +7,7 @@ class Location < ActiveRecord::Base
     lng_column_name: :longitude
 
   def coordinates
-    [latitude, longitude]
+    latitude == 0.0 && longitude == 0.0 ? [] : [latitude, longitude]
   end
 
   class << self

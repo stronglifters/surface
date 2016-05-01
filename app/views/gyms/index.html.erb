@@ -9,8 +9,8 @@
       <% @gyms.each do |gym| %>
         <tr>
         <td><%= gym.name %></td>
-        <td><%= gym.address %>, <%= gym.city %>, <%= gym.state %>, <%= gym.country %></td>
-        <td><a href="https://maps.google.com/?q=<%= gym.latitude %>,<%= gym.longitude %>" target="_blank"><%= t('.view_map') %></a></td>
+        <td><%= gym.location.address %>, <%= gym.location.city %>, <%= gym.location.region %>, <%= gym.location.country %></td>
+        <td><a href="https://maps.google.com/?q=<%= gym.location.latitude %>,<%= gym.location.longitude %>" target="_blank"><%= t('.view_map') %></a></td>
       </tr>
     <% end %>
     </table>

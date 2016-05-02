@@ -10,7 +10,6 @@ And /^There are (\d) gyms$/ do |n|
 end
 
 Then /^it lists all gyms$/ do
-  puts page.html
   @gyms.each do |gym|
     expect(@subject).to have_content(gym.name)
   end

@@ -9,8 +9,8 @@
       <% @gyms.each do |gym| %>
         <tr>
         <td><%= gym.name %></td>
-        <td><%= gym.location.address %>, <%= gym.location.city %>, <%= gym.location.region %>, <%= gym.location.country %></td>
-        <td><%= link_to t('.view_map'), gym.location.url %></td>
+        <td><%= gym.location.try(:address) %>, <%= gym.location.try(:city) %>, <%= gym.location.try(:region) %>, <%= gym.location.try(:country) %></td>
+        <td><%= link_to t('.view_map'), gym.location.try(:url) %></td>
       </tr>
     <% end %>
     </table>

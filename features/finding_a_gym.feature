@@ -3,8 +3,9 @@ Feature: Finding a gym
   So that I can get a good work out.
 
   Scenario: Find a gym
-    Given the user is on the gyms page
-    When I look at the page
+    Given the user is logged in
+    And There are 2 gyms
+    When the user is on the gyms page
     Then it lists all gyms
 
   Scenario: Find a gym in a city

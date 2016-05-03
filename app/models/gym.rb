@@ -29,13 +29,13 @@ class Gym < ActiveRecord::Base
     end
   end
 
-  def self.search_yelp(city: "Calgary", page: 1, page_size: 20)
+  def self.search_yelp(term: 'gym', city: "Calgary", categories: ['gyms'], page: 1, page_size: 20)
     offset = (page * page_size) - page_size
     Yelp.client.search(city, {
-      category_filter: 'gyms',
+      category_filter: categories.join(','),
       limit: page_size,
       offset: offset,
-      term: 'gym',
+      term: term,
     }).businesses.map do |result|
       Gym.new(
         name: result.name,

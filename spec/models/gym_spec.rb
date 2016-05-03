@@ -95,5 +95,13 @@ describe Gym do
       expect(results.count).to be > 0
       expect(results.first).to be_instance_of(Gym)
     end
+
+    it 'finds a college gym' do
+      expect(Gym.search_yelp(
+        term: 'SAIT',
+        city: "Calgary",
+        categories: ["gyms", "stadiumsarenas"]
+      ).map(&:name)).to match_array(["Sait Campus Centre"])
+    end
   end
 end

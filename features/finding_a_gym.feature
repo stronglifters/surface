@@ -12,5 +12,5 @@ Feature: Finding a gym
     Given the user is logged in
     And There are 3 gyms
     When the user is on the gyms page
-    And I choose a city
+    And they search for a city
     Then it lists all gyms

@@ -15,6 +15,8 @@ Then /^it lists all gyms$/ do
   end
 end
 
-When /^I choose a city$/ do
-  pending
+When /^they search for a city/ do
+  gym = @gyms.sample
+  @subject.search(gym.location.city)
+  @gyms = [gym]
 end

@@ -59,8 +59,7 @@ class Gym < ActiveRecord::Base
 
   def duplicate?
     Gym.
-      within(1, units: :kms, origin: location.coordinates).
-      joins(:location).
+      closest_to(location, distance: 1).
       where.not(id: id).
       limit(1).
       any?

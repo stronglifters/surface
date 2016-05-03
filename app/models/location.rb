@@ -6,6 +6,10 @@ class Location < ActiveRecord::Base
     lat_column_name: :latitude,
     lng_column_name: :longitude
 
+  def full_address
+    "#{try(:address)}, #{try(:city)}, #{try(:region)}, #{try(:country)}"
+  end
+
   def coordinates
     latitude == 0.0 && longitude == 0.0 ? [] : [latitude, longitude]
   end

@@ -16,7 +16,7 @@
         <% end %>
       </td>
       <td>
-        <% if gym.new_record? %>
+        <% if gym.new_record? && !gym.duplicate? %>
           <%= form_for(gym) do |form| %>
             <%= form.hidden_field :name %>
             <%= form.fields_for :location do |location_form| %>

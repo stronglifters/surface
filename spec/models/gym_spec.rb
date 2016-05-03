@@ -104,4 +104,33 @@ describe Gym do
       ).map(&:name)).to match_array(["Sait Campus Centre"])
     end
   end
+
+  describe "#full_address" do
+    let(:location) { build(:location) }
+
+    it 'returns the full address' do
+      subject.location = location
+      expected = "#{location.address}, " +
+        "#{location.city}, " +
+        "#{location.region}, " +
+        "#{location.country}"
+      expect(subject.full_address).to eql(expected)
+    end
+  end
+
+  describe "#duplicate?" do
+    it 'returns true when a dup is found' do
+      subject.location = create(:portland)
+      subject.save!
+      other = create(:gym, location: create(:portland))
+
+      expect(subject.duplicate?).to be_truthy
+    end
+
+    it 'returns false when no dups are found' do
+      subject.location = create(:portland)
+      subject.save!
+      expect(subject.duplicate?).to be_falsey
+    end
+  end
 end

@@ -1,8 +1,9 @@
 class Gym < ActiveRecord::Base
   validates_presence_of :name
-  has_one :location, as: :locatable
+  has_one :location, as: :locatable, dependent: :destroy
   accepts_nested_attributes_for :location
   acts_as_mappable through: :location
+  delegate :full_address, to: :location, allow_nil: true
 
   scope :closest_to, ->(location, distance: 100) do
     if location.present? && location.coordinates.present?
@@ -56,7 +57,12 @@ class Gym < ActiveRecord::Base
     end
   end
 
-  def full_address
-    "#{location.try(:address)}, #{location.try(:city)}, #{location.try(:region)}, #{location.try(:country)}"
+  def duplicate?
+    Gym.
+      within(1, units: :kms, origin: location.coordinates).
+      joins(:location).
+      where.not(id: id).
+      limit(1).
+      any?
   end
 end

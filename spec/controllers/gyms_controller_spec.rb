@@ -8,13 +8,20 @@ describe GymsController do
   end
 
   describe "#index" do
-    let(:sait) { create(:gym, name: 'sait') }
-    let(:world_health) { create(:gym, name: 'world health') }
+    let!(:sait) { create(:gym, name: 'sait') }
+    let!(:world_health) { create(:gym, name: 'world health') }
 
     it 'returns a list of gyms' do
       get :index
 
       expect(assigns(:gyms)).to match_array([sait, world_health])
+      expect(response).to be_ok
+    end
+
+    it 'returns matching results' do
+      get :index, q: 'sait'
+
+      expect(assigns(:gyms)).to match_array([sait])
       expect(response).to be_ok
     end
   end

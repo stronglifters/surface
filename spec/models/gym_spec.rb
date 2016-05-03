@@ -49,4 +49,35 @@ describe Gym do
       expect(results).to match_array([calgary_gym, edmonton_gym])
     end
   end
+
+  describe '.search_with' do
+    let!(:calgary_gym) { create(:gym, name: 'SAIT', location: create(:calgary)) }
+    let!(:edmonton_gym) { create(:gym, name: 'NAIT', location: create(:edmonton)) }
+    let!(:portland_gym) { create(:gym, name: '24 Hour Fitness', location: create(:portland)) }
+
+    it 'returns all gyms' do
+      results = Gym.search_with({})
+      expect(results).to match_array([calgary_gym, edmonton_gym, portland_gym])
+    end
+
+    it 'returns gyms with a matching name' do
+      results = Gym.search_with(q: 'sait')
+      expect(results).to match_array([calgary_gym])
+    end
+
+    it 'returns all gyms from a city' do
+      results = Gym.search_with(q: 'calgary')
+      expect(results).to match_array([calgary_gym])
+    end
+
+    it 'returns all gyms from a region' do
+      results = Gym.search_with(q: 'AB')
+      expect(results).to match_array([calgary_gym, edmonton_gym])
+    end
+
+    it 'returns all gyms from a country' do
+      results = Gym.search_with(q: 'US')
+      expect(results).to match_array([portland_gym])
+    end
+  end
 end

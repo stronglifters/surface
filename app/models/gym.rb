@@ -12,4 +12,20 @@ class Gym < ActiveRecord::Base
       all
     end
   end
+
+  scope :search, ->(query) do
+    sql = 'UPPER(gyms.name) LIKE :query' +
+      ' OR UPPER(locations.city) LIKE :query' +
+      ' OR UPPER(locations.region) LIKE :query' +
+      ' OR UPPER(locations.country) LIKE :query'
+    joins(:location).where(sql, { query: "%#{query.upcase}%" })
+  end
+
+  scope :search_with, ->(params) do
+    if params[:q].present?
+      search(params[:q])
+    else
+      all
+    end
+  end
 end

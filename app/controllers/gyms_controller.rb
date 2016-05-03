@@ -2,7 +2,7 @@ class GymsController < ApplicationController
   before_action :provide_search_path
 
   def index
-    @gyms = Gym.closest_to(current_session.location).includes(:location)
+    @gyms = Gym.search_with(params).closest_to(current_session.location).includes(:location)
   end
 
   def new

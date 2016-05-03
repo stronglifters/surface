@@ -98,7 +98,7 @@ describe Gym do
 
     it 'finds a college gym' do
       expect(Gym.search_yelp(
-        term: 'SAIT',
+        q: 'SAIT',
         city: "Calgary",
         categories: ["gyms", "stadiumsarenas"]
       ).map(&:name)).to match_array(["Sait Campus Centre"])

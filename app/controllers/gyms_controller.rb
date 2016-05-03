@@ -3,9 +3,8 @@ class GymsController < ApplicationController
   before_action only: [:index] { @remote_search = true }
 
   def index
-    if params[:source] == "yelp"
-      city = current_session.location.try(:city)
-      @gyms = Gym.search_yelp(term: params[:q], city: city)
+    if 'yelp' == params[:source]
+      @gyms = Gym.search_with(params)
     else
       @gyms = Gym.
         includes(:location).
@@ -24,7 +23,7 @@ class GymsController < ApplicationController
   def create
     @gym = Gym.new(secure_params)
     if @gym.save
-      redirect_to gyms_path
+      redirect_to gyms_path(q: @gym.name)
     else
       flash[:error] = @gym.errors.full_messages
       render :new

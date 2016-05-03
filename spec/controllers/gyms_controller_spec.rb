@@ -29,9 +29,7 @@ describe GymsController do
 
     it 'returns matches from yelp' do
       yelp_gym = double
-      allow(Gym).to receive(:search_yelp).
-        with(term: 'sait', city: portland.city).
-        and_return([yelp_gym])
+      allow(Gym).to receive(:search_yelp).and_return([yelp_gym])
       get :index, q: 'sait', source: 'yelp'
 
       expect(assigns(:gyms)).to match_array([yelp_gym])
@@ -70,7 +68,7 @@ describe GymsController do
       end
 
       it 'redirects to the listing page' do
-        expect(response).to redirect_to(gyms_path)
+        expect(response).to redirect_to(gyms_path(q: 'SAIT'))
       end
 
       it 'creates a new gym' do

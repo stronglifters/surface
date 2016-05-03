@@ -7,6 +7,6 @@ cities = ['Calgary', 'Edmonton', 'Portland', 'Victoria', 'Anaheim', 'San Diego',
 cities.each do |city|
   (1..5).each do |page|
     puts "Searching #{city}, page: #{page}"
-    Gym.search_yelp(city: city, page: page).each(&:save!)
+    Gym.search_yelp(q: 'gym', city: city, page: page).each(&:save!)
   end
 end

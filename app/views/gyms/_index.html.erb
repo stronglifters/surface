@@ -1,28 +1,37 @@
-<table>
+<table role="grid">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+  </tr>
+  </thead>
+  <tbody>
   <% @gyms.each do |gym| %>
     <tr>
-    <td><%= gym.name %></td>
-    <td><%= gym.full_address %></td>
-    <td>
-      <%= link_to gym.location.try(:url) do %>
-        <i class="fa fa-map-marker" aria-hidden="true"></i>
-      <% end %>
-    </td>
-    <% if gym.new_record? %>
+      <td><%= gym.name %></td>
       <td>
-        <%= form_for(gym) do |form| %>
-          <%= form.hidden_field :name %>
-          <%= form.fields_for :location do |location_form| %>
-            <%= location_form.hidden_field :address %>
-            <%= location_form.hidden_field :city %>
-            <%= location_form.hidden_field :region %>
-            <%= location_form.hidden_field :country %>
-            <%= location_form.hidden_field :postal_code %>
-          <% end %>
-          <%= form.submit t(:save), class: "button tiny" %>
+        <%= gym.full_address %>
+        <%= link_to gym.location.try(:url) do %>
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
         <% end %>
       </td>
-    <% end %>
-  </tr>
-<% end %>
+      <td>
+        <% if gym.new_record? %>
+          <%= form_for(gym) do |form| %>
+            <%= form.hidden_field :name %>
+            <%= form.fields_for :location do |location_form| %>
+              <%= location_form.hidden_field :address %>
+              <%= location_form.hidden_field :city %>
+              <%= location_form.hidden_field :region %>
+              <%= location_form.hidden_field :country %>
+              <%= location_form.hidden_field :postal_code %>
+            <% end %>
+            <%= form.submit t(:add), class: "button tiny" %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
+<%= paginate @gyms, remote: true %>

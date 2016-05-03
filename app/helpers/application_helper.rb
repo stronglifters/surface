@@ -7,7 +7,9 @@ module ApplicationHelper
       class: "gravatar"
   end
 
-  def search_path
-    @search_path || dashboard_path
+  def search_form(search_path: @search_path || dashboard_path, remote: false)
+    form_tag search_path, id: "search-form", method: :get, remote: remote do
+      search_field_tag :q, params[:q], placeholder: t(:search)
+    end
   end
 end

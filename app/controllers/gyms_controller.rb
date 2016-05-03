@@ -1,5 +1,5 @@
 class GymsController < ApplicationController
-  before_action :provide_search_path
+  before_action { @search_path = gyms_path }
 
   def index
     @gyms = Gym.search_with(params).closest_to(current_session.location).includes(:location)
@@ -28,9 +28,5 @@ class GymsController < ApplicationController
       :name,
       location_attributes: [:address, :city, :region, :country, :postal_code]
     )
-  end
-
-  def provide_search_path
-    @search_path = gyms_path
   end
 end

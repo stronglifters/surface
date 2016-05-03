@@ -32,11 +32,7 @@
                 <!-- Right Nav Section -->
                 <ul class="right">
                   <% if feature_available?(:gym) %>
-                  <li>
-                    <%= form_tag search_path, id: "search-form", method: :get, remote: true do %>
-                      <%= search_field_tag :q, params[:q], placeholder: t('.search') %>
-                    <% end %>
-                  </li>
+                  <li> <%= search_form %> </li>
                   <li class="divider"></li>
                   <li><%= link_to t(".gyms"), gyms_path %></li>
                   <% end %>

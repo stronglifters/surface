@@ -32,22 +32,15 @@ class Gym < ActiveRecord::Base
           per_page: (params[:per_page] || 20).to_i
         )
       else
-        search(params[:q])
+        includes(:location).search(params[:q]).order(:name)
       end
     else
-      all
+      includes(:location).order(:name)
     end
   end
 
-  def self.search_yelp(q: 'gym', categories: ['gyms'], city: "Calgary", page: 1, per_page: 20)
-    city = city.present? ? city : 'Calgary'
-    results = Yelp.client.search(city, {
-      category_filter: categories.join(','),
-      limit: per_page,
-      offset: (page * per_page) - per_page,
-      term: q,
-    })
-    results.businesses.map do |result|
+  def self.search_yelp(q: 'gym', categories: ['gyms'], city: , page: 1, per_page: 20)
+    Search.yelp(q, categories, city, page, per_page) do |result|
       Gym.new(
         name: result.name,
         location_attributes: {

@@ -3,15 +3,7 @@ class GymsController < ApplicationController
   before_action only: [:index] { @remote_search = true }
 
   def index
-    if 'yelp' == params[:source]
-      @gyms = Gym.search_with(params)
-    else
-      @gyms = Gym.
-        includes(:location).
-        search_with(params).
-        closest_to(current_session.location).
-        order(:name)
-    end
+    @gyms = Gym.closest_to(current_session.location).search_with(params)
   end
 
   def new

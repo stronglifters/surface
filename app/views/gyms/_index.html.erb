@@ -2,12 +2,27 @@
   <% @gyms.each do |gym| %>
     <tr>
     <td><%= gym.name %></td>
-    <td><%= gym.location.try(:address) %>, <%= gym.location.try(:city) %>, <%= gym.location.try(:region) %>, <%= gym.location.try(:country) %></td>
+    <td><%= gym.full_address %></td>
     <td>
       <%= link_to gym.location.try(:url) do %>
         <i class="fa fa-map-marker" aria-hidden="true"></i>
       <% end %>
     </td>
+    <% if !gym.persisted? %>
+      <td>
+        <%= form_for(gym) do |form| %>
+          <%= form.hidden_field :name %>
+          <%= form.fields_for :location do |location_form| %>
+            <%= location_form.hidden_field :address %>
+            <%= location_form.hidden_field :city %>
+            <%= location_form.hidden_field :region %>
+            <%= location_form.hidden_field :country %>
+            <%= location_form.hidden_field :postal_code %>
+          <% end %>
+          <%= form.submit t(:save), class: "button tiny" %>
+        <% end %>
+      </td>
+    <% end %>
   </tr>
 <% end %>
 </table>

@@ -2,14 +2,16 @@ require 'rails_helper'
 
 describe GymsController do
   let(:user) { create(:user) }
+  let(:user_session) { create(:user_session, location: portland, user: user) }
+  let(:portland) { create(:portland) }
 
   before :each do
-    http_login(user)
+    http_login(user, user_session)
   end
 
   describe "#index" do
-    let!(:sait) { create(:gym, name: 'sait') }
-    let!(:world_health) { create(:gym, name: 'world health') }
+    let!(:sait) { create(:gym, name: 'sait', location: create(:portland)) }
+    let!(:world_health) { create(:gym, name: 'world health', location: create(:portland)) }
 
     it 'returns a list of gyms' do
       get :index
@@ -22,6 +24,17 @@ describe GymsController do
       get :index, q: 'sait'
 
       expect(assigns(:gyms)).to match_array([sait])
+      expect(response).to be_ok
+    end
+
+    it 'returns matches from yelp' do
+      yelp_gym = double
+      allow(Gym).to receive(:search_yelp).
+        with(term: 'sait', city: portland.city).
+        and_return([yelp_gym])
+      get :index, q: 'sait', source: 'yelp'
+
+      expect(assigns(:gyms)).to match_array([yelp_gym])
       expect(response).to be_ok
     end
   end

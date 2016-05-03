@@ -3,7 +3,13 @@
 <% end %>
 
 <div class="row">
-  <div class="large-12 columns">
+  <div class="large-6 columns">
+    <h1><%= t(:search) %></h1>
+    <%= search_form id: 'yelp-search', path: gyms_path(source: 'yelp'), remote: true %>
+    <div id="results"></div>
+  </div>
+
+  <div class="large-6 columns">
     <h1><%= t(".title") %></h1>
     <%= form_for(@gym) do |form| %>
       <%= form.label :name %>

@@ -29,8 +29,9 @@ class Gym < ActiveRecord::Base
     end
   end
 
-  def self.search_yelp(term: 'gym', city: "Calgary", categories: ['gyms'], page: 1, page_size: 20)
+  def self.search_yelp(term: 'gym', city: , categories: ['gyms'], page: 1, page_size: 20)
     offset = (page * page_size) - page_size
+    city = city.present? ? city : "Calgary"
     Yelp.client.search(city, {
       category_filter: categories.join(','),
       limit: page_size,
@@ -50,5 +51,9 @@ class Gym < ActiveRecord::Base
         }
       )
     end
+  end
+
+  def full_address
+    "#{location.try(:address)}, #{location.try(:city)}, #{location.try(:region)}, #{location.try(:country)}"
   end
 end

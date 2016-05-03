@@ -35,7 +35,6 @@ en:
   gyms:
     index:
       title: Gyms
-      view_map: View map
     new:
       title: New Gym
   registrations:

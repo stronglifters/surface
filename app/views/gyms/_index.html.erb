@@ -3,7 +3,11 @@
     <tr>
     <td><%= gym.name %></td>
     <td><%= gym.location.try(:address) %>, <%= gym.location.try(:city) %>, <%= gym.location.try(:region) %>, <%= gym.location.try(:country) %></td>
-    <td><%= link_to t('.view_map'), gym.location.try(:url) %></td>
+    <td>
+      <%= link_to gym.location.try(:url) do %>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>

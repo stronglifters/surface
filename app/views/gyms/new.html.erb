@@ -16,7 +16,7 @@
         <%= location_form.label :region %>
         <%= location_form.text_field :region %>
         <%= location_form.label :country %>
-        <%= location_form.text_field :country %>
+        <%= location_form.select :country, @countries %>
         <%= location_form.label :postal_code %>
         <%= location_form.text_field :postal_code %>
       <% end %>

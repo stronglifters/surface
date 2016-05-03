@@ -6,6 +6,7 @@ class GymsController < ApplicationController
   def new
     @gym = Gym.new
     @gym.build_location
+    @countries = Carmen::Country.all.map { |x| [x.name, x.code] }
   end
 
   def create

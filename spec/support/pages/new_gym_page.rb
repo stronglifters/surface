@@ -14,7 +14,7 @@ class NewGymPage < PageModel
       fill_in "gym_location_attributes_address", with: address
       fill_in "gym_location_attributes_city", with: city
       fill_in "gym_location_attributes_region", with: region
-      fill_in "gym_location_attributes_country", with: country
+      select country, from: "gym_location_attributes_country"
       fill_in "gym_location_attributes_postal_code", with: postal_code
       click_button "Create Gym"
     end

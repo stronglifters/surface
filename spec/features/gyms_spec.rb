@@ -38,7 +38,7 @@ feature "Gyms", type: :feature do
         address: '1301 16 Ave NW',
         city: 'Calgary',
         region: 'AB',
-        country: 'CA',
+        country: 'Canada',
         postal_code: 'T2M 0L4',
       )
 

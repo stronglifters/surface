@@ -83,6 +83,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carmen (1.0.2)
+      activesupport (>= 3.0.0)
     chartkick (1.4.2)
     choice (0.2.0)
     cliver (0.3.2)
@@ -414,6 +416,7 @@ DEPENDENCIES
   capistrano-bundler (~> 1.1)!
   capistrano-rails!
   capistrano-rbenv (~> 2.0)!
+  carmen!
   chartkick!
   codeclimate-test-reporter!
   coffee-rails (~> 4.1)!

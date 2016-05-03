@@ -55,6 +55,7 @@ FactoryGirl.define do
   end
   factory :gym do
     name { FFaker::Internet.user_name }
+    association :location
   end
 
   factory :user_session, class: UserSession do

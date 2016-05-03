@@ -7,6 +7,7 @@ source 'https://rubygems.org' do
   gem 'capistrano-bundler', '~> 1.1', require: false, group: :development
   gem 'capistrano-rails', group: :development
   gem 'capistrano-rbenv', '~> 2.0', require: false, group: :development
+  gem 'carmen'
   gem 'chartkick'
   gem 'codeclimate-test-reporter', require: nil, group: :test
   gem 'coffee-rails', '~> 4.1'

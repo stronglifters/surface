@@ -26,6 +26,12 @@ describe GymsController do
       expect(assigns(:gym)).to be_instance_of(Gym)
       expect(assigns(:gym).location).to be_present
     end
+
+    it 'loads the available countries' do
+      get :new
+      expect(assigns(:countries).count).to eql(248)
+      expect(assigns(:countries)).to include(["Canada", "CA"])
+    end
   end
 
   describe "#create" do

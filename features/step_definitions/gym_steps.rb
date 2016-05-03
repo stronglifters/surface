@@ -18,4 +18,3 @@ end
 When /^I choose a city$/ do
   pending
 end
-

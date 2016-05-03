@@ -65,6 +65,7 @@ source 'https://rubygems.org' do
   gem 'turbolinks'
   gem 'uglifier', '>= 1.3.0'
   gem 'web-console', '~> 2.0', group: :development
+  gem 'yelp'
 end
 
 source 'https://rails-assets.org' do

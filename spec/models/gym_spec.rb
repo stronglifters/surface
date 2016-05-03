@@ -80,4 +80,20 @@ describe Gym do
       expect(results).to match_array([portland_gym])
     end
   end
+
+  describe ".search_yelp", skip: !ENV['YELP_CONSUMER_KEY'].present? do
+    it 'returns results' do
+      results = Gym.search_yelp(city: "Calgary")
+      expect(results).to be_present
+      expect(results.count).to be > 0
+      expect(results.first).to be_instance_of(Gym)
+    end
+
+    it 'returns the next page of results' do
+      results = Gym.search_yelp(city: "Calgary", page: 2)
+      expect(results).to be_present
+      expect(results.count).to be > 0
+      expect(results.first).to be_instance_of(Gym)
+    end
+  end
 end

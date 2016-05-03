@@ -1,8 +1,13 @@
 class GymsController < ApplicationController
   before_action { @search_path = gyms_path }
+  before_action only: [:index] { @remote_search = true }
 
   def index
-    @gyms = Gym.search_with(params).closest_to(current_session.location).includes(:location)
+    @gyms = Gym.
+      includes(:location).
+      search_with(params).
+      closest_to(current_session.location).
+      order(:name)
   end
 
   def new

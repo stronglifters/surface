@@ -1,0 +1,12 @@
+#!/bin/env ruby
+
+# bin/rails runner -e development bin/yelp
+#url='https://api.yelp.com/v2/search/?term=gym&location=Calgary&sort=2&limit=20&cc=CA&category_filter=gyms'
+#curl $url
+cities = ['Calgary', 'Edmonton']
+cities.each do |city|
+  (1..5).each do |page|
+    puts "Searching #{city}, page: #{page}"
+    Gym.search_yelp(city: city, page: page).each(&:save!)
+  end
+end

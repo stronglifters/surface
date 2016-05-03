@@ -5,14 +5,8 @@
 <div class="row">
   <div class="large-12 columns">
     <h1><%= t(".title") %></h1>
-    <table>
-      <% @gyms.each do |gym| %>
-        <tr>
-        <td><%= gym.name %></td>
-        <td><%= gym.location.try(:address) %>, <%= gym.location.try(:city) %>, <%= gym.location.try(:region) %>, <%= gym.location.try(:country) %></td>
-        <td><%= link_to t('.view_map'), gym.location.try(:url) %></td>
-      </tr>
-    <% end %>
-    </table>
+    <div id="results">
+      <%= render partial: 'index' %>
+    </div>
   </div>
 </div>

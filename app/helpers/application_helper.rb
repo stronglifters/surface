@@ -3,7 +3,11 @@ module ApplicationHelper
     secure_host = "https://secure.gravatar.com/avatar"
     options = "s=#{size}&d=mm"
     image_tag "#{secure_host}/#{user.gravatar_id}?#{options}",
-              alt: user.username,
-              class: "gravatar"
+      alt: user.username,
+      class: "gravatar"
+  end
+
+  def search_path
+    @search_path || dashboard_path
   end
 end

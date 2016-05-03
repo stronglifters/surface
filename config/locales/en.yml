@@ -30,6 +30,7 @@ en:
           log_out: "Log out"
           profile_edit: "Edit profile"
           profile_view: "View profile"
+      search: Search
       title: Stronglifters
   gyms:
     index:

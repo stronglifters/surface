@@ -1,4 +1,6 @@
 class GymsController < ApplicationController
+  before_action :provide_search_path
+
   def index
     @gyms = Gym.closest_to(current_session.location).includes(:location)
   end
@@ -6,7 +8,7 @@ class GymsController < ApplicationController
   def new
     @gym = Gym.new
     @gym.build_location
-    @countries = Carmen::Country.all.map { |x| [x.name, x.code] }
+    @countries = Carmen::Country.all.sort_by(&:name).map { |x| [x.name, x.code] }
   end
 
   def create
@@ -26,5 +28,9 @@ class GymsController < ApplicationController
       :name,
       location_attributes: [:address, :city, :region, :country, :postal_code]
     )
+  end
+
+  def provide_search_path
+    @search_path = gyms_path
   end
 end

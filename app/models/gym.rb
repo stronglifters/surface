@@ -57,9 +57,9 @@ class Gym < ActiveRecord::Base
     end
   end
 
-  def duplicate?
+  def duplicate?(distance: 0.1)
     Gym.
-      closest_to(location, distance: 1).
+      closest_to(location, distance: distance).
       where.not(id: id).
       limit(1).
       any?

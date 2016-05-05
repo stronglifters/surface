@@ -28,11 +28,11 @@ describe GymsController do
     end
 
     it 'returns matches from yelp' do
-      yelp_gym = double
-      allow(Gym).to receive(:search_yelp).and_return([yelp_gym])
+      gym = build(:gym)
+      allow(Search).to receive(:yelp).and_return(Kaminari.paginate_array([gym]))
       get :index, q: 'sait', source: 'yelp'
 
-      expect(assigns(:gyms)).to match_array([yelp_gym])
+      expect(assigns(:gyms)).to match_array([gym])
       expect(response).to be_ok
     end
   end

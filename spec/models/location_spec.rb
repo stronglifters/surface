@@ -39,9 +39,9 @@ describe Location do
       expect(result.city).to eql("Las Vegas")
       expect(result.region).to eql("NV")
       expect(result.country).to eql("US")
-      expect(result.postal_code).to eql("89101")
-      expect(result.latitude).to be_within(0.1).of(36.1)
-      expect(result.longitude).to be_within(0.1).of(-115.1)
+      expect(result.postal_code).to start_with("8910")
+      expect(result.latitude).to be_within(0.2).of(36.1)
+      expect(result.longitude).to be_within(0.2).of(-115.1)
     end
 
     it 'returns a location from the ip address' do

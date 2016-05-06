@@ -3,7 +3,7 @@ When /^the user is on the gyms page$/ do
   @subject.visit_page
 end
 
-And /^There are (\d) gyms$/ do |n|
+And /^There are (.*) gyms$/ do |n|
   @gyms = n.to_i.times.map do
     FactoryGirl.create(:gym)
   end

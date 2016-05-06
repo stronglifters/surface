@@ -26,7 +26,21 @@ feature "Gyms", type: :feature do
       expect(subject).to have_content(calgary_gym.name)
       expect(subject).to have_content(edmonton_gym.name)
     end
+
+    describe "search" do
+      let!(:other_calgary_gym) { create(:gym, name: 'world health', location: create(:calgary)) }
+
+      it 'returns gyms that match the search criteria', js: true do
+        subject.visit_page
+        subject.search("sait")
+
+        expect(subject).to be_on_page
+        expect(subject).to have_content(calgary_gym.name)
+        expect(subject).to have_no_content(other_calgary_gym.name)
+      end
+    end
   end
+
 
   feature "adding a gym" do
     subject { NewGymPage.new }

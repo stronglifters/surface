@@ -2,7 +2,7 @@ class UserSession < ActiveRecord::Base
   has_one :location, as: :locatable
   belongs_to :user
   scope :active, -> do
-    where('accessed_at > ?', 2.weeks.ago).where(revoked_at: nil)
+    where("accessed_at > ?", 2.weeks.ago).where(revoked_at: nil)
   end
 
   def revoke!

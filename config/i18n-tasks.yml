@@ -69,6 +69,8 @@ search:
 ignore_missing:
   - views.pagination.*
 
+ignore_unused:
+  - activerecord.*
 ## Consider these keys used
 # ignore_unused:
 # - 'activerecord.attributes.*'

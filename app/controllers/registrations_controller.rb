@@ -6,9 +6,10 @@ class RegistrationsController < PublicController
   def create
     @user = User.new(secure_params)
     if @user.save
-      session[:user_id] = User.
-        login(secure_params[:username], secure_params[:password]).
-        access(request)
+      session[:user_id] = User.login(
+        secure_params[:username],
+        secure_params[:password]
+      ).access(request)
       UserMailer.registration_email(@user).deliver_later
       flash[:notice] = translate(".success")
       redirect_to dashboard_path

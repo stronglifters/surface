@@ -15,10 +15,10 @@ class Gym < ActiveRecord::Base
   end
 
   scope :search, ->(query) do
-    sql = 'UPPER(gyms.name) LIKE :query' +
-      ' OR UPPER(locations.city) LIKE :query' +
-      ' OR UPPER(locations.region) LIKE :query' +
-      ' OR UPPER(locations.country) LIKE :query'
+    sql = "UPPER(gyms.name) LIKE :query" +
+      " OR UPPER(locations.city) LIKE :query" +
+      " OR UPPER(locations.region) LIKE :query" +
+      " OR UPPER(locations.country) LIKE :query"
     joins(:location).where(sql, { query: "%#{query.upcase}%" })
   end
 
@@ -40,7 +40,7 @@ class Gym < ActiveRecord::Base
     end
   end
 
-  def self.search_yelp(q: 'gym', categories: ['gyms'], city: , page: 1, per_page: 20)
+  def self.search_yelp(q: "gym", categories: ["gyms"], city: , page: 1, per_page: 20)
     Search.yelp(q, categories, city, page, per_page) do |result|
       Gym.new(
         name: result.name,

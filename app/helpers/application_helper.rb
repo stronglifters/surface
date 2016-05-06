@@ -1,7 +1,7 @@
 module ApplicationHelper
   VIDEOS=[
-    'ua8oObEPptQ',
-    'txuWGoZF3ew',
+    "ua8oObEPptQ",
+    "txuWGoZF3ew",
   ]
   def gravatar_for(user, size: 260)
     secure_host = "https://secure.gravatar.com/avatar"
@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def search_form(
-    id: 'search-form',
+    id: "search-form",
     path: @search_path || dashboard_path,
     remote: @remote_search
   )

@@ -32,6 +32,7 @@ feature "Gyms", type: :feature do
 
       it "returns gyms that match the search criteria", js: true do
         subject.visit_page
+        subject.wait_for_ajax
         subject.search("sait")
 
         expect(subject).to be_on_page

@@ -16,6 +16,13 @@ class PageModel
     current_path == page_path
   end
 
+  def wait_for_ajax
+    yield if block_given?
+    Timeout.timeout(Capybara.default_max_wait_time) do
+      loop until finished_all_ajax_requests?
+    end
+  end
+
   def login_with(username, password)
     LoginPage.new.tap do |login_page|
       login_page.visit_page
@@ -23,9 +30,17 @@ class PageModel
     end
   end
 
+  def pretty_print
+    Nokogiri::HTML(page.html)
+  end
+
   private
 
   def translate(key)
     I18n.translate(key)
+  end
+
+  def finished_all_ajax_requests?
+    page.evaluate_script('jQuery.active').zero?
   end
 end

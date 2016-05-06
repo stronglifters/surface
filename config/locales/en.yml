@@ -20,6 +20,18 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    models:
+      profile: Profile
+    attributes:
+      profile:
+        female: Female
+        high: High
+        low: Low
+        male: Male
+        medium: Medium
+        other: Other
+        transgender: Transgender
   add: Add
   save: Save
   search: Search
@@ -54,14 +66,7 @@ en:
     edit:
       gender:
         title: Gender
-        female: Female
-        male: Male
-        transgender: Transgender
-        other: Other
       social_tolerance:
-        low: Low
-        medium: Medium
-        high: High
         title: Social Tolerance
       save: Save Profile
       profile_update_success: "Profile updated. This is how your public profile appears."

@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   get "/dashboard" => "training_sessions#index", as: :dashboard
   get "/terms" => "static_pages#terms"
 
-  get "/email/incoming", to: proc { [200, {}, ["OK"]] }, as: "mandrill_head_test_request"
+  get "/email/incoming", to: proc { [200, {}, ["OK"]] }
   post "/email/incoming" => "griddler/emails#create"
 end

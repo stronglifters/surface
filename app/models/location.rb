@@ -7,7 +7,12 @@ class Location < ActiveRecord::Base
     lng_column_name: :longitude
 
   def full_address
-    "#{try(:address)}, #{try(:city)}, #{try(:region)}, #{try(:country)}"
+    [
+      try(:address),
+      try(:city),
+      try(:region),
+      try(:country)
+    ].join(", ")
   end
 
   def coordinates
@@ -46,7 +51,8 @@ class Location < ActiveRecord::Base
   private
 
   def assign_coordinates
-    return if self.latitude.present? || self.longitude.present?
-    self.latitude, self.longitude = Location.from(address, city, region, country)
+    return if latitude.present? || longitude.present?
+    self.latitude, self.longitude =
+      Location.from(address, city, region, country)
   end
 end

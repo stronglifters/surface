@@ -9,8 +9,12 @@ feature "Gyms", type: :feature do
 
   feature "viewing gyms" do
     subject { GymsPage.new }
-    let!(:calgary_gym) { create(:gym, name: "sait", location: create(:calgary)) }
-    let!(:edmonton_gym) { create(:gym, name: "nait", location: create(:edmonton)) }
+    let!(:calgary_gym) do
+      create(:gym, name: "sait", location: create(:calgary))
+    end
+    let!(:edmonton_gym) do
+      create(:gym, name: "nait", location: create(:edmonton))
+    end
 
     it "loads the gyms closest to you" do
       subject.visit_page
@@ -28,7 +32,9 @@ feature "Gyms", type: :feature do
     end
 
     describe "search" do
-      let!(:other_calgary_gym) { create(:gym, name: "world health", location: create(:calgary)) }
+      let!(:other_calgary_gym) do 
+        create(:gym, name: "world health", location: create(:calgary))
+      end
 
       it "returns gyms that match the search criteria", js: true do
         subject.visit_page

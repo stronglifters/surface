@@ -51,9 +51,9 @@ describe Gym do
   end
 
   describe ".search_with" do
-    let!(:calgary_gym) { create(:gym, name: "SAIT", location: create(:calgary)) }
-    let!(:edmonton_gym) { create(:gym, name: "NAIT", location: create(:edmonton)) }
-    let!(:portland_gym) { create(:gym, name: "24 Hour Fitness", location: create(:portland)) }
+    let!(:calgary_gym) { create(:calgary_gym, name: "SAIT") }
+    let!(:edmonton_gym) { create(:edmonton_gym, name: "NAIT") }
+    let!(:portland_gym) { create(:portland_gym, name: "24 Hour Fitness") }
 
     it "returns all gyms" do
       results = Gym.search_with({})
@@ -100,7 +100,7 @@ describe Gym do
       expect(Gym.search_yelp(
         q: "SAIT",
         city: "Calgary",
-        categories: ["gyms", "stadiumsarenas"]
+        categories: %w{gyms stadiumsarenas},
       ).map(&:name)).to match_array(["Sait Campus Centre"])
     end
   end
@@ -110,10 +110,12 @@ describe Gym do
 
     it "returns the full address" do
       subject.location = location
-      expected = "#{location.address}, " +
-        "#{location.city}, " +
-        "#{location.region}, " +
-        "#{location.country}"
+      expected = [
+        location.address,
+        location.city,
+        location.region,
+        location.country
+      ].join(", ")
       expect(subject.full_address).to eql(expected)
     end
   end

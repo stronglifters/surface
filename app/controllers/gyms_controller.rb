@@ -12,7 +12,9 @@ class GymsController < ApplicationController
   def new
     @gym = Gym.new
     @gym.build_location
-    @countries = Carmen::Country.all.sort_by(&:name).map { |x| [x.name, x.code] }
+    @countries = Carmen::Country.all.sort_by(&:name).map do |x|
+      [x.name, x.code]
+    end
   end
 
   def create

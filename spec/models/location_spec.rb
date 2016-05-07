@@ -52,8 +52,9 @@ describe Location do
 
   describe "#coordinates" do
     it "returns the lat/long" do
-      subject.latitude, subject.longitude = rand(90.0), rand(180.0)
-      expect(subject.coordinates).to eql([
+      subject.latitude = rand(90.0)
+      subject.longitude = rand(180.0)
+      expect(subject.coordinates).to match_array([
         subject.latitude,
         subject.longitude
       ])

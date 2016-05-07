@@ -15,10 +15,12 @@ class Gym < ActiveRecord::Base
   end
 
   scope :search, ->(query) do
-    sql = "UPPER(gyms.name) LIKE :query" +
-      " OR UPPER(locations.city) LIKE :query" +
-      " OR UPPER(locations.region) LIKE :query" +
-      " OR UPPER(locations.country) LIKE :query"
+    sql = [
+      "UPPER(gyms.name) LIKE :query",
+      "OR UPPER(locations.city) LIKE :query",
+      "OR UPPER(locations.region) LIKE :query",
+      "OR UPPER(locations.country) LIKE :query"
+    ].join(' ')
     joins(:location).where(sql, { query: "%#{query.upcase}%" })
   end
 

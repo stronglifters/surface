@@ -56,6 +56,15 @@ FactoryGirl.define do
   factory :gym do
     name { FFaker::Internet.user_name }
     association :location
+    factory :calgary_gym do
+      location { create(:calgary) }
+    end
+    factory :edmonton_gym do
+      location { create(:edmonton) }
+    end
+    factory :portland_gym do
+      location { create(:portland) }
+    end
   end
 
   factory :user_session, class: UserSession do

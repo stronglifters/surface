@@ -1,6 +1,9 @@
 class SessionsController < PublicController
   def create
-    if user_session = User.login(params[:user][:username], params[:user][:password])
+    if user_session = User.login(
+        params[:user][:username],
+        params[:user][:password]
+    )
       session[:user_id] = user_session.access(request)
       redirect_to dashboard_path
     else

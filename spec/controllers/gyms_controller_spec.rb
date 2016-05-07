@@ -10,8 +10,8 @@ describe GymsController do
   end
 
   describe "#index" do
-    let!(:sait) { create(:gym, name: "sait", location: create(:portland)) }
-    let!(:world_health) { create(:gym, name: "world health", location: create(:portland)) }
+    let!(:sait) { create(:portland_gym, name: "sait") }
+    let!(:world_health) { create(:portland_gym, name: "world health") }
 
     it "returns a list of gyms" do
       get :index

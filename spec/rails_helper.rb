@@ -65,4 +65,10 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.after(:each) do |example|
+    if example.metadata[:type] == :feature && example.exception.present?
+      puts subject.pretty_print
+    end
+  end
 end

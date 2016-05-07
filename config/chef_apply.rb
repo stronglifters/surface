@@ -102,7 +102,7 @@ git "/usr/local/rbenv/plugins/ruby-build" do
   repository "https://github.com/sstephenson/ruby-build.git"
 end
 
-ruby_version = `cat .ruby-version`.strip
+ruby_version = `cat /vagrant/.ruby-version`.strip
 bash "install_ruby" do
   user "root"
   not_if { ::Dir.exist?("/usr/local/rbenv/versions/#{ruby_version}") }

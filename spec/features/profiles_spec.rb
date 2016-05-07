@@ -3,14 +3,16 @@ require "rails_helper"
 feature "Profiles", type: :feature do
   include_context "stronglifts_program"
   let(:user) { create(:user) }
+  let(:user_session) { create(:active_session, user: user) }
+
+  before :each do
+    page.set_rack_session(user_id: user_session.id)
+  end
 
   context "when the user has not completed any workouts" do
     subject { ProfilePage.new(user) }
 
-    before :each do
-      page.set_rack_session(user_id: user.id)
-      subject.visit_page
-    end
+    before { subject.visit_page }
 
     it "displays the users username" do
       expect(page).to have_content(user.username)
@@ -25,10 +27,7 @@ feature "Profiles", type: :feature do
   context "editing my profile" do
     subject { EditProfilePage.new(user) }
 
-    before :each do
-      page.set_rack_session(user_id: user.id)
-      subject.visit_page
-    end
+    before { subject.visit_page }
 
     it "allows me to edit my profile" do
       subject.change(gender: :male, social_tolerance: :low)

@@ -20,15 +20,37 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    models:
+      profile: Profile
+    attributes:
+      profile:
+        female: Female
+        high: High
+        low: Low
+        male: Male
+        medium: Medium
+        other: Other
+        transgender: Transgender
+  add: Add
+  save: Save
+  search: Search
   layouts:
     application:
+      gyms: Gyms
       loading: "Loading..."
-  nav:
-    user:
-      training_sessions: "Training sessions"
-      log_out: "Log out"
-      profile_edit: "Edit profile"
-      profile_view: "View profile"
+      nav:
+        user:
+          training_sessions: "Training sessions"
+          log_out: "Log out"
+          profile_edit: "Edit profile"
+          profile_view: "View profile"
+      title: Stronglifters
+  gyms:
+    index:
+      title: Gyms
+    new:
+      title: New Gym
   registrations:
     new:
       username: "Username"
@@ -44,14 +66,7 @@ en:
     edit:
       gender:
         title: Gender
-        female: Female
-        male: Male
-        transgender: Transgender
-        other: Other
       social_tolerance:
-        low: Low
-        medium: Medium
-        high: High
         title: Social Tolerance
       save: Save Profile
       profile_update_success: "Profile updated. This is how your public profile appears."
@@ -78,4 +93,4 @@ en:
     training_session:
       body_weight: Body Weight
   footer:
-    copyright: "© Copyright stronglifters.com. All rights reserved."
+    copyright: "© Copyright www.stronglifters.com. All rights reserved."

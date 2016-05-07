@@ -19,7 +19,7 @@ describe GoogleDrive do
     let(:filename) { "#{FFaker::Internet.user_name}.html" }
     let(:access_token) { FFaker::Internet.user_name }
 
-    it "downloads the specified google drive file" do
+    it "downloads the specified google drive file", skip: true do
       result = nil
       subject.download(params) do |backup_file|
         result = backup_file

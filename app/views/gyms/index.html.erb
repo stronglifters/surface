@@ -1,0 +1,12 @@
+<% content_for(:title) do %>
+  <%= t(".title") %>
+<% end %>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h1><%= t(".title") %></h1>
+    <div id="results">
+      <%= render partial: 'index' %>
+    </div>
+  </div>
+</div>

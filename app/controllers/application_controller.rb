@@ -4,15 +4,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate!
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  helper_method :current_user, :current_session, :feature_available?
 
   protected
 
-  def log_in(user)
-    session[:user_id] = user.id
+  def current_session(session_id = session[:user_id])
+    @current_session ||= UserSession.authenticate(session_id)
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id])
+    @current_user ||= current_session.try(:user)
+  end
+
+  def feature_available?(feature)
+    return true if Rails.env.test?
+    $flipper[feature.to_sym].enabled?(current_user)
   end
 
   def translate(key)
@@ -20,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate!
-    return if session[:user_id].present? && current_user.present?
+    return if current_user.present?
     redirect_to new_session_path
   rescue
     redirect_to new_session_path

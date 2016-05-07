@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115190853) do
+ActiveRecord::Schema.define(version: 20160430155822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,28 @@ ActiveRecord::Schema.define(version: 20151115190853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "gyms", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "locatable_id"
+    t.string   "locatable_type"
+    t.decimal  "latitude",       precision: 10, scale: 6
+    t.decimal  "longitude",      precision: 10, scale: 6
+    t.string   "address"
+    t.string   "city"
+    t.string   "region"
+    t.string   "country"
+    t.string   "postal_code"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
 
   create_table "profiles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "user_id",          null: false
@@ -71,6 +93,18 @@ ActiveRecord::Schema.define(version: 20151115190853) do
 
   add_index "training_sessions", ["user_id"], name: "index_training_sessions_on_user_id", using: :btree
 
+  create_table "user_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "user_id",     null: false
+    t.string   "ip"
+    t.text     "user_agent"
+    t.datetime "accessed_at"
+    t.datetime "revoked_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "user_sessions", ["user_id"], name: "index_user_sessions_on_user_id", using: :btree
+
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "username",        null: false
     t.string   "email",           null: false
@@ -86,4 +120,5 @@ ActiveRecord::Schema.define(version: 20151115190853) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "user_sessions", "users"
 end

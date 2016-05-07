@@ -53,4 +53,64 @@ FactoryGirl.define do
       ]}
     end
   end
+  factory :gym do
+    name { FFaker::Internet.user_name }
+    association :location
+    factory :calgary_gym do
+      location { create(:calgary) }
+    end
+    factory :edmonton_gym do
+      location { create(:edmonton) }
+    end
+    factory :portland_gym do
+      location { create(:portland) }
+    end
+  end
+
+  factory :user_session, class: UserSession do
+    association :user
+    ip FFaker::Internet.ip_v4_address
+    factory :active_session do
+      accessed_at Time.current
+    end
+  end
+
+  factory :location do
+    latitude { rand(90.0) }
+    longitude { rand(180.0) }
+    address { FFaker::Address.street_address }
+    city { FFaker::AddressCA.city }
+    region { FFaker::AddressCA.province }
+    postal_code { FFaker::AddressCA.postal_code }
+    country { FFaker::Address.country }
+    factory :calgary do
+      latitude { 51.0130333 }
+      longitude { -114.2142365 }
+      city { "Calgary" }
+      region { "AB" }
+      country { "CA" }
+    end
+    factory :edmonton do
+      latitude { 53.5557956 }
+      longitude { -113.6340292 }
+      city { "Edmonton" }
+      region { "AB" }
+      country { "CA" }
+    end
+    factory :portland do
+      latitude { 45.542415 }
+      longitude { -122.7244614 }
+      city { "Portland" }
+      region { "OR" }
+      country { "US" }
+    end
+    factory :no_where do
+      latitude { 0.0 }
+      longitude { 0.0 }
+      city { "" }
+      region { "" }
+      country { "" }
+      postal_code { "" }
+    end
+  end
 end

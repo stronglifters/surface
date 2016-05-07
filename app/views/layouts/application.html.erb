@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= content_for?(:title) ? "Stronglifters | #{yield(:title)}" : "Stronglifters" %></title>
+    <title><%= t('.title') %> <%= content_for?(:title) ? "| #{yield(:title)}" : "" %></title>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application" %>
@@ -31,44 +31,20 @@
               <section class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
+                  <% if feature_available?(:gym) %>
+                  <li> <%= search_form %> </li>
+                  <li class="divider"></li>
+                  <li><%= link_to t(".gyms"), gyms_path %></li>
+                  <% end %>
                   <li class="divider"></li>
                   <li class="has-dropdown">
-                    <a href="#">Main Item 1</a>
+                    <a href="#"><%= gravatar_for(current_user, size: 16) %> <%= current_user.username %></a>
                     <ul class="dropdown">
-                      <li><label>Section Name</label></li>
-                      <li class="has-dropdown">
-                        <a href="#" class="">Has Dropdown, Level 1</a>
-                        <ul class="dropdown">
-                          <li><a href="#">Dropdown Options</a></li>
-                          <li><a href="#">Dropdown Options</a></li>
-                          <li><a href="#">Level 2</a></li>
-                          <li><a href="#">Subdropdown Option</a></li>
-                          <li><a href="#">Subdropdown Option</a></li>
-                          <li><a href="#">Subdropdown Option</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="#">Dropdown Option</a></li>
-                      <li><a href="#">Dropdown Option</a></li>
+                      <li><%= link_to t(".nav.user.training_sessions"), training_sessions_path %></li>
+                      <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
+                      <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>
                       <li class="divider"></li>
-                      <li><label>Section Name</label></li>
-                      <li><a href="#">Dropdown Option</a></li>
-                      <li><a href="#">Dropdown Option</a></li>
-                      <li><a href="#">Dropdown Option</a></li>
-                      <li class="divider"></li>
-                      <li><a href="#">See all →</a></li>
-                    </ul>
-                  </li>
-                  <li class="divider"></li>
-                  <li><a href="#">Main Item 2</a></li>
-                  <li class="divider"></li>
-                  <li class="has-dropdown">
-                    <a href="#"><%= gravatar_for(@current_user, size: 16) %> <%= @current_user.username %></a>
-                    <ul class="dropdown">
-                      <li><%= link_to t("nav.user.training_sessions"), training_sessions_path %></li>
-                      <li><%= link_to t("nav.user.profile_edit"), edit_profile_path(@current_user) %></li>
-                      <li><%= link_to t("nav.user.profile_view"), profile_path(@current_user) %></li>
-                      <li class="divider"></li>
-                      <li><%= link_to t("nav.user.log_out"), session_path('me'), method: :delete %></li>
+                      <li><%= link_to t(".nav.user.log_out"), session_path('me'), method: :delete %></li>
                     </ul>
                   </li>
                 </ul>
@@ -97,8 +73,6 @@
                 <ul class="inline-list right">
                   <li><a href="https://twitter.com/Stronglifters/">Twitter</a></li>
                   <li><a href="https://github.com/stronglifters">Github</a></li>
-                  <li><a href="#">Link 3</a></li>
-                  <li><a href="#">Link 4</a></li>
                 </ul>
               </div>
             </div>

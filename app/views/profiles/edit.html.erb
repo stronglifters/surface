@@ -7,14 +7,14 @@
         <legend><%= t(".gender.title") %></legend>
         <% Profile.genders.keys.each do |gender| %>
           <%= f.radio_button(:gender, gender) %>
-          <%= f.label("gender_#{gender}", t(".gender.#{gender}")) %>
+          <%= f.label("gender_#{gender}", Profile.human_attribute_name(gender)) %>
         <% end %>
       </fieldset>
       <fieldset>
         <legend><%= t(".social_tolerance.title") %></legend>
         <% Profile.social_tolerances.keys.each do |social_tolerance| %>
           <%= f.radio_button(:social_tolerance, social_tolerance) %>
-          <%= f.label("social_tolerance_#{social_tolerance}", t(".social_tolerance.#{social_tolerance}")) %>
+          <%= f.label("social_tolerance_#{social_tolerance}", Profile.human_attribute_name(social_tolerance)) %>
         <% end %>
       </fieldset>
       <%= f.submit t(".save"), class: "button"  %>

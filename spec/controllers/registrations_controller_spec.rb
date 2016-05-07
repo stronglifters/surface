@@ -38,7 +38,8 @@ describe RegistrationsController do
       end
 
       it "logs them in" do
-        expect(session[:user_id]).to eql(User.first.id)
+        expect(session[:user_id]).to be_present
+        expect(session[:user_id]).to eql(UserSession.last.id)
       end
 
       it "does not display any errors" do

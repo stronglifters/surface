@@ -1,5 +1,13 @@
-<div class="row">
-  <div class="large-12 columns">
-    <%= render @training_sessions %>
+<% if @training_sessions.any? %>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= render @training_sessions %>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="row">
+    <div class="large-12 columns">
+      <%= random_video %>
+    </div>
+  </div>
+<% end %>

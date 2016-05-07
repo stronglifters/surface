@@ -3,6 +3,6 @@ coffeescript:
 javascript:
   enabled: true
 ruby:
-  config_file: .ruby-style.yml
+  enabled: true
 scss:
   enabled: true

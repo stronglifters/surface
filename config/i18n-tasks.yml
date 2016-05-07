@@ -66,10 +66,11 @@ search:
 #   api_key: "AbC-dEf5"
 
 ## Consider these keys not missing
-# ignore_missing:
-# - 'errors.messages.{accepted,blank,invalid,too_short,too_long}'
-# - '{devise,simple_form}.*'
+ignore_missing:
+  - views.pagination.*
 
+ignore_unused:
+  - activerecord.*
 ## Consider these keys used
 # ignore_unused:
 # - 'activerecord.attributes.*'

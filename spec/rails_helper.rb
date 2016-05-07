@@ -48,7 +48,14 @@ RSpec.configure do |config|
 
   config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
-    page.driver.browser.url_blacklist = ["http://fonts.googleapis.com"]
+    page.driver.browser.url_blacklist = [
+      "http://apis.google.com",
+      "http://fonts.googleapis.com",
+      "http://www.google.com",
+      "https://accounts.google.com",
+      "https://maps.google.com",
+      "https://secure.gravatar.com",
+    ]
   end
 
   config.before(:each) do

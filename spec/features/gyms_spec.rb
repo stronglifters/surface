@@ -32,7 +32,7 @@ feature "Gyms", type: :feature do
     end
 
     describe "search" do
-      let!(:other_calgary_gym) do 
+      let!(:other_calgary_gym) do
         create(:gym, name: "world health", location: create(:calgary))
       end
 

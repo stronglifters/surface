@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def feature_available?(feature)
+    return true if Rails.env.test?
     $flipper[feature.to_sym].enabled?(current_user)
   end
 

@@ -28,7 +28,7 @@ source 'https://rubygems.org' do
   gem 'geocoder'
   gem 'geokit-rails'
   gem 'griddler'
-  gem 'griddler-mandrill'
+  gem 'griddler-sendgrid'
   gem 'groupdate'
   gem 'i18n-tasks', group: :development
   gem 'jbuilder', '~> 2.0'

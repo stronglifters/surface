@@ -34,6 +34,7 @@ source 'https://rubygems.org' do
   gem 'jbuilder', '~> 2.0'
   gem 'jquery-rails'
   gem 'jquery-turbolinks'
+  gem 'json', '1.8.2'
   gem 'kaminari'
   gem 'meta_request', group: :development
   gem 'pg'
@@ -55,7 +56,7 @@ source 'https://rubygems.org' do
   gem 'sequel'
   gem 'sidekiq'
   gem 'spring', group: [:development, :test]
-  gem "spring-commands-cucumber", group: :test
+  gem 'spring-commands-cucumber', group: :test
   gem 'spring-commands-rspec', group: :test
   gem 'spring-commands-teaspoon', group: :test
   gem 'sprockets-rails', '2.3.3'

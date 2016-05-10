@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require ::File.expand_path('../../config/environment', __FILE__)
+
+user = User.last
+attachment = File.open(ARGV.first)
+
+BackupFile.new(user, attachment).process_later(Program.stronglifts)

@@ -20,7 +20,7 @@ class Csv::Workout
     day, month, year = row[0].split("/")
     year = "20#{year}"
     workout = new(
-      date: user.timezone.local_to_utc(Time.utc(year, month, day)),
+      date: user.time_zone.local_to_utc(Time.utc(year, month, day)),
       note: row[1],
       workout: row[2],
       body_weight_kg: row[3],

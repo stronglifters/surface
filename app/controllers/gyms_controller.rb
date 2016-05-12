@@ -1,5 +1,4 @@
 class GymsController < ApplicationController
-  include Pageable
   before_action { @search_path = gyms_path }
   before_action only: [:index] { @remote_search = true }
 

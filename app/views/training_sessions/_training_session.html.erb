@@ -1,17 +1,12 @@
-<%= cache(training_session) do %>
-  <div class="large-4 small-6 columns">
-    <div class="panel">
-      <h5>
-        (<%= link_to training_session.workout, program_path(training_session.program, anchor: training_session.workout) %>)
-        <%= training_session.occurred_at.strftime("%a, %d %b. %Y") %>
-      </h5>
-      <% training_session.exercise_sessions.each do |exercise_session| %>
-        <p>
-        <strong><%= exercise_session.exercise.short_name %></strong>
-        <%= exercise_session.sets.compact.join('/') %> @ <%= exercise_session.target_weight %> lbs 
-        </p>
-      <% end %>
-      <p> <strong><%= t('.body_weight') %></strong> <%= training_session.body_weight %> lbs </p>
-    </div>
-  </div>
-<% end %>
+<tr>
+  <td>
+    <%= link_to training_session.workout, program_path(training_session.program, anchor: training_session.workout) %>
+  </td>
+  <td><%= I18n.l training_session.occurred_at, format: :long %></td>
+  <td><%= training_session.body_weight %> lbs</td>
+  <td>
+  <% training_session.exercise_sessions.each do |exercise_session| %>
+    <strong><%= exercise_session.exercise.name %></strong> @ <%= exercise_session.target_weight %> lbs,
+  <% end %>
+  </td>
+</tr>

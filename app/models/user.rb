@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   after_create :create_profile
   before_validation :lowercase_account_fields
 
-  def timezone
+  def time_zone
     TZInfo::Timezone.get('Canada/Mountain')
   end
 

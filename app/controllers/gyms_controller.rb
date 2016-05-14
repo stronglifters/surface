@@ -8,6 +8,10 @@ class GymsController < ApplicationController
     )
   end
 
+  def show
+    @gym = Gym.find(params[:id])
+  end
+
   def new
     @gym = Gym.new
     @gym.build_location

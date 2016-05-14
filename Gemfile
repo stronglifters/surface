@@ -22,6 +22,7 @@ source 'https://rubygems.org' do
   gem 'flamegraph', group: :development
   gem 'flipper'
   gem 'flipper-redis'
+  gem 'flux-rails-assets'
   gem 'font-awesome-rails'
   gem 'foreman', group: :development
   gem 'foundation-rails', '~> 5.5'
@@ -36,6 +37,7 @@ source 'https://rubygems.org' do
   gem 'jquery-turbolinks'
   gem 'json', '1.8.2'
   gem 'kaminari'
+  gem 'lodash-rails'
   gem 'meta_request', group: :development
   gem 'pg'
   gem 'phantomjs', group: [:development, :test]
@@ -49,6 +51,7 @@ source 'https://rubygems.org' do
   gem 'rails-erd', group: :development
   gem 'rails-i18n', '~> 4.0.0'
   gem 'rails_12factor', group: :production
+  gem 'react-rails'
   gem 'rspec-rails', group: :test
   gem 'rubyzip', require: 'zip'
   gem 'sass-rails', '~> 5.0'
@@ -60,6 +63,7 @@ source 'https://rubygems.org' do
   gem 'spring-commands-cucumber', group: :test
   gem 'spring-commands-rspec', group: :test
   gem 'spring-commands-teaspoon', group: :test
+  gem 'sprockets-es6'
   gem 'sprockets-rails', '2.3.3'
   gem 'sqlite3'
   gem 'stackprof', group: :development

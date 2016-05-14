@@ -9,6 +9,7 @@ describe EmailProcessor do
     let(:user) { create(:user) }
 
     before :each do
+      email.to.first[:token] = user.id
       email.from[:email] = user.email
     end
 

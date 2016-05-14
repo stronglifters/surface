@@ -44,7 +44,7 @@ describe Csv::Import do
       subject.import_from(directory)
       training_session = user.training_sessions.order(:occurred_at).first
 
-      expected_date = user.timezone.local_to_utc(Time.utc(2015, 03, 02))
+      expected_date = user.time_zone.local_to_utc(Time.utc(2015, 03, 02))
       expect(training_session.occurred_at).to eql(expected_date)
       expect(training_session.workout).to eql(workout_a)
       expect(training_session.body_weight).to eql(205.0)
@@ -97,7 +97,7 @@ describe Csv::Import do
     it "excludes items that have already been imported" do
       subject.import_from(directory)
       subject.import_from(directory)
-      expect(user.training_sessions.count).to eql(100)
+      expect(user.training_sessions.count).to eql(168)
     end
   end
 

@@ -1,5 +1,4 @@
 class GymsController < ApplicationController
-  include Pageable
   before_action { @search_path = gyms_path }
   before_action only: [:index] { @remote_search = true }
 
@@ -7,6 +6,10 @@ class GymsController < ApplicationController
     @gyms = paginate(
       Gym.closest_to(current_session.location).search_with(params)
     )
+  end
+
+  def show
+    @gym = Gym.find(params[:id])
   end
 
   def new

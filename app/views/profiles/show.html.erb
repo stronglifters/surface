@@ -9,6 +9,8 @@
     <% else %>
       <p><%= t('.no_workouts_completed') %></p>
     <% end %>
+    <p><%= Profile.human_attribute_name(:time_zone) %> <%= @user.time_zone %></p>
+    <p><%= mail_to(@user.import_address, User.human_attribute_name(:import_address)) %></p>
   </div>
 
   <div class="small-12 medium-8 columns small-text-center medium-text-left">

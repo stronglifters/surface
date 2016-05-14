@@ -47,6 +47,7 @@ source 'https://rubygems.org' do
   gem 'ractive-rails'
   gem 'rails', '~> 4.2'
   gem 'rails-erd', group: :development
+  gem 'rails-i18n', '~> 4.0.0'
   gem 'rails_12factor', group: :production
   gem 'rspec-rails', group: :test
   gem 'rubyzip', require: 'zip'

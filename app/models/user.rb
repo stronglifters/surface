@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :exercise_sessions, through: :training_sessions
   has_many :user_sessions, dependent: :destroy
   has_one :profile
+  has_many :received_emails
   USERNAME_REGEX=/\A[-a-z0-9_.]*\z/i
 
   validates :username, presence: true, format: { with: USERNAME_REGEX }, uniqueness: true
@@ -13,9 +14,10 @@ class User < ActiveRecord::Base
 
   after_create :create_profile
   before_validation :lowercase_account_fields
+  delegate :time_zone, to: :profile
 
-  def timezone
-    TZInfo::Timezone.get('Canada/Mountain')
+  def first_training_session
+    training_sessions.order(occurred_at: :asc).first
   end
 
   def gravatar_id
@@ -26,11 +28,24 @@ class User < ActiveRecord::Base
     username
   end
 
+  def import_address
+    "#{id}@stronglifters.com"
+  end
+
+  def add_to_inbox(email)
+    received_emails.create!(
+      to: email.to,
+      from: email.from,
+      subject: email.subject,
+      body: email.body
+    )
+    email.attachments.each do |attachment|
+      BackupFile.new(self, attachment).process_later(Program.stronglifts)
+    end
+  end
+
   def personal_record_for(exercise)
-    exercise_sessions.
-      joins(:exercise).
-      where(exercises: { name: exercise.name }).
-      maximum(:target_weight)
+    history_for(exercise).personal_record
   end
 
   def history_for(exercise)

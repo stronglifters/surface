@@ -26,12 +26,19 @@ en:
     attributes:
       profile:
         female: Female
+        gender: Gender
         high: High
         low: Low
         male: Male
         medium: Medium
         other: Other
         transgender: Transgender
+        social_tolerance: Social Tolerance
+      user:
+        import_address: Send-to-Stronglifters e-mail address
+  time:
+    formats:
+      short: "%a, %d %b %Y"
   add: Add
   save: Save
   search: Search
@@ -64,10 +71,6 @@ en:
       success: "Thank you for registering."
   profiles:
     edit:
-      gender:
-        title: Gender
-      social_tolerance:
-        title: Social Tolerance
       save: Save Profile
       profile_update_success: "Profile updated. This is how your public profile appears."
     show:
@@ -90,7 +93,5 @@ en:
     upload:
       success: "Our minions have been summoned to unpack your backup."
       failure: "We don't know how to unpack this type of file."
-    training_session:
-      body_weight: Body Weight
   footer:
     copyright: "© Copyright www.stronglifters.com. All rights reserved."

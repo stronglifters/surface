@@ -217,4 +217,20 @@ describe User do
       it { expect(User.login("sofake", "password")).to be_falsey }
     end
   end
+
+  describe "#add_to_inbox" do
+    include_context "stronglifts_program"
+    subject { create(:user) }
+    let(:email) { build(:email, :with_attachment) }
+
+    it "records the email" do
+      subject.add_to_inbox(email)
+      expect(subject.received_emails.count).to eql(1)
+      received_email = subject.received_emails.first
+      expect(received_email.to.map(&:symbolize_keys)).to match_array(email.to)
+      expect(received_email.from.symbolize_keys).to eql(email.from)
+      expect(received_email.subject).to eql(email.subject)
+      expect(received_email.body).to eql(email.body)
+    end
+  end
 end

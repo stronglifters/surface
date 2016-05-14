@@ -7,6 +7,14 @@ class TrainingHistory
     @exercise = exercise
   end
 
+  def personal_record
+    user.
+      exercise_sessions.
+      joins(:exercise).
+      where(exercises: { name: exercise.name }).
+      maximum(:target_weight)
+  end
+
   def to_line_chart
     user.
       exercise_sessions.

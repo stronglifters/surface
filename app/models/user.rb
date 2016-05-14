@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     username
   end
 
+  def import_address
+    "#{id}@stronglifters.com"
+  end
+
   def add_to_inbox(email)
     email.attachments.each do |attachment|
       BackupFile.new(self, attachment).process_later(Program.stronglifts)
@@ -34,10 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def personal_record_for(exercise)
-    exercise_sessions.
-      joins(:exercise).
-      where(exercises: { name: exercise.name }).
-      maximum(:target_weight)
+    history_for(exercise).personal_record
   end
 
   def history_for(exercise)

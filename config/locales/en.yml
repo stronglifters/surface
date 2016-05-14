@@ -34,6 +34,8 @@ en:
         other: Other
         transgender: Transgender
         social_tolerance: Social Tolerance
+      user:
+        import_address: Send-to-Stronglifters e-mail address
   time:
     formats:
       short: "%a, %d %b %Y"

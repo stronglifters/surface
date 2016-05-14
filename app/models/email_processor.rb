@@ -6,10 +6,9 @@ class EmailProcessor
   end
 
   def process
-    user = User.find_by!(email: email.from[:email])
-
-    email.attachments.each do |attachment|
-      BackupFile.new(user, attachment).process_later(Program.stronglifts)
+    tokens = email.to.map { |x| x[:token] }.uniq
+    User.find(tokens).each do |user|
+      user.add_to_inbox(email)
     end
   end
 end

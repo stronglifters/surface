@@ -24,10 +24,10 @@ FactoryGirl.define do
   end
   factory :email, class: OpenStruct do
     to [{
-      full: "to_user@email.com",
-      email: "to_user@email.com",
-      token: "to_user",
-      host: "email.com",
+      full: "cf9b756e-789d-4bbb-aee7-2c8298bb69a7@stronglifters.com",
+      email: "cf9b756e-789d-4bbb-aee7-2c8298bb69a7@stronglifters.com",
+      token: "cf9b756e-789d-4bbb-aee7-2c8298bb69a7",
+      host: "stronglifters.com",
       name: nil
     }]
     from({

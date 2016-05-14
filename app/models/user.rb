@@ -27,6 +27,12 @@ class User < ActiveRecord::Base
     username
   end
 
+  def add_to_inbox(email)
+    email.attachments.each do |attachment|
+      BackupFile.new(self, attachment).process_later(Program.stronglifts)
+    end
+  end
+
   def personal_record_for(exercise)
     exercise_sessions.
       joins(:exercise).

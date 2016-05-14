@@ -71,6 +71,7 @@ ignore_missing:
 
 ignore_unused:
   - activerecord.*
+  - time.*
 ## Consider these keys used
 # ignore_unused:
 # - 'activerecord.attributes.*'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512024722) do
+ActiveRecord::Schema.define(version: 20160514150039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,18 @@ ActiveRecord::Schema.define(version: 20160512024722) do
 
   add_index "programs", ["slug"], name: "index_programs_on_slug", unique: true, using: :btree
 
+  create_table "received_emails", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "user_id"
+    t.text     "to"
+    t.text     "from"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "received_emails", ["user_id"], name: "index_received_emails_on_user_id", using: :btree
+
   create_table "training_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "user_id",     null: false
     t.datetime "created_at",  null: false
@@ -121,5 +133,6 @@ ActiveRecord::Schema.define(version: 20160512024722) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "received_emails", "users"
   add_foreign_key "user_sessions", "users"
 end

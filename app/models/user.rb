@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :exercise_sessions, through: :training_sessions
   has_many :user_sessions, dependent: :destroy
   has_one :profile
+  has_many :received_emails
   USERNAME_REGEX=/\A[-a-z0-9_.]*\z/i
 
   validates :username, presence: true, format: { with: USERNAME_REGEX }, uniqueness: true
@@ -32,6 +33,12 @@ class User < ActiveRecord::Base
   end
 
   def add_to_inbox(email)
+    received_emails.create!(
+      to: email.to,
+      from: email.from,
+      subject: email.subject,
+      body: email.body
+    )
     email.attachments.each do |attachment|
       BackupFile.new(self, attachment).process_later(Program.stronglifts)
     end

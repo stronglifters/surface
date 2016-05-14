@@ -223,7 +223,7 @@ describe User do
     subject { create(:user) }
     let(:email) { build(:email, :with_attachment) }
 
-    it 'records the email' do
+    it "records the email" do
       subject.add_to_inbox(email)
       expect(subject.received_emails.count).to eql(1)
       received_email = subject.received_emails.first

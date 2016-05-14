@@ -20,7 +20,7 @@ describe Android::Import do
     end
 
     it "imports each training session" do
-      mountain_time = ActiveSupport::TimeZone['America/Denver']
+      mountain_time = ActiveSupport::TimeZone["America/Denver"]
       allow(user).to receive(:time_zone).and_return(mountain_time)
       subject.import_from(directory)
       training_session = user.training_sessions.order(:occurred_at).first

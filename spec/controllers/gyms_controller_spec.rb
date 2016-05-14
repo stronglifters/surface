@@ -101,7 +101,7 @@ describe GymsController do
   end
 
   describe "#show" do
-    it 'loads the gym' do
+    it "loads the gym" do
       gym = create(:gym)
       get :show, id: gym.id
       expect(assigns(:gym)).to eql(gym)

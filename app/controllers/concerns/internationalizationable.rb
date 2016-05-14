@@ -16,7 +16,7 @@ module Internationalizationable
     I18n.with_locale(params[:locale]) { yield }
   end
 
-  def default_url_options(options = {})
+  def default_url_options(*)
     { locale: I18n.locale }
   end
 end

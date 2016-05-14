@@ -13,9 +13,10 @@ class User < ActiveRecord::Base
 
   after_create :create_profile
   before_validation :lowercase_account_fields
+  delegate :time_zone, to: :profile
 
-  def time_zone
-    TZInfo::Timezone.get('Canada/Mountain')
+  def first_training_session
+    training_sessions.order(occurred_at: :asc).first
   end
 
   def gravatar_id

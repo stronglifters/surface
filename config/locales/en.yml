@@ -26,12 +26,14 @@ en:
     attributes:
       profile:
         female: Female
+        gender: Gender
         high: High
         low: Low
         male: Male
         medium: Medium
         other: Other
         transgender: Transgender
+        social_tolerance: Social Tolerance
   add: Add
   save: Save
   search: Search
@@ -64,10 +66,6 @@ en:
       success: "Thank you for registering."
   profiles:
     edit:
-      gender:
-        title: Gender
-      social_tolerance:
-        title: Social Tolerance
       save: Save Profile
       profile_update_success: "Profile updated. This is how your public profile appears."
     show:

@@ -2,7 +2,7 @@
   <td>
     <%= link_to training_session.workout, program_path(training_session.program, anchor: training_session.workout) %>
   </td>
-  <td><%= I18n.l training_session.occurred_at, format: :long %></td>
+  <td><%= I18n.l training_session.occurred_at, format: :short %></td>
   <td><%= training_session.body_weight %> lbs</td>
   <td>
   <% training_session.exercise_sessions.each do |exercise_session| %>

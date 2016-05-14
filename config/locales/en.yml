@@ -34,6 +34,9 @@ en:
         other: Other
         transgender: Transgender
         social_tolerance: Social Tolerance
+  time:
+    formats:
+      short: "%a, %d %b %Y"
   add: Add
   save: Save
   search: Search

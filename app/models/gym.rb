@@ -46,6 +46,7 @@ class Gym < ActiveRecord::Base
     Search.yelp(q, categories, city, page, per_page) do |result|
       Gym.new(
         name: result.name,
+        yelp_id: result.id,
         location_attributes: {
           address: result.location.address.first,
           city: result.location.city,
@@ -60,6 +61,7 @@ class Gym < ActiveRecord::Base
   end
 
   def duplicate?(distance: 0.1)
+    return true if yelp_id.present? && Gym.where.not(id: id).exists?(yelp_id: yelp_id)
     Gym.
       closest_to(location, distance: distance).
       where.not(id: id).

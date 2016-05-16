@@ -129,7 +129,16 @@ describe Gym do
       expect(subject.duplicate?).to be_truthy
     end
 
+    it 'returns true when another gym has the same yelp id' do
+      subject.yelp_id = "hello-world"
+      subject.save!
+      other = create(:gym, yelp_id: subject.yelp_id)
+
+      expect(subject.duplicate?).to be_truthy
+    end
+
     it "returns false when no dups are found" do
+      subject.yelp_id = "hello-world"
       subject.location = create(:portland)
       subject.save!
       expect(subject.duplicate?).to be_falsey

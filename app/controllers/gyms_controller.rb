@@ -35,6 +35,7 @@ class GymsController < ApplicationController
   def secure_params
     params.require(:gym).permit(
       :name,
+      :yelp_id,
       location_attributes: [:address, :city, :region, :country, :postal_code]
     )
   end

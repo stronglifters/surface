@@ -8,7 +8,7 @@
   <tbody>
   <% @gyms.each do |gym| %>
     <tr>
-      <td><%= gym.name %></td>
+      <td><%= gym.new_record? ? gym.name : link_to(gym.name, gym_path(gym)) %></td>
       <td>
         <%= gym.full_address %>
         <%= link_to gym.location.try(:url) do %>
@@ -19,6 +19,7 @@
         <% if gym.new_record? && !gym.duplicate? %>
           <%= form_for(gym) do |form| %>
             <%= form.hidden_field :name %>
+            <%= form.hidden_field :yelp_id %>
             <%= form.fields_for :location do |location_form| %>
               <%= location_form.hidden_field :address %>
               <%= location_form.hidden_field :city %>

@@ -1,6 +1,23 @@
 require "rails_helper"
 
 describe SessionsController do
+  describe "#new" do
+    context "when already logged in" do
+      let(:user) { create(:user) }
+
+      it 'redirects to the dashboard' do
+        http_login(user)
+        get :new
+        expect(response).to redirect_to(dashboard_path)
+      end
+    end
+
+    it 'loads a new user' do
+      get :new
+      expect(assigns(:user)).to be_new_record
+    end
+  end
+
   describe "#create" do
     let(:user) { create(:user, password: "password") }
 

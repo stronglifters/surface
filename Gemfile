@@ -31,6 +31,7 @@ source 'https://rubygems.org' do
   gem 'griddler'
   gem 'griddler-sendgrid'
   gem 'groupdate'
+  gem 'http_accept_language'
   gem 'i18n-tasks', group: :development
   gem 'jbuilder', '~> 2.0'
   gem 'jquery-rails'

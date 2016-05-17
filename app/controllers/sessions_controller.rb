@@ -13,7 +13,11 @@ class SessionsController < PublicController
   end
 
   def new
-    @user = User.new
+    if current_user.present?
+      redirect_to dashboard_path
+    else
+      @user = User.new
+    end
   end
 
   def destroy

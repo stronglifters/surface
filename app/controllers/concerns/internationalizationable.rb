@@ -19,7 +19,8 @@ module Internationalizationable
   end
 
   def with_locale(available_locales = I18n.available_locales)
-    locale = http_accept_language.compatible_language_from(available_locales)
+    locale = params[:locale] ||
+      http_accept_language.compatible_language_from(available_locales)
     I18n.with_locale(locale) { yield }
   end
 end

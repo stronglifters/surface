@@ -1,37 +1,16 @@
 class ApplicationController < ActionController::Base
+  include Authenticatable
   include Internationalizationable
   include Pageable
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :authenticate!
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  helper_method :current_user, :current_session, :feature_available?
-
-  protected
-
-  def current_session(session_id = session[:user_id])
-    @current_session ||= UserSession.authenticate(session_id)
-  end
-
-  def current_user
-    @current_user ||= current_session.try(:user)
-  end
+  helper_method :feature_available?
 
   def feature_available?(feature)
     return true if Rails.env.test?
     $flipper[feature.to_sym].enabled?(current_user)
-  end
-
-  def translate(key)
-    I18n.translate("#{params[:controller]}.#{params[:action]}#{key}")
-  end
-
-  def authenticate!
-    return if current_user.present?
-    redirect_to new_session_path
-  rescue
-    redirect_to new_session_path
   end
 
   def record_not_found

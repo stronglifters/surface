@@ -20,7 +20,7 @@ class Gym < ActiveRecord::Base
       "OR UPPER(locations.city) LIKE :query",
       "OR UPPER(locations.region) LIKE :query",
       "OR UPPER(locations.country) LIKE :query"
-    ].join(' ')
+    ].join(" ")
     joins(:location).where(sql, { query: "%#{query.upcase}%" })
   end
 
@@ -64,7 +64,7 @@ class Gym < ActiveRecord::Base
     return if city.blank?
     return [] if Rails.env.test?
     (1..pages).each do |page|
-      Gym.search_yelp(q: 'gym', city: city, page: page).each(&:save!)
+      Gym.search_yelp(q: "gym", city: city, page: page).each(&:save!)
     end
   end
 

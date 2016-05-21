@@ -11,12 +11,12 @@ describe UserSession do
   end
 
   describe "#access" do
-    let(:request) { double(ip: '192.168.1.1', user_agent: 'blah') }
+    let(:request) { double(ip: "192.168.1.1", user_agent: "blah") }
     let(:location) { build(:location) }
     let(:because) {  subject.access(request) }
 
     before :each do
-      allow(Location).to receive(:build_from_ip).with('192.168.1.1').and_return(location)
+      allow(Location).to receive(:build_from_ip).with("192.168.1.1").and_return(location)
       because
     end
 
@@ -54,16 +54,16 @@ describe UserSession do
     end
 
     it "returns nil if the id is not active" do
-      expect(UserSession.authenticate('blah')).to be_nil
+      expect(UserSession.authenticate("blah")).to be_nil
     end
   end
 
   describe "#after_create" do
-    it 'schedules a job to import gyms in city' do
+    it "schedules a job to import gyms in city" do
       allow(ImportGymsJob).to receive(:perform_later)
-      subject.location = create(:portland)
+      subject.location = location = create(:portland)
       subject.save!
-      expect(ImportGymsJob).to have_received(:perform_later).with(subject.location)
+      expect(ImportGymsJob).to have_received(:perform_later).with(location)
     end
   end
 end

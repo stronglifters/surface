@@ -6,7 +6,7 @@ class Search
       @client = client
     end
 
-    def search(q, categories = [], city, page, per_page, &block)
+    def search(q, city, categories = [], page = 1, per_page = 20, &block)
       return [] if city.blank?
 
       cache(key: key_for(q, city, page, per_page)) do
@@ -17,16 +17,17 @@ class Search
     private
 
     def key_for(*args)
-      args.join('-')
+      args.join("-")
     end
 
     def results_for(q, city, categories, page, per_page)
-      client.search(city, {
+      client.search(
+        city,
         category_filter: categories.join(","),
         limit: per_page,
         offset: offset_for(page, per_page),
         term: q,
-      }).businesses
+      ).businesses
     end
 
     def paginate(results)
@@ -45,6 +46,6 @@ class Search
   end
 
   def self.yelp(q, categories = [], city, page, per_page, &block)
-    Yelp.new.search(q, categories, city, page, per_page, &block)
+    Yelp.new.search(q, city, categories, page, per_page, &block)
   end
 end

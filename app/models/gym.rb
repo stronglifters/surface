@@ -61,7 +61,8 @@ class Gym < ActiveRecord::Base
   end
 
   def self.import(city, pages: 5)
-    return if Rails.env.test? || city.blank?
+    return if city.blank?
+    return [] if Rails.env.test?
     (1..pages).each do |page|
       Gym.search_yelp(q: 'gym', city: city, page: page).each(&:save!)
     end

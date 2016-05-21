@@ -60,6 +60,12 @@ class Gym < ActiveRecord::Base
     end
   end
 
+  def self.import(city, pages: 5)
+    (1..pages).each do |page|
+      Gym.search_yelp(q: 'gym', city: city, page: page).each(&:save!)
+    end
+  end
+
   def duplicate?(distance: 0.1)
     return true if yelp_id.present? && Gym.where.not(id: id).exists?(yelp_id: yelp_id)
     Gym.

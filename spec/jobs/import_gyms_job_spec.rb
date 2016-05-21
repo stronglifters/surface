@@ -15,4 +15,13 @@ describe ImportGymsJob do
     subject.perform(nil)
     expect(Gym).to_not have_received(:import)
   end
+
+  it 'skips the import of gyms in the city are already present' do
+    allow(Gym).to receive(:import)
+    create(:gym, location: location)
+
+    subject.perform(location)
+
+    expect(Gym).to_not have_received(:import)
+  end
 end

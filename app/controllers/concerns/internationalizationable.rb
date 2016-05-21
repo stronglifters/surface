@@ -19,10 +19,10 @@ module Internationalizationable
   end
 
   def with_locale
-    I18n.with_locale(params[:locale]) { yield }
+    I18n.with_locale(current_locale) { yield }
   end
 
-  def default_url_options(*)
-    { locale: I18n.locale }
+  def current_locale(locales = I18n.available_locales)
+    params[:locale] || http_accept_language.compatible_language_from(locales)
   end
 end

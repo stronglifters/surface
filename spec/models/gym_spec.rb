@@ -124,15 +124,14 @@ describe Gym do
     it "returns true when a dup is found" do
       subject.location = create(:portland)
       subject.save!
-      other = create(:gym, location: create(:portland))
+      create(:gym, location: create(:portland))
 
       expect(subject.duplicate?).to be_truthy
     end
 
     it 'returns true when another gym has the same yelp id' do
       subject.yelp_id = "hello-world"
-      subject.save!
-      other = create(:gym, yelp_id: subject.yelp_id)
+      create(:gym, yelp_id: subject.yelp_id)
 
       expect(subject.duplicate?).to be_truthy
     end

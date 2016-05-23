@@ -14,7 +14,10 @@ class User < ActiveRecord::Base
 
   after_create :create_profile
   before_validation :lowercase_account_fields
-  delegate :time_zone, to: :profile
+
+  def time_zone
+    @time_zone ||= ActiveSupport::TimeZone[profile.read_attribute(:time_zone)]
+  end
 
   def first_training_session
     training_sessions.order(occurred_at: :asc).first

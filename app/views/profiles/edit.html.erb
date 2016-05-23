@@ -19,8 +19,7 @@
       </fieldset>
       <fieldset>
         <legend><%= Profile.human_attribute_name(:time_zone) %></legend>
-          <%= f.time_zone_select(:time_zone, @time_zones, model: ActiveSupport::TimeZone) %>
-          <%= f.label(:time_zone) %>
+        <%= f.time_zone_select(:time_zone, @time_zones) %>
       </fieldset>
       <%= f.submit t(".save"), class: "button"  %>
     <% end %>

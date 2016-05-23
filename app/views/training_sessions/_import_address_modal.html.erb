@@ -2,7 +2,7 @@
   <h2 id="modalTitle">Send-to-Stronglifters.</h2>
   <p class="lead">Your custom email address.</p>
 
-  <p>This is your custom email address for sending CSV exports to from the StrongLifts 5x5 mobile application.</p>
+  <p><%= t('.blurb') %></p>
   <div class="row">
     <div class="large-8 columns">
       <p><%= text_field_tag :import_address, current_user.import_address %></p>
@@ -13,9 +13,9 @@
   </div>
   <p class="text-center"><%= mail_to(current_user.import_address, User.human_attribute_name(:import_address)) %></p>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-  <% if current_user.default_time_zone? %>
+  <% if !current_user.default_time_zone? %>
     <div class="panel">
-      <p>To ensure your workouts are imported correctly we suggest that you update your timezone <%= link_to "here", edit_profile_path(current_user.profile) %>.</p>
+      <p><%= link_to t('.warning'), edit_profile_path(current_user.profile) %></p>
     </div>
   <% end %>
 </div>

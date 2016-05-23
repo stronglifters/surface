@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   private
 
   def create_profile
-    self.profile = Profile.create!(user: self)
+    self.create_profile!
   end
 
   def lowercase_account_fields

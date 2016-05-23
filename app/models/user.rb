@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
     @time_zone ||= ActiveSupport::TimeZone[profile.read_attribute(:time_zone)]
   end
 
-  def chosen_time_zone?
-    time_zone.name != "Etc/UTC"
+  def default_time_zone?
+    "Etc/UTC" == time_zone.name
   end
 
   def first_training_session

@@ -460,7 +460,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)!
   jquery-rails!
   jquery-turbolinks!
-  json (= 1.8.2)!
   kaminari!
   meta_request!
   pg!
@@ -499,4 +498,4 @@ DEPENDENCIES
   yelp!
 
 BUNDLED WITH
-   1.12.3
+   1.12.5

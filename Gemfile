@@ -34,7 +34,6 @@ source 'https://rubygems.org' do
   gem 'jbuilder', '~> 2.0'
   gem 'jquery-rails'
   gem 'jquery-turbolinks'
-  gem 'json', '1.8.2'
   gem 'kaminari'
   gem 'meta_request', group: :development
   gem 'pg'

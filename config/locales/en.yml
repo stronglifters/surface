@@ -92,6 +92,8 @@ en:
       success: 'Our minions have been summoned to fetch your backup.'
     import_address_modal:
       blurb: This is your custom email address for sending CSV exports from the StrongLifts 5x5 mobile application.
+      lead: Your custom email address.
+      title: Send-to-Stronglifters.
       warning: To ensure your workouts are imported correctly we suggest that you update your timezone.
     upload:
       success: "Our minions have been summoned to unpack your backup."

@@ -8,7 +8,6 @@ class ProfilesController < ApplicationController
   def edit
     @profile = current_user.profile
     @program = Program.stronglifts
-    @time_zones = ActiveSupport::TimeZone.all.sort
   end
 
   def update

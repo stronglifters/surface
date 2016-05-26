@@ -41,14 +41,6 @@ describe ProfilesController do
         expect(assigns(:profile)).to eql(user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
-
-      it "loads all available timezones" do
-        get :edit, id: user.to_param
-        expect(assigns(:time_zones)).
-          to include(ActiveSupport::TimeZone.new("Mountain Time (US & Canada)"))
-        expect(assigns(:time_zones)).
-          to include(ActiveSupport::TimeZone.new("UTC"))
-      end
     end
 
     describe "#update" do

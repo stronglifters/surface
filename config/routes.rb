@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/u/:id" => "profiles#show", constraints: { id: /[^\/]+/ }
   get "/dashboard" => "training_sessions#index", as: :dashboard
   get "/terms" => "static_pages#terms"
+  get "/stronglifts/export" => "static_pages#export"
 
   get "/email/incoming", to: proc { [200, {}, ["OK"]] }
   post "/email/incoming" => "griddler/emails#create"

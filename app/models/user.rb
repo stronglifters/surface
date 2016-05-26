@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, email: true, uniqueness: true
   validates_acceptance_of :terms_and_conditions
 
-  after_create :create_profile
+  after_create :create_profile!
   before_validation :lowercase_account_fields
 
   def time_zone
@@ -89,10 +89,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
-  def create_profile
-    self.create_profile!
-  end
 
   def lowercase_account_fields
     username.downcase! if username.present?

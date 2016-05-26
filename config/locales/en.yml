@@ -35,7 +35,7 @@ en:
         transgender: Transgender
         social_tolerance: Social Tolerance
       user:
-        import_address: Send-to-Stronglifters e-mail address
+        import_address: Send-to-Stronglifters
   time:
     formats:
       short: "%a, %d %b %Y"
@@ -91,7 +91,9 @@ en:
     drive_upload:
       success: 'Our minions have been summoned to fetch your backup.'
     import_address_modal:
-      blurb: This is your custom email address for sending CSV exports from the StrongLifts 5x5 mobile application.
+      blurb: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
+      copy: Copy
+      help: I need help.
       lead: Your custom email address.
       title: Send-to-Stronglifters.
       warning: To ensure your workouts are imported correctly we suggest that you update your timezone.

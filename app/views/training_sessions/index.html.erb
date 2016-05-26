@@ -1,7 +1,9 @@
 <% if @training_sessions.any? %>
   <div class="row">
     <div class="large-12 columns">
+      <% if feature_available?(:csv_import) %>
       <p class="text-center"> <a href="#" data-reveal-id="sendToStrongLiftsModal"><%= User.human_attribute_name(:import_address) %></a> </p>
+      <% end %>
       <table>
         <thead>
           <tr>
@@ -25,7 +27,9 @@
 <% else %>
   <div class="row">
     <div class="large-12 columns">
+      <% if feature_available?(:csv_import) %>
       <p class="text-center"> <a href="#" data-reveal-id="sendToStrongLiftsModal"><%= User.human_attribute_name(:import_address) %></a> </p>
+      <% end %>
       <%= random_video %>
     </div>
   </div>

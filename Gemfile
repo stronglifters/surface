@@ -72,6 +72,7 @@ source 'https://rubygems.org' do
 end
 
 source 'https://rails-assets.org' do
+  gem 'rails-assets-clipboard'
   gem 'rails-assets-ractive'
 end
 

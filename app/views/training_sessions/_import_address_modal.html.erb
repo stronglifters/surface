@@ -8,14 +8,14 @@
       <p><%= text_field_tag :import_address, current_user.import_address %></p>
     </div>
     <div class="large-4 columns">
-      <button class="button" data-clipboard-target="#import_address"><i class="fa fa-copy"></i></button>
+      <button class="button clipboard-button" data-clipboard-target="#import_address"><i class="fa fa-copy"></i></button>
     </div>
   </div>
   <p class="text-center"><%= mail_to(current_user.import_address, User.human_attribute_name(:import_address)) %></p>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
   <% if !current_user.default_time_zone? %>
     <div class="panel">
-      <p><%= link_to t('.warning'), edit_profile_path(current_user.profile) %></p>
+      <p><i class="fa fa-warning"></i><%= link_to t('.warning'), edit_profile_path(current_user.profile) %></p>
     </div>
   <% end %>
 </div>

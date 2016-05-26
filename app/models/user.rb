@@ -12,9 +12,16 @@ class User < ActiveRecord::Base
   validates :email, presence: true, email: true, uniqueness: true
   validates_acceptance_of :terms_and_conditions
 
-  after_create :create_profile
+  after_create :create_profile!
   before_validation :lowercase_account_fields
-  delegate :time_zone, to: :profile
+
+  def time_zone
+    @time_zone ||= ActiveSupport::TimeZone[profile.read_attribute(:time_zone)]
+  end
+
+  def default_time_zone?
+    "Etc/UTC" == time_zone.name
+  end
 
   def first_training_session
     training_sessions.order(occurred_at: :asc).first
@@ -82,10 +89,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
-  def create_profile
-    self.profile = Profile.create!(user: self)
-  end
 
   def lowercase_account_fields
     username.downcase! if username.present?

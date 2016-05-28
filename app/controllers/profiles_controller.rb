@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
     profile = current_user.profile
     ActiveRecord::Base.transaction do
       if params[:home_gym_yelp_id].present?
-        profile.home_gym = Gym.create_from_yelp!(params[:home_gym_yelp_id])
+        profile.gym = Gym.create_from_yelp!(params[:home_gym_yelp_id])
       end
       profile.update(profile_params)
     end

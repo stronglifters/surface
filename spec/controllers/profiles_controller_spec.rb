@@ -50,6 +50,16 @@ describe ProfilesController do
         expect(user.profile.male?).to be_truthy
         expect(response).to redirect_to(profile_path(user.profile))
       end
+
+      it 'saves the users home gym' do
+        gym = create(:gym, yelp_id: 'sait-campus-centre-calgary')
+
+        patch :update, id: user.to_param,
+          profile: { time_zone: 'Alaska' },
+          home_gym_yelp_id: gym.yelp_id
+
+        expect(user.reload.profile.gym).to eql(gym)
+      end
     end
   end
 

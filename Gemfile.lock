@@ -275,6 +275,7 @@ GEM
       railties (= 4.2.6)
       sprockets-rails
     rails-assets-clipboard (1.5.10)
+    rails-assets-lodash (4.13.1)
     rails-assets-ractive (0.7.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -474,6 +475,7 @@ DEPENDENCIES
   ractive-rails!
   rails (~> 4.2)!
   rails-assets-clipboard!
+  rails-assets-lodash!
   rails-assets-ractive!
   rails-erd!
   rails-i18n (~> 4.0.0)!

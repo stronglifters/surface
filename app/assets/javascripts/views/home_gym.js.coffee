@@ -1,14 +1,27 @@
 Stronglifters.HomeGym = Ractive.extend
   template: RactiveTemplates["templates/home_gym"]
-  oninit: ->
-    @set(city: 'Calgary')
-    @set(gyms: [])
-    @on 'search', (event) -> @search()
-    @on 'choose', (event) -> @choose(event.context)
+  data:
+    city: 'Calgary'
+    gyms: []
+    search:
+      button:
+        disabled: true
+    searching: false
 
-  search: ->
+  oninit: ->
+    @on 'search', (event) -> @search(event)
+    @on 'choose', (event) -> @choose(event.context)
+    @observe 'gym', -> @nameChanged()
+
+  search: (event) ->
+    event.original.preventDefault()
+    @disableSearchButton()
+    @clearResults()
+    @set(searching: true)
     $.getJSON @buildSearchUrl(), (data) =>
+      @set(searching: false)
       @displayResults(data)
+      @enableSearchButton()
 
   choose: (gym) ->
     $.ajax
@@ -39,3 +52,21 @@ Stronglifters.HomeGym = Ractive.extend
 
   closeModal: ->
     $('#homeGymModal').foundation('reveal', 'close')
+
+  enableSearchButton: ->
+    @set('search.button.disabled': false)
+
+  disableSearchButton: ->
+    @set('search.button.disabled': true)
+
+  nameChanged: ->
+    if @valid()
+      @enableSearchButton()
+    else
+      @disableSearchButton()
+
+  valid: ->
+    @get('gym').trim().length >= 2
+
+  clearResults: ->
+    @set(gyms: [])

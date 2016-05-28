@@ -1,29 +1,33 @@
+<form on-submit="search">
   <fieldset>
     <legend>City</legend>
     <input type="text" name="city" value='{{city}}' />
   </fieldset>
   <fieldset>
     <legend>Gym</legend>
-    <input type="text" name="q" value='{{gym}}' />
+    <input on-submit="search" type="text" name="q" value='{{gym}}' />
   </fieldset>
-
-  <button on-click='search' class="button">Search</button>
+  <button on-click='search' class="button" disabled='{{search.button.disabled}}'>Search</button>
+  {{#if searching}}
+  <p><i class="fa fa-spinner fa-pulse"></i></p>
+  {{/if}}
+<form>
 
 <div id="results">
-<table>
-  <tbody>
+  <table>
+    <tbody>
 {{#each gyms}}
-    <tr>
-      <td>{{name}}</td>
-      <td>
-        {{full_address}}
-        <a href={{map_url}}><i class="fa fa-map-marker" aria-hidden=true></i></a>
-      </td>
-      <td>
-        <button on-click="choose" class="button tiny">My Home Gym</button>
-      </td>
-    </tr>
+      <tr>
+        <td>{{name}}</td>
+        <td>
+          {{full_address}}
+          <a href={{map_url}}><i class="fa fa-map-marker" aria-hidden=true></i></a>
+        </td>
+        <td>
+          <button on-click="choose" class="button tiny">My Home Gym</button>
+        </td>
+      </tr>
 {{/each}}
-  </tbody>
-</table>
+    </tbody>
+  </table>
 </div>

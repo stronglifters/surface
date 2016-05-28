@@ -38,7 +38,6 @@ source 'https://rubygems.org' do
   gem 'kaminari'
   gem 'meta_request', group: :development
   gem 'pg'
-  gem 'phantomjs', group: [:development, :test]
   gem 'poltergeist', group: :test
   gem 'puma'
   gem 'rack-mini-profiler', group: :development

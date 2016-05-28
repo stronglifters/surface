@@ -7,7 +7,7 @@ class Search
     end
 
     def search(q, city, categories = [], page = 1, per_page = 20, &block)
-      return [] if city.blank?
+      return paginate([]) if city.blank?
 
       cache(key: key_for(q, city, page, per_page)) do
         paginate(results_for(q, city, categories, page, per_page).map(&block))

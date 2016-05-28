@@ -10,7 +10,17 @@ class EditProfilePage < PageModel
       page.choose(gender.to_s.titleize)
       page.choose(social_tolerance.to_s.titleize)
     end
-    save_changes
+  end
+
+  def choose_home_gym(city:, name:)
+    within("#gym-search form") do
+      fill_in "q", with: name
+      fill_in "city", with: city
+      click_button("Search")
+    end
+    wait_for_ajax
+    click_button("Mine")
+    wait_for_ajax
   end
 
   def save_changes

@@ -6,12 +6,16 @@ class Search
       @client = client
     end
 
-    def search(q, city, categories = [], page = 1, per_page = 20, &block)
+    def for(q, city, categories = [], page = 1, per_page = 20, &block)
       return paginate([]) if city.blank?
 
       cache(key: key_for(q, city, page, per_page)) do
         paginate(results_for(q, city, categories, page, per_page).map(&block))
       end
+    end
+
+    def for_business(yelp_id)
+      client.business(yelp_id).try(:business)
     end
 
     private
@@ -45,7 +49,7 @@ class Search
     end
   end
 
-  def self.yelp(q, categories = [], city, page, per_page, &block)
-    Yelp.new.search(q, city, categories, page, per_page, &block)
+  def self.yelp
+    @yelp ||= Yelp.new
   end
 end

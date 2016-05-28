@@ -15,6 +15,13 @@ class TrainingHistory
       maximum(:target_weight)
   end
 
+  def completed_any?
+    user.
+      exercise_sessions.
+      joins(:exercise).
+      any?
+  end
+
   def to_line_chart
     user.
       exercise_sessions.

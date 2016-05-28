@@ -44,13 +44,13 @@ feature "Profiles", type: :feature do
 
       link_text = I18n.translate("profiles.edit.choose_home_gym")
       subject.click_link(link_text)
-      within('#gym-search form') do
-        fill_in 'q', with: 'sait'
-        fill_in 'city', with: 'calgary'
+      within("#gym-search form") do
+        fill_in "q", with: "sait"
+        fill_in "city", with: "calgary"
         click_button("Search")
       end
       subject.wait_for_ajax
-      subject.click_button('Mine')
+      subject.click_button("Mine")
       subject.wait_for_ajax
       subject.save_changes
       expect(page).to have_content(gym.name)

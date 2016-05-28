@@ -54,8 +54,7 @@ describe ProfilesController do
       it 'saves the users home gym' do
         gym = create(:gym)
 
-        patch :update, id: user.to_param,
-          profile: { time_zone: 'Alaska', gym_id: gym.id }
+        patch :update, id: user.to_param, profile: { gym_id: gym.id }
 
         expect(user.reload.profile.gym).to eql(gym)
       end

@@ -20,6 +20,11 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:gender, :social_tolerance, :time_zone, :gym_id)
+    params.require(:profile).permit(
+      :gender,
+      :gym_id,
+      :social_tolerance,
+      :time_zone,
+    )
   end
 end

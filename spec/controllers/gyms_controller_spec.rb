@@ -82,13 +82,12 @@ describe GymsController do
         expect(gym.location.country).to eql("CA")
         expect(gym.location.postal_code).to eql("T2M 0L4")
       end
-
     end
 
     context "with the yelp id" do
       render_views
 
-      let(:yelp_id) { 'sait-campus-centre-calgary'}
+      let(:yelp_id) { "sait-campus-centre-calgary" }
       let(:gym) { build(:gym, yelp_id: yelp_id) }
 
       before :each do
@@ -97,12 +96,12 @@ describe GymsController do
           and_return(gym)
       end
 
-      it 'returns a json response' do
+      it "returns a json response" do
         xhr :post, :create, yelp_id: yelp_id
         json = JSON.parse(response.body)
-        expect(json['yelp_id']).to eql(yelp_id)
-        expect(json['name']).to eql(gym.name)
-        expect(json['full_address']).to eql(gym.full_address)
+        expect(json["yelp_id"]).to eql(yelp_id)
+        expect(json["name"]).to eql(gym.name)
+        expect(json["full_address"]).to eql(gym.full_address)
       end
     end
 

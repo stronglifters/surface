@@ -46,9 +46,9 @@ class GymsController < ApplicationController
 
   def build_gym
     if params[:yelp_id].present?
-      @gym = Gym.create_from_yelp!(params[:yelp_id])
+      Gym.create_from_yelp!(params[:yelp_id])
     else
-      @gym = Gym.new(secure_params)
+      Gym.new(secure_params)
     end
   end
 end

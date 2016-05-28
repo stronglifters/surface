@@ -65,7 +65,8 @@ class Gym < ActiveRecord::Base
   end
 
   def self.create_from_yelp!(id)
-    Gym.find_by(yelp_id: id) || Gym.map_from(::Yelp.client.business(id).business)
+    Gym.find_by(yelp_id: id) ||
+      Gym.map_from(::Yelp.client.business(id).business)
   end
 
   def self.import(city, pages: 5)
@@ -77,7 +78,8 @@ class Gym < ActiveRecord::Base
   end
 
   def map_url
-    "https://maps.google.com/maps/place/#{name}/@#{location.latitude},#{location.longitude},12z"
+    params = [location.latitude, location.longitude, "12z"].join(",")
+    "https://maps.google.com/maps/place/#{name}/@#{params}"
   end
 
   def duplicate?(distance: 0.1)

@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @program.exercises.uniq.each do |exercise| %>
+        <% @program.each_exercise do |exercise| %>
           <tr>
             <td> <strong><%= exercise.name %></strong></td><td><%= @user.personal_record_for(exercise) %> lbs</td>
           </tr>
@@ -37,7 +37,7 @@
 
 <div>
   <div class="small-12 columns small-text-center medium-text-left">
-    <% @program.exercises.uniq.each do |exercise| %>
+    <% @program.each_exercise do |exercise| %>
       <%= render @user.history_for(exercise) %>
     <% end %>
   </div>

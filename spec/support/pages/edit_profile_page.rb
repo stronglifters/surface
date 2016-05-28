@@ -9,6 +9,12 @@ class EditProfilePage < PageModel
     within(".edit_profile") do
       page.choose(gender.to_s.titleize)
       page.choose(social_tolerance.to_s.titleize)
+    end
+    save_changes
+  end
+
+  def save_changes
+    within(".edit_profile") do
       click_button translate("profiles.edit.save")
     end
   end

@@ -11,7 +11,7 @@
   {{#if searching}}
   <p><i class="fa fa-spinner fa-pulse"></i></p>
   {{/if}}
-<form>
+</form>
 
 <div id="results">
   <table>

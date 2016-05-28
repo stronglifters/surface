@@ -68,6 +68,10 @@ class Gym < ActiveRecord::Base
     end
   end
 
+  def map_url
+    "https://maps.google.com/maps/place/#{name}/@#{location.latitude},#{location.longitude},12z"
+  end
+
   def duplicate?(distance: 0.1)
     return true if yelp_id.present? && Gym.where.not(id: id).exists?(yelp_id: yelp_id)
     Gym.

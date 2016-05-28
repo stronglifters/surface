@@ -11,7 +11,7 @@
       <td><%= gym.new_record? ? gym.name : link_to(gym.name, gym_path(gym)) %></td>
       <td>
         <%= gym.full_address %>
-        <%= link_to gym.location.try(:url) do %>
+        <%= link_to gym.map_url do %>
           <i class="fa fa-map-marker" aria-hidden="true"></i>
         <% end %>
       </td>

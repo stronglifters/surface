@@ -12,7 +12,12 @@ class ProfilesController < ApplicationController
 
   def update
     profile = current_user.profile
-    profile.update_attributes(profile_params)
+    ActiveRecord::Base.transaction do
+      if params[:home_gym_yelp_id].present?
+        profile.home_gym = Gym.create_from_yelp!(params[:home_gym_yelp_id])
+      end
+      profile.update(profile_params)
+    end
     flash[:notice] = t("profiles.edit.profile_update_success")
     redirect_to profile_path(profile)
   end

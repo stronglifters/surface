@@ -21,7 +21,26 @@
         <legend><%= Profile.human_attribute_name(:time_zone) %></legend>
         <%= f.time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones) %>
       </fieldset>
+      <fieldset>
+        <legend><%= Profile.human_attribute_name(:home_gym) %></legend>
+        <p id="home_gym_name"><%= @profile.home_gym %></p>
+        <%= hidden_field_tag(:home_gym_yelp_id) %>
+        <a href="#" data-reveal-id="homeGymModal">Choose Home Gym</a>
+      </fieldset>
       <%= f.submit t(".save"), class: "button"  %>
     <% end %>
   </div>
 </div>
+
+<div id="homeGymModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle"><%= t('.title') %></h2>
+  <p class="lead"><%= t('.lead') %></p>
+  <div id="gym-search"></div>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    new Stronglifters.HomeGym({
+      el: 'gym-search',
+    })
+</script>

@@ -1,0 +1,29 @@
+  <fieldset>
+    <legend>City</legend>
+    <input type="text" name="city" value='{{city}}' />
+  </fieldset>
+  <fieldset>
+    <legend>Gym</legend>
+    <input type="text" name="q" value='{{gym}}' />
+  </fieldset>
+
+  <button on-click='search' class="button">Search</button>
+
+<div id="results">
+<table>
+  <tbody>
+{{#each gyms}}
+    <tr>
+      <td>{{name}}</td>
+      <td>
+        {{full_address}}
+        <a href={{map_url}}><i class="fa fa-map-marker" aria-hidden=true></i></a>
+      </td>
+      <td>
+        <button on-click="choose" class="button tiny">My Home Gym</button>
+      </td>
+    </tr>
+{{/each}}
+  </tbody>
+</table>
+</div>

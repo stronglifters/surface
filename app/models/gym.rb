@@ -44,20 +44,28 @@ class Gym < ActiveRecord::Base
 
   def self.search_yelp(q: "gym", categories: ["gyms"], city: , page: 1, per_page: 20)
     Search.yelp(q, categories, city, page, per_page) do |result|
-      Gym.new(
-        name: result.name,
-        yelp_id: result.id,
-        location_attributes: {
-          address: result.location.address.first,
-          city: result.location.city,
-          postal_code: result.location.postal_code,
-          region: result.location.state_code,
-          country: result.location.country_code,
-          latitude: result.location.coordinate.try(:latitude),
-          longitude: result.location.coordinate.try(:longitude),
-        }
-      )
+      map_from(result)
     end
+  end
+
+  def self.map_from(result)
+    Gym.new(
+      name: result.name,
+      yelp_id: result.id,
+      location_attributes: {
+        address: result.location.address.first,
+        city: result.location.city,
+        postal_code: result.location.postal_code,
+        region: result.location.state_code,
+        country: result.location.country_code,
+        latitude: result.location.coordinate.try(:latitude),
+        longitude: result.location.coordinate.try(:longitude),
+      }
+    )
+  end
+
+  def self.create_from_yelp!(id)
+    Gym.find_by(yelp_id: id) || Gym.map_from(::Yelp.client.business(id).business).save!
   end
 
   def self.import(city, pages: 5)

@@ -12,12 +12,7 @@ class ProfilesController < ApplicationController
 
   def update
     profile = current_user.profile
-    ActiveRecord::Base.transaction do
-      if params[:home_gym_yelp_id].present?
-        profile.gym = Gym.create_from_yelp!(params[:home_gym_yelp_id])
-      end
-      profile.update(profile_params)
-    end
+    profile.update(profile_params)
     flash[:notice] = t("profiles.edit.profile_update_success")
     redirect_to profile_path(profile)
   end
@@ -25,6 +20,6 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:gender, :social_tolerance, :time_zone)
+    params.require(:profile).permit(:gender, :social_tolerance, :time_zone, :gym_id)
   end
 end

@@ -23,8 +23,8 @@
       </fieldset>
       <fieldset>
         <legend><%= Profile.human_attribute_name(:home_gym) %></legend>
-        <p id="home_gym_name"><%= @profile.home_gym %></p>
-        <%= hidden_field_tag(:home_gym_yelp_id) %>
+        <p id="home_gym_name"><%= @profile.gym.try(:name) %></p>
+        <%= f.hidden_field(:gym_id) %>
         <a href="#" data-reveal-id="homeGymModal">Choose Home Gym</a>
       </fieldset>
       <%= f.submit t(".save"), class: "button"  %>

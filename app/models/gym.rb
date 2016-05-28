@@ -65,7 +65,7 @@ class Gym < ActiveRecord::Base
   end
 
   def self.create_from_yelp!(id)
-    Gym.find_by(yelp_id: id) || Gym.map_from(::Yelp.client.business(id).business).save!
+    Gym.find_by(yelp_id: id) || Gym.map_from(::Yelp.client.business(id).business)
   end
 
   def self.import(city, pages: 5)

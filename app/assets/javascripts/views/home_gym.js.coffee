@@ -11,7 +11,8 @@ Stronglifters.HomeGym = Ractive.extend
   oninit: ->
     @on 'search', (event) -> @search(event)
     @on 'choose', (event) -> @choose(event.context)
-    @observe 'gym', -> @nameChanged()
+    @observe 'gym', -> @changed()
+    @observe 'city', -> @changed()
 
   search: (event) ->
     event.original.preventDefault()
@@ -21,7 +22,6 @@ Stronglifters.HomeGym = Ractive.extend
     $.getJSON @buildSearchUrl(), (data) =>
       @set(searching: false)
       @displayResults(data)
-      @enableSearchButton()
 
   choose: (gym) ->
     $.ajax
@@ -59,14 +59,14 @@ Stronglifters.HomeGym = Ractive.extend
   disableSearchButton: ->
     @set('search.button.disabled': true)
 
-  nameChanged: ->
+  changed: ->
     if @valid()
       @enableSearchButton()
     else
       @disableSearchButton()
 
   valid: ->
-    @get('gym').trim().length >= 2
+    @get('gym').trim().length >= 2 && @get('city').trim().length >= 2
 
   clearResults: ->
     @set(gyms: [])

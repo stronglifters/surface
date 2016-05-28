@@ -71,8 +71,9 @@ en:
       success: "Thank you for registering."
   profiles:
     edit:
-      save: Save Profile
+      choose_home_gym: 'Choose Home Gym'
       profile_update_success: "Profile updated. This is how your public profile appears."
+      save: Save Profile
     home_gym_modal:
       title: Home Gym
       lead: Search for your regular gym.

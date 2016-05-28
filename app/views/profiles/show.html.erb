@@ -9,6 +9,9 @@
     <% else %>
       <p><%= t('.no_workouts_completed') %></p>
     <% end %>
+    <% if @profile.gym.present? %>
+      <p><%= link_to @profile.gym.name, @profile.gym %></p>
+    <% end %>
     <p><%= @user.time_zone %></p>
   </div>
 

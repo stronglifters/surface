@@ -21,9 +21,13 @@ class GymsController < ApplicationController
   end
 
   def create
-    @gym = Gym.new(secure_params)
+    @gym = build_gym
+
     if @gym.save
-      redirect_to gyms_path(q: @gym.name)
+      respond_to do |format|
+        format.html { redirect_to gyms_path(q: @gym.name) }
+        format.js { render @gym }
+      end
     else
       flash[:error] = @gym.errors.full_messages
       render :new
@@ -38,5 +42,13 @@ class GymsController < ApplicationController
       :yelp_id,
       location_attributes: [:address, :city, :region, :country, :postal_code]
     )
+  end
+
+  def build_gym
+    if params[:yelp_id].present?
+      Gym.create_from_yelp!(params[:yelp_id])
+    else
+      Gym.new(secure_params)
+    end
   end
 end

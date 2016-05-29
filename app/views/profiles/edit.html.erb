@@ -21,7 +21,19 @@
         <legend><%= Profile.human_attribute_name(:time_zone) %></legend>
         <%= f.time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones) %>
       </fieldset>
+      <fieldset>
+        <legend><%= Profile.human_attribute_name(:home_gym) %></legend>
+        <p id="home-gym-name"><%= @profile.gym.try(:name) %></p>
+        <%= f.hidden_field(:gym_id) %>
+        <a href="#" data-reveal-id="homeGymModal"><%= t('.choose_home_gym') %></a>
+      </fieldset>
       <%= f.submit t(".save"), class: "button"  %>
     <% end %>
   </div>
 </div>
+
+<%= render partial: "home_gym_modal", locals: { id: 'homeGymModal' } %>
+
+<script type="text/javascript" charset="utf-8">
+new Stronglifters.HomeGym({ el: 'gym-search', data: { city: '<%= current_session.location.try(:city) %>'} })
+</script>

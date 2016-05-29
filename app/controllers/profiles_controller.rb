@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
 
   def update
     profile = current_user.profile
-    profile.update_attributes(profile_params)
+    profile.update(profile_params)
     flash[:notice] = t("profiles.edit.profile_update_success")
     redirect_to profile_path(profile)
   end
@@ -20,6 +20,11 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:gender, :social_tolerance, :time_zone)
+    params.require(:profile).permit(
+      :gender,
+      :gym_id,
+      :social_tolerance,
+      :time_zone,
+    )
   end
 end

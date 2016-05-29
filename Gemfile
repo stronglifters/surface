@@ -38,7 +38,6 @@ source 'https://rubygems.org' do
   gem 'kaminari'
   gem 'meta_request', group: :development
   gem 'pg'
-  gem 'phantomjs', group: [:development, :test]
   gem 'poltergeist', group: :test
   gem 'puma'
   gem 'rack-mini-profiler', group: :development
@@ -73,5 +72,6 @@ end
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-clipboard'
+  gem 'rails-assets-lodash'
   gem 'rails-assets-ractive'
 end

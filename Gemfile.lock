@@ -240,7 +240,6 @@ GEM
     parser (2.3.0.7)
       ast (~> 2.2)
     pg (0.18.4)
-    phantomjs (2.1.1.0)
     poltergeist (1.9.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -275,6 +274,7 @@ GEM
       railties (= 4.2.6)
       sprockets-rails
     rails-assets-clipboard (1.5.10)
+    rails-assets-lodash (4.13.1)
     rails-assets-ractive (0.7.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
@@ -465,7 +465,6 @@ DEPENDENCIES
   kaminari!
   meta_request!
   pg!
-  phantomjs!
   poltergeist!
   puma!
   rack-mini-profiler!
@@ -474,6 +473,7 @@ DEPENDENCIES
   ractive-rails!
   rails (~> 4.2)!
   rails-assets-clipboard!
+  rails-assets-lodash!
   rails-assets-ractive!
   rails-erd!
   rails-i18n (~> 4.0.0)!

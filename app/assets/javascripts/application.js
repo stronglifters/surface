@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require clipboard
+//= require lodash
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs

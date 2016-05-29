@@ -3,7 +3,7 @@
     <h1><%= @gym.name %></h1>
     <p>
     <%= @gym.full_address %>
-    <%= link_to @gym.location.try(:url) do %>
+    <%= link_to @gym.map_url do %>
       <i class="fa fa-map-marker" aria-hidden="true"></i>
     <% end %>
     </p>

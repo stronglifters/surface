@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password:
+  host: db
+
+development:
+  <<: *default
+  database: stronglifters_development
+
+test:
+  <<: *default
+  database: stronglifters_test

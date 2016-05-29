@@ -12,6 +12,7 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install npm -g
 RUN npm install phantomjs-prebuilt -g
+RUN apt-get install -y postgresql-client
 
 RUN mkdir -p /app
 WORKDIR /app

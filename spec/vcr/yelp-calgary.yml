@@ -1,0 +1,345 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.yelp.com/v2/search?category_filter=gyms&limit=20&location=Calgary&offset=0&term=gym
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: ASCII-8BIT
+      string: '{"region": {"span": {"latitude_delta": 0.24506755404779312, "longitude_delta":
+        0.23675644461479806}, "center": {"latitude": 51.046380457251004, "longitude":
+        -114.055232934266}}, "total": 232, "businesses": [{"is_claimed": true, "rating":
+        4.5, "mobile_url": "http://m.yelp.com/biz/ymca-calgary-calgary-4?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/99493c12711e/ico/stars/v1/stars_4_half.png",
+        "review_count": 12, "name": "YMCA Calgary", "rating_img_url_small": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/a5221e66bc70/ico/stars/v1/stars_small_4_half.png",
+        "url": "http://www.yelp.com/biz/ymca-calgary-calgary-4?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Recreation Centers", "recreation"]], "phone":
+        "4032696701", "snippet_text": "I have been  a member of the Eau Claire YMCA
+        since 1997. \n\nI enjoy the clean facilities and modern equipment. The gym
+        is well maintained and the staff are...", "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/zXn9LtAUgGD6Fdy0gJj1kQ/ms.jpg",
+        "snippet_image_url": "http://s3-media3.fl.yelpcdn.com/photo/ZyciZ9ggR1CXp03IZfc3cw/ms.jpg",
+        "display_phone": "+1-403-269-6701", "rating_img_url_large": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/9f83790ff7f6/ico/stars/v1/stars_large_4_half.png",
+        "id": "ymca-calgary-calgary-4", "is_closed": false, "location": {"city": "Calgary",
+        "display_address": ["101 3 Street SW", "Calgary, AB T2P 4G6", "Canada"], "geo_accuracy":
+        9.5, "postal_code": "T2P 4G6", "country_code": "CA", "address": ["101 3 Street
+        SW"], "coordinate": {"latitude": 51.0529052983445, "longitude": -114.070559496009},
+        "state_code": "AB"}}, {"is_claimed": true, "rating": 4.0, "mobile_url": "http://m.yelp.com/biz/fit4less-calgary-2?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 5, "name": "Fit4Less", "rating_img_url_small": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/fit4less-calgary-2?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"]], "phone": "4035696816", "snippet_text": "I
+        really like this gym.  It''s close to home and open 24/7.   The staff is excellent.   \nThe
+        weight area is intimidating at first with everyone walking...", "image_url":
+        "https://s3-media2.fl.yelpcdn.com/bphoto/B_LtiBmNGLQCi8dvD0_iCQ/ms.jpg", "snippet_image_url":
+        "http://s3-media3.fl.yelpcdn.com/photo/UCYjFfIbhGC8iu_1dRT7pw/ms.jpg", "display_phone":
+        "+1-403-569-6816", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "fit4less-calgary-2", "is_closed": false, "location": {"city": "Calgary",
+        "display_address": ["999 36th Street NE", "Calgary, AB T2A 7X6", "Canada"],
+        "geo_accuracy": 8.0, "postal_code": "T2A 7X6", "country_code": "CA", "address":
+        ["999 36th Street NE"], "coordinate": {"latitude": 51.0613785, "longitude":
+        -113.9822388}, "state_code": "AB"}}, {"is_claimed": true, "rating": 4.5, "mobile_url":
+        "http://m.yelp.com/biz/goodlife-fitness-calgary-10?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/99493c12711e/ico/stars/v1/stars_4_half.png",
+        "review_count": 3, "name": "GoodLife Fitness", "rating_img_url_small": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/a5221e66bc70/ico/stars/v1/stars_small_4_half.png",
+        "url": "http://www.yelp.com/biz/goodlife-fitness-calgary-10?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Sports Clubs", "sports_clubs"], ["Trainers",
+        "healthtrainers"]], "phone": "4032693410", "snippet_text": "A gym with more
+        weights than cardio machines! If you want to grab some iron, this is the gym
+        you want to head to. The trainers are super helpful if you''re...", "image_url":
+        "https://s3-media3.fl.yelpcdn.com/bphoto/lBUe6ZMsFylhuCcrbGAqTg/ms.jpg", "snippet_image_url":
+        "http://s3-media4.fl.yelpcdn.com/photo/DoC-7FN79H7Sx0YtUUKN4g/ms.jpg", "display_phone":
+        "+1-403-269-3410", "rating_img_url_large": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/9f83790ff7f6/ico/stars/v1/stars_large_4_half.png",
+        "id": "goodlife-fitness-calgary-10", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["200 Barclay Parade SW", "Calgary, AB T2P 4R5",
+        "Canada"], "geo_accuracy": 8.0, "postal_code": "T2P 4R5", "country_code":
+        "CA", "address": ["200 Barclay Parade SW"], "coordinate": {"latitude": 51.0523682,
+        "longitude": -114.0688934}, "state_code": "AB"}}, {"is_claimed": true, "rating":
+        4.0, "mobile_url": "http://m.yelp.com/biz/talisman-centre-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 18, "name": "Talisman Centre", "rating_img_url_small": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/talisman-centre-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Nutritionists", "nutritionists"], ["Swimming
+        Pools", "swimmingpools"]], "phone": "4032338393", "snippet_text": "I have
+        been a member of Talisman Centre for 4 years now and love it. I love that
+        they maintain all the equipment and facilities to high sports standards. I...",
+        "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/H1T8pa1rVtmPkdCbsSAB_g/ms.jpg",
+        "snippet_image_url": "http://s3-media1.fl.yelpcdn.com/photo/-3T5vMKLivO__Zxxt9bQPw/ms.jpg",
+        "display_phone": "+1-403-233-8393", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "talisman-centre-calgary", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["2225 Macleod Trail SE", "Calgary, AB T2G 5B6",
+        "Canada"], "geo_accuracy": 8.0, "postal_code": "T2G 5B6", "country_code":
+        "CA", "address": ["2225 Macleod Trail SE"], "coordinate": {"latitude": 51.0348704,
+        "longitude": -114.0591838}, "state_code": "AB"}}, {"is_claimed": true, "rating":
+        3.5, "mobile_url": "http://m.yelp.com/biz/goodlife-fitness-calgary-12?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/5ef3eb3cb162/ico/stars/v1/stars_3_half.png",
+        "review_count": 18, "name": "GoodLife Fitness", "rating_img_url_small": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/2e909d5d3536/ico/stars/v1/stars_small_3_half.png",
+        "url": "http://www.yelp.com/biz/goodlife-fitness-calgary-12?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Sports Clubs", "sports_clubs"], ["Trainers",
+        "healthtrainers"]], "phone": "4032863481", "snippet_text": "I love how many
+        locations there are in the city. I really enjoy going to body pump classes,
+        yoga, and the ladies only facilities. The clubs with steam rooms...", "image_url":
+        "https://s3-media1.fl.yelpcdn.com/bphoto/Y_ANaf1zQXzvNykD7Qq7oA/ms.jpg", "snippet_image_url":
+        "http://s3-media1.fl.yelpcdn.com/photo/uThPfUYcRrS95aVKQ2Dn-w/ms.jpg", "display_phone":
+        "+1-403-286-3481", "rating_img_url_large": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/bd9b7a815d1b/ico/stars/v1/stars_large_3_half.png",
+        "id": "goodlife-fitness-calgary-12", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["50-3915 51 Street SW", "Calgary, AB T3E 6N1",
+        "Canada"], "geo_accuracy": 8.0, "postal_code": "T3E 6N1", "country_code":
+        "CA", "address": ["50-3915 51 Street SW"], "coordinate": {"latitude": 51.02069,
+        "longitude": -114.16156}, "state_code": "AB"}}, {"is_claimed": true, "rating":
+        4.0, "mobile_url": "http://m.yelp.com/biz/anytime-fitness-calgary-4?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 5, "name": "Anytime Fitness", "rating_img_url_small": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/anytime-fitness-calgary-4?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Trainers", "healthtrainers"]], "phone":
+        "4032551200", "snippet_text": "Great environment, staff is also great. Couldn''t
+        ask for a better place to release stress.", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/uudoBfpeosn3rIJEQKDZoQ/ms.jpg",
+        "snippet_image_url": "http://s3-media2.fl.yelpcdn.com/photo/3zSzGfEUdkgtFuUZ5iKKsA/ms.jpg",
+        "display_phone": "+1-403-255-1200", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "anytime-fitness-calgary-4", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["9620 Elbow Drive SW", "Calgary, AB T2V 1M2",
+        "Canada"], "geo_accuracy": 9.5, "postal_code": "T2V 1M2", "country_code":
+        "CA", "address": ["9620 Elbow Drive SW"], "coordinate": {"latitude": 50.9687834,
+        "longitude": -114.0847694}, "state_code": "AB"}}, {"is_claimed": true, "rating":
+        5.0, "mobile_url": "http://m.yelp.com/biz/2110-fitness-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/f1def11e4e79/ico/stars/v1/stars_5.png",
+        "review_count": 1, "name": "2110 Fitness", "rating_img_url_small": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/c7623205d5cd/ico/stars/v1/stars_small_5.png",
+        "url": "http://www.yelp.com/biz/2110-fitness-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Trainers", "healthtrainers"]], "phone":
+        "4032522225", "snippet_text": "I like the fact that this isn''t your \"typical\"
+        gym - where the guys only work on their upper bodies and have sticks for legs,
+        and the girls are too busy...", "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/Ej3r79wMpjwm3jmYXuvTjQ/ms.jpg",
+        "snippet_image_url": "http://s3-media3.fl.yelpcdn.com/photo/OTipWvCAku-uAeJ-ac8zag/ms.jpg",
+        "display_phone": "+1-403-252-2225", "rating_img_url_large": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/22affc4e6c38/ico/stars/v1/stars_large_5.png",
+        "id": "2110-fitness-calgary", "is_closed": false, "location": {"city": "Calgary",
+        "display_address": ["6624 Centre Street South West", "Calgary, AB T2H 0C6",
+        "Canada"], "geo_accuracy": 9.5, "postal_code": "T2H 0C6", "country_code":
+        "CA", "address": ["6624 Centre Street South West"], "coordinate": {"latitude":
+        50.9951077590435, "longitude": -114.063148498535}, "state_code": "AB"}}, {"is_claimed":
+        true, "rating": 4.0, "mobile_url": "http://m.yelp.com/biz/urban-athlete-fitness-studio-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 4, "name": "Urban Athlete Fitness Studio", "rating_img_url_small":
+        "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/urban-athlete-fitness-studio-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"]], "phone": "4032441445", "snippet_text": "I''ve
+        been a member since last year, just after these guys opened.  I was thrilled
+        to see a gym go in so close to where I live: I mean, when you can stumble...",
+        "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/eJQmVY7cGAF9tbUXklDjIA/ms.jpg",
+        "snippet_image_url": "http://s3-media3.fl.yelpcdn.com/photo/LGqj9vs8Bg1q_uK28hfMPg/ms.jpg",
+        "display_phone": "+1-403-244-1445", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "urban-athlete-fitness-studio-calgary", "is_closed": false, "location":
+        {"city": "Calgary", "display_address": ["480 14th Street NW", "Calgary, AB
+        T2N 1Z7", "Canada"], "geo_accuracy": 9.5, "postal_code": "T2N 1Z7", "country_code":
+        "CA", "address": ["480 14th Street NW"], "coordinate": {"latitude": 51.0571239,
+        "longitude": -114.0947424}, "state_code": "AB"}}, {"is_claimed": false, "rating":
+        4.0, "mobile_url": "http://m.yelp.com/biz/golds-gym-northgate-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 5, "name": "Gold''s Gym Northgate", "rating_img_url_small":
+        "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/golds-gym-northgate-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"]], "phone": "4032724653", "snippet_text": "Just
+        signed up for a member ship for $18 Biweekly might I add! The have tons of
+        equipment and all the machines I need to work out. They do have a lot of...",
+        "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/PAVHn35HS6_vsYbsbLDGGg/ms.jpg",
+        "snippet_image_url": "http://s3-media3.fl.yelpcdn.com/photo/P9vF6FmxYXEjK04IcyrCNQ/ms.jpg",
+        "display_phone": "+1-403-272-4653", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "golds-gym-northgate-calgary", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["565 36 Street NE", "Calgary, AB T2A 6K3",
+        "Canada"], "geo_accuracy": 8.0, "postal_code": "T2A 6K3", "country_code":
+        "CA", "address": ["565 36 Street NE"], "coordinate": {"latitude": 51.0565082,
+        "longitude": -113.9820949}, "state_code": "AB"}}, {"is_claimed": true, "rating":
+        4.0, "mobile_url": "http://m.yelp.com/biz/anytime-fitness-calgary-3?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 4, "name": "Anytime Fitness", "rating_img_url_small": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/anytime-fitness-calgary-3?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Trainers", "healthtrainers"]], "phone":
+        "4032626288", "snippet_text": "It''s taken me a few good years to really commit
+        to a gym. The last time I did was at World Heath and it was such a horrible
+        experience I thought I would...", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/BmkzEqAS9nIra8TEvP-mxg/ms.jpg",
+        "snippet_image_url": "http://s3-media1.fl.yelpcdn.com/photo/W1hxVGepOQfu1YWVBvUsoQ/ms.jpg",
+        "display_phone": "+1-403-262-6288", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "anytime-fitness-calgary-3", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["1222 1st St SW", "Calgary, AB T2R 0V4", "Canada"],
+        "geo_accuracy": 8.0, "postal_code": "T2R 0V4", "country_code": "CA", "address":
+        ["1222 1st St SW"], "coordinate": {"latitude": 51.0411682, "longitude": -114.0655594},
+        "state_code": "AB"}}, {"is_claimed": false, "rating": 5.0, "mobile_url": "http://m.yelp.com/biz/b-js-gym-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/f1def11e4e79/ico/stars/v1/stars_5.png",
+        "review_count": 2, "name": "B J''s Gym", "rating_img_url_small": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/c7623205d5cd/ico/stars/v1/stars_small_5.png",
+        "url": "http://www.yelp.com/biz/b-js-gym-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"]], "phone": "4032625060", "snippet_text": "Reg
+        was awesome enough to spread the word on \"ring a ding dong\" art party that
+        was held at Bj''s gym. I can''t believe that in all the years of my pro...",
+        "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/U1YarpXDM49aYR6Ghyxluw/ms.jpg",
+        "snippet_image_url": "http://s3-media2.fl.yelpcdn.com/photo/il6AajabCLy8TjZfl8Qd-w/ms.jpg",
+        "display_phone": "+1-403-262-5060", "rating_img_url_large": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/22affc4e6c38/ico/stars/v1/stars_large_5.png",
+        "id": "b-js-gym-calgary", "is_closed": false, "location": {"city": "Calgary",
+        "display_address": ["602 7 Avenue SE", "Calgary, AB T2G 0J7", "Canada"], "geo_accuracy":
+        8.0, "postal_code": "T2G 0J7", "country_code": "CA", "address": ["602 7 Avenue
+        SE"], "coordinate": {"latitude": 51.04637, "longitude": -114.05045}, "state_code":
+        "AB"}}, {"is_claimed": true, "rating": 3.0, "mobile_url": "http://m.yelp.com/biz/goodlife-fitness-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/34bc8086841c/ico/stars/v1/stars_3.png",
+        "review_count": 15, "name": "GoodLife Fitness", "rating_img_url_small": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/902abeed0983/ico/stars/v1/stars_small_3.png",
+        "url": "http://www.yelp.com/biz/goodlife-fitness-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Sports Clubs", "sports_clubs"], ["Trainers",
+        "healthtrainers"]], "phone": "4032740397", "snippet_text": "I go to this gym
+        every other day. Very clean and am always happy with the staff and the towel,
+        soap, disinfectant dispensers are always full. Many yound...", "image_url":
+        "https://s3-media4.fl.yelpcdn.com/bphoto/xAnWv952ADDQsQTHfJ-Alw/ms.jpg", "snippet_image_url":
+        "http://s3-media4.fl.yelpcdn.com/photo/q50PTYB15EO2jEwgv-9vrA/ms.jpg", "display_phone":
+        "+1-403-274-0397", "rating_img_url_large": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/e8b5b79d37ed/ico/stars/v1/stars_large_3.png",
+        "id": "goodlife-fitness-calgary", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["11420 Sarcee Trail NW", "Beacon Hill Shopping
+        Centre", "Calgary, AB T3R 0A1", "Canada"], "geo_accuracy": 8.0, "postal_code":
+        "T3R 0A1", "country_code": "CA", "address": ["11420 Sarcee Trail NW", "Beacon
+        Hill Shopping Centre"], "coordinate": {"latitude": 51.1552048, "longitude":
+        -114.1629181}, "state_code": "AB"}}, {"is_claimed": false, "rating": 5.0,
+        "mobile_url": "http://m.yelp.com/biz/platoonfx-fitness-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/f1def11e4e79/ico/stars/v1/stars_5.png",
+        "review_count": 2, "name": "PlatoonFX Fitness", "rating_img_url_small": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/c7623205d5cd/ico/stars/v1/stars_small_5.png",
+        "url": "http://www.yelp.com/biz/platoonfx-fitness-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"]], "phone": "4032616664", "snippet_text": "Platoon
+        FX is located in aviation park NE. Within the industrial area (right beside
+        an air field, lol)\n\nPlatoon FX offers a nutrition center, a set of...",
+        "snippet_image_url": "http://s3-media2.fl.yelpcdn.com/photo/il6AajabCLy8TjZfl8Qd-w/ms.jpg",
+        "display_phone": "+1-403-261-6664", "rating_img_url_large": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/22affc4e6c38/ico/stars/v1/stars_large_5.png",
+        "id": "platoonfx-fitness-calgary", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["1351 Aviation Park NE", "Calgary, AB T2E 8M7",
+        "Canada"], "geo_accuracy": 8.0, "postal_code": "T2E 8M7", "country_code":
+        "CA", "address": ["1351 Aviation Park NE"], "coordinate": {"latitude": 51.0999184,
+        "longitude": -114.0310669}, "state_code": "AB"}}, {"is_claimed": true, "rating":
+        2.5, "mobile_url": "http://m.yelp.com/biz/macleod-trail-world-health-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c7fb9aff59f9/ico/stars/v1/stars_2_half.png",
+        "review_count": 11, "name": "Macleod Trail World Health", "rating_img_url_small":
+        "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/8e8633e5f8f0/ico/stars/v1/stars_small_2_half.png",
+        "url": "http://www.yelp.com/biz/macleod-trail-world-health-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Trainers", "healthtrainers"]], "phone":
+        "4039740300", "snippet_text": "Since my last review I had a quick reply from
+        the manager Caterina at world health. She cleared up everything and I can
+        honestly say I am very satisfied...", "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/gjLi3IOSgxtx_JOVQj58_g/ms.jpg",
+        "snippet_image_url": "http://s3-media2.fl.yelpcdn.com/photo/yqZEFxFQmCJC43W4lraWAQ/ms.jpg",
+        "display_phone": "+1-403-974-0300", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/d63e3add9901/ico/stars/v1/stars_large_2_half.png",
+        "id": "macleod-trail-world-health-calgary", "is_closed": false, "location":
+        {"city": "Calgary", "display_address": ["4344 Macleod Trail S", "Calgary,
+        AB T2G 0A4", "Canada"], "geo_accuracy": 8.0, "postal_code": "T2G 0A4", "country_code":
+        "CA", "address": ["4344 Macleod Trail S"], "coordinate": {"latitude": 51.01456,
+        "longitude": -114.06408}, "state_code": "AB"}}, {"is_claimed": true, "rating":
+        3.5, "mobile_url": "http://m.yelp.com/biz/edgemont-world-health-calgary-3?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/5ef3eb3cb162/ico/stars/v1/stars_3_half.png",
+        "review_count": 11, "name": "Edgemont World Health", "rating_img_url_small":
+        "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/2e909d5d3536/ico/stars/v1/stars_small_3_half.png",
+        "url": "http://www.yelp.com/biz/edgemont-world-health-calgary-3?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Trainers", "healthtrainers"]], "phone":
+        "4032394048", "snippet_text": "I love this gym I have been a member for many
+        years. The staff is very friendly and helpful. The trainers top notch!! Love
+        the pool in the summer with my family", "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/oByoc7yZ0mpDDFqy6S2-LA/ms.jpg",
+        "snippet_image_url": "http://s3-media2.fl.yelpcdn.com/photo/NSXcRJTKZnoRMu-bIMHuFg/ms.jpg",
+        "display_phone": "+1-403-239-4048", "rating_img_url_large": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/bd9b7a815d1b/ico/stars/v1/stars_large_3_half.png",
+        "id": "edgemont-world-health-calgary-3", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["7222 Edgemont Blvd NW", "Calgary, AB T3A 2X7",
+        "Canada"], "geo_accuracy": 8.0, "postal_code": "T3A 2X7", "country_code":
+        "CA", "address": ["7222 Edgemont Blvd NW"], "coordinate": {"latitude": 51.1195499,
+        "longitude": -114.15526}, "state_code": "AB"}}, {"is_claimed": false, "rating":
+        5.0, "mobile_url": "http://m.yelp.com/biz/genesis-centre-of-community-wellness-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/f1def11e4e79/ico/stars/v1/stars_5.png",
+        "review_count": 1, "name": "Genesis Centre of Community Wellness", "rating_img_url_small":
+        "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/c7623205d5cd/ico/stars/v1/stars_small_5.png",
+        "url": "http://www.yelp.com/biz/genesis-centre-of-community-wellness-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Leisure Centers", "leisure_centers"]],
+        "phone": "4035902833", "snippet_text": "Booked Feature Gym 3 for an hour on
+        Friday night. Cost was good. W had a great time playing volleyball. The hour
+        rental gave us private locker rooms with...", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/j6AdVNXUxH6WF2T62kZ1uw/ms.jpg",
+        "snippet_image_url": "http://s3-media3.fl.yelpcdn.com/photo/-TO63zq0g5Jyv5SUn3bQIw/ms.jpg",
+        "display_phone": "+1-403-590-2833", "rating_img_url_large": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/22affc4e6c38/ico/stars/v1/stars_large_5.png",
+        "id": "genesis-centre-of-community-wellness-calgary", "is_closed": false,
+        "location": {"city": "Calgary", "display_address": ["7555 Falconridge Blvd
+        NE", "Calgary, AB T3J 0C9", "Canada"], "geo_accuracy": 9.5, "postal_code":
+        "T3J 0C9", "country_code": "CA", "address": ["7555 Falconridge Blvd NE"],
+        "coordinate": {"latitude": 51.1191326805031, "longitude": -113.947616368532},
+        "state_code": "AB"}}, {"is_claimed": true, "rating": 3.0, "mobile_url": "http://m.yelp.com/biz/goodlife-fitness-calgary-3?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/34bc8086841c/ico/stars/v1/stars_3.png",
+        "review_count": 4, "name": "GoodLife Fitness", "rating_img_url_small": "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/902abeed0983/ico/stars/v1/stars_small_3.png",
+        "url": "http://www.yelp.com/biz/goodlife-fitness-calgary-3?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Trainers", "healthtrainers"], ["Sports
+        Clubs", "sports_clubs"]], "phone": "4037263147", "snippet_text": "Goodlife
+        recently took this location over from Gold''s. Other than new signage on the
+        outside of the building, they haven''t done anything else yet. They''ve...",
+        "image_url": "https://s3-media1.fl.yelpcdn.com/bphoto/3z9jkzWxQPMK485lhux0lQ/ms.jpg",
+        "snippet_image_url": "http://s3-media2.fl.yelpcdn.com/photo/v2_-L7WeOm0okMJA-R4I_Q/ms.jpg",
+        "display_phone": "+1-403-726-3147", "rating_img_url_large": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/e8b5b79d37ed/ico/stars/v1/stars_large_3.png",
+        "id": "goodlife-fitness-calgary-3", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["12686 48 St SE", "Calgary, AB T2Z 0B1", "Canada"],
+        "geo_accuracy": 9.5, "postal_code": "T2Z 0B1", "country_code": "CA", "address":
+        ["12686 48 St SE"], "coordinate": {"latitude": 50.934986114502, "longitude":
+        -113.964851379395}, "state_code": "AB"}}, {"is_claimed": true, "rating": 4.0,
+        "mobile_url": "http://m.yelp.com/biz/fit4less-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 2, "name": "Fit4Less", "rating_img_url_small": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/fit4less-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Sports Clubs", "sports_clubs"], ["Trainers",
+        "healthtrainers"]], "phone": "4032558455", "snippet_text": "If your looking
+        for a cheap gym that fulfills your basic needs; this is the place. Open 24
+        hrs, cheap membership (under $20/month), free tanning \u0026 massage...",
+        "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/l-YE--qFVjrXn6MOxiWzSg/ms.jpg",
+        "snippet_image_url": "http://s3-media4.fl.yelpcdn.com/photo/JZl5pH0c8uuQjfoF6X4i-w/ms.jpg",
+        "display_phone": "+1-403-255-8455", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "fit4less-calgary", "is_closed": false, "location": {"city": "Calgary",
+        "display_address": ["Macleod Plaza", "180 94th Ave SE", "Calgary, AB T2J 3G8",
+        "Canada"], "geo_accuracy": 9.5, "postal_code": "T2J 3G8", "country_code":
+        "CA", "address": ["Macleod Plaza", "180 94th Ave SE"], "coordinate": {"latitude":
+        50.9694610191834, "longitude": -114.069261859455}, "state_code": "AB"}}, {"is_claimed":
+        true, "rating": 4.0, "mobile_url": "http://m.yelp.com/biz/fifth-avenue-club-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 5, "name": "Fifth Avenue Club", "rating_img_url_small": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/fifth-avenue-club-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Trainers", "healthtrainers"], ["Squash",
+        "squash"]], "phone": "4035434747", "snippet_text": "As a relatively new member,
+        I don''t have the wealth of experience the previous reviewers do. I also don''t
+        play squash, nor have I joined in any of the...", "image_url": "https://s3-media4.fl.yelpcdn.com/bphoto/7ToTBj5Mvhy6FpPoJno3lw/ms.jpg",
+        "snippet_image_url": "http://s3-media1.fl.yelpcdn.com/photo/ooalu4Q6JixKycxDBI8F7w/ms.jpg",
+        "display_phone": "+1-403-543-4747", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "fifth-avenue-club-calgary", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["715 5 Avenue SW", "2nd Floor", "Calgary, AB
+        T2P 2X6", "Canada"], "geo_accuracy": 8.0, "postal_code": "T2P 2X6", "country_code":
+        "CA", "address": ["715 5 Avenue SW", "2nd Floor"], "coordinate": {"latitude":
+        51.04849, "longitude": -114.07757}, "state_code": "AB"}}, {"is_claimed": true,
+        "rating": 5.0, "mobile_url": "http://m.yelp.com/biz/the-fitness-fix-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/f1def11e4e79/ico/stars/v1/stars_5.png",
+        "review_count": 1, "name": "The Fitness Fix", "rating_img_url_small": "https://s3-media1.fl.yelpcdn.com/assets/2/www/img/c7623205d5cd/ico/stars/v1/stars_small_5.png",
+        "url": "http://www.yelp.com/biz/the-fitness-fix-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Gyms", "gyms"], ["Trainers", "healthtrainers"]], "deals":
+        [{"what_you_get": "You get a voucher redeemable for CA$150 at The Fitness
+        Fix.\nPrint out your voucher, or redeem on your phone with the \u003ca href=\"http://www.yelp.com/mobile?source=deal_marketing\"\u003eYelp
+        app\u003c/a\u003e.", "time_start": 1449262668, "title": "CA$100 for CA$150",
+        "url": "http://www.yelp.ca/deals/the-fitness-fix-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "additional_restrictions": "Promotion lasts for 1 year from date of purchase.
+        After that period, your voucher is redeemable for the amount you paid, less
+        any value you may have received. Not valid with other vouchers, certificates,
+        or offers. Voucher can only be used for services, not retail products. Only
+        1 voucher(s) can be purchased and redeemed per person. Up to 3 can be purchased
+        as gifts for others. Subject to the \u003ca target=\"_blank\" href=\"http://www.yelp.com/tos/general_b2c_en_ca_20140515\"\u003eGeneral
+        Terms\u003c/a\u003e.", "options": [{"original_price": 15000, "title": "CA$100
+        for CA$150", "price": 10000, "purchase_url": "https://www.yelp.ca/checkout/deal/1in-0sQyEU_h8H92_Subww?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "formatted_original_price": "CA$150", "formatted_price": "CA$100", "is_quantity_limited":
+        false}], "image_url": "https://s3-media4.fl.yelpcdn.com/dphoto/-L1gHFbmCE15kclxQ9PZ_Q/m.jpg",
+        "id": "qeLYDYksm7MtRAoI620frQ", "currency_code": "CAD"}], "phone": "4035696757",
+        "snippet_text": "Top notch trainers, fitness instructors, and yoga therapists.  A
+        close-knit group of students and teachers gives the studio a Cheers-feel,
+        where everyone...", "image_url": "https://s3-media2.fl.yelpcdn.com/bphoto/5jjiQHdJD4FzLTue_OfxuQ/ms.jpg",
+        "snippet_image_url": "http://s3-media4.fl.yelpcdn.com/photo/PXPrSVqXFzDrvSGAnbNr9g/ms.jpg",
+        "display_phone": "+1-403-569-6757", "gift_certificates": [{"url": "http://www.yelp.ca/gift-certificates/the-fitness-fix-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "unused_balances": "CASH", "options": [{"price": 1000, "formatted_price":
+        "CA$10"}, {"price": 2500, "formatted_price": "CA$25"}, {"price": 5000, "formatted_price":
+        "CA$50"}, {"price": 7500, "formatted_price": "CA$75"}, {"price": 10000, "formatted_price":
+        "CA$100"}, {"price": 15000, "formatted_price": "CA$150"}], "image_url": "http://s3-media1.fl.yelpcdn.com/bphoto/Wg25ztNaJV7ynjndGuGJEA/m.jpg",
+        "id": "SJbYV5GAN2q3sjYD-JHC_Q", "currency_code": "CAD"}], "rating_img_url_large":
+        "https://s3-media3.fl.yelpcdn.com/assets/2/www/img/22affc4e6c38/ico/stars/v1/stars_large_5.png",
+        "id": "the-fitness-fix-calgary", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["Unit 566", "64th Ave NE", "Calgary, AB T2K
+        6H9", "Canada"], "geo_accuracy": 6.0, "postal_code": "T2K 6H9", "country_code":
+        "CA", "address": ["Unit 566", "64th Ave NE"], "coordinate": {"latitude": 51.1106491,
+        "longitude": -114.0532227}, "state_code": "AB"}}]}'
+    http_version: 
+  recorded_at: Tue, 31 May 2016 01:21:28 GMT
+recorded_with: VCR 3.0.3

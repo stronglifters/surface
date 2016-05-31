@@ -13,13 +13,15 @@ describe Gym do
 
   describe "#location" do
     it "updates the location" do
-      subject.location_attributes = {
-        address: "123 street sw",
-        city: "edmonton",
-        region: "alberta",
-        country: "canada",
-      }
-      subject.save!
+      VCR.use_cassette("geo-location") do
+        subject.location_attributes = {
+          address: "123 street sw",
+          city: "edmonton",
+          region: "alberta",
+          country: "canada",
+        }
+        subject.save!
+      end
 
       expect(subject.location.address).to eql("123 street sw")
       expect(subject.location.city).to eql("edmonton")
@@ -81,27 +83,33 @@ describe Gym do
     end
   end
 
-  describe ".search_yelp", skip: !ENV["YELP_CONSUMER_KEY"].present? do
+  describe ".search_yelp" do
     it "returns results" do
-      results = Gym.search_yelp(city: "Calgary")
-      expect(results).to be_present
-      expect(results.count).to be > 0
-      expect(results.first).to be_instance_of(Gym)
+      VCR.use_cassette("yelp-calgary") do
+        results = Gym.search_yelp(city: "Calgary")
+        expect(results).to be_present
+        expect(results.count).to be > 0
+        expect(results.first).to be_instance_of(Gym)
+      end
     end
 
     it "returns the next page of results" do
-      results = Gym.search_yelp(city: "Calgary", page: 2)
-      expect(results).to be_present
-      expect(results.count).to be > 0
-      expect(results.first).to be_instance_of(Gym)
+      VCR.use_cassette("yelp-calgary-page-2") do
+        results = Gym.search_yelp(city: "Calgary", page: 2)
+        expect(results).to be_present
+        expect(results.count).to be > 0
+        expect(results.first).to be_instance_of(Gym)
+      end
     end
 
     it "finds a college gym" do
-      expect(Gym.search_yelp(
-        q: "SAIT",
-        city: "Calgary",
-        categories: %w{gyms stadiumsarenas},
-      ).map(&:name)).to match_array(["Sait Campus Centre"])
+      VCR.use_cassette("yelp-sait") do
+        expect(Gym.search_yelp(
+          q: "SAIT",
+          city: "Calgary",
+          categories: %w{gyms stadiumsarenas},
+        ).map(&:name)).to match_array(["Sait Campus Centre"])
+      end
     end
   end
 

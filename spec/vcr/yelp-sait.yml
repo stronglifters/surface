@@ -1,0 +1,32 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.yelp.com/v2/search?category_filter=gyms,stadiumsarenas&limit=20&location=Calgary&offset=0&term=SAIT
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: ASCII-8BIT
+      string: '{"region": {"span": {"latitude_delta": 0.0, "longitude_delta": 0.0},
+        "center": {"latitude": 51.0663333, "longitude": -114.0865588}}, "total": 1,
+        "businesses": [{"is_claimed": false, "rating": 4.0, "mobile_url": "http://m.yelp.com/biz/sait-campus-centre-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "rating_img_url": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/c2f3dd9799a5/ico/stars/v1/stars_4.png",
+        "review_count": 1, "name": "Sait Campus Centre", "rating_img_url_small": "https://s3-media4.fl.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/v1/stars_small_4.png",
+        "url": "http://www.yelp.com/biz/sait-campus-centre-calgary?utm_campaign=yelp_api\u0026utm_medium=api_v2_search\u0026utm_source=",
+        "categories": [["Stadiums \u0026 Arenas", "stadiumsarenas"], ["Colleges \u0026
+        Universities", "collegeuniv"]], "phone": "4032848357", "snippet_text": "I
+        spend a lot of time at the Campus Centre for events, fitness, and even wait
+        time while family is working out /swimming. It''s a Shaw Open WiFi location
+        so...", "image_url": "https://s3-media3.fl.yelpcdn.com/bphoto/sPLC52Bh5DDpVGFhCjRzYQ/ms.jpg",
+        "snippet_image_url": "http://s3-media4.fl.yelpcdn.com/photo/IhPIcIDEjVaAi4PKrlAyYQ/ms.jpg",
+        "display_phone": "+1-403-284-8357", "rating_img_url_large": "https://s3-media2.fl.yelpcdn.com/assets/2/www/img/ccf2b76faa2c/ico/stars/v1/stars_large_4.png",
+        "id": "sait-campus-centre-calgary", "is_closed": false, "location": {"city":
+        "Calgary", "display_address": ["1301 16 Avenue NW", "Calgary, AB T2M 0L4",
+        "Canada"], "geo_accuracy": 8.0, "postal_code": "T2M 0L4", "country_code":
+        "CA", "address": ["1301 16 Avenue NW"], "coordinate": {"latitude": 51.06667,
+        "longitude": -114.08978}, "state_code": "AB"}}]}'
+    http_version: 
+  recorded_at: Tue, 31 May 2016 01:21:13 GMT
+recorded_with: VCR 3.0.3

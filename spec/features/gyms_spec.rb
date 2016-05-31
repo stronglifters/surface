@@ -51,25 +51,27 @@ feature "Gyms", type: :feature do
     subject { NewGymPage.new }
 
     it "saves a new gym" do
-      subject.visit_page
-      subject.change(
-        name: "SAIT",
-        address: "1301 16 Ave NW",
-        city: "Calgary",
-        region: "AB",
-        country: "Canada",
-        postal_code: "T2M 0L4",
-      )
+      VCR.use_cassette("geo-location-sait") do
+        subject.visit_page
+        subject.change(
+          name: "SAIT",
+          address: "1301 16 Ave NW",
+          city: "Calgary",
+          region: "AB",
+          country: "Canada",
+          postal_code: "T2M 0L4",
+        )
 
-      expect(Gym.count).to eql(1)
-      gym = Gym.last
-      expect(gym.name).to eql("SAIT")
-      expect(gym.location).to be_present
-      expect(gym.location.address).to eql("1301 16 Ave NW")
-      expect(gym.location.city).to eql("Calgary")
-      expect(gym.location.region).to eql("AB")
-      expect(gym.location.country).to eql("CA")
-      expect(gym.location.postal_code).to eql("T2M 0L4")
+        expect(Gym.count).to eql(1)
+        gym = Gym.last
+        expect(gym.name).to eql("SAIT")
+        expect(gym.location).to be_present
+        expect(gym.location.address).to eql("1301 16 Ave NW")
+        expect(gym.location.city).to eql("Calgary")
+        expect(gym.location.region).to eql("AB")
+        expect(gym.location.country).to eql("CA")
+        expect(gym.location.postal_code).to eql("T2M 0L4")
+      end
     end
   end
 end

@@ -6,10 +6,28 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ''
- response:
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
     status:
       code: 200
       message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Vary:
+      - Origin
+      X-Database-Date:
+      - Fri, 06 May 2016 11:56:24 GMT
+      Date:
+      - Tue, 31 May 2016 03:09:44 GMT
+      Content-Length:
+      - '246'
     body:
       encoding: UTF-8
       string: '{"ip":"70.173.137.232","country_code":"US","country_name":"United States","region_code":"NV","region_name":"Nevada","city":"Las
@@ -17,5 +35,5 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Tue, 31 May 2016 02:42:34 GMT
+  recorded_at: Tue, 31 May 2016 03:09:44 GMT
 recorded_with: VCR 3.0.3

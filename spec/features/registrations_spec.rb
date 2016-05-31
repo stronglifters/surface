@@ -11,7 +11,7 @@ feature "Registrations", type: :feature do
     it "registers a new account" do
       subject.register_with(username: "mo", email: "mo@example.com", password: "password")
 
-      expect(current_path).to eql(dashboard_path)
+      expect(current_path).to eql(edit_profile_path("mo"))
     end
 
     context "when the username is taken" do

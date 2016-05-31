@@ -1,0 +1,163 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=1301%2016%20Ave%20NW,%20Calgary,%20AB,%20CA&language=en&sensor=false
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "E.H. Crandell Building",
+                       "short_name" : "E.H. Crandell Building",
+                       "types" : [ "premise" ]
+                    },
+                    {
+                       "long_name" : "1301",
+                       "short_name" : "1301",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "16 Avenue Northwest",
+                       "short_name" : "16 Ave NW",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Northwest Calgary",
+                       "short_name" : "Northwest Calgary",
+                       "types" : [ "neighborhood", "political" ]
+                    },
+                    {
+                       "long_name" : "Calgary",
+                       "short_name" : "Calgary",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Division No. 6",
+                       "short_name" : "Division No. 6",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Alberta",
+                       "short_name" : "AB",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Canada",
+                       "short_name" : "CA",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "T2M 0L4",
+                       "short_name" : "T2M 0L4",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "E.H. Crandell Building, 1301 16 Ave NW, Calgary, AB T2M 0L4, Canada",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : 51.0663333,
+                       "lng" : -114.0865588
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 51.06768228029149,
+                          "lng" : -114.0852098197085
+                       },
+                       "southwest" : {
+                          "lat" : 51.06498431970849,
+                          "lng" : -114.0879077802915
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJCfK3241vcVMRRI-ORjRNjEM",
+                 "types" : [ "premise" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "1301",
+                       "short_name" : "1301",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "16 Avenue Northwest",
+                       "short_name" : "16 Ave NW",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Northwest Calgary",
+                       "short_name" : "Northwest Calgary",
+                       "types" : [ "neighborhood", "political" ]
+                    },
+                    {
+                       "long_name" : "Calgary",
+                       "short_name" : "Calgary",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Division No. 6",
+                       "short_name" : "Division No. 6",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Alberta",
+                       "short_name" : "AB",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Canada",
+                       "short_name" : "CA",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "T2M 4W7",
+                       "short_name" : "T2M 4W7",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "1301 16 Ave NW, Calgary, AB T2M 4W7, Canada",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 51.0668709,
+                          "lng" : -114.084417
+                       },
+                       "southwest" : {
+                          "lat" : 51.0613607,
+                          "lng" : -114.0941751
+                       }
+                    },
+                    "location" : {
+                       "lat" : 51.064591,
+                       "lng" : -114.0901942
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 51.0668709,
+                          "lng" : -114.084417
+                       },
+                       "southwest" : {
+                          "lat" : 51.0613607,
+                          "lng" : -114.0941751
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJgZ6maJJvcVMRmTIpIcczF1Y",
+                 "types" : [ "premise" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Tue, 31 May 2016 02:38:44 GMT
+recorded_with: VCR 3.0.3

@@ -57,16 +57,18 @@ describe GymsController do
   describe "#create" do
     context "valid params" do
       before :each do
-        post :create, gym: {
-          name: "SAIT",
-          location_attributes: {
-            address: "1301 16 Ave NW",
-            city: "Calgary",
-            region: "AB",
-            country: "CA",
-            postal_code: "T2M 0L4",
+        VCR.use_cassette("geo-location-sait") do
+          post :create, gym: {
+            name: "SAIT",
+            location_attributes: {
+              address: "1301 16 Ave NW",
+              city: "Calgary",
+              region: "AB",
+              country: "CA",
+              postal_code: "T2M 0L4",
+            }
           }
-        }
+        end
       end
 
       it "redirects to the listing page" do

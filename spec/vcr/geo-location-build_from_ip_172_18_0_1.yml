@@ -1,0 +1,17 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://freegeoip.io/json/172.18.0.1
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: UTF-8
+      string: '{"ip":"172.18.0.1","country_code":"","country_name":"","region_code":"","region_name":"","city":"","zip_code":"","time_zone":"","latitude":0,"longitude":0,"metro_code":0}
+
+'
+    http_version: 
+  recorded_at: Tue, 31 May 2016 02:47:26 GMT
+recorded_with: VCR 3.0.3

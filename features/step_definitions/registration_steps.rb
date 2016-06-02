@@ -4,6 +4,7 @@ Given(/^the user is on the registration page$/) do
 end
 
 When(/^they enter a (.*), (.*) and (.*)$/) do |username, email, password|
+  @username = username
   @subject.register_with(
     username: username,
     email: email,
@@ -12,7 +13,6 @@ When(/^they enter a (.*), (.*) and (.*)$/) do |username, email, password|
 end
 
 When(/^the username (.*) is already registered$/) do |username|
-  @username = username
   FactoryGirl.create(:user, username: username)
 end
 
@@ -21,7 +21,7 @@ When(/^the email (.*) is already registered$/) do |email|
 end
 
 Then(/^it redirects them to edit their profile$/) do
-  expect(@subject.current_path).to eql(edit_profile_path(@username))
+  expect(@subject.current_path).to eql(edit_profile_path(id: @username))
 end
 
 Then(/^it displays the following (.*)$/) do |text|

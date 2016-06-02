@@ -6,7 +6,7 @@ Feature: Registration
   Scenario Outline: Register a new user
     Given the user is on the registration page
     When they enter a <username>, <email> and <password>
-    Then it redirects them to the dashboard
+    Then it redirects them to edit their profile
 
     Examples:
       | username | email          | password |

@@ -1,7 +1,8 @@
 module ApplicationHelper
   VIDEOS=[
-    "ua8oObEPptQ",
+    "bs_Ej32IYgo",
     "txuWGoZF3ew",
+    "ua8oObEPptQ",
   ]
   def gravatar_for(user, size: 260)
     secure_host = "https://secure.gravatar.com/avatar"
@@ -23,7 +24,7 @@ module ApplicationHelper
 
   def random_video
     video = VIDEOS.sample
-    iframe = content_tag(:iframe, "", width: 560, height: 315, src: "https://www.youtube.com/embed/#{video}", frameborder: 0, allowfullscreen: true)
+    iframe = content_tag(:iframe, "", width: 560, height: 315, src: "https://www.youtube-nocookie.com/embed/#{video}", frameborder: 0, allowfullscreen: true)
     content_tag(:div, iframe, class: "flex-video")
   end
 end

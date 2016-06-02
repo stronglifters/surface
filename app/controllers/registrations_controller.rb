@@ -12,7 +12,7 @@ class RegistrationsController < PublicController
       ).access(request)
       UserMailer.registration_email(@user).deliver_later
       flash[:notice] = translate(".success")
-      redirect_to dashboard_path
+      redirect_to edit_profile_path(@user.username)
     else
       flash.now[:error] = @user.errors.full_messages
       render :new

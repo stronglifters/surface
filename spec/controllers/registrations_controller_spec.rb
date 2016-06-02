@@ -33,8 +33,8 @@ describe RegistrationsController do
         expect(first_user.email).to eql(email)
       end
 
-      it "redirects them to the dashboard" do
-        expect(response).to redirect_to(dashboard_path)
+      it "redirects them to edit their profile" do
+        expect(response).to redirect_to(edit_profile_path(username))
       end
 
       it "logs them in" do

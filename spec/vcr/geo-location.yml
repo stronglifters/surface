@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=123%20street%20sw,%20edmonton,%20alberta,%20canada&language=en&sensor=false
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "123 Street Southwest",
+                       "short_name" : "123 St SW",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Rutherford",
+                       "short_name" : "Rutherford",
+                       "types" : [ "neighborhood", "political" ]
+                    },
+                    {
+                       "long_name" : "Edmonton",
+                       "short_name" : "Edmonton",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Division No. 11",
+                       "short_name" : "Division No. 11",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Alberta",
+                       "short_name" : "AB",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Canada",
+                       "short_name" : "CA",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "T6W",
+                       "short_name" : "T6W",
+                       "types" : [ "postal_code_prefix", "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "123 St SW, Edmonton, AB T6W, Canada",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 53.41838800000001,
+                          "lng" : -113.5345074
+                       },
+                       "southwest" : {
+                          "lat" : 53.4174456,
+                          "lng" : -113.535319
+                       }
+                    },
+                    "location" : {
+                       "lat" : 53.41792539999999,
+                       "lng" : -113.5347344
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 53.41926578029151,
+                          "lng" : -113.5335642197085
+                       },
+                       "southwest" : {
+                          "lat" : 53.41656781970851,
+                          "lng" : -113.5362621802915
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJW8nsT3IeoFMRI9BGHNCnSb8",
+                 "types" : [ "route" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Tue, 31 May 2016 01:18:16 GMT
+recorded_with: VCR 3.0.3

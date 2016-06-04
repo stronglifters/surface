@@ -73,7 +73,9 @@ source "https://rubygems.org" do
 end
 
 source "https://rails-assets.org" do
+  gem "rails-assets-backbone"
   gem "rails-assets-clipboard"
   gem "rails-assets-lodash"
   gem "rails-assets-ractive"
+  gem "rails-assets-ractive-backbone"
 end

@@ -17,6 +17,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require ractive
+//= require backbone
+//= require ractive-backbone
 //= require_self
 //= require_tree .
 //= require turbolinks

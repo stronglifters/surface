@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "sessions#new"
   resources :sessions, only: [:new, :create, :destroy]
   resources :registrations, only: [:new, :create]
-  resources :training_sessions, only: [:index] do
+  resources :training_sessions, only: [:index, :new] do
     collection do
       post :upload
       post :drive_upload

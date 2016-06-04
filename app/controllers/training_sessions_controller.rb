@@ -10,6 +10,9 @@ class TrainingSessionsController < ApplicationController
     )
   end
 
+  def new
+  end
+
   def upload
     backup_file = BackupFile.new(current_user, params[:backup])
 

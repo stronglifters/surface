@@ -85,4 +85,63 @@ describe TrainingSessionsController do
       expect(flash[:notice]).to eql(success_message)
     end
   end
+
+  describe "#new" do
+    include_context "stronglifts_program"
+
+    it "loads the next workout in the program" do
+      create(:training_session, user: user, workout: workout_a)
+
+      get :new
+
+      expect(assigns(:workout)).to eql(workout_b)
+    end
+
+    it "loads the first workout in the program" do
+      get :new
+
+      expect(assigns(:workout)).to eql(workout_a)
+    end
+  end
+
+  describe "#create" do
+    include_context "stronglifts_program"
+    let(:body_weight) { rand(250.0) }
+
+    it "creates a new training session" do
+      post :create, training_session: {
+        workout_id: workout_b.id,
+        body_weight: body_weight
+      }
+      expect(response.status).to eql(200)
+      expect(user.reload.training_sessions.count).to eql(1)
+      expect(user.last_workout).to eql(workout_b)
+      expect(user.training_sessions.last.body_weight).to eql(body_weight.to_f)
+    end
+  end
+
+  describe "#edit" do
+    let(:training_session) { create(:training_session, user: user) }
+
+    it "loads the training session" do
+      get :edit, id: training_session.id
+      expect(assigns(:training_session)).to eql(training_session)
+    end
+  end
+
+  describe "#update" do
+    include_context "stronglifts_program"
+    let(:training_session) { create(:training_session, user: user, workout: workout_a) }
+
+    it "records the exercise" do
+      patch :update, id: training_session.id, training_session: {
+        exercise_id: squat.id,
+        weight: 315,
+        sets: [5, 5, 5],
+      }
+      expect(training_session.exercises).to include(squat)
+      expect(training_session.progress_for(squat).target_weight).to eql(315.to_f)
+      expect(training_session.progress_for(squat).sets).to eql(['5', '5', '5'])
+    end
+  end
 end

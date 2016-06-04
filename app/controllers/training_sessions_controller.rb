@@ -11,6 +11,35 @@ class TrainingSessionsController < ApplicationController
   end
 
   def new
+    @workout = current_user.next_workout
+  end
+
+  def create
+    secure_params = params.require(:training_session).permit(:workout_id, :body_weight)
+    workout = Workout.find(secure_params[:workout_id])
+    @training_session = current_user.begin_workout(
+      workout,
+      DateTime.now,
+      secure_params[:body_weight]
+    )
+    render nothing: true
+  end
+
+  def edit
+    @training_session = current_user.training_sessions.find(params[:id])
+  end
+
+  def update
+    secure_params = params.
+      require(:training_session).
+      permit(:exercise_id, :weight, sets: [])
+    training_session = current_user.training_sessions.find(params[:id])
+    training_session.train(
+      Exercise.find(secure_params[:exercise_id]),
+      secure_params[:weight],
+      secure_params[:sets]
+    )
+    render nothing: true
   end
 
   def upload

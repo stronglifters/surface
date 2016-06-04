@@ -16,6 +16,10 @@ class Program < ActiveRecord::Base
     end
   end
 
+  def next_workout_after(workout)
+    workouts.where.not(name: workout.name).first
+  end
+
   class << self
     def stronglifts
       Program.find_by(name: STRONG_LIFTS)

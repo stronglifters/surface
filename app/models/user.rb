@@ -72,6 +72,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def last_workout
+    if training_sessions.any?
+      training_sessions.order(:occurred_at).last.workout
+    else
+      current_program.workouts.order(name: :desc).first
+    end
+  end
+
+  def next_workout
+    last_workout.next_workout
+  end
+
+  def current_program
+    Program.stronglifts
+  end
+
   def google_drive
     GoogleDrive.new(self)
   end

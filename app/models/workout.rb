@@ -22,4 +22,8 @@ class Workout < ActiveRecord::Base
       repetitions: repetitions
     ) unless exercises.include?(exercise)
   end
+
+  def next_workout
+    program.next_workout_after(self)
+  end
 end

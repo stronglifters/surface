@@ -7,8 +7,10 @@
 
 
 <script type="text/javascript" charset="utf-8">
-new Stronglifters.TrainingSessionView({
+var json = <%= raw render partial: 'edit.json.jbuilder', locals: { training_session: @training_session } %>;
+var model = new Stronglifters.TrainingSession(json);
+window.currentView = new Stronglifters.TrainingSessionView({
   el: 'training-session-view',
-  data: { }
+  data: json
 })
 </script>

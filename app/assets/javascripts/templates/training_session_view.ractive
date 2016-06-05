@@ -1,64 +1,24 @@
 <div class="row">
+  {{#each exercises}}
   <div class="panel small-12 columns">
     <div class="row">
       <div class="small-6 columns">
-        Squat
+        {{name}}
       </div>
       <div class="small-6 columns">
-        3x5 270lb
+        <p class="text-right">
+        {{sets}}x{{repetitions}} {{target_weight}}lb
+        </p>
       </div>
     </div>
+
     <div class="row">
       <div class="small-12 columns">
-        <button class="button small round success">5</button>
-        <button class="button small round success">5</button>
-        <button class="button small round success">5</button>
-        <button class="button small round alert">4</button>
-        <button class="button small round secondary">5</button>
+      {{#each completed_sets}}
+        <button class="button small round secondary">{{.}}</button>
+      {{/each}}
       </div>
     </div>
   </div>
+  {{/each}}
 </div>
-
-<div class="row">
-  <div class="panel small-12 columns">
-    <div class="row">
-      <div class="small-6 columns">
-        Bench Press
-      </div>
-      <div class="small-6 columns">
-        5x5 180lb
-      </div>
-    </div>
-    <div class="row">
-      <div class="small-12 columns">
-        <button class="button small round">5</button>
-        <button class="button small round">5</button>
-        <button class="button small round">5</button>
-        <button class="button small round">5</button>
-        <button class="button small round">5</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="panel small-12 columns">
-    <div class="row">
-      <div class="small-6 columns">
-        Barbell Row
-      </div>
-      <div class="small-6 columns">
-        3x5 160lb
-      </div>
-    </div>
-    <div class="row">
-      <div class="small-12 columns">
-        <button class="button small round">5</button>
-        <button class="button small round">5</button>
-        <button class="button small round">5</button>
-      </div>
-    </div>
-  </div>
-</div>
-

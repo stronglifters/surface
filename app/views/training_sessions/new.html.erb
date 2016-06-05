@@ -1,14 +1,28 @@
-<div class="row">
-  <div class="large-12 columns">
-    <div id="training-session-view">
+<% @workout.exercise_workouts.each do |exercise| %>
+  <div class="row">
+    <div class="panel small-12 columns">
+      <div class="row">
+        <div class="small-6 columns">
+          <%= exercise.name %>
+        </div>
+        <div class="small-6 columns">
+          <%= exercise.sets %>x<%= exercise.repetitions %>
+          <%= current_user.next_weight_for(exercise.exercise) %>lb
+        </div>
+      </div>
     </div>
   </div>
+<% end %>
+
+<div class="row">
+  <div class="small-12 columns">
+    <%= form_for @training_session do |f| %>
+      <fieldset>
+        <legend><%= TrainingSession.human_attribute_name(:body_weight) %></legend>
+        <%= f.number_field :body_weight %>
+      </fieldset>
+      <%= f.hidden_field :workout_id %>
+      <%= f.submit "Start", class: "button round right" %>
+    <% end %>
+  </div>
 </div>
-
-
-<script type="text/javascript" charset="utf-8">
-new Stronglifters.TrainingSessionView({
-  el: 'training-session-view',
-  data: { }
-})
-</script>

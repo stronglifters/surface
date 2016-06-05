@@ -1,5 +1,5 @@
 <div class="row">
-  {{#each exercises}}
+  {{#each json.exercises}}
   <div class="panel small-12 columns">
     <div class="row">
       <div class="small-6 columns">
@@ -14,8 +14,8 @@
 
     <div class="row">
       <div class="small-12 columns">
-      {{#each completed_sets}}
-        <button class="button small round secondary">{{.}}</button>
+      {{#each reps}}
+        <button on-click="completeSet" class="button small round secondary {{status}}">{{completed}}</button>
       {{/each}}
       </div>
     </div>

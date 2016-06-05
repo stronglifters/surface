@@ -1,5 +1,6 @@
 <div class="row">
   <div class="large-12 columns">
+    <%= render partial: 'edit.json.jbuilder', locals: { training_session: @training_session } %>
     <div id="training-session-view">
     </div>
   </div>
@@ -11,6 +12,9 @@ var json = <%= raw render partial: 'edit.json.jbuilder', locals: { training_sess
 var model = new Stronglifters.TrainingSession(json);
 window.currentView = new Stronglifters.TrainingSessionView({
   el: 'training-session-view',
-  data: json
+  data: {
+    json: json,
+    model: model
+  }
 })
 </script>

@@ -40,6 +40,7 @@ en:
     formats:
       short: "%a, %d %b %Y"
   add: Add
+  back_html: '&laquo Back'
   save: Save
   search: Search
   layouts:

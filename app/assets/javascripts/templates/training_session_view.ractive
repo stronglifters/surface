@@ -21,14 +21,16 @@
     {{else}}
       <div class="row">
         <div class="small-12 columns">
-        {{#each reps}}
-          <button on-click="updateProgress" class="button small round {{status}}">{{completed}}</button>
-        {{/each}}
+          <p class="text-center">
+            {{#each reps}}
+              <button on-click="updateProgress" class="button small round {{status}}">{{completed}}</button>
+            {{/each}}
+          </p>
         </div>
       </div>
       <div class="row">
         <div class="small-12 columns">
-          <button on-click="completeExercise">Done</button>
+          <button on-click="completeExercise" class="button expand">Done</button>
         </div>
       </div>
     {{/if}}

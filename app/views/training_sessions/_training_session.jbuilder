@@ -6,7 +6,7 @@ json.exercises training_session.workout.exercise_workouts do |exercise|
   json.name exercise.name
   json.sets exercise.sets
   json.repetitions exercise.repetitions
-  json.reps training_session.progress_for(exercise.exercise).sets do |completed_reps|
+  json.reps training_session.progress_for(exercise.exercise).try(:sets) || exercise.sets.times.map { |x| 0 } do |completed_reps|
     json.target exercise.repetitions
     json.completed completed_reps.to_i
   end

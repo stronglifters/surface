@@ -35,5 +35,10 @@
 <%= render partial: "home_gym_modal", locals: { id: 'homeGymModal' } %>
 
 <script type="text/javascript" charset="utf-8">
-new Stronglifters.HomeGym({ el: 'gym-search', data: { city: '<%= current_session.location.try(:city) %>'} })
+window.currentView = new Stronglifters.HomeGym({
+  el: 'gym-search',
+  data: function() {
+    return { city: '<%= current_session.location.try(:city) %>' };
+  }
+})
 </script>

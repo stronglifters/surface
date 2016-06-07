@@ -113,10 +113,10 @@ describe TrainingSessionsController do
         workout_id: workout_b.id,
         body_weight: body_weight
       }
-      expect(response.status).to eql(200)
       expect(user.reload.training_sessions.count).to eql(1)
       expect(user.last_workout).to eql(workout_b)
       expect(user.training_sessions.last.body_weight).to eql(body_weight.to_f)
+      expect(response).to redirect_to(edit_training_session_path(user.training_sessions.last))
     end
   end
 
@@ -134,7 +134,7 @@ describe TrainingSessionsController do
     let(:training_session) { create(:training_session, user: user, workout: workout_a) }
 
     it "records the exercise" do
-      patch :update, id: training_session.id, training_session: {
+      xhr :patch, :update, id: training_session.id, training_session: {
         exercise_id: squat.id,
         weight: 315,
         sets: [5, 5, 5],

@@ -34,13 +34,12 @@ class TrainingSessionsController < ApplicationController
     secure_params = params.
       require(:training_session).
       permit(:exercise_id, :weight, sets: [])
-    training_session = current_user.training_sessions.find(params[:id])
-    training_session.train(
+    @training_session = current_user.training_sessions.find(params[:id])
+    @training_session.train(
       Exercise.find(secure_params[:exercise_id]),
       secure_params[:weight],
       secure_params[:sets]
     )
-    render nothing: true
   end
 
   def upload

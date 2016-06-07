@@ -1,5 +1,5 @@
 <div class="row">
-  {{#each exercises}}
+  {{#each training_session.exercises}}
   <div class="panel small-12 columns">
     <div class="row">
       <div class="small-6 columns">
@@ -12,13 +12,27 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="small-12 columns">
-      {{#each reps}}
-        <button on-click="updateProgress" class="button small round {{status}}">{{completed}}</button>
-      {{/each}}
+    {{#if completed}}
+      <div class="row">
+        <div class="small-12 columns">
+          Good Work!
+        </div>
       </div>
-    </div>
+    {{else}}
+      <div class="row">
+        <div class="small-12 columns">
+        {{#each reps}}
+          <button on-click="updateProgress" class="button small round {{status}}">{{completed}}</button>
+        {{/each}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-12 columns">
+          <button on-click="completeExercise">Done</button>
+        </div>
+      </div>
+    {{/if}}
+
   </div>
   {{/each}}
 </div>

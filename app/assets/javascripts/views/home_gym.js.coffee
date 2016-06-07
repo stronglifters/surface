@@ -1,6 +1,6 @@
 Stronglifters.HomeGym = Ractive.extend
   template: RactiveTemplates["templates/home_gym"]
-  data:
+  data: ->
     city: ''
     gyms: []
     search:

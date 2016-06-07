@@ -27,12 +27,6 @@ describe "TrainingSessionView", ->
     result = @subject.get('exercises.0.reps.0.status')
     expect(result).toEqual('secondary')
 
-  it "disables the other sets", ->
-    secondSetButton = @el.find('button:eq(1)')
-    thirdSetButton = @el.find('button:eq(2)')
-    expect(secondSetButton.attr('disabled')).toEqual('disabled')
-    expect(thirdSetButton.attr('disabled')).toEqual('disabled')
-
   describe "updating progress", ->
     describe "when no reps are completed", ->
       it "sets the reps to the target", ->
@@ -44,10 +38,6 @@ describe "TrainingSessionView", ->
         @el.find('button').first().trigger('click')
         result = @subject.get('exercises.0.reps.0.status')
         expect(result).toEqual('success')
-
-      it "enables the next set", ->
-        @el.find('button').first().trigger('click')
-        expect(@el.find('button:eq(1)').attr('disabled')).toEqual('')
 
     describe "when at least one rep is completed", ->
       beforeEach ->

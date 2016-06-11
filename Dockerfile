@@ -13,6 +13,7 @@ RUN apt-get install -y nodejs
 RUN npm install npm -g
 RUN npm install phantomjs-prebuilt -g
 RUN apt-get install -y postgresql-client
+RUN apt-get install -y graphviz
 
 RUN mkdir -p /app
 WORKDIR /app

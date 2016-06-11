@@ -6,22 +6,17 @@ class TrainingSession < ActiveRecord::Base
   has_many :exercises, through: :exercise_sessions
   accepts_nested_attributes_for :exercise_sessions
 
-  def train(exercise, target_weight, completed_sets)
+  def train(exercise, target_weight, repetitions:, set: nil)
     recommendation = workout.exercise_workouts.find_by(exercise: exercise)
 
-    session = exercise_sessions.find_by(exercise_workout: recommendation)
-    if session.present?
-      session.update!(actual_sets: completed_sets, target_weight: target_weight)
-      session
-    else
-      exercise_sessions.create!(
-        actual_sets: completed_sets,
-        exercise_workout: recommendation,
-        target_repetitions: recommendation.repetitions,
-        target_sets: recommendation.sets,
-        target_weight: target_weight,
-      )
-    end
+    session = exercise_sessions.find_or_create_by(exercise_workout: recommendation)
+    exercise_set = set.present? ? session.sets.at(set-1) : session.sets.build
+    exercise_set.update!(
+      actual_repetitions: repetitions,
+      target_repetitions: recommendation.repetitions,
+      target_weight: target_weight,
+    )
+    session
   end
 
   def progress_for(exercise)

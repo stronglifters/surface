@@ -43,7 +43,7 @@ class TrainingHistory
       joins(:exercise).
       where(exercises: { name: exercise.name }).
       inject({}) do |memo, session|
-        memo[session.training_session.occurred_at] = session.target_weight
+        memo[session.training_session.occurred_at] = session.sets.first.target_weight
         memo
       end
   end

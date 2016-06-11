@@ -12,7 +12,9 @@ describe TrainingHistory do
 
     before :each do
       session = user.begin_workout(workout_a, date, body_weight)
-      session.train(squat, target_weight, [5, 5, 5, 5, 5])
+      5.times do
+        session.train(squat, target_weight, repetitions: 5)
+      end
     end
 
     it "returns the history in the format required for the chart" do
@@ -33,7 +35,9 @@ describe TrainingHistory do
     describe "when the exercise has been performed at least once" do
       it "returns true" do
         session = user.begin_workout(workout_a, DateTime.now, 225)
-        session.train(squat, 310, [5, 5, 5])
+        3.times do
+          session.train(squat, 310, repetitions: 5)
+        end
         expect(subject.completed_any?).to be_truthy
       end
     end

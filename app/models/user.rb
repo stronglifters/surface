@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :training_sessions
   has_many :exercise_sessions, through: :training_sessions
+  has_many :exercise_sets, through: :exercise_sessions
   has_many :user_sessions, dependent: :destroy
   has_one :profile
   has_many :received_emails

@@ -118,13 +118,11 @@ describe User do
         workout: workout_a,
         occurred_at: DateTime.now.utc
       )
-      1.upto(5) do |n|
-        training_session.exercise_sessions.create!(
-          target_weight: (200 + n),
-          exercise_workout: exercise_workout,
-          actual_sets: [5, 5, 5, 5, 5]
-        )
-      end
+      training_session.train(squat, 201, repetitions: exercise_workout.repetitions)
+      training_session.train(squat, 202, repetitions: exercise_workout.repetitions)
+      training_session.train(squat, 210, repetitions: exercise_workout.repetitions - 1)
+      training_session.train(squat, 204, repetitions: exercise_workout.repetitions)
+      training_session.train(squat, 205, repetitions: exercise_workout.repetitions)
     end
 
     it "returns the users maximum amount of weight lifted" do
@@ -173,7 +171,11 @@ describe User do
 
     it "removes all the associations" do
       training_session = subject.begin_workout(workout_a, Date.today, 200)
-      training_session.train(squat, 200, [5, 5, 5, 5, 5])
+      training_session.train(squat, 200, repetitions: 5)
+      training_session.train(squat, 200, repetitions: 5)
+      training_session.train(squat, 200, repetitions: 5)
+      training_session.train(squat, 200, repetitions: 5)
+      training_session.train(squat, 200, repetitions: 5)
 
       subject.training_sessions.destroy_all
 

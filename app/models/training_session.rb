@@ -2,7 +2,7 @@ class TrainingSession < ActiveRecord::Base
   belongs_to :user
   belongs_to :workout
   has_one :program, through: :workout
-  has_many :exercise_sessions, -> { order(:created_at) }, dependent: :destroy
+  has_many :exercise_sessions, dependent: :destroy
   has_many :exercises, through: :exercise_sessions
   accepts_nested_attributes_for :exercise_sessions
 

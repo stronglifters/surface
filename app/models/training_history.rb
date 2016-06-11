@@ -8,10 +8,10 @@ class TrainingHistory
   end
 
   def personal_record
-    user.
-      exercise_sessions.
+    user.exercise_sets.
       joins(:exercise).
-      where(exercises: { name: exercise.name }).
+      where(exercises: { id: exercise.id }).
+      where('actual_repetitions = target_repetitions').
       maximum(:target_weight)
   end
 

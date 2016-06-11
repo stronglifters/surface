@@ -14,11 +14,8 @@ class Csv::Import
 
   def import_from(directory)
     ActiveRecord::Base.transaction do
-      previous = nil
-      ::CSV.foreach(database_file(directory)).drop(1).each do |row|
-        next if previous.present? && row == previous
+      csv_rows_from(database_file(directory)) do |row|
         import(row)
-        previous = row
       end
     end
   end
@@ -50,5 +47,15 @@ class Csv::Import
 
   def database_file(dir)
     Dir.glob("#{dir}/*csv*").first
+  end
+
+  def csv_rows_from(file)
+    previous = nil
+    ::CSV.foreach(file).drop(1).each do |row|
+      duplicate = previous.present? && row == previous
+      next if duplicate
+      yield row
+      previous = row
+    end
   end
 end

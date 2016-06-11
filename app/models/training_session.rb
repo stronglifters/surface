@@ -10,7 +10,7 @@ class TrainingSession < ActiveRecord::Base
     recommendation = workout.exercise_workouts.find_by(exercise: exercise)
 
     session = exercise_sessions.find_or_create_by(exercise_workout: recommendation)
-    exercise_set = set.present? ? session.sets.at(set-1) : session.sets.build
+    exercise_set = set.present? && session.sets.at(set).present? ? session.sets.at(set) : session.sets.build
     exercise_set.update!(
       actual_repetitions: repetitions,
       target_repetitions: recommendation.repetitions,

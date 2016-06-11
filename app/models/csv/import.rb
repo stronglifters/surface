@@ -14,8 +14,11 @@ class Csv::Import
 
   def import_from(directory)
     ActiveRecord::Base.transaction do
+      previous = nil
       ::CSV.foreach(database_file(directory)).drop(1).each do |row|
+        next if previous.present? && row == previous
         import(row)
+        previous = row
       end
     end
   end
@@ -32,11 +35,14 @@ class Csv::Import
     workout.exercises.each do |exercise|
       exercise_row = workout_row.find(exercise)
       next if exercise_row.nil?
-      training_session.train(
-        exercise,
-        exercise_row.weight_lb,
-        exercise_row.sets
-      )
+      exercise_row.sets.compact.each_with_index do |completed_reps, index|
+        training_session.train(
+          exercise,
+          exercise_row.weight_lb,
+          repetitions: completed_reps,
+          set: index
+        )
+      end
     end
   end
 

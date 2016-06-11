@@ -60,12 +60,7 @@ describe Csv::Import do
       training_session = user.training_sessions.order(:occurred_at).first
       squat_session = training_session.progress_for(squat)
 
-      expect(squat_session.target_weight).to eql(45.0)
-      expect(squat_session.actual_sets[0]).to eql("5")
-      expect(squat_session.actual_sets[1]).to eql("5")
-      expect(squat_session.actual_sets[2]).to eql("5")
-      expect(squat_session.actual_sets[3]).to eql("5")
-      expect(squat_session.actual_sets[4]).to eql("5")
+      expect(squat_session.to_sets).to eql([5, 5, 5, 5, 5])
     end
 
     it "imports the completed bench exercise" do
@@ -73,12 +68,8 @@ describe Csv::Import do
 
       training_session = user.training_sessions.order(:occurred_at).first
       bench_session = training_session.progress_for(bench_press)
-      expect(bench_session.target_weight).to eql(65.0)
-      expect(bench_session.actual_sets[0]).to eql("5")
-      expect(bench_session.actual_sets[1]).to eql("5")
-      expect(bench_session.actual_sets[2]).to eql("5")
-      expect(bench_session.actual_sets[3]).to eql("5")
-      expect(bench_session.actual_sets[4]).to eql("5")
+      expect(bench_session.sets.count).to eql(5)
+      expect(bench_session.to_sets).to eql([5, 5, 5, 5, 5])
     end
 
     it "imports the completed barbell row exercise" do
@@ -86,12 +77,17 @@ describe Csv::Import do
 
       training_session = user.training_sessions.order(:occurred_at).first
       row_session = training_session.progress_for(barbell_row)
-      expect(row_session.target_weight).to eql(65.0)
-      expect(row_session.actual_sets[0]).to eql("5")
-      expect(row_session.actual_sets[1]).to eql("5")
-      expect(row_session.actual_sets[2]).to eql("5")
-      expect(row_session.actual_sets[3]).to eql("5")
-      expect(row_session.actual_sets[4]).to eql("5")
+      expect(row_session.to_sets).to eql([5, 5, 5, 5, 5])
+      expect(row_session.sets.at(0).target_weight).to eql(65.0)
+      expect(row_session.sets.at(0).actual_repetitions).to eql(5)
+      expect(row_session.sets.at(1).target_weight).to eql(65.0)
+      expect(row_session.sets.at(1).actual_repetitions).to eql(5)
+      expect(row_session.sets.at(2).target_weight).to eql(65.0)
+      expect(row_session.sets.at(2).actual_repetitions).to eql(5)
+      expect(row_session.sets.at(3).target_weight).to eql(65.0)
+      expect(row_session.sets.at(3).actual_repetitions).to eql(5)
+      expect(row_session.sets.at(4).target_weight).to eql(65.0)
+      expect(row_session.sets.at(4).actual_repetitions).to eql(5)
     end
 
     it "excludes items that have already been imported" do
@@ -109,10 +105,7 @@ describe Csv::Import do
       training_session = user.training_sessions.first
       session = training_session.progress_for(dips)
       expect(session).to_not be_nil
-      expect(session.target_weight).to eql(12.5)
-      expect(session.actual_sets[0]).to eql("5")
-      expect(session.actual_sets[1]).to eql("5")
-      expect(session.actual_sets[2]).to eql("5")
+      expect(session.to_sets).to eql([5, 5, 5])
     end
 
     it "imports chinups" do
@@ -122,10 +115,16 @@ describe Csv::Import do
       training_session = user.training_sessions.first
       session = training_session.progress_for(chinups)
       expect(session).to_not be_nil
-      expect(session.target_weight).to eql(0.0)
-      expect(session.actual_sets[0]).to eql("5")
-      expect(session.actual_sets[1]).to eql("3")
-      expect(session.actual_sets[2]).to eql("2")
+      expect(session.to_sets).to eql([5, 3, 2])
+      expect(session.sets.at(0).target_weight).to eql(0.0)
+      expect(session.sets.at(0).target_repetitions).to eql(5)
+      expect(session.sets.at(0).actual_repetitions).to eql(5)
+      expect(session.sets.at(1).target_weight).to eql(0.0)
+      expect(session.sets.at(1).target_repetitions).to eql(5)
+      expect(session.sets.at(1).actual_repetitions).to eql(3)
+      expect(session.sets.at(2).target_weight).to eql(0.0)
+      expect(session.sets.at(2).target_repetitions).to eql(5)
+      expect(session.sets.at(2).actual_repetitions).to eql(2)
     end
   end
 end

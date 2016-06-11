@@ -5,7 +5,6 @@ describe TrainingSession, type: :model do
 
   describe "#train" do
     let(:workout) { subject.workout }
-    #let(:sets) { [5, 5, 5, 5, 5] }
     let(:target_weight) { 200 }
     let(:squat) { create(:exercise) }
 
@@ -48,7 +47,7 @@ describe TrainingSession, type: :model do
       subject.train(squat, target_weight, repetitions: 5)
 
       new_weight = target_weight + 10
-      result = subject.train(squat, new_weight, repetitions: 3, set: 2)
+      result = subject.train(squat, new_weight, repetitions: 3, set: 1)
 
       expect(result).to be_persisted
       expect(result.exercise).to eql(squat)

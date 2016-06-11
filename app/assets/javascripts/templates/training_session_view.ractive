@@ -1,17 +1,7 @@
 <div class="row">
   {{#each training_session.exercises}}
   <div class="panel small-12 columns">
-    <div class="row">
-      <div class="small-6 columns">
-        {{name}}
-      </div>
-      <div class="small-6 columns">
-        <p class="text-right">
-        {{sets}}x{{repetitions}} {{target_weight}}lb
-        </p>
-      </div>
-    </div>
-
+    {{name}}
     {{#if completed}}
       <div class="row">
         <div class="small-12 columns">
@@ -23,7 +13,10 @@
         <div class="small-12 columns">
           <p class="text-center">
             {{#each reps}}
-              <button on-click="updateProgress" class="button small round {{status}}">{{completed}}</button>
+              <button on-click="updateProgress" class="button small round {{status}}">
+                {{completed}}
+              </button>
+              @ {{weight}} lb
             {{/each}}
           </p>
         </div>

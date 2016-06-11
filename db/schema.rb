@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611152357) do
+ActiveRecord::Schema.define(version: 20160611165543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20160611152357) do
     t.float    "target_weight"
     t.integer  "target_sets",         default: 5,  null: false
     t.integer  "target_repetitions",  default: 5,  null: false
+  end
+
+  create_table "exercise_sets", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "exercise_session_id", null: false
+    t.integer  "target_repetitions"
+    t.integer  "actual_repetitions"
+    t.float    "target_weight"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "exercise_workouts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

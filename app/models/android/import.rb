@@ -39,11 +39,14 @@ class Android::Import
       workout.exercise_workouts.each_with_index do |exercise_workout, index|
         exercise_row = workout_row.exercises[index]
         next if exercise_row.nil?
-        training_session.train(
-          exercise_workout.exercise,
-          exercise_row["warmup"]["targetWeight"],
-          sets_from(exercise_workout, exercise_row)
-        )
+        sets_from(exercise_workout, exercise_row).each_with_index do |reps, set|
+          training_session.train(
+            exercise_workout.exercise,
+            exercise_row["warmup"]["targetWeight"],
+            repetitions: reps,
+            set: set,
+          )
+        end
       end
     end
   end

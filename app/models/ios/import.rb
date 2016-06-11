@@ -30,8 +30,9 @@ class Ios::Import
               db[:ZWEIGHT].
                 where(Z_PK: exercise_set_row[:ZWEIGHT]).each do |weight_row|
                 target_weight = weight_row[:ZVAL]
-                sets = sets_from(exercise_set_row)
-                training_session.train(exercise, target_weight, sets)
+                sets_from(exercise_set_row).each_with_index do |reps, set|
+                  training_session.train(exercise, target_weight, repetitions: reps, set: set)
+                end
               end
             end
           end
@@ -46,7 +47,7 @@ class Ios::Import
     (1..5).inject([]) do |memo, n|
       column = "ZSET#{n}".to_sym
       memo << row[column] if row[column] && row[column] != -3
-    end
+    end || []
   end
 
   def database_file(directory)

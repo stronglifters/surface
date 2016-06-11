@@ -122,7 +122,7 @@ describe User do
         training_session.exercise_sessions.create!(
           target_weight: (200 + n),
           exercise_workout: exercise_workout,
-          sets: [5, 5, 5, 5, 5]
+          actual_sets: [5, 5, 5, 5, 5]
         )
       end
     end

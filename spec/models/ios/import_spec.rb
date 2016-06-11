@@ -50,7 +50,7 @@ describe Ios::Import do
       training_session = training_sessions.first
       first_exercises = training_session.exercise_sessions
       expect(first_exercises.count).to eql(3)
-      expect(first_exercises.first.sets).to eql(["5", "5", "5", "5", "5"])
+      expect(first_exercises.first.actual_sets).to eql(["5", "5", "5", "5", "5"])
 
       expected_date = DateTime.new(2015, 05, 02, 23, 27, 05)
       expect(training_session.occurred_at.to_i).to eql(expected_date.to_i)
@@ -69,11 +69,11 @@ describe Ios::Import do
       squat_session = training_session.progress_for(squat)
 
       expect(squat_session.target_weight).to eql(45.0)
-      expect(squat_session.sets[0]).to eql("5")
-      expect(squat_session.sets[1]).to eql("5")
-      expect(squat_session.sets[2]).to eql("5")
-      expect(squat_session.sets[3]).to eql("5")
-      expect(squat_session.sets[4]).to eql("5")
+      expect(squat_session.actual_sets[0]).to eql("5")
+      expect(squat_session.actual_sets[1]).to eql("5")
+      expect(squat_session.actual_sets[2]).to eql("5")
+      expect(squat_session.actual_sets[3]).to eql("5")
+      expect(squat_session.actual_sets[4]).to eql("5")
     end
 
     it "imports the completed bench exercise" do
@@ -82,11 +82,11 @@ describe Ios::Import do
       training_session = user.training_sessions.order(:occurred_at).first
       bench_session = training_session.progress_for(bench_press)
       expect(bench_session.target_weight).to eql(45.0)
-      expect(bench_session.sets[0]).to eql("5")
-      expect(bench_session.sets[1]).to eql("5")
-      expect(bench_session.sets[2]).to eql("5")
-      expect(bench_session.sets[3]).to eql("5")
-      expect(bench_session.sets[4]).to eql("5")
+      expect(bench_session.actual_sets[0]).to eql("5")
+      expect(bench_session.actual_sets[1]).to eql("5")
+      expect(bench_session.actual_sets[2]).to eql("5")
+      expect(bench_session.actual_sets[3]).to eql("5")
+      expect(bench_session.actual_sets[4]).to eql("5")
     end
 
     it "imports the completed barbell row exercise" do
@@ -95,11 +95,11 @@ describe Ios::Import do
       training_session = user.training_sessions.order(:occurred_at).first
       row_session = training_session.progress_for(barbell_row)
       expect(row_session.target_weight).to eql(65.0)
-      expect(row_session.sets[0]).to eql("5")
-      expect(row_session.sets[1]).to eql("5")
-      expect(row_session.sets[2]).to eql("5")
-      expect(row_session.sets[3]).to eql("5")
-      expect(row_session.sets[4]).to eql("5")
+      expect(row_session.actual_sets[0]).to eql("5")
+      expect(row_session.actual_sets[1]).to eql("5")
+      expect(row_session.actual_sets[2]).to eql("5")
+      expect(row_session.actual_sets[3]).to eql("5")
+      expect(row_session.actual_sets[4]).to eql("5")
     end
 
     it "excludes items that have already been imported" do

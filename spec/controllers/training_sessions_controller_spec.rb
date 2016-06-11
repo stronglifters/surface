@@ -118,6 +118,31 @@ describe TrainingSessionsController do
       expect(user.training_sessions.last.body_weight).to eql(body_weight.to_f)
       expect(response).to redirect_to(edit_training_session_path(user.training_sessions.last))
     end
+
+    it 'creates the training session with the selected exercises' do
+      post :create, training_session: {
+        workout_id: workout_b.id,
+        body_weight: body_weight,
+        exercise_sessions_attributes: [
+          {
+            exercise_workout_id: workout_b.exercise_workouts.first.id,
+            target_repetitions: 4,
+            target_sets: 3,
+            target_weight: 275.0,
+          }
+        ]
+      }
+
+      expect(user.reload.training_sessions.count).to eql(1)
+      expect(user.last_workout).to eql(workout_b)
+      training_session = user.training_sessions.last
+      expect(training_session.body_weight).to eql(body_weight.to_f)
+      expect(training_session.exercise_sessions.count).to eql(1)
+      expect(training_session.exercise_sessions.first.target_sets).to eql(3)
+      expect(training_session.exercise_sessions.first.target_repetitions).to eql(4)
+      expect(training_session.exercise_sessions.first.target_weight).to eql(275.0)
+      expect(response).to redirect_to(edit_training_session_path(user.training_sessions.last))
+    end
   end
 
   describe "#edit" do
@@ -141,7 +166,7 @@ describe TrainingSessionsController do
       }
       expect(training_session.exercises).to include(squat)
       expect(training_session.progress_for(squat).target_weight).to eql(315.to_f)
-      expect(training_session.progress_for(squat).sets).to eql(['5', '5', '5'])
+      expect(training_session.progress_for(squat).actual_sets).to eql(['5', '5', '5'])
     end
   end
 end

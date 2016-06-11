@@ -18,7 +18,7 @@ describe TrainingSession, type: :model do
       expect(result).to be_persisted
       expect(result.target_weight).to eql(target_weight.to_f)
       expect(result.exercise).to eql(squat)
-      expect(result.sets).to eql(sets.map(&:to_s))
+      expect(result.actual_sets).to eql(sets.map(&:to_s))
     end
 
     it "updates a completed exercise" do
@@ -30,7 +30,7 @@ describe TrainingSession, type: :model do
       expect(result).to be_persisted
       expect(result.target_weight).to eql(new_weight.to_f)
       expect(result.exercise).to eql(squat)
-      expect(result.sets).to eql(new_sets.map(&:to_s))
+      expect(result.actual_sets).to eql(new_sets.map(&:to_s))
     end
 
     it "cannot save a duplicate exercise" do
@@ -53,7 +53,7 @@ describe TrainingSession, type: :model do
     it "returns the progress for the specific exercise" do
       result = subject.progress_for(exercise)
       expect(result.exercise).to eql(exercise)
-      expect(result.sets).to eql(["5", "5"])
+      expect(result.actual_sets).to eql(["5", "5"])
       expect(result.target_weight).to eql(100.0)
     end
   end

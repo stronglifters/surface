@@ -13,16 +13,30 @@ class TrainingSessionsController < ApplicationController
   def new
     @workout = current_user.next_workout
     @training_session = current_user.training_sessions.build(workout: @workout)
+    @workout.exercise_workouts.each do |exercise|
+      @training_session.exercise_sessions.build(
+        exercise_workout: exercise,
+        target_sets: exercise.sets,
+        target_repetitions: exercise.repetitions,
+        target_weight: current_user.next_weight_for(exercise.exercise)
+      )
+    end
   end
 
   def create
-    secure_params = params.require(:training_session).permit(:workout_id, :body_weight)
+    secure_params = params.require(:training_session).permit(:workout_id, :body_weight, exercise_sessions_attributes: [
+      :exercise_workout_id,
+      :target_repetitions,
+      :target_sets,
+      :target_weight,
+    ])
     workout = Workout.find(secure_params[:workout_id])
     training_session = current_user.begin_workout(
       workout,
       DateTime.now,
       secure_params[:body_weight]
     )
+    training_session.update!(secure_params)
     redirect_to edit_training_session_path(training_session)
   end
 

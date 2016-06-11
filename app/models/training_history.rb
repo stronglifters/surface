@@ -22,14 +22,18 @@ class TrainingHistory
       any?
   end
 
-  def next_weight
+  def last_weight
     user.
       exercise_sessions.
       joins(:exercise).
       joins(:training_session).
       where(exercises: { id: exercise.id }).
       order('training_sessions.occurred_at').
-      last.target_weight + 5
+      last.try(:target_weight).to_i
+  end
+
+  def next_weight
+    5 + last_weight
   end
 
   def to_line_chart

@@ -11,30 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611165543) do
+ActiveRecord::Schema.define(version: 20160611171913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "exercise_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "training_session_id",              null: false
-    t.uuid     "exercise_workout_id",              null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.text     "actual_sets",         default: [],              array: true
-    t.float    "target_weight"
-    t.integer  "target_sets",         default: 5,  null: false
-    t.integer  "target_repetitions",  default: 5,  null: false
+    t.uuid     "training_session_id", null: false
+    t.uuid     "exercise_workout_id", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "exercise_sets", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "exercise_session_id", null: false
-    t.integer  "target_repetitions"
-    t.integer  "actual_repetitions"
-    t.float    "target_weight"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.uuid     "exercise_session_id",             null: false
+    t.integer  "target_repetitions",              null: false
+    t.integer  "actual_repetitions",  default: 0, null: false
+    t.float    "target_weight",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "exercise_workouts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

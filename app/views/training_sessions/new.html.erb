@@ -8,11 +8,11 @@
         <%= f.fields_for :exercise_sessions do |e| %>
           <fieldset>
             <legend><%= e.object.exercise.name %></legend>
-            <%= e.label :sets %>
-            <%= e.number_field :sets %>
+            <%= e.label :target_sets %>
+            <%= e.number_field :target_sets %>
 
-            <%= e.label :repetitions %>
-            <%= number_field_tag :repetitions, e.object.exercise_workout.repetitions, disabled: true %>
+            <%= e.label :target_repetitions %>
+            <%= e.number_field :target_repetitions %>
 
             <%= e.label :target_weight %>
             <%= e.number_field :target_weight %>

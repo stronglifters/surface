@@ -4,7 +4,7 @@ json.workout_name training_session.workout.name
 json.exercises training_session.exercise_sessions.order(:created_at) do |exercise|
   json.id exercise.exercise.id
   json.name exercise.name
-  json.reps exercise.sets do |set|
+  json.sets exercise.sets.order(:created_at) do |set|
     json.weight set.target_weight
     json.target set.target_repetitions
     json.completed set.actual_repetitions

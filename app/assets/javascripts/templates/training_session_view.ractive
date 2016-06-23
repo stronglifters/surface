@@ -12,7 +12,7 @@
       <div class="row">
         <div class="small-12 columns">
           <p class="text-center">
-            {{#each reps}}
+            {{#each sets}}
               <button on-click="updateProgress" class="button small round {{status}}">
                 {{completed}}
               </button>

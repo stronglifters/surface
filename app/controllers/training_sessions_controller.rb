@@ -14,21 +14,23 @@ class TrainingSessionsController < ApplicationController
     @workout = current_user.next_workout
     @training_session = current_user.training_sessions.build(workout: @workout)
     @workout.exercise_workouts.each do |exercise|
-      @training_session.exercise_sessions.build(
-        exercise_workout: exercise,
-        #target_sets: exercise.sets,
-        #target_repetitions: exercise.repetitions,
-        #target_weight: current_user.next_weight_for(exercise.exercise)
-      )
+      exercise_session = @training_session.exercise_sessions.build(exercise_workout: exercise)
+      exercise.sets.times do
+        exercise_session.exercise_sets.build(
+          target_repetitions: exercise.repetitions,
+          target_weight: current_user.next_weight_for(exercise.exercise)
+        )
+      end
     end
   end
 
   def create
     secure_params = params.require(:training_session).permit(:workout_id, :body_weight, exercise_sessions_attributes: [
       :exercise_workout_id,
-      #:target_repetitions,
-      #:target_sets,
-      #:target_weight,
+      exercise_sets_attributes: [
+        :target_repetitions,
+        :target_weight,
+      ]
     ])
     workout = Workout.find(secure_params[:workout_id])
     training_session = current_user.begin_workout(
@@ -45,13 +47,18 @@ class TrainingSessionsController < ApplicationController
   end
 
   def update
-    secure_params = params.require(:training_session).permit(:exercise_id, :weight, sets: [])
+    #render json: params and return
+    secure_params = params.require(:training_session).permit(:exercise_id, :weight, sets: [
+      :weight,
+      :completed
+    ])
     @training_session = current_user.training_sessions.find(params[:id])
-    secure_params[:sets].each do |reps|
+    secure_params[:sets].each_with_index do |set, index|
       @training_session.train(
         Exercise.find(secure_params[:exercise_id]),
-        secure_params[:weight],
-        repetitions: reps,
+        set[:weight],
+        repetitions: set[:completed],
+        set: index
       )
     end
   end

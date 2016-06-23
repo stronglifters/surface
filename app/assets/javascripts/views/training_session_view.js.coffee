@@ -4,11 +4,12 @@ class Stronglifters.TrainingSessionView extends Ractive
   oninit: ->
     @on 'updateProgress', (event) -> @updateProgress(event)
     @on 'completeExercise', (event) -> @completeExercise(event.context)
-    @observe 'training_session.exercises.*.reps.*', (newValue, oldValue, keypath) ->
+    @observe 'training_session.exercises.*.sets.*', (newValue, oldValue, keypath) ->
       @refreshStatus(newValue, oldValue, keypath)
 
   updateProgress: (event) ->
-    if @get("#{event.keypath}.completed") == 0
+    completed = @get("#{event.keypath}.completed")
+    if completed == null || completed == 0
       @set("#{event.keypath}.completed", @get("#{event.keypath}.target"))
     else
       @subtract("#{event.keypath}.completed")
@@ -27,9 +28,10 @@ class Stronglifters.TrainingSessionView extends Ractive
     payload =
       training_session:
         exercise_id: exercise.id
-        weight: exercise.target_weight
-        sets: _.map exercise.reps, (rep) ->
-          rep.completed
+        sets: _.map exercise.sets, (set) ->
+          completed: set.completed
+          weight: exercise.target_weight
+    console.log(payload)
 
     $.ajax
       url: "/training_sessions/#{@get('training_session.id')}",

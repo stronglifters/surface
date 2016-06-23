@@ -16,9 +16,9 @@ class TrainingSessionsController < ApplicationController
     @workout.exercise_workouts.each do |exercise|
       @training_session.exercise_sessions.build(
         exercise_workout: exercise,
-        target_sets: exercise.sets,
-        target_repetitions: exercise.repetitions,
-        target_weight: current_user.next_weight_for(exercise.exercise)
+        #target_sets: exercise.sets,
+        #target_repetitions: exercise.repetitions,
+        #target_weight: current_user.next_weight_for(exercise.exercise)
       )
     end
   end
@@ -26,9 +26,9 @@ class TrainingSessionsController < ApplicationController
   def create
     secure_params = params.require(:training_session).permit(:workout_id, :body_weight, exercise_sessions_attributes: [
       :exercise_workout_id,
-      :target_repetitions,
-      :target_sets,
-      :target_weight,
+      #:target_repetitions,
+      #:target_sets,
+      #:target_weight,
     ])
     workout = Workout.find(secure_params[:workout_id])
     training_session = current_user.begin_workout(
@@ -45,15 +45,15 @@ class TrainingSessionsController < ApplicationController
   end
 
   def update
-    secure_params = params.
-      require(:training_session).
-      permit(:exercise_id, :weight, sets: [])
+    secure_params = params.require(:training_session).permit(:exercise_id, :weight, sets: [])
     @training_session = current_user.training_sessions.find(params[:id])
-    @training_session.train(
-      Exercise.find(secure_params[:exercise_id]),
-      secure_params[:weight],
-      secure_params[:sets]
-    )
+    secure_params[:sets].each do |reps|
+      @training_session.train(
+        Exercise.find(secure_params[:exercise_id]),
+        secure_params[:weight],
+        repetitions: reps,
+      )
+    end
   end
 
   def upload

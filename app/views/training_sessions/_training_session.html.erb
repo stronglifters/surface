@@ -6,7 +6,7 @@
   <td><%= training_session.body_weight %> lbs</td>
   <td>
   <% training_session.exercise_sessions.each do |exercise_session| %>
-    <strong><%= exercise_session.exercise.name %></strong> @ <%= exercise_session.target_weight %> lbs,
+    <strong><%= exercise_session.exercise.name %></strong> @ <%= exercise_session.sets.maximum(:target_weight) %> lbs,
   <% end %>
   </td>
   <td> <%= link_to "edit", edit_training_session_path(training_session) %> </td>

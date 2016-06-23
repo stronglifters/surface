@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20160611171913) do
 
   create_table "exercise_sets", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "exercise_session_id", null: false
-    t.integer  "target_repetitions",  null: false
+    t.integer  "target_repetitions"
     t.integer  "actual_repetitions"
-    t.float    "target_weight",       null: false
+    t.float    "target_weight"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end

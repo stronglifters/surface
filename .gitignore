@@ -21,3 +21,4 @@ config/deploy_id_rsa
 pkg
 public/assets
 erd.pdf
+db/data

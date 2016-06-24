@@ -1,12 +1,14 @@
-<div class="row">
+<ul class="accordion" data-accordion>
   {{#each workout.exercises}}
-  <div class="panel small-12 columns">
-    <h3>{{name}}</h3>
-    {{#each sets}}
-      <button on-click="updateProgress" class="button expand {{status}}">
-        {{actual_repetitions}} x {{target_repetitions}} @ {{target_weight}} lbs
-      </button>
-    {{/each}}
-  </div>
+  <li class="accordion-navigation">
+    <a href="#panel-{{id}}">{{name}}</a>
+    <div id="panel-{{id}}" class="content">
+      {{#each sets}}
+        <button on-click="updateProgress" class="button expand {{status}}">
+          {{actual_repetitions}} x {{target_repetitions}} @ {{target_weight}} lbs
+        </button>
+      {{/each}}
+    </div>
+  </li>
   {{/each}}
-</div>
+</ul>

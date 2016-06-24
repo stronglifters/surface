@@ -3,8 +3,8 @@
   <div class="panel small-12 columns">
     <h3>{{name}}</h3>
     {{#each sets}}
-      <button on-click="updateProgress" class="button small round {{status}}">
-        {{actual_repetitions}}/{{target_repetitions}} @ {{target_weight}} lb
+      <button on-click="updateProgress" class="button expand {{status}}">
+        {{actual_repetitions}} x {{target_repetitions}} @ {{target_weight}} lbs
       </button>
     {{/each}}
   </div>

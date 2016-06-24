@@ -41,6 +41,7 @@ en:
       short: "%a, %d %b %Y"
   add: Add
   back_html: '&laquo Back'
+  done: "I'm Done"
   save: Save
   search: Search
   layouts:

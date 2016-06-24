@@ -110,19 +110,19 @@ describe User do
   describe "#personal_record_for" do
     include_context "stronglifts_program"
     let(:user) { create(:user) }
-    let(:exercise_workout) { workout_a.exercise_workouts.first }
-    let(:exercise) { exercise_workout.exercise }
+    let(:recommendation) { routine_a.recommendations.first }
+    let(:exercise) { recommendation.exercise }
 
     before :each do
-      training_session = user.training_sessions.create!(
-        workout: workout_a,
+      workout = user.workouts.create!(
+        routine: routine_a,
         occurred_at: DateTime.now.utc
       )
-      training_session.train(squat, 201, repetitions: exercise_workout.repetitions)
-      training_session.train(squat, 202, repetitions: exercise_workout.repetitions)
-      training_session.train(squat, 210, repetitions: exercise_workout.repetitions - 1)
-      training_session.train(squat, 204, repetitions: exercise_workout.repetitions)
-      training_session.train(squat, 205, repetitions: exercise_workout.repetitions)
+      workout.train(squat, 201, repetitions: recommendation.repetitions)
+      workout.train(squat, 202, repetitions: recommendation.repetitions)
+      workout.train(squat, 210, repetitions: recommendation.repetitions - 1)
+      workout.train(squat, 204, repetitions: recommendation.repetitions)
+      workout.train(squat, 205, repetitions: recommendation.repetitions)
     end
 
     it "returns the users maximum amount of weight lifted" do
@@ -132,27 +132,27 @@ describe User do
 
   describe "#begin_workout" do
     subject { create(:user) }
-    let(:workout) { create(:workout) }
+    let(:routine) { create(:routine) }
     let(:today) { DateTime.now }
 
     it "creates a new training session" do
-      result = subject.begin_workout(workout, today, 200)
+      result = subject.begin_workout(routine, today, 200)
       expect(result).to be_persisted
-      expect(subject.training_sessions.count).to eql(1)
-      expect(subject.training_sessions.first).to eql(result)
-      expect(result.workout).to eql(workout)
+      expect(subject.workouts.count).to eql(1)
+      expect(subject.workouts.first).to eql(result)
+      expect(result.routine).to eql(routine)
       expect(result.occurred_at).to eql(today.utc)
-      expect(result.body_weight).to eql(200.0)
+      expect(result.body_weight).to eql(200.lbs)
     end
 
     it "returns the existing workout for that day" do
-      result = subject.begin_workout(workout, today, 200)
-      expect(subject.begin_workout(workout, today, 200)).to eql(result)
+      result = subject.begin_workout(routine, today, 200)
+      expect(subject.begin_workout(routine, today, 200)).to eql(result)
     end
 
     it "returns different sessions for different days" do
-      todays_result = subject.begin_workout(workout, today, 200)
-      tomorrows_result = subject.begin_workout(workout, DateTime.tomorrow, 200)
+      todays_result = subject.begin_workout(routine, today, 200)
+      tomorrows_result = subject.begin_workout(routine, DateTime.tomorrow, 200)
       expect(todays_result).to_not eql(tomorrows_result)
     end
   end
@@ -162,16 +162,16 @@ describe User do
     subject { create(:user) }
 
     it "removes all the associations" do
-      training_session = subject.begin_workout(workout_a, Date.today, 200)
-      training_session.train(squat, 200, repetitions: 5)
-      training_session.train(squat, 200, repetitions: 5)
-      training_session.train(squat, 200, repetitions: 5)
-      training_session.train(squat, 200, repetitions: 5)
-      training_session.train(squat, 200, repetitions: 5)
+      workout = subject.begin_workout(routine_a, Date.today, 200)
+      workout.train(squat, 200, repetitions: 5)
+      workout.train(squat, 200, repetitions: 5)
+      workout.train(squat, 200, repetitions: 5)
+      workout.train(squat, 200, repetitions: 5)
+      workout.train(squat, 200, repetitions: 5)
 
-      subject.training_sessions.destroy_all
+      subject.workouts.destroy_all
 
-      expect(TrainingSession.all).to be_empty
+      expect(Workout.all).to be_empty
       expect(ExerciseSet.all).to be_empty
     end
   end

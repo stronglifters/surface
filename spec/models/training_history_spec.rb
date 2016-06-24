@@ -11,7 +11,7 @@ describe TrainingHistory do
     let(:body_weight) { 210 }
 
     before :each do
-      session = user.begin_workout(workout_a, date, body_weight)
+      session = user.begin_workout(routine_a, date, body_weight)
       5.times do
         session.train(squat, target_weight, repetitions: 5)
         session.train(bench_press, target_weight + 10, repetitions: 5)
@@ -36,7 +36,7 @@ describe TrainingHistory do
 
     describe "when the exercise has been performed at least once" do
       it "returns true" do
-        session = user.begin_workout(workout_a, DateTime.now, 225)
+        session = user.begin_workout(routine_a, DateTime.now, 225)
         3.times do
           session.train(squat, 310, repetitions: 5)
         end

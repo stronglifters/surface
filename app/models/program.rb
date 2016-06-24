@@ -1,8 +1,8 @@
 class Program < ActiveRecord::Base
   STRONG_LIFTS = "StrongLifts 5×5"
-  has_many :exercises, through: :workouts
-  has_many :workouts
-  has_many :exercise_workouts, through: :workouts
+  has_many :exercises, through: :routines
+  has_many :routines
+  has_many :recommendations, through: :routines
 
   before_save do
     self.slug = name.parameterize
@@ -18,8 +18,8 @@ class Program < ActiveRecord::Base
     end
   end
 
-  def next_workout_after(workout)
-    workouts.where.not(name: workout.name).first
+  def next_routine_after(routine)
+    routines.where.not(name: routine.name).first
   end
 
   def prepare_sets_for(user, exercise)
@@ -33,8 +33,7 @@ class Program < ActiveRecord::Base
   end
 
   def recommended_sets_for(user, exercise)
-    recommended_sets = user.history_for(exercise).last_target_sets
-    recommended_sets > 0 ? recommended_sets : recommendation_for(user, exercise).sets
+    recommendation_for(user, exercise).sets
   end
 
   def recommended_reps_for(user, exercise)
@@ -42,7 +41,7 @@ class Program < ActiveRecord::Base
   end
 
   def recommendation_for(user, exercise)
-    exercise_workouts.find_by(exercise: exercise)
+    UserRecommendation.new(user, exercise, self)
   end
 
   class << self

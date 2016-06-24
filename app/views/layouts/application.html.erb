@@ -32,7 +32,7 @@
               <section class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
-                  <% if feature_available?(:gym) %>
+                  <% if feature_enabled?(:gym) %>
                   <li> <%= search_form %> </li>
                   <li class="divider"></li>
                   <li><%= link_to t(".gyms"), gyms_path %></li>
@@ -41,7 +41,7 @@
                   <li class="has-dropdown">
                     <a href="#"><%= gravatar_for(current_user, size: 16) %> <%= current_user.username %></a>
                     <ul class="dropdown">
-                      <li><%= link_to t(".nav.user.training_sessions"), training_sessions_path %></li>
+                      <li><%= link_to t(".nav.user.workouts"), workouts_path %></li>
                       <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
                       <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>
                       <li class="divider"></li>

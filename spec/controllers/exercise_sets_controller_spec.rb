@@ -9,11 +9,11 @@ describe ExerciseSetsController do
 
   describe "#update" do
     include_context "stronglifts_program"
-    let(:training_session) { user.next_training_session_for(workout_a) }
+    let(:workout) { user.next_workout_for(routine_a) }
 
     it "records the exercise" do
-      training_session.update!(occurred_at: DateTime.now, body_weight: 225)
-      exercise_set = training_session.exercise_sets.first
+      workout.update!(occurred_at: DateTime.now, body_weight: 225)
+      exercise_set = workout.exercise_sets.first
 
       xhr :patch, :update, id: exercise_set.id, exercise_set: {
         actual_weight: 315,

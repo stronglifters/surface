@@ -1,10 +1,10 @@
 require "rails_helper"
 
-feature "Training Sessions", type: :feature do
+feature "Workouts", type: :feature do
   include_context "stronglifts_program"
-  subject { TrainingSessionsPage.new }
+  subject { WorkoutsPage.new }
   let(:user) { create(:user, password: "password") }
-  let!(:training_session) { create(:training_session, user: user, workout: workout_a, occurred_at: DateTime.now, body_weight: 210.0) }
+  let!(:workout) { create(:workout, user: user, routine: routine_a, occurred_at: DateTime.now, body_weight: 210.0) }
 
   before :each do
     subject.login_with(user.username, "password")
@@ -13,7 +13,7 @@ feature "Training Sessions", type: :feature do
 
   describe "view training history" do
     it "displays each training session" do
-      expect(page).to have_content(training_session.occurred_at.strftime("%a, %d %b"))
+      expect(page).to have_content(workout.occurred_at.strftime("%a, %d %b"))
     end
   end
 end

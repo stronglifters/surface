@@ -1,11 +1,11 @@
 <div class="row">
   <div class="small-12 columns">
-    <%= form_for @training_session do |f| %>
+    <%= form_for @workout do |f| %>
       <fieldset>
-        <legend><%= TrainingSession.human_attribute_name(:body_weight) %></legend>
+        <legend><%= Workout.human_attribute_name(:body_weight) %></legend>
         <%= f.number_field :body_weight %>
       </fieldset>
-      <% @training_session.exercise_sets.group_by(&:exercise).each do |exercise, exercise_sets| %>
+      <% @workout.exercise_sets.group_by(&:exercise).each do |exercise, exercise_sets| %>
           <fieldset>
             <legend><%= exercise.name %></legend>
             <% exercise_sets.each.with_index(1) do |set, index| %>
@@ -28,10 +28,10 @@
               <% end %>
             <% end %>
 
-            <%= f.hidden_field :workout_id %>
+            <%= f.hidden_field :routine_id %>
           </fieldset>
       <% end %>
-      <%= f.hidden_field :workout_id %>
+      <%= f.hidden_field :routine_id %>
       <%= f.submit "Start", class: "button round right" %>
     <% end %>
   </div>

@@ -8,31 +8,22 @@ class TrainingHistory
   end
 
   def personal_record
-    user.exercise_sets.
-      joins(:exercise).
-      where(exercises: { id: exercise.id }).
-      where('actual_repetitions = target_repetitions').
-      maximum(:target_weight)
+    successful_sets.maximum(:target_weight)
   end
 
   def completed_any?
-    user.exercise_sets.where(exercise: exercise).any?
+    sets.any?
   end
 
   def last_target_sets
-    last_training_session = user.last_training_session(exercise)
-    return 0 if last_training_session.blank?
-    last_training_session.exercise_sets.where(exercise: exercise).count
+    last_workout = user.last_workout(exercise)
+    return 0 if last_workout.blank?
+    sets.where(workout: last_workout).count
   end
 
   def last_weight
-    user.
-      exercise_sets.
-      joins(:exercise).
-      where(exercises: { id: exercise.id }).
-      where('actual_repetitions = target_repetitions').
-      order('training_sessions.occurred_at').
-      last.try(:target_weight).to_i
+    last_successful_set = successful_sets.order('workouts.occurred_at').last
+    last_successful_set.try(:target_weight).to_i
   end
 
   def next_weight
@@ -40,10 +31,20 @@ class TrainingHistory
   end
 
   def to_line_chart
-    user.training_sessions.inject({}) do |memo, training_session|
-      memo[training_session.occurred_at] =
-        training_session.exercise_sets.where(exercise: exercise).maximum(:target_weight)
+    user.workouts.inject({}) do |memo, workout|
+      memo[workout.occurred_at] =
+        workout.exercise_sets.where(exercise: exercise).maximum(:target_weight)
       memo
     end
+  end
+
+  private
+
+  def sets
+    user.exercise_sets.where(exercise: exercise)
+  end
+
+  def successful_sets
+    sets.where('actual_repetitions = target_repetitions')
   end
 end

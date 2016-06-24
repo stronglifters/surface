@@ -49,7 +49,7 @@ en:
       loading: "Loading..."
       nav:
         user:
-          training_sessions: "Training sessions"
+          workouts: "Workouts"
           log_out: "Log out"
           profile_edit: "Edit profile"
           profile_view: "View profile"
@@ -92,7 +92,7 @@ en:
       password: "Password"
       login_button: "Login"
       register_link: "Create an account"
-  training_sessions:
+  workouts:
     import_address_modal:
       blurb: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
       copy: Copy

@@ -1,9 +1,9 @@
-class Stronglifters.TrainingSessionView extends Ractive
-  template: RactiveTemplates["templates/training_session_view"]
+class Stronglifters.WorkoutView extends Ractive
+  template: RactiveTemplates["templates/workout_view"]
 
   oninit: ->
     @on 'updateProgress', (event) -> @updateProgress(event)
-    @observe 'training_session.exercises.*.sets.*', (newValue, oldValue, keypath) ->
+    @observe 'workout.exercises.*.sets.*', (newValue, oldValue, keypath) ->
       @refreshStatus(newValue, oldValue, keypath)
 
   updateProgress: (event) ->

@@ -1,5 +1,5 @@
 <div class="row">
-  {{#each training_session.exercises}}
+  {{#each workout.exercises}}
   <div class="panel small-12 columns">
     <h3>{{name}}</h3>
     {{#each sets}}

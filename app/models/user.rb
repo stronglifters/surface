@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   include Flippable
   has_secure_password
-  has_many :training_sessions
-  has_many :exercise_sets, through: :training_sessions
+  has_many :workouts
+  has_many :exercise_sets, through: :workouts
   has_many :user_sessions, dependent: :destroy
   has_one :profile
   has_many :received_emails
@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
     "Etc/UTC" == time_zone.name
   end
 
-  def first_training_session
-    training_sessions.order(occurred_at: :asc).first
+  def first_workout
+    workouts.order(occurred_at: :asc).first
   end
 
   def gravatar_id
@@ -63,47 +63,51 @@ class User < ActiveRecord::Base
     history_for(exercise).next_weight
   end
 
-  def begin_workout(workout, date, body_weight)
-    matching_workouts = training_sessions.where(occurred_at: date)
+  def begin_workout(routine, date, body_weight)
+    matching_workouts = workouts.where(occurred_at: date)
     if matching_workouts.any?
       matching_workouts.first
     else
-      training_sessions.create!(
-        workout: workout,
+      workouts.create!(
+        routine: routine,
         occurred_at: date,
         body_weight: body_weight.to_f
       )
     end
   end
 
-  def last_workout
-    if training_sessions.any?
-      training_sessions.order(:occurred_at).last.workout
+  def last_routine
+    if workouts.any?
+      last_workout.routine
     else
-      current_program.workouts.order(name: :desc).first
+      current_program.routines.order(name: :desc).first
     end
   end
 
-  def next_workout
-    last_workout.next_workout
+  def next_routine
+    last_routine.next_routine
   end
 
-  def next_training_session_for(workout = next_workout)
-    last_body_weight = last_training_session.try(:body_weight)
-    training_sessions.build(workout: workout, body_weight: last_body_weight).tap do |training_session|
-      workout.prepare_sets_for(self, training_session)
+  def preferred_units
+    :lbs
+  end
+
+  def next_workout_for(routine = next_routine)
+    last_body_weight = last_workout.try(:body_weight)
+    workouts.build(routine: routine, body_weight: last_body_weight.to(preferred_units)).tap do |workout|
+      routine.prepare_sets_for(self, workout)
     end
   end
 
-  def last_training_session(exercise = nil)
+  def last_workout(exercise = nil)
     if exercise.present?
-      training_sessions.
+      workouts.
         joins(:exercises).
         where(exercises: { id: exercise.id }).
         order(:created_at).
         last
     else
-      training_sessions.order(:created_at).last
+      workouts.order(:created_at).last
     end
   end
 

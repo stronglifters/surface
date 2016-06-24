@@ -1,35 +1,34 @@
 class Workout < ActiveRecord::Base
-  belongs_to :program
-  has_many :exercise_workouts
-  has_many :exercises, through: :exercise_workouts
+  belongs_to :user
+  belongs_to :routine
+  has_one :program, through: :routine
+  has_many :exercises, through: :exercise_sets
+  has_many :exercise_sets, dependent: :destroy
+  accepts_nested_attributes_for :exercise_sets
 
-  def slug
-    name.parameterize
+  def body_weight
+    Quantity.new(read_attribute(:body_weight), :lbs)
   end
 
-  def to_param
-    slug
+  def train(exercise, target_weight, repetitions:, set: nil)
+    exercise_set =
+      if set.present? && exercise_sets.where(exercise: exercise).at(set).present?
+        exercise_sets.where(exercise: exercise).at(set)
+      else
+        exercise_sets.build(
+          exercise: exercise,
+          target_repetitions: program.recommended_reps_for(user, exercise)
+        )
+      end
+    exercise_set.update!(actual_repetitions: repetitions, target_weight: target_weight)
+    exercise_set
   end
 
-  def to_s
-    name
+  def progress_for(exercise)
+    Progress.new(self, exercise)
   end
 
-  def add_exercise(exercise, sets: 5, repetitions: 5)
-    exercise_workouts.create!(
-      exercise: exercise,
-      sets: sets,
-      repetitions: repetitions
-    ) unless exercises.include?(exercise)
-  end
-
-  def next_workout
-    program.next_workout_after(self)
-  end
-
-  def prepare_sets_for(user, training_session)
-    exercises.each do |exercise|
-      training_session.exercise_sets << program.prepare_sets_for(user, exercise)
-    end
+  def sets
+    exercise_sets
   end
 end

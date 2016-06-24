@@ -1,6 +1,6 @@
 <div class="small-12 columns">
   <div class="row">
     <h1><%= link_to @program.name, program_path(@program) %></h1>
-    <%= render @program.workouts.includes(exercise_workouts: :exercise) %>
+    <%= render @program.routines.includes(recommendations: :exercise) %>
   </div>
 </div>

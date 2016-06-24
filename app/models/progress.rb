@@ -1,9 +1,9 @@
 class Progress
-  attr_reader :exercise, :training_session
+  attr_reader :exercise, :workout
 
-  def initialize(training_session, exercise)
+  def initialize(workout, exercise)
     @exercise = exercise
-    @training_session = training_session
+    @workout = workout
   end
 
   def to_sets
@@ -15,6 +15,6 @@ class Progress
   end
 
   def sets
-    training_session.exercise_sets.where(exercise: exercise).order(:created_at)
+    workout.exercise_sets.where(exercise: exercise).order(:created_at)
   end
 end

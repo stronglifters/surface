@@ -9,7 +9,7 @@ feature "Profiles", type: :feature do
     page.set_rack_session(user_id: user_session.id)
   end
 
-  context "when the user has not completed any workouts" do
+  context "when the user has not completed any routines" do
     subject { ProfilePage.new(user) }
 
     before { subject.visit_page }
@@ -18,7 +18,7 @@ feature "Profiles", type: :feature do
       expect(page).to have_content(user.username)
     end
 
-    it "displays the number of workouts completed" do
+    it "displays the number of routines completed" do
       translations = I18n.translate("profiles.show.no_workouts_completed")
       expect(page).to have_content(translations)
     end

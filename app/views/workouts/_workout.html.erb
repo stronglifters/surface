@@ -1,7 +1,17 @@
-<div class="small-6 columns">
-  <div class="panel">
-    <%= link_to '', {}, name: workout.slug %>
-    <h1>Workout <%= workout.name %>
-    <%= render workout.exercise_workouts %>
-  </div>
-</div>
+<tr>
+  <td>
+    <%= link_to workout.routine, program_path(workout.program, anchor: workout.routine) %>
+  </td>
+  <td><%= I18n.l workout.occurred_at, format: :short %></td>
+  <td><%= workout.body_weight.to(:lbs) %> lbs</td>
+  <td>
+  <% workout.exercises.order(:created_at).uniq.each do |exercise| %>
+    <strong><%= exercise.name %></strong> @ <%= workout.progress_for(exercise).max_weight %> lbs
+  <% end %>
+  </td>
+  <td>
+    <% if feature_enabled?(:csv_import) %>
+    <%= link_to "edit", edit_workout_path(workout) %>
+    <% end %>
+  </td>
+</tr>

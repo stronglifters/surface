@@ -17,11 +17,11 @@ describe TrainingSession, type: :model do
 
       expect(result).to be_persisted
       expect(result.exercise).to eql(squat)
-      expect(result.to_sets).to eql([5])
-      expect(result.sets.at(0).exercise).to eql(squat)
-      expect(result.sets.at(0).target_weight).to eql(target_weight.to_f)
-      expect(result.sets.at(0).target_repetitions).to eql(5)
-      expect(result.sets.at(0).actual_repetitions).to eql(5)
+      expect(subject.progress_for(squat).to_sets).to eql([5])
+      expect(subject.sets.at(0).exercise).to eql(squat)
+      expect(subject.sets.at(0).target_weight).to eql(target_weight.to_f)
+      expect(subject.sets.at(0).target_repetitions).to eql(5)
+      expect(subject.sets.at(0).actual_repetitions).to eql(5)
     end
 
     it 'records the next set' do
@@ -30,15 +30,15 @@ describe TrainingSession, type: :model do
 
       expect(result).to be_persisted
       expect(result.exercise).to eql(squat)
-      expect(result.to_sets).to eql([5, 3])
-      expect(result.sets.at(0).exercise).to eql(squat)
-      expect(result.sets.at(0).target_weight).to eql(target_weight.to_f)
-      expect(result.sets.at(0).target_repetitions).to eql(5)
-      expect(result.sets.at(0).actual_repetitions).to eql(5)
-      expect(result.sets.at(1).exercise).to eql(squat)
-      expect(result.sets.at(1).target_weight).to eql(target_weight.to_f)
-      expect(result.sets.at(1).target_repetitions).to eql(5)
-      expect(result.sets.at(1).actual_repetitions).to eql(3)
+      expect(subject.progress_for(squat).to_sets).to eql([5, 3])
+      expect(subject.sets.at(0).exercise).to eql(squat)
+      expect(subject.sets.at(0).target_weight).to eql(target_weight.to_f)
+      expect(subject.sets.at(0).target_repetitions).to eql(5)
+      expect(subject.sets.at(0).actual_repetitions).to eql(5)
+      expect(subject.sets.at(1).exercise).to eql(squat)
+      expect(subject.sets.at(1).target_weight).to eql(target_weight.to_f)
+      expect(subject.sets.at(1).target_repetitions).to eql(5)
+      expect(subject.sets.at(1).actual_repetitions).to eql(3)
     end
 
     it "updates a completed exercise" do
@@ -51,37 +51,40 @@ describe TrainingSession, type: :model do
 
       expect(result).to be_persisted
       expect(result.exercise).to eql(squat)
-      expect(result.to_sets).to eql([5, 3, 5])
-      expect(result.sets.at(0).exercise).to eql(squat)
-      expect(result.sets.at(0).target_weight).to eql(target_weight.to_f)
-      expect(result.sets.at(0).target_repetitions).to eql(5)
-      expect(result.sets.at(0).actual_repetitions).to eql(5)
-      expect(result.sets.at(1).exercise).to eql(squat)
-      expect(result.sets.at(1).target_weight).to eql(new_weight.to_f)
-      expect(result.sets.at(1).target_repetitions).to eql(5)
-      expect(result.sets.at(1).actual_repetitions).to eql(3)
-      expect(result.sets.at(2).exercise).to eql(squat)
-      expect(result.sets.at(2).target_weight).to eql(target_weight.to_f)
-      expect(result.sets.at(2).target_repetitions).to eql(5)
-      expect(result.sets.at(2).actual_repetitions).to eql(5)
+      progress = subject.progress_for(squat)
+      expect(progress.to_sets).to eql([5, 3, 5])
+      expect(progress.sets.at(0).exercise).to eql(squat)
+      expect(progress.sets.at(0).target_weight).to eql(target_weight.to_f)
+      expect(progress.sets.at(0).target_repetitions).to eql(5)
+      expect(progress.sets.at(0).actual_repetitions).to eql(5)
+      expect(progress.sets.at(1).exercise).to eql(squat)
+      expect(progress.sets.at(1).target_weight).to eql(new_weight.to_f)
+      expect(progress.sets.at(1).target_repetitions).to eql(5)
+      expect(progress.sets.at(1).actual_repetitions).to eql(3)
+      expect(progress.sets.at(2).exercise).to eql(squat)
+      expect(progress.sets.at(2).target_weight).to eql(target_weight.to_f)
+      expect(progress.sets.at(2).target_repetitions).to eql(5)
+      expect(progress.sets.at(2).actual_repetitions).to eql(5)
     end
 
     it "cannot save a duplicate exercise" do
-      result = subject.train(squat, target_weight, repetitions: 5)
-      subject.train(squat, target_weight, repetitions: 5)
+      subject.train(squat, target_weight, repetitions: 5, set: 0)
+      subject.train(squat, target_weight, repetitions: 5, set: 0)
 
-      expect(subject.exercise_sessions.count).to eql(1)
-      expect(subject.exercise_sessions).to match_array([result])
+      expect(subject.exercise_sets.count).to eql(1)
     end
   end
 
   describe "#progress_for" do
     let(:exercise) { create(:exercise) }
+    let(:other_exercise) { create(:exercise) }
     let(:workout) { subject.workout }
 
     before :each do
       workout.add_exercise(exercise)
+      workout.add_exercise(other_exercise)
       subject.train(exercise, 100, repetitions: 5)
+      subject.train(other_exercise, 100, repetitions: 5)
       subject.train(exercise, 100, repetitions: 5)
     end
 

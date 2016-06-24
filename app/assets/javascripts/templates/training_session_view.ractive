@@ -1,33 +1,12 @@
 <div class="row">
   {{#each training_session.exercises}}
   <div class="panel small-12 columns">
-    {{name}}
-    {{#if completed}}
-      <div class="row">
-        <div class="small-12 columns">
-          Good Work!
-        </div>
-      </div>
-    {{else}}
-      <div class="row">
-        <div class="small-12 columns">
-          <p class="text-center">
-            {{#each sets}}
-              <button on-click="updateProgress" class="button small round {{status}}">
-                {{completed}}
-              </button>
-              @ {{weight}} lb
-            {{/each}}
-          </p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <button on-click="completeExercise" class="button expand">Done</button>
-        </div>
-      </div>
-    {{/if}}
-
+    <h3>{{name}}</h3>
+    {{#each sets}}
+      <button on-click="updateProgress" class="button small round {{status}}">
+        {{actual_repetitions}}/{{target_repetitions}} @ {{target_weight}} lb
+      </button>
+    {{/each}}
   </div>
   {{/each}}
 </div>

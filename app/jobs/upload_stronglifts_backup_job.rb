@@ -19,8 +19,6 @@ class UploadStrongliftsBackupJob < ActiveJob::Base
 
   def importer_for(directory, user, program)
     [
-      Android::Import.new(user, program),
-      Ios::Import.new(user, program),
       Csv::Import.new(user, program),
       UnknownFile.new
     ].detect { |x| x.can_parse?(directory) }

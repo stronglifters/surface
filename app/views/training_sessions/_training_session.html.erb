@@ -5,8 +5,8 @@
   <td><%= I18n.l training_session.occurred_at, format: :short %></td>
   <td><%= training_session.body_weight %> lbs</td>
   <td>
-  <% training_session.exercise_sessions.each do |exercise_session| %>
-    <strong><%= exercise_session.exercise.name %></strong> @ <%= exercise_session.sets.maximum(:target_weight) %> lbs,
+  <% training_session.exercises.each do |exercise| %>
+    <strong><%= exercise.name %></strong> @ <%= training_session.progress_for(exercise).max_weight %> lbs,
   <% end %>
   </td>
   <td> <%= link_to "edit", edit_training_session_path(training_session) %> </td>

@@ -5,12 +5,11 @@
         <legend><%= TrainingSession.human_attribute_name(:body_weight) %></legend>
         <%= f.number_field :body_weight %>
       </fieldset>
-      <% @training_session.exercise_sessions.each do |exercise_session| %>
-        <%= f.fields_for :exercise_sessions, exercise_session do |e| %>
+      <% @training_session.exercise_sets.group_by(&:exercise).each do |exercise, exercise_sets| %>
           <fieldset>
-            <legend><%= e.object.exercise.name %></legend>
-            <% exercise_session.exercise_sets.each.with_index(1) do |set, index| %>
-              <%= e.fields_for :exercise_sets, set do |s| %>
+            <legend><%= exercise.name %></legend>
+            <% exercise_sets.each.with_index(1) do |set, index| %>
+              <%= f.fields_for :exercise_sets, set do |s| %>
                 <fieldset>
                   <legend>Set <%= index %></legend>
                   <div class="row">
@@ -24,13 +23,13 @@
                       <%= s.number_field :target_weight %>
                     </div>
                   </div>
+                  <%= s.hidden_field :exercise_id %>
                 </fieldset>
               <% end %>
             <% end %>
 
-            <%= e.hidden_field :exercise_workout_id %>
+            <%= f.hidden_field :workout_id %>
           </fieldset>
-        <% end %>
       <% end %>
       <%= f.hidden_field :workout_id %>
       <%= f.submit "Start", class: "button round right" %>

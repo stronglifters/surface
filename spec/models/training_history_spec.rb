@@ -14,6 +14,7 @@ describe TrainingHistory do
       session = user.begin_workout(workout_a, date, body_weight)
       5.times do
         session.train(squat, target_weight, repetitions: 5)
+        session.train(bench_press, target_weight + 10, repetitions: 5)
       end
     end
 
@@ -21,6 +22,7 @@ describe TrainingHistory do
       result = subject.to_line_chart
       expect(result).to_not be_nil
       expect(result.keys.first.to_i).to eql(date.to_i)
+      expect(result.keys.count).to eql(1)
       expect(result.values.first).to eql(target_weight.to_f)
     end
   end

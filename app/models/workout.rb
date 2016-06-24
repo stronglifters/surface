@@ -26,4 +26,10 @@ class Workout < ActiveRecord::Base
   def next_workout
     program.next_workout_after(self)
   end
+
+  def prepare_sets_for(user, training_session)
+    exercises.each do |exercise|
+      training_session.exercise_sets << program.prepare_sets_for(user, exercise)
+    end
+  end
 end

@@ -3,44 +3,40 @@ class Stronglifters.TrainingSessionView extends Ractive
 
   oninit: ->
     @on 'updateProgress', (event) -> @updateProgress(event)
-    @on 'completeExercise', (event) -> @completeExercise(event.context)
     @observe 'training_session.exercises.*.sets.*', (newValue, oldValue, keypath) ->
       @refreshStatus(newValue, oldValue, keypath)
 
   updateProgress: (event) ->
-    completed = @get("#{event.keypath}.completed")
+    completed = @get("#{event.keypath}.actual_repetitions")
     if completed == null || completed == 0
-      @set("#{event.keypath}.completed", @get("#{event.keypath}.target"))
+      @set("#{event.keypath}.actual_repetitions", @get("#{event.keypath}.target_repetitions"))
     else
-      @subtract("#{event.keypath}.completed")
+      @subtract("#{event.keypath}.actual_repetitions")
+    @saveSet(@get(event.keypath))
 
-  refreshStatus: (newValue, oldValue, keyPath) ->
-    if @get("#{keyPath}.completed") == 0
-      @set("#{keyPath}.status", "secondary")
-      return
+  saveSet: (set) ->
+    @patch "/exercise_sets/#{set.id}",
+      exercise_set:
+        actual_repetitions: set.actual_repetitions
 
-    if @get("#{keyPath}.target") == @get("#{keyPath}.completed")
-      @set("#{keyPath}.status", "success")
-    else
-      @set("#{keyPath}.status", "alert")
-
-  completeExercise: (exercise) ->
-    payload =
-      training_session:
-        exercise_id: exercise.id
-        sets: _.map exercise.sets, (set) ->
-          completed: set.completed
-          weight: exercise.target_weight
-    console.log(payload)
-
+  patch: (url, payload) ->
     $.ajax
-      url: "/training_sessions/#{@get('training_session.id')}",
+      url: url,
       dataType: 'json',
       type: 'patch',
       contentType: 'application/json',
       data: JSON.stringify(payload),
-      success: (gym, statux, xhr) =>
-        exercise.completed = true
-        @updateModel()
+      success: (data, statux, xhr) =>
+        console.log(data)
       error: (xhr, status, error) ->
         console.log(error)
+
+  refreshStatus: (newValue, oldValue, keypath) ->
+    if @get("#{keypath}.actual_repetitions") == null
+      @set("#{keypath}.status", "secondary")
+      return
+
+    if @get("#{keypath}.target_repetitions") == @get("#{keypath}.actual_repetitions")
+      @set("#{keypath}.status", "success")
+    else
+      @set("#{keypath}.status", "alert")

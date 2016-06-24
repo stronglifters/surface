@@ -2,8 +2,7 @@ class User < ActiveRecord::Base
   include Flippable
   has_secure_password
   has_many :training_sessions
-  has_many :exercise_sessions, through: :training_sessions
-  has_many :exercise_sets, through: :exercise_sessions
+  has_many :exercise_sets, through: :training_sessions
   has_many :user_sessions, dependent: :destroy
   has_one :profile
   has_many :received_emails
@@ -89,12 +88,27 @@ class User < ActiveRecord::Base
     last_workout.next_workout
   end
 
-  def current_program
-    Program.stronglifts
+  def next_training_session_for(workout = next_workout)
+    last_body_weight = last_training_session.try(:body_weight)
+    training_sessions.build(workout: workout, body_weight: last_body_weight).tap do |training_session|
+      workout.prepare_sets_for(self, training_session)
+    end
   end
 
-  def google_drive
-    GoogleDrive.new(self)
+  def last_training_session(exercise = nil)
+    if exercise.present?
+      training_sessions.
+        joins(:exercises).
+        where(exercises: { id: exercise.id }).
+        order(:created_at).
+        last
+    else
+      training_sessions.order(:created_at).last
+    end
+  end
+
+  def current_program
+    Program.stronglifts
   end
 
   class << self

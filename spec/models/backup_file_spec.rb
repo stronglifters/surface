@@ -8,11 +8,6 @@ describe BackupFile do
   end
 
   describe "#valid?" do
-    it "returns true" do
-      subject = BackupFile.new(user, fixture_file("backup.android.stronglifts"))
-      expect(subject).to be_valid
-    end
-
     it "returns true for csv exports" do
       csv_export = fixture_file("spreadsheet-stronglifts.csv")
       subject = BackupFile.new(user, csv_export)
@@ -30,7 +25,7 @@ describe BackupFile do
 
     it "creates a job to process later" do
       allow(UploadStrongliftsBackupJob).to receive(:perform_later)
-      subject = BackupFile.new(user, fixture_file("backup.ios.stronglifts"))
+      subject = BackupFile.new(user, fixture_file("spreadsheet-stronglifts.csv"))
       subject.process_later(program)
       expect(UploadStrongliftsBackupJob).to have_received(:perform_later)
     end

@@ -48,9 +48,9 @@ describe Csv::Import do
       expect(training_session.occurred_at).to eql(expected_date)
       expect(training_session.workout).to eql(workout_a)
       expect(training_session.body_weight).to eql(205.0)
-      expect(training_session.exercise_sessions.count).to eql(3)
+      expect(training_session.exercise_sets.count).to eql(15)
       expect(
-        training_session.exercise_sessions.map { |x| x.exercise.name }
+        training_session.exercise_sets.map { |x| x.exercise.name }.uniq
       ).to match_array(["Squat", "Bench Press", "Barbell Row"])
     end
 
@@ -103,9 +103,9 @@ describe Csv::Import do
       subject.import(row)
 
       training_session = user.training_sessions.first
-      session = training_session.progress_for(dips)
-      expect(session).to_not be_nil
-      expect(session.to_sets).to eql([5, 5, 5])
+      progress = training_session.progress_for(dips)
+      expect(progress).to_not be_nil
+      expect(progress.to_sets).to eql([5, 5, 5])
     end
 
     it "imports chinups" do
@@ -113,18 +113,30 @@ describe Csv::Import do
       subject.import(row)
 
       training_session = user.training_sessions.first
-      session = training_session.progress_for(chinups)
-      expect(session).to_not be_nil
-      expect(session.to_sets).to eql([5, 3, 2])
-      expect(session.sets.at(0).target_weight).to eql(0.0)
-      expect(session.sets.at(0).target_repetitions).to eql(5)
-      expect(session.sets.at(0).actual_repetitions).to eql(5)
-      expect(session.sets.at(1).target_weight).to eql(0.0)
-      expect(session.sets.at(1).target_repetitions).to eql(5)
-      expect(session.sets.at(1).actual_repetitions).to eql(3)
-      expect(session.sets.at(2).target_weight).to eql(0.0)
-      expect(session.sets.at(2).target_repetitions).to eql(5)
-      expect(session.sets.at(2).actual_repetitions).to eql(2)
+      progress = training_session.progress_for(chinups)
+      expect(progress).to_not be_nil
+      expect(progress.to_sets).to eql([5, 3, 2])
+      expect(progress.sets.at(0).target_weight).to eql(0.0)
+      expect(progress.sets.at(0).target_repetitions).to eql(5)
+      expect(progress.sets.at(0).actual_repetitions).to eql(5)
+      expect(progress.sets.at(1).target_weight).to eql(0.0)
+      expect(progress.sets.at(1).target_repetitions).to eql(5)
+      expect(progress.sets.at(1).actual_repetitions).to eql(3)
+      expect(progress.sets.at(2).target_weight).to eql(0.0)
+      expect(progress.sets.at(2).target_repetitions).to eql(5)
+      expect(progress.sets.at(2).actual_repetitions).to eql(2)
+    end
+
+    it 'imports the correct number of sets' do
+      row = ["06/05/16", "", "B", "101.93", "225", "Squat", "125", "275", "5", "5", "5", "", "", "Overhead press", "57.5", "125", "5", "5", "5", "5", "5", "Deadlift", "127.5", "285", "5", "", "", "" , "", "", "", "", "", ""]
+
+      subject.import(row)
+      training_session = user.training_sessions.first
+      expect(training_session.progress_for(squat).sets.count).to eql(3)
+      expect(training_session.progress_for(squat).to_sets).to eql([5, 5, 5])
+
+      expect(training_session.progress_for(deadlift).sets.count).to eql(1)
+      expect(training_session.progress_for(deadlift).to_sets).to eql([5])
     end
   end
 end

@@ -157,14 +157,6 @@ describe User do
     end
   end
 
-  describe "#google_drive" do
-    it "returns the users google drive" do
-      result = subject.google_drive
-      expect(result).to be_instance_of(GoogleDrive)
-      expect(result.user).to eql(subject)
-    end
-  end
-
   describe "when destroying a training session" do
     include_context "stronglifts_program"
     subject { create(:user) }
@@ -180,7 +172,7 @@ describe User do
       subject.training_sessions.destroy_all
 
       expect(TrainingSession.all).to be_empty
-      expect(ExerciseSession.all).to be_empty
+      expect(ExerciseSet.all).to be_empty
     end
   end
 

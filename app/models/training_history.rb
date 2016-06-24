@@ -16,18 +16,21 @@ class TrainingHistory
   end
 
   def completed_any?
-    user.
-      exercise_sessions.
-      joins(:exercise).
-      any?
+    user.exercise_sets.where(exercise: exercise).any?
+  end
+
+  def last_target_sets
+    last_training_session = user.last_training_session(exercise)
+    return 0 if last_training_session.blank?
+    last_training_session.exercise_sets.where(exercise: exercise).count
   end
 
   def last_weight
     user.
-      exercise_sessions.
+      exercise_sets.
       joins(:exercise).
-      joins(:training_session).
       where(exercises: { id: exercise.id }).
+      where('actual_repetitions = target_repetitions').
       order('training_sessions.occurred_at').
       last.try(:target_weight).to_i
   end
@@ -37,14 +40,10 @@ class TrainingHistory
   end
 
   def to_line_chart
-    user.
-      exercise_sessions.
-      includes(:training_session).
-      joins(:exercise).
-      where(exercises: { name: exercise.name }).
-      inject({}) do |memo, session|
-        memo[session.training_session.occurred_at] = session.sets.first.target_weight
-        memo
-      end
+    user.training_sessions.inject({}) do |memo, training_session|
+      memo[training_session.occurred_at] =
+        training_session.exercise_sets.where(exercise: exercise).maximum(:target_weight)
+      memo
+    end
   end
 end

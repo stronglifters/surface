@@ -33,6 +33,7 @@ class Csv::Import
       exercise_row = workout_row.find(exercise)
       next if exercise_row.nil?
       exercise_row.sets.compact.each_with_index do |completed_reps, index|
+        next if completed_reps.blank?
         training_session.train(
           exercise,
           exercise_row.weight_lb,

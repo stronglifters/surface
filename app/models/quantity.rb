@@ -14,42 +14,47 @@ class Quantity
     @amount.to_f
   end
 
-  def eql?(other)
+  def eql?(other, delta = 0.1)
     converted = other.to(unit)
-    self.amount == converted
+    (self.amount - converted.amount).abs <= delta
   end
 
   def to_s
     to_f.to_s
   end
-end
 
-
-class Unit
-  def self.for(unit)
-    case unit
-    when :lbs, :lb
-      Pound.new
-    when :kg, :kgs
-      Kilogram.new
+  class Unit
+    def self.for(unit)
+      case unit
+      when :lbs, :lb
+        Pound.new
+      when :kg, :kgs
+        Kilogram.new
+      else
+        unit
+      end
     end
   end
-end
 
-class Pound < Unit
-  def convert(amount, unit)
-    if unit.is_a? Kilogram
-      amount * 2.20462
+  class Pound < Unit
+    def convert(amount, unit)
+      case unit
+      when Kilogram
+        amount * 2.20462
+      else
+        amount
+      end
     end
   end
-end
 
-class Kilogram < Unit
-  def convert(amount, unit)
-    if unit.is_a? Pound
-      amount * 0.453592
-    elsif unit.is_a? Kilogram
-      amount
+  class Kilogram < Unit
+    def convert(amount, unit)
+      case unit
+      when Pound
+        amount * 0.453592
+      else
+        amount
+      end
     end
   end
 end

@@ -7,7 +7,7 @@ class Progress
   end
 
   def to_sets
-    sets.pluck(:actual_repetitions)
+    sets.pluck(:actual_repetitions).compact
   end
 
   def max_weight

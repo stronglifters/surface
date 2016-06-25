@@ -2,26 +2,36 @@
   <div class="row">
     <div class="large-12 columns">
       <% if feature_enabled?(:csv_import) %>
-      <p class="text-center"> <a href="#" data-reveal-id="sendToStrongLiftsModal"><%= User.human_attribute_name(:import_address) %></a> </p>
+        <p class="text-center">
+          <a href="#" data-reveal-id="sendToStrongLiftsModal">
+            <%= User.human_attribute_name(:import_address) %>
+          </a>
+        </p>
       <% end %>
-      <table>
-        <thead>
-          <tr>
-          <td></td>
-          <td>Date</td>
-          <td>Weight</td>
-          <td></td>
-          <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render @workouts %>
-        </tbody>
-      </table>
+      <ul class="accordion" data-accordion>
+        <% @workouts.each do |workout| %>
+        <li class="accordion-navigation">
+          <a href="#panel-<%= workout.id %>">
+            <p class="text-center">
+              <%= workout.name %> - <strong><%= I18n.l workout.occurred_at, format: :short %></strong> - <%= workout.body_weight.to(:lbs) %> lbs
+            </p>
+          </a>
+          <div id="panel-<%= workout.id %>" class="content">
+            <% workout.exercises.order(:created_at).uniq.each do |exercise| %>
+              <% progress = workout.progress_for(exercise) %>
+              <p class="text-center">
+              <strong><%= exercise.name %></strong>
+              <%= progress.to_sets.join("/") %> @ <%= progress.max_weight %> lbs
+              </p>
+            <% end %>
+          </div>
+        </li>
+        <% end %>
+      </ul>
     </div>
   </div>
   <div class="row">
-    <div class="large-12 text-center columns">
+    <div class="large-12 columns">
       <%= paginate @workouts, remote: false %>
     </div>
   </div>

@@ -1,24 +1,15 @@
 class WorkoutsController < ApplicationController
   def index
-    @workouts = paginate(
-      current_user.
-      workouts.
-      includes(:routine, :program, exercise_sets: [:exercise]).
-      order(occurred_at: :desc)
-    )
+    @workouts = paginate(recent_workouts)
   end
 
   def new
-    @routine = current_user.next_routine
+    @routine = find_routine(params[:routine_id])
+    @all_routines = current_program.routines - [@routine]
     @workout = current_user.next_workout_for(@routine)
   end
 
   def create
-    secure_params = params.require(:workout).permit(:routine_id, :body_weight, exercise_sets_attributes: [
-      :target_repetitions,
-      :target_weight,
-      :exercise_id
-    ])
     secure_params.merge!(occurred_at: DateTime.now)
     workout = current_user.workouts.create!(secure_params)
     redirect_to edit_workout_path(workout)
@@ -26,5 +17,31 @@ class WorkoutsController < ApplicationController
 
   def edit
     @workout = current_user.workouts.find(params[:id])
+  end
+
+  private
+
+  def secure_params
+    params.require(:workout).permit(
+      :routine_id,
+      :body_weight,
+      exercise_sets_attributes: [
+        :exercise_id,
+        :target_repetitions,
+        :target_weight,
+      ]
+    )
+  end
+
+  def recent_workouts
+    current_user.workouts.recent.includes(:routine, :program, exercise_sets: [:exercise])
+  end
+
+  def find_routine(routine_id)
+    current_program.routines.find_by(id: routine_id) || current_user.next_routine
+  end
+
+  def current_program
+    current_user.current_program
   end
 end

@@ -5,6 +5,10 @@ class Workout < ActiveRecord::Base
   has_many :exercises, through: :exercise_sets
   has_many :exercise_sets, dependent: :destroy
   accepts_nested_attributes_for :exercise_sets
+  delegate :name, to: :routine
+
+  scope :recent, -> { order(occurred_at: :desc) }
+
 
   def body_weight
     Quantity.new(read_attribute(:body_weight), :lbs)

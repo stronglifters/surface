@@ -1,6 +1,13 @@
 <div class="row">
   <div class="small-12 columns">
+    <h1>Routine <%= @routine.name %></h1>
+    <% @all_routines.each do |routine| %>
+      <p class="text-right">
+        <%= link_to "Switch to Routine #{routine.name}", new_workout_path(routine_id: routine.id) %>
+      </p>
+    <% end %>
     <%= form_for @workout do |f| %>
+      <%= f.hidden_field :routine_id %>
       <fieldset>
         <legend><%= Workout.human_attribute_name(:body_weight) %></legend>
         <%= f.number_field :body_weight %>
@@ -27,11 +34,8 @@
                 </fieldset>
               <% end %>
             <% end %>
-
-            <%= f.hidden_field :routine_id %>
           </fieldset>
       <% end %>
-      <%= f.hidden_field :routine_id %>
       <%= f.submit "Start", class: "button round right" %>
     <% end %>
   </div>

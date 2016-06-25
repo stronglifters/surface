@@ -52,12 +52,14 @@ RSpec.configure do |config|
   config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
     page.driver.browser.url_blacklist = [
-      "http://apis.google.com",
+      "https://apis.google.com",
       "http://fonts.googleapis.com",
-      "http://www.google.com",
+      "https://www.google.com",
       "https://accounts.google.com",
       "https://maps.google.com",
+      "https://s.ytimg.com",
       "https://secure.gravatar.com",
+      "https://www.youtube-nocookie.com",
     ]
   end
 

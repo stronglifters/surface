@@ -26,7 +26,7 @@ class Stronglifters.WorkoutView extends Ractive
       type: 'patch',
       contentType: 'application/json',
       data: JSON.stringify(payload),
-      success: (data, statux, xhr) =>
+      success: (data, statux, xhr) ->
         console.log("Saved: #{data}")
       error: (xhr, status, error) ->
         console.log(error)

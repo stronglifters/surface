@@ -48,9 +48,9 @@ describe Csv::Import do
       expect(workout.occurred_at).to eql(expected_date)
       expect(workout.routine).to eql(routine_a)
       expect(workout.body_weight).to eql(205.0.lbs)
-      expect(workout.exercise_sets.count).to eql(15)
+      expect(workout.sets.count).to eql(15)
       expect(
-        workout.exercise_sets.map { |x| x.exercise.name }.uniq
+        workout.sets.map { |x| x.exercise.name }.uniq
       ).to match_array(["Squat", "Bench Press", "Barbell Row"])
     end
 

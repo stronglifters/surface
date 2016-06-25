@@ -33,7 +33,7 @@ class WorkoutsController < ApplicationController
   end
 
   def recent_workouts
-    current_user.workouts.recent.includes(:routine, :program, exercise_sets: [:exercise])
+    current_user.workouts.recent.includes(:routine, exercise_sets: [:exercise])
   end
 
   def find_routine(routine_id)

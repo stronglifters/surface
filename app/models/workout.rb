@@ -6,6 +6,7 @@ class Workout < ActiveRecord::Base
   has_many :exercise_sets, dependent: :destroy
   accepts_nested_attributes_for :exercise_sets
   delegate :name, to: :routine
+  alias_method :sets, :exercise_sets
 
   scope :recent, -> { order(occurred_at: :desc) }
 
@@ -15,24 +16,20 @@ class Workout < ActiveRecord::Base
   end
 
   def train(exercise, target_weight, repetitions:, set: nil)
-    exercise_set =
-      if set.present? && exercise_sets.where(exercise: exercise).at(set).present?
-        exercise_sets.where(exercise: exercise).at(set)
+    set =
+      if set.present? && sets.where(exercise: exercise).at(set).present?
+        sets.where(exercise: exercise).at(set)
       else
-        exercise_sets.build(
+        sets.build(
           exercise: exercise,
           target_repetitions: program.recommended_reps_for(user, exercise)
         )
       end
-    exercise_set.update!(actual_repetitions: repetitions, target_weight: target_weight)
-    exercise_set
+    set.update!(actual_repetitions: repetitions, target_weight: target_weight)
+    set
   end
 
   def progress_for(exercise)
     Progress.new(self, exercise)
-  end
-
-  def sets
-    exercise_sets
   end
 end

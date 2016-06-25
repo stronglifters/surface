@@ -15,6 +15,6 @@ class Progress
   end
 
   def sets
-    workout.exercise_sets.where(exercise: exercise).order(:created_at)
+    workout.sets.where(exercise: exercise).order(:created_at)
   end
 end

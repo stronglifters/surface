@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   after_create :create_profile!
   before_validation :lowercase_account_fields
+  alias_method :sets, :exercise_sets
 
   def time_zone
     @time_zone ||= ActiveSupport::TimeZone[profile.read_attribute(:time_zone)]

@@ -12,10 +12,10 @@
         <legend><%= Workout.human_attribute_name(:body_weight) %></legend>
         <%= f.number_field :body_weight %>
       </fieldset>
-      <% @workout.exercise_sets.group_by(&:exercise).each do |exercise, exercise_sets| %>
+      <% @workout.sets.group_by(&:exercise).each do |exercise, sets| %>
         <fieldset>
           <legend><%= exercise.name %></legend>
-          <% exercise_sets.each.with_index(1) do |set, index| %>
+          <% sets.each.with_index(1) do |set, index| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
               <fieldset name="<%= exercise.slug %>-<%= index %>">
                 <legend>Set</legend>

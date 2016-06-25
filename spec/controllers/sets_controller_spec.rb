@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe ExerciseSetsController do
+describe SetsController do
   let(:user) { create(:user) }
 
   before :each do
@@ -13,14 +13,14 @@ describe ExerciseSetsController do
 
     it "records the exercise" do
       workout.update!(occurred_at: DateTime.now, body_weight: 225)
-      exercise_set = workout.exercise_sets.first
+      set = workout.sets.first
 
-      xhr :patch, :update, id: exercise_set.id, exercise_set: {
+      xhr :patch, :update, id: set.id, set: {
         actual_weight: 315,
         actual_repetitions: 5,
       }
       expect(response).to have_http_status(:ok)
-      expect(exercise_set.reload.actual_repetitions).to eql(5)
+      expect(set.reload.actual_repetitions).to eql(5)
     end
   end
 end

@@ -33,7 +33,7 @@ class TrainingHistory
   def to_line_chart
     user.workouts.inject({}) do |memo, workout|
       memo[workout.occurred_at] =
-        workout.exercise_sets.where(exercise: exercise).maximum(:target_weight)
+        workout.sets.where(exercise: exercise).maximum(:target_weight)
       memo
     end
   end
@@ -41,7 +41,7 @@ class TrainingHistory
   private
 
   def sets
-    user.exercise_sets.where(exercise: exercise)
+    user.sets.where(exercise: exercise)
   end
 
   def successful_sets

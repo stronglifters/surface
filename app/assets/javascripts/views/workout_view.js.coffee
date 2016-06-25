@@ -15,8 +15,8 @@ class Stronglifters.WorkoutView extends Ractive
     @saveSet(@get(event.keypath))
 
   saveSet: (set) ->
-    @patch "/exercise_sets/#{set.id}",
-      exercise_set:
+    @patch "/sets/#{set.id}",
+      set:
         actual_repetitions: set.actual_repetitions
 
   patch: (url, payload) ->

@@ -67,7 +67,7 @@ describe WorkoutsController do
       workout = user.workouts.last
       expect(workout.body_weight).to eql(body_weight)
       expect(workout.routine).to eql(routine_b)
-      expect(workout.exercise_sets.count).to eql(1)
+      expect(workout.sets.count).to eql(1)
       expect(response).to redirect_to(edit_workout_path(user.workouts.last))
     end
   end

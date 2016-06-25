@@ -71,7 +71,7 @@ describe Workout, type: :model do
       subject.train(squat, target_weight, repetitions: 5, set: 0)
       subject.train(squat, target_weight, repetitions: 5, set: 0)
 
-      expect(subject.exercise_sets.count).to eql(1)
+      expect(subject.sets.count).to eql(1)
     end
   end
 

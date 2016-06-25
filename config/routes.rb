@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "sessions#new"
   resources :sessions, only: [:new, :create, :destroy]
   resources :registrations, only: [:new, :create]
-  resources :exercise_sets, only: [:update]
+  resources :sets, only: [:update]
   resources :workouts, only: [:index, :new, :create, :edit]
   resources :programs, only: [:show]
   resources :profiles, only: [:new, :create, :show, :edit, :update], constraints: { id: /[^\/]+/ }

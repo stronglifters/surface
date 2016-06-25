@@ -3,11 +3,11 @@ class Quantity
 
   def initialize(amount, unit)
     @amount = amount
-    @unit = Unit.for(unit)
+    @unit = UnitOfMeasure.for(unit)
   end
 
   def to(target_unit)
-    Quantity.new(Unit.for(target_unit).convert(amount, unit), target_unit)
+    Quantity.new(UnitOfMeasure.for(target_unit).convert(amount, unit), target_unit)
   end
 
   def to_f
@@ -23,7 +23,7 @@ class Quantity
     to_f.to_s
   end
 
-  class Unit
+  class UnitOfMeasure
     def self.for(unit)
       case unit
       when :lbs, :lb
@@ -36,7 +36,7 @@ class Quantity
     end
   end
 
-  class Pound < Unit
+  class Pound < UnitOfMeasure
     def convert(amount, unit)
       case unit
       when Kilogram
@@ -47,7 +47,7 @@ class Quantity
     end
   end
 
-  class Kilogram < Unit
+  class Kilogram < UnitOfMeasure
     def convert(amount, unit)
       case unit
       when Pound

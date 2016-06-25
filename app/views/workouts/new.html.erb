@@ -13,30 +13,39 @@
         <%= f.number_field :body_weight %>
       </fieldset>
       <% @workout.exercise_sets.group_by(&:exercise).each do |exercise, exercise_sets| %>
-          <fieldset>
-            <legend><%= exercise.name %></legend>
-            <% exercise_sets.each.with_index(1) do |set, index| %>
-              <%= f.fields_for :exercise_sets, set do |s| %>
-                <fieldset>
-                  <legend>Set <%= index %></legend>
-                  <div class="row">
-                    <div class="small-6 columns">
-                      <%= s.label :target_repetitions %>
-                      <%= s.number_field :target_repetitions %>
-                    </div>
-
-                    <div class="small-6 columns">
-                      <%= s.label :target_weight %>
-                      <%= s.number_field :target_weight %>
-                    </div>
+        <fieldset>
+          <legend><%= exercise.name %></legend>
+          <% exercise_sets.each.with_index(1) do |set, index| %>
+            <%= f.fields_for :exercise_sets, set do |s| %>
+              <fieldset name="<%= exercise.slug %>-<%= index %>">
+                <legend>Set</legend>
+                <div class="row">
+                  <div class="small-6 columns">
+                    <%= s.label :target_repetitions %>
+                    <%= s.number_field :target_repetitions %>
                   </div>
-                  <%= s.hidden_field :exercise_id %>
-                </fieldset>
-              <% end %>
+
+                  <div class="small-6 columns">
+                    <%= s.label :target_weight %>
+                    <%= s.number_field :target_weight %>
+                  </div>
+                </div>
+                <p class="text-right"><a class="skip" href="#">skip</a></p>
+                <%= s.hidden_field :exercise_id %>
+              </fieldset>
             <% end %>
-          </fieldset>
+          <% end %>
+        </fieldset>
       <% end %>
       <%= f.submit "Start", class: "button round right" %>
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+var ready = function() {
+  window.currentView = new Stronglifters.NewWorkoutView({ el: $('#new_workout') });
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
+</script>

@@ -1,7 +1,7 @@
 class MigrateToExerciseSets < ActiveRecord::Migration
   def up
     execute("SELECT * FROM exercise_sessions").each do |exercise_session|
-      actual_sets = exercise_session["actual_sets"].gsub(/{/, '').gsub(/}/, '').split(',').map(&:to_i)
+      actual_sets = exercise_session["actual_sets"].gsub(/[{}]|NULL/, '').split(',').map(&:to_i)
       actual_sets.each do |n|
         say "Creating set for: #{exercise_session["name"]}: set: #{n}"
 

@@ -4,31 +4,33 @@ class Stronglifters.WorkoutView extends Ractive
   template: RactiveTemplates["templates/workout_view"]
 
   oninit: ->
-    @on 'updateProgress', (event) -> @updateProgress(event)
+    @on 'updateProgress', (event) ->
+      model = new Stronglifters.Set(@get(event.keypath))
+      @updateProgress(model)
+      x = {}
+      _.each _.keys(model.changed), (key) ->
+        x["#{event.keypath}.#{key}"] = model.changed[key]
+      @set(x)
+
     @observe 'workout.exercises.*.sets.*', (newValue, oldValue, keypath) ->
       @refreshStatus(newValue, oldValue, keypath)
     @set('message', "Let's do this!")
     @clock = new Stronglifters.Timer(@)
 
-  updateProgress: (event) ->
-    completed = @get("#{event.keypath}.actual_repetitions")
-    if completed == null || completed == 0
-      @set("#{event.keypath}.actual_repetitions", @get("#{event.keypath}.target_repetitions"))
+  updateProgress: (model) ->
+    if !model.started()
+      model.complete()
     else
-      @subtract("#{event.keypath}.actual_repetitions")
-    @saveSet(@get(event.keypath))
+      model.decrement()
+    model.save()
 
-    if @successful(event.keypath)
+    if model.successful()
       @set('message', "If it was easy break for 1:30, otherwise rest for 3:00.")
       @set('alertStatus', 'radius')
     else
       @set('alertStatus', 'alert')
       @set('message', "Take a 5:00 break.")
     @clock.start()
-
-  saveSet: (set) ->
-    model = new Stronglifters.Set(set)
-    model.save
 
   successful: (keypath) ->
     @get("#{keypath}.target_repetitions") == @get("#{keypath}.actual_repetitions")

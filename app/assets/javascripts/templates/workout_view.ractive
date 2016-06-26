@@ -1,12 +1,33 @@
+{{#if clock}}
+  <div data-alert="" class="alert-box {{alertStatus}}">
+    <p> {{message}} </p>
+    <p> Rest Clock: {{clock}} </p>
+  </div>
+{{/if}}
+
 <ul class="accordion" data-accordion>
   {{#each workout.exercises}}
   <li class="accordion-navigation">
     <a href="#panel-{{id}}">{{name}}</a>
     <div id="panel-{{id}}" class="content">
       {{#each sets}}
-        <button on-click="updateProgress" class="button expand {{status}}">
-          {{actual_repetitions}} x {{target_repetitions}} @ {{target_weight}} lbs
-        </button>
+      <div class="row">
+        <div class="columns small-3">
+          <button on-click="updateProgress" class="button round {{status}}">
+            {{actual_repetitions}}
+          </button>
+        </div>
+        <div class="columns small-5">
+          <p class="text-center">
+            {{target_repetitions}} x {{target_weight}} lbs
+          </p>
+        </div>
+        <div class="columns small-4">
+          <p class="text-center">
+            110 lb/side
+          </p>
+        </div>
+      </div>
       {{/each}}
     </div>
   </li>

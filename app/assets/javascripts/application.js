@@ -12,6 +12,7 @@
 //
 //= require clipboard
 //= require lodash
+//= require moment
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs

@@ -7,10 +7,10 @@ class Stronglifters.WorkoutView extends Ractive
     @on 'updateProgress', (event) ->
       model = new Stronglifters.Set(@get(event.keypath))
       @updateProgress(model)
-      x = {}
-      _.each _.keys(model.changed), (key) ->
+      prefix = (x, key) ->
         x["#{event.keypath}.#{key}"] = model.changed[key]
-      @set(x)
+        x
+      @set(_.reduce(_.keys(model.changed), prefix, {}))
 
     @observe 'workout.exercises.*.sets.*', (newValue, oldValue, keypath) ->
       @refreshStatus(newValue, oldValue, keypath)

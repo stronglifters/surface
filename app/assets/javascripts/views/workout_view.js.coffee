@@ -1,3 +1,5 @@
+#= require models/timer
+#= require models/set
 class Stronglifters.WorkoutView extends Ractive
   template: RactiveTemplates["templates/workout_view"]
 
@@ -6,9 +8,9 @@ class Stronglifters.WorkoutView extends Ractive
     @observe 'workout.exercises.*.sets.*', (newValue, oldValue, keypath) ->
       @refreshStatus(newValue, oldValue, keypath)
     @set('message', "Let's do this!")
+    @clock = new Stronglifters.Timer(@)
 
   updateProgress: (event) ->
-    @stopTimer()
     completed = @get("#{event.keypath}.actual_repetitions")
     if completed == null || completed == 0
       @set("#{event.keypath}.actual_repetitions", @get("#{event.keypath}.target_repetitions"))
@@ -22,35 +24,11 @@ class Stronglifters.WorkoutView extends Ractive
     else
       @set('alertStatus', 'alert')
       @set('message', "Take a 5:00 break.")
-    @startTimer()
-
-  startTimer: ->
-    @set('timer', 0)
-    @intervalId = setInterval @refreshTimer, 1000
-
-  refreshTimer: =>
-    @add('timer', 1000)
-    @set('clock', moment.utc(@get('timer')).format('mm:ss'))
-
-  stopTimer: =>
-    clearTimeout @intervalId
+    @clock.start()
 
   saveSet: (set) ->
-    @patch "/sets/#{set.id}",
-      set:
-        actual_repetitions: set.actual_repetitions
-
-  patch: (url, payload) ->
-    $.ajax
-      url: url,
-      dataType: 'json',
-      type: 'patch',
-      contentType: 'application/json',
-      data: JSON.stringify(payload),
-      success: (data, statux, xhr) ->
-        console.log("Saved: #{data}")
-      error: (xhr, status, error) ->
-        console.log(error)
+    model = new Stronglifters.Set(set)
+    model.save
 
   successful: (keypath) ->
     @get("#{keypath}.target_repetitions") == @get("#{keypath}.actual_repetitions")

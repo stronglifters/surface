@@ -1,8 +1,7 @@
 class SetsController < ApplicationController
   def update
-    set = current_user.sets.find(params[:id])
-    set.update!(secure_params)
-    render json: {}
+    @set = current_user.sets.find(params[:id])
+    @set.update!(secure_params)
   end
 
   private

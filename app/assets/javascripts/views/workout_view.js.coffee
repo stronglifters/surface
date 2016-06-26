@@ -4,18 +4,22 @@ class Stronglifters.WorkoutView extends Ractive
   template: RactiveTemplates["templates/workout_view"]
 
   oninit: ->
+    @clock = new Stronglifters.Timer(@)
     @on 'updateProgress', (event) ->
-      model = new Stronglifters.Set(@get(event.keypath))
-      @updateProgress(model)
-      prefix = (x, key) ->
-        x["#{event.keypath}.#{key}"] = model.changed[key]
-        x
-      @set(_.reduce(_.keys(model.changed), prefix, {}))
+      @withModel event.keypath, (model) =>
+        @updateProgress(model)
 
     @observe 'workout.exercises.*.sets.*', (newValue, oldValue, keypath) ->
-      @refreshStatus(newValue, oldValue, keypath)
-    @set('message', "Let's do this!")
-    @clock = new Stronglifters.Timer(@)
+      @withModel keypath, (model) =>
+        @refreshStatus(model, keypath)
+
+  withModel: (keypath, callback) ->
+    model = new Stronglifters.Set(@get(keypath))
+    callback(model)
+    prefix = (x, key) ->
+      x["#{keypath}.#{key}"] = model.changed[key]
+      x
+    @set(_.reduce(_.keys(model.changed), prefix, {}))
 
   updateProgress: (model) ->
     if !model.started()
@@ -25,22 +29,21 @@ class Stronglifters.WorkoutView extends Ractive
     model.save()
 
     if model.successful()
-      @set('message', "If it was easy break for 1:30, otherwise rest for 3:00.")
-      @set('alertStatus', 'radius')
+      @displayMessage("If it was easy break for 1:30, otherwise rest for 3:00.", 'radius')
     else
-      @set('alertStatus', 'alert')
-      @set('message', "Take a 5:00 break.")
+      @displayMessage("Take a 5:00 break.", 'alert')
     @clock.start()
 
-  successful: (keypath) ->
-    @get("#{keypath}.target_repetitions") == @get("#{keypath}.actual_repetitions")
-
-  refreshStatus: (newValue, oldValue, keypath) ->
-    if @get("#{keypath}.actual_repetitions") == null
+  refreshStatus: (model, keypath) ->
+    if !model.started()
       @set("#{keypath}.status", "secondary")
       return
 
-    if @successful(keypath)
+    if model.successful()
       @set("#{keypath}.status", "success")
     else
       @set("#{keypath}.status", "alert")
+
+  displayMessage: (message, status) ->
+    @set('message', message)
+    @set('alertStatus', status)

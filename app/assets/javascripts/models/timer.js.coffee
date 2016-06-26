@@ -11,11 +11,14 @@ class Stronglifters.Timer
   refreshTimer: =>
     @view.add('timer', 1000)
     @view.set('clock', moment.utc(@view.get('timer')).format('mm:ss'))
+    if @view.get('timer') > 600000
+      @stop()
 
   stop: =>
     if @running()
       clearTimeout @intervalId
       @intervalId = null
+      @view.set('clock', null)
 
   running: ->
     @intervalId?

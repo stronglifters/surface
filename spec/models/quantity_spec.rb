@@ -41,5 +41,16 @@ describe Quantity do
       other = Quantity.new(61.2, :kgs)
       expect(quantity).to eql(other)
     end
+
+    it 'is equal to a float' do
+      quantity = Quantity.new(135.0, :lbs)
+      expect(quantity).to eql(135.0)
+    end
+
+    it 'is not equal' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = Quantity.new(135.2, :lbs)
+      expect(quantity).to_not eql(other)
+    end
   end
 end

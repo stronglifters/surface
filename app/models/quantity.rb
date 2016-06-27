@@ -15,8 +15,8 @@ class Quantity
   end
 
   def eql?(other, delta = 0.1)
-    converted = other.to(unit)
-    (self.amount - converted.amount).abs <= delta
+    converted = other.respond_to?(:to) ? other.to(unit).amount : other
+    (self.amount - converted).abs <= delta
   end
 
   def to_s

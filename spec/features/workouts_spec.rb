@@ -27,7 +27,7 @@ feature "Workouts", type: :feature do
       subject.click_start
 
       expect(user.workouts.count).to eql(1)
+      expect(user.workouts.last.body_weight).to eql(225.0)
     end
-
   end
 end

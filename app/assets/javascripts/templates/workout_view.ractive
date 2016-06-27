@@ -13,7 +13,7 @@
       {{#each sets}}
       <div class="row">
         <div class="columns small-3">
-          <button on-click="updateProgress" class="button round {{status}}">
+          <button id='{{id}}' on-click="updateProgress" class="button round {{status}}">
             {{actual_repetitions}}
           </button>
         </div>

@@ -73,7 +73,7 @@ RSpec.configure do |config|
 
   config.after(:each) do |example|
     if example.metadata[:type] == :feature && example.exception.present?
-      puts subject.pretty_print
+      subject.record_failure
     end
   end
 end

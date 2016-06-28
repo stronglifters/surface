@@ -44,6 +44,14 @@ describe Program do
         sets = subject.prepare_sets_for(user, squat)
         expect(sets.map(&:target_weight).uniq).to match_array([50.lbs])
       end
+
+      it 'returns the same weight after a failed workout' do
+        workout = create(:workout, user: user, routine: routine_a)
+        5.times { |n| workout.train(squat, 45, repetitions: n) }
+
+        sets = subject.prepare_sets_for(user, squat)
+        expect(sets.map(&:target_weight).uniq).to match_array([45.lbs])
+      end
     end
   end
 end

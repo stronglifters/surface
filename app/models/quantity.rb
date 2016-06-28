@@ -14,13 +14,26 @@ class Quantity
     @amount.to_f
   end
 
+  def +(other)
+    Quantity.new(amount + amount_from(other), unit)
+  end
+
   def eql?(other, delta = 0.1)
-    converted = other.respond_to?(:to) ? other.to(unit).amount : other
-    (self.amount - converted).abs <= delta
+    (self.amount - amount_from(other)).abs <= delta
+  end
+
+  def ==(other)
+    eql?(other)
   end
 
   def to_s
     to_f.to_s
+  end
+
+  private
+
+  def amount_from(quantity)
+    quantity.respond_to?(:to) ? quantity.to(unit).amount : quantity
   end
 
   class UnitOfMeasure

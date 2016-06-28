@@ -16,6 +16,15 @@ class UserRecommendation
     recommended_sets > 0 ? recommended_sets : recommendation.sets
   end
 
+  def next_weight
+    last_weight = user.history_for(exercise).last_weight
+    if last_weight > 0
+      5.lbs + last_weight
+    else
+      45.lbs
+    end
+  end
+
   private
 
   def recommendation

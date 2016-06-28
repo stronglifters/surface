@@ -60,10 +60,6 @@ class User < ActiveRecord::Base
     TrainingHistory.new(self, exercise)
   end
 
-  def next_weight_for(exercise)
-    history_for(exercise).next_weight
-  end
-
   def begin_workout(routine, date, body_weight)
     matching_workouts = workouts.where(occurred_at: date)
     if matching_workouts.any?

@@ -27,7 +27,7 @@ class Program < ActiveRecord::Base
       ExerciseSet.new(
         exercise: exercise,
         target_repetitions: recommended_reps_for(user, exercise),
-        target_weight: user.next_weight_for(exercise)
+        target_weight: recommendation_for(user, exercise).next_weight
       )
     end
   end

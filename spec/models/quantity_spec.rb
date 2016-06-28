@@ -53,4 +53,30 @@ describe Quantity do
       expect(quantity).to_not eql(other)
     end
   end
+
+  describe "#+" do
+    it 'adds lbs to lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity + other).to eql(Quantity.new(270.0, :lbs))
+    end
+
+    it 'adds kgs to lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = Quantity.new(61.2, :kg)
+      expect(quantity + other).to eql(Quantity.new(270.0, :lbs))
+    end
+
+    it 'adds lbs to kgs' do
+      quantity = Quantity.new(61.2, :kg)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity + other).to eql(Quantity.new(122.4, :kg))
+    end
+
+    it 'adds a float to lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = 135.0
+      expect(quantity + other).to eql(Quantity.new(270.0, :lbs))
+    end
+  end
 end

@@ -227,4 +227,73 @@ describe User do
       expect(received_email.body).to eql(email.body)
     end
   end
+
+  describe "#next_workout_for" do
+    subject { create(:user) }
+    let(:routine) { create(:routine) }
+    let(:body_weight) { rand(300) }
+
+    it 'includes the body weight from the previous workout' do
+      create(:workout, user: subject, body_weight: body_weight)
+
+      workout = subject.next_workout_for(routine)
+      expect(workout.body_weight).to eql(body_weight)
+    end
+
+    it 'uses the correct routine' do
+      workout = subject.next_workout_for(routine)
+      expect(workout.routine).to eql(routine)
+    end
+
+    it 'prepares the correct number of sets' do
+      squat = create(:exercise)
+      routine.add_exercise(squat, sets: 3)
+      workout = subject.next_workout_for(routine)
+      expect(workout.exercise_sets.length).to eql(3)
+    end
+  end
+
+  describe "#next_routine" do
+    include_context "stronglifts_program"
+    subject { create(:user) }
+
+    it 'routines the next workout' do
+      create(:workout, routine: routine_a, user: subject)
+      expect(subject.next_routine).to eql(routine_b)
+    end
+
+    it 'returns the first routine in the program' do
+      expect(subject.next_routine).to eql(routine_a)
+    end
+  end
+
+  describe "#last_workout" do
+    include_context "stronglifts_program"
+    subject { create(:user) }
+
+    it 'returns the last workout' do
+      workout = create(:workout, user: subject, routine: routine_a)
+      expect(subject.last_workout).to eql(workout)
+    end
+
+    it 'returns the last workout that included a specific exercise' do
+      deadlift_workout = create(:workout, user: subject, routine: routine_b)
+      deadlift_workout.train(deadlift, 315.lbs, repetitions: 5)
+      bench_workout = create(:workout, user: subject, routine: routine_a)
+      bench_workout.train(bench_press, 195.lbs, repetitions: 5)
+
+      expect(subject.last_workout(deadlift)).to eql(deadlift_workout)
+    end
+
+    it 'returns nil when no workouts have been completed' do
+      expect(subject.last_workout).to be_nil
+    end
+
+    it 'returns nil when the exercise has not been performed' do
+      bench_workout = create(:workout, user: subject, routine: routine_a)
+      bench_workout.train(bench_press, 195.lbs, repetitions: 5)
+
+      expect(subject.last_workout(deadlift)).to be_nil
+    end
+  end
 end

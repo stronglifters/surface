@@ -106,11 +106,10 @@ describe Program do
             workout = create(:workout, user: user, routine: routine_a)
             5.times { |n| workout.train(squat, 105, repetitions: 5) }
 
-            sets = subject.prepare_sets_for(user, squat)
-            warmup_sets = sets.find_all { |x| x.warm_up? }
-            expect(warmup_sets.length).to eql(4)
-            expect(warmup_sets.at(3).target_weight.lbs).to eql(75.lbs)
-            expect(warmup_sets.at(3).target_repetitions).to eql(3)
+            warmup_sets = subject.prepare_sets_for(user, squat).find_all { |x| x.warm_up? }
+            expect(warmup_sets.length).to eql(3)
+            expect(warmup_sets.last.target_weight.lbs).to eql(75.lbs)
+            expect(warmup_sets.last.target_repetitions).to eql(3)
           end
         end
 
@@ -119,11 +118,10 @@ describe Program do
             workout = create(:workout, user: user, routine: routine_a)
             5.times { |n| workout.train(squat, 125, repetitions: 5) }
 
-            sets = subject.prepare_sets_for(user, squat)
-            warmup_sets = sets.find_all { |x| x.warm_up? }
-            expect(warmup_sets.length).to eql(5)
-            expect(warmup_sets.at(4).target_weight.lbs).to eql(85.lbs)
-            expect(warmup_sets.at(4).target_repetitions).to eql(3)
+            warmup_sets = subject.prepare_sets_for(user, squat).find_all { |x| x.warm_up? }
+            expect(warmup_sets.length).to eql(3)
+            expect(warmup_sets.last.target_weight.lbs).to eql(85.lbs)
+            expect(warmup_sets.last.target_repetitions).to eql(3)
           end
         end
 
@@ -132,11 +130,10 @@ describe Program do
             workout = create(:workout, user: user, routine: routine_a)
             5.times { |n| workout.train(squat, 135, repetitions: 5) }
 
-            sets = subject.prepare_sets_for(user, squat)
-            warmup_sets = sets.find_all { |x| x.warm_up? }
-            expect(warmup_sets.length).to eql(6)
-            expect(warmup_sets.at(5).target_weight.lbs).to eql(95.lbs)
-            expect(warmup_sets.at(5).target_repetitions).to eql(5)
+            warmup_sets = subject.prepare_sets_for(user, squat).find_all { |x| x.warm_up? }
+            expect(warmup_sets.length).to eql(4)
+            expect(warmup_sets.last.target_weight.lbs).to eql(115.lbs)
+            expect(warmup_sets.last.target_repetitions).to eql(3)
           end
         end
       end

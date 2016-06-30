@@ -9,19 +9,11 @@ class UserRecommendation
 
   def prepare_sets
     target_weight = next_weight
-    warm_up_sets = []
-    if target_weight >= 65.lbs
-      warm_up_sets << warm_up(45.lbs, 5)
-      warm_up_sets << warm_up(45.lbs, 5)
-    end
-    warm_up_sets << warm_up(65.lbs, 3) if target_weight >= 95.lbs
-    warm_up_sets << warm_up(75.lbs, 3) if target_weight >= 105.lbs
-    warm_up_sets << warm_up(85.lbs, 3) if target_weight >= 125.lbs
-    warm_up_sets << warm_up(95.lbs, 5) if target_weight >= 135.lbs
+    warm_up = WarmUp.calculate_for(exercise, target_weight)
     work_sets = recommended_sets.times.map do
       work_set(target_weight, repetitions)
     end
-    (warm_up_sets + work_sets).compact
+    (warm_up.sets + work_sets).compact
   end
 
   def repetitions

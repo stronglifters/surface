@@ -17,8 +17,8 @@
           <legend><%= exercise.name %></legend>
           <% sets.each.with_index(1) do |set, index| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
-              <fieldset name="<%= exercise.slug %>-<%= index %>">
-                <legend>Set</legend>
+              <fieldset name="<%= exercise.slug %>-<%= index %>" class="panel <%= set.work? ? "callout" : "" %>">
+                <legend><%= set.model_name.human %></legend>
                 <div class="row">
                   <div class="small-6 columns">
                     <%= s.label :target_repetitions %>

@@ -1,0 +1,2 @@
+class WorkSet < ExerciseSet
+end

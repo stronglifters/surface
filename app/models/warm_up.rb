@@ -1,5 +1,4 @@
 class WarmUp
-  DEADLIFT_INCREMENT_THRESHOLD_LB=220.0
   attr_reader :exercise, :sets, :target_weight
 
   def initialize(exercise, target_weight)
@@ -19,8 +18,7 @@ class WarmUp
   private
 
   def add_set(weight, repetitions)
-    @sets << ExerciseSet.new(
-      type: :warm_up,
+    @sets << WarmUpSet.new(
       exercise: exercise,
       target_weight: weight,
       target_repetitions: repetitions,
@@ -33,7 +31,7 @@ class WarmUp
     return add_set(135.0, 5) if (target_weight < 175.0)
     add_set(135.0, 5)
     return add_set(165.0, 5) if (target_weight < 200.0)
-    return add_set(175.0, 5) if (target_weight < DEADLIFT_INCREMENT_THRESHOLD_LB)
+    return add_set(175.0, 5) if (target_weight < 220.0)
     return add_set(185.0, 5) if (target_weight < 225.0)
     add_set(185.0, 5)
     return add_set(205.0, 5) if (target_weight < 240.0)
@@ -68,7 +66,7 @@ class WarmUp
     return add_set(135.0, 3) if (target_weight < 185.0)
     add_set(135.0, 5)
     return add_set(165.0, 3) if (target_weight < 200.0)
-    return add_set(175.0, 3) if (target_weight < DEADLIFT_INCREMENT_THRESHOLD_LB)
+    return add_set(175.0, 3) if (target_weight < 220.0)
     return add_set(185.0, 3) if (target_weight < 225.0)
     add_set(185.0, 5)
     return add_set(205.0, 2) if (target_weight < 240.0)
@@ -108,7 +106,7 @@ class WarmUp
     return add_set(135.0, 3) if (target_weight < 185.0)
     add_set(135.0, 5)
     return add_set(165.0, 3) if (target_weight < 200.0)
-    return add_set(175.0, 3) if (target_weight < DEADLIFT_INCREMENT_THRESHOLD_LB)
+    return add_set(175.0, 3) if (target_weight < 220.0)
     return add_set(185.0, 3) if (target_weight < 225.0)
     add_set(185.0, target_weight < 305.0 ? 3 : 5)
     return add_set(205.0, 2) if (target_weight < 240.0)

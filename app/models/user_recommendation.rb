@@ -21,18 +21,8 @@ class UserRecommendation
 
   private
 
-  def warm_up(weight, repetitions)
-    ExerciseSet.new(
-      type: :warm_up,
-      exercise: exercise,
-      target_weight: weight,
-      target_repetitions: repetitions,
-    )
-  end
-
   def work_set(target_weight, repetitions)
-    ExerciseSet.new(
-      type: :work,
+    WorkSet.new(
       exercise: exercise,
       target_repetitions: repetitions,
       target_weight: target_weight

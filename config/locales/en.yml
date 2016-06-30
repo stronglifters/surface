@@ -23,6 +23,8 @@ en:
   activerecord:
     models:
       profile: Profile
+      warm_up_set: Warm Up Set
+      work_set: Work Set
     attributes:
       profile:
         female: Female

@@ -21,6 +21,7 @@ class Workout < ActiveRecord::Base
         sets.where(exercise: exercise).at(set)
       else
         sets.build(
+          type: WorkSet.name,
           exercise: exercise,
           target_repetitions: program.recommendation_for(user, exercise).repetitions
         )

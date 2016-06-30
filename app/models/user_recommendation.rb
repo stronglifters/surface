@@ -17,6 +17,7 @@ class UserRecommendation
     warm_up_sets << warm_up(65.lbs, 3) if target_weight >= 95.lbs
     warm_up_sets << warm_up(75.lbs, 3) if target_weight >= 105.lbs
     warm_up_sets << warm_up(85.lbs, 3) if target_weight >= 125.lbs
+    warm_up_sets << warm_up(95.lbs, 5) if target_weight >= 135.lbs
     work_sets = recommended_sets.times.map do
       work_set(target_weight, repetitions)
     end

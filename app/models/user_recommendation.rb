@@ -9,11 +9,10 @@ class UserRecommendation
 
   def prepare_sets
     target_weight = next_weight
-    warm_up = WarmUp.calculate_for(exercise, target_weight)
     work_sets = recommended_sets.times.map do
       work_set(target_weight, repetitions)
     end
-    (warm_up.sets + work_sets).compact
+    (WarmUp.new(exercise, target_weight).sets + work_sets).compact
   end
 
   def repetitions

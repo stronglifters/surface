@@ -11,14 +11,22 @@ class UserRecommendation
     target_weight = next_weight
     warm_up_sets = []
     if target_weight >= 65.lbs
-       2.times.map do
+      2.times.map do
         warm_up_sets << ExerciseSet.new(
           type: :warm_up,
           exercise: exercise,
           target_weight: 45.lbs,
-          #target_repetitions: repetitions,
+          target_repetitions: 5,
         )
       end
+    end
+    if target_weight >= 95.lbs
+      warm_up_sets << ExerciseSet.new(
+        type: :warm_up,
+        exercise: exercise,
+        target_weight: 65.lbs,
+        target_repetitions: 3,
+      )
     end
     work_sets = sets.times.map do
       ExerciseSet.new(
@@ -30,7 +38,6 @@ class UserRecommendation
     end
     (warm_up_sets + work_sets).compact
   end
-
 
   def repetitions
     recommendation.repetitions

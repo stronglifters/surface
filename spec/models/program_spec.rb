@@ -21,10 +21,21 @@ describe Program do
     describe "squat" do
       let(:user) { build(:user) }
 
-      it 'returns 5 sets of 5 repetitions' do
+      it 'returns 5 work sets of 5 repetitions' do
         sets = subject.prepare_sets_for(user, squat)
-        expect(sets.length).to eql(5)
-        expect(sets.map(&:target_repetitions)).to match_array([5, 5, 5, 5, 5])
+        worksets = sets.find_all { |x| x.work? }
+        expect(worksets.length).to eql(5)
+        expect(worksets.map(&:target_repetitions)).to match_array([5, 5, 5, 5, 5])
+      end
+
+      it 'returns 3 sets of 5 repetitions when the last workout was 3x5' do
+        workout = create(:workout, user: user, routine: routine_a)
+        3.times { workout.train(squat, 45, repetitions: 5) }
+
+        sets = subject.prepare_sets_for(user, squat)
+        worksets = sets.find_all { |x| x.work? }
+        expect(worksets.length).to eql(3)
+        expect(worksets.map(&:target_repetitions)).to match_array([5, 5, 5])
       end
 
       it 'returns the correct exercise for each set' do
@@ -33,7 +44,7 @@ describe Program do
       end
 
       it 'returns 45 lbs for the first workout' do
-        sets = subject.prepare_sets_for(user, squat)
+        sets = subject.prepare_sets_for(user, squat).find_all { |x| x.work? }
         expect(sets.map(&:target_weight).uniq).to match_array([45.lbs])
       end
 
@@ -41,7 +52,7 @@ describe Program do
         workout = create(:workout, user: user, routine: routine_a)
         5.times { workout.train(squat, 45, repetitions: 5) }
 
-        sets = subject.prepare_sets_for(user, squat)
+        sets = subject.prepare_sets_for(user, squat).find_all { |x| x.work? }
         expect(sets.map(&:target_weight).uniq).to match_array([50.lbs])
       end
 
@@ -49,8 +60,42 @@ describe Program do
         workout = create(:workout, user: user, routine: routine_a)
         5.times { |n| workout.train(squat, 45, repetitions: n) }
 
-        sets = subject.prepare_sets_for(user, squat)
+        sets = subject.prepare_sets_for(user, squat).find_all { |x| x.work? }
         expect(sets.map(&:target_weight).uniq).to match_array([45.lbs])
+      end
+
+      describe "warmup" do
+        describe "when the workset is less than 65 lbs" do
+          it 'returns zero warmup sets' do
+            sets = subject.prepare_sets_for(user, squat)
+            warmup_sets = sets.find_all { |x| x.warm_up? }
+            expect(warmup_sets.length).to eql(0)
+          end
+        end
+
+        describe "when the work set is between 65 lbs an 95 lbs" do
+          it 'returns two warmup sets' do
+            workout = create(:workout, user: user, routine: routine_a)
+            5.times { |n| workout.train(squat, 65, repetitions: 5) }
+
+            sets = subject.prepare_sets_for(user, squat)
+            warmup_sets = sets.find_all { |x| x.warm_up? }
+            expect(warmup_sets.length).to eql(2)
+            expect(warmup_sets.at(0).target_weight.lbs).to eql(45.lbs)
+            expect(warmup_sets.at(1).target_weight.lbs).to eql(45.lbs)
+          end
+        end
+      end
+    end
+
+    describe "deadlift" do
+      let(:user) { build(:user) }
+
+      it 'returns 1 work set with 5 repetitions' do
+        sets = subject.prepare_sets_for(user, deadlift)
+        worksets = sets.find_all { |x| x.work? }
+        expect(worksets.length).to eql(1)
+        expect(worksets.map(&:target_repetitions)).to match_array([5])
       end
     end
   end

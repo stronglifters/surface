@@ -18,6 +18,18 @@ class Quantity
     Quantity.new(amount + amount_from(other), unit)
   end
 
+  def >(other)
+    self.amount > amount_from(other)
+  end
+
+  def >=(other)
+    self.>(other) || eql?(other)
+  end
+
+  def <(other)
+    self.amount < amount_from(other)
+  end
+
   def eql?(other, delta = 0.1)
     (self.amount - amount_from(other)).abs <= delta
   end

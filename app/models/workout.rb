@@ -22,7 +22,7 @@ class Workout < ActiveRecord::Base
       else
         sets.build(
           exercise: exercise,
-          target_repetitions: program.recommended_reps_for(user, exercise)
+          target_repetitions: program.recommendation_for(user, exercise).repetitions
         )
       end
     set.update!(actual_repetitions: repetitions, target_weight: target_weight)

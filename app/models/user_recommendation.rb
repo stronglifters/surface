@@ -7,9 +7,36 @@ class UserRecommendation
     @program = program
   end
 
+  def prepare_sets_for(user, exercise)
+    target_weight = next_weight
+    warm_up_sets = []
+    if target_weight >= 65.lbs
+       2.times.map do
+        warm_up_sets << ExerciseSet.new(
+          type: :warm_up,
+          exercise: exercise,
+          target_weight: 45.lbs,
+          #target_repetitions: repetitions,
+        )
+      end
+    end
+    work_sets = sets.times.map do
+      ExerciseSet.new(
+        type: :work,
+        exercise: exercise,
+        target_repetitions: repetitions,
+        target_weight: target_weight
+      )
+    end
+    (warm_up_sets + work_sets).compact
+  end
+
+
   def repetitions
     recommendation.repetitions
   end
+
+  private
 
   def sets
     recommended_sets = user.history_for(exercise).last_target_sets
@@ -24,8 +51,6 @@ class UserRecommendation
       45.lbs
     end
   end
-
-  private
 
   def recommendation
     @recommendation ||= program.recommendations.find_by(exercise: exercise)

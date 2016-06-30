@@ -79,4 +79,32 @@ describe Quantity do
       expect(quantity + other).to eql(Quantity.new(270.0, :lbs))
     end
   end
+
+  describe "#>" do
+    it 'compares lbs with lbs' do
+      quantity = Quantity.new(135.1, :lbs)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity).to be > other
+      expect(other).to_not be > quantity
+    end
+  end
+
+  describe "#>=" do
+    it 'compares lbs with lbs' do
+      quantity = Quantity.new(135.2, :lbs)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity).to be >= quantity
+      expect(quantity).to be >= other
+      expect(other).to_not be >= quantity
+    end
+  end
+
+  describe "#<" do
+    it 'compares lbs with lbs' do
+      quantity = Quantity.new(135.1, :lbs)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity).to_not be < other
+      expect(other).to be < quantity
+    end
+  end
 end

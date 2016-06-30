@@ -23,21 +23,8 @@ class Program < ActiveRecord::Base
   end
 
   def prepare_sets_for(user, exercise)
-    recommended_sets_for(user, exercise).times.map do
-      ExerciseSet.new(
-        exercise: exercise,
-        target_repetitions: recommended_reps_for(user, exercise),
-        target_weight: recommendation_for(user, exercise).next_weight
-      )
-    end
-  end
-
-  def recommended_sets_for(user, exercise)
-    recommendation_for(user, exercise).sets
-  end
-
-  def recommended_reps_for(user, exercise)
-    recommendation_for(user, exercise).repetitions
+    recommendation = recommendation_for(user, exercise)
+    recommendation.prepare_sets_for(user, exercise)
   end
 
   def recommendation_for(user, exercise)

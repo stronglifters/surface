@@ -59,6 +59,7 @@ describe WorkoutsController do
           exercise_id: squat.id,
           target_repetitions: 5,
           target_weight: 200,
+          type: 'WorkSet',
         }]
       }
 

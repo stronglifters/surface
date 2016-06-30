@@ -28,6 +28,7 @@ class WorkoutsController < ApplicationController
         :exercise_id,
         :target_repetitions,
         :target_weight,
+        :type,
       ]
     )
   end

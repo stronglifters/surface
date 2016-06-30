@@ -4,5 +4,11 @@ class ExerciseSet < ActiveRecord::Base
   scope :for, ->(exercise) { where(exercise: exercise).order(:created_at) }
   scope :successful, -> { where('actual_repetitions = target_repetitions') }
 
-  enum type: { work: WorkSet.name, warm_up: WarmUpSet.name }
+  def work?
+    type == WorkSet.name
+  end
+
+  def warm_up?
+    type == WarmUpSet.name
+  end
 end

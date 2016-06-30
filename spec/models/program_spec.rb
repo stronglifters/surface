@@ -100,6 +100,32 @@ describe Program do
             expect(warmup_sets.at(2).target_repetitions).to eql(3)
           end
         end
+
+        describe "when the work set is between 105 lbs and 125 lbs" do
+          it 'returns another warm up set' do
+            workout = create(:workout, user: user, routine: routine_a)
+            5.times { |n| workout.train(squat, 105, repetitions: 5) }
+
+            sets = subject.prepare_sets_for(user, squat)
+            warmup_sets = sets.find_all { |x| x.warm_up? }
+            expect(warmup_sets.length).to eql(4)
+            expect(warmup_sets.at(3).target_weight.lbs).to eql(75.lbs)
+            expect(warmup_sets.at(3).target_repetitions).to eql(3)
+          end
+        end
+
+        describe "when the work set is between 125 lbs and 135 lbs" do
+          it 'returns another warm up set' do
+            workout = create(:workout, user: user, routine: routine_a)
+            5.times { |n| workout.train(squat, 125, repetitions: 5) }
+
+            sets = subject.prepare_sets_for(user, squat)
+            warmup_sets = sets.find_all { |x| x.warm_up? }
+            expect(warmup_sets.length).to eql(5)
+            expect(warmup_sets.at(4).target_weight.lbs).to eql(85.lbs)
+            expect(warmup_sets.at(4).target_repetitions).to eql(3)
+          end
+        end
       end
     end
 

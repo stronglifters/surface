@@ -24,7 +24,7 @@ class Program < ActiveRecord::Base
 
   def prepare_sets_for(user, exercise)
     recommendation = recommendation_for(user, exercise)
-    recommendation.prepare_sets_for(user, exercise)
+    recommendation.prepare_sets
   end
 
   def recommendation_for(user, exercise)

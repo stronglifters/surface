@@ -1,20 +1,19 @@
 require 'rails_helper'
 
 describe WarmUp do
-  describe ".calculate_for" do
-
+  describe ".new" do
     describe "squat" do
       let(:squat) { build(:exercise, name: 'Squat') }
 
       (45..60).step(5).each do |target_weight|
         it "has zero warm up sets" do
-          expect(WarmUp.calculate_for(squat, target_weight).sets).to be_empty
+          expect(WarmUp.new(squat, target_weight).sets).to be_empty
         end
       end
 
       (65..400).step(5).each do |target_weight|
         it "calculates the warm up sets at #{target_weight} lbs" do
-          sets = WarmUp.calculate_for(squat, target_weight).sets
+          sets = WarmUp.new(squat, target_weight).sets
           expect(sets).to be_present
           if target_weight >= 350
             expect(sets.length).to eql(9)
@@ -42,13 +41,13 @@ describe WarmUp do
 
       (45..100).step(5).each do |target_weight|
         it "has zero warm up sets" do
-          expect(WarmUp.calculate_for(barbell_row, target_weight).sets).to be_empty
+          expect(WarmUp.new(barbell_row, target_weight).sets).to be_empty
         end
       end
 
       (105..400).step(5).each do |target_weight|
         it "calculates the warm up sets for #{target_weight} lbs" do
-          sets = WarmUp.calculate_for(barbell_row, target_weight).sets
+          sets = WarmUp.new(barbell_row, target_weight).sets
           expect(sets).to be_present
           if target_weight >= 350
             expect(sets.length).to eql(6)
@@ -72,13 +71,13 @@ describe WarmUp do
 
       (45..150).step(5).each do |target_weight|
         it "has zero warm up sets at #{target_weight} lbs" do
-          expect(WarmUp.calculate_for(deadlift, target_weight).sets).to be_empty
+          expect(WarmUp.new(deadlift, target_weight).sets).to be_empty
         end
       end
 
       (155..400).step(5).each do |target_weight|
         it "calculates the warm up sets for #{target_weight} lbs" do
-          sets = WarmUp.calculate_for(deadlift, target_weight).sets
+          sets = WarmUp.new(deadlift, target_weight).sets
           expect(sets).to be_present
           if target_weight >= 350
             expect(sets.length).to eql(6)

@@ -9,7 +9,7 @@
   {{#each workout.exercises}}
   <li class="accordion-navigation">
     <a href="#panel-{{id}}">{{name}}</a>
-    <div id="panel-{{id}}" class="content">
+    <div id="panel-{{id}}" class="content active">
       {{#each sets}}
       <div class="row">
         <div class="columns small-3">
@@ -24,7 +24,7 @@
         </div>
         <div class="columns small-4">
           <p class="text-center">
-            110 lb/side
+            {{weight_per_side}}
           </p>
         </div>
       </div>

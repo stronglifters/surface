@@ -18,6 +18,18 @@ class Quantity
     Quantity.new(amount + amount_from(other), unit)
   end
 
+  def -(other)
+    Quantity.new(amount - amount_from(other), unit)
+  end
+
+  def /(other)
+    Quantity.new(amount / amount_from(other), unit)
+  end
+
+  def *(other)
+    Quantity.new(amount * amount_from(other), unit)
+  end
+
   def >(other)
     self.amount > amount_from(other)
   end
@@ -28,6 +40,10 @@ class Quantity
 
   def <(other)
     self.amount < amount_from(other)
+  end
+
+  def coerce(other)
+    [self, other]
   end
 
   def eql?(other, delta = 0.1)

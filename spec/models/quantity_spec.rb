@@ -80,6 +80,72 @@ describe Quantity do
     end
   end
 
+  describe "#-" do
+    it 'subtracts lbs from lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity - other).to eql(Quantity.new(0.0, :lbs))
+    end
+
+    it 'subtracts kgs from lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = Quantity.new(61.2, :kg)
+      expect(quantity - other).to eql(Quantity.new(0.0, :lbs))
+    end
+
+    it 'subtracts lbs from kgs' do
+      quantity = Quantity.new(61.2, :kg)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity - other).to eql(Quantity.new(0.0, :kg))
+    end
+
+    it 'subtracts a float from lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = 135.0
+      expect(quantity - other).to eql(Quantity.new(0.0, :lbs))
+    end
+  end
+
+  describe "#/" do
+    it 'divides lbs from lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity / other).to eql(Quantity.new(1.0, :lbs))
+    end
+
+    it 'divides kgs from lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = Quantity.new(61.2, :kg)
+      expect(quantity / other).to eql(Quantity.new(1.0, :lbs))
+    end
+
+    it 'divides lbs from kgs' do
+      quantity = Quantity.new(61.2, :kg)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity / other).to eql(Quantity.new(1.0, :kg))
+    end
+
+    it 'divides a float from lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = 135.0
+      expect(quantity / other).to eql(Quantity.new(1.0, :lbs))
+    end
+  end
+
+  describe "#*" do
+    it 'multiples lbs with lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = Quantity.new(135.0, :lbs)
+      expect(quantity * other).to eql(Quantity.new(18_225.0, :lbs))
+    end
+
+    it 'multiples a float with lbs' do
+      quantity = Quantity.new(135.0, :lbs)
+      other = 135.0
+      expect(quantity * other).to eql(Quantity.new(18_225.0, :lbs))
+    end
+  end
+
   describe "#>" do
     it 'compares lbs with lbs' do
       quantity = Quantity.new(135.1, :lbs)

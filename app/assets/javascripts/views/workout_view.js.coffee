@@ -35,9 +35,6 @@ class Stronglifters.WorkoutView extends Ractive
     @clock.start()
 
   refreshStatus: (model, keypath) ->
-    if @get("#{keypath}.work")
-      @set("#{keypath}.type", "callout")
-
     if !model.started()
       @set("#{keypath}.status", "secondary")
       return

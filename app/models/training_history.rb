@@ -37,6 +37,6 @@ class TrainingHistory
   private
 
   def sets
-    user.sets.for(exercise)
+    user.sets.work.for(exercise)
   end
 end

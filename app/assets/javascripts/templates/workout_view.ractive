@@ -9,7 +9,7 @@
   {{#each workout.exercises}}
   <li class="accordion-navigation">
     <a href="#panel-{{id}}">{{name}}</a>
-    <div id="panel-{{id}}" class="content active">
+    <div id="panel-{{id}}" class="content">
       {{#each sets}}
       <div class="row">
         <div class="columns small-3">

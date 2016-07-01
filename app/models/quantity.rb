@@ -34,7 +34,7 @@ class Quantity
   end
 
   def >(other)
-    self.amount > amount_from(other)
+    amount > amount_from(other)
   end
 
   def >=(other)
@@ -42,7 +42,7 @@ class Quantity
   end
 
   def <(other)
-    self.amount < amount_from(other)
+    amount < amount_from(other)
   end
 
   def coerce(other)
@@ -50,7 +50,7 @@ class Quantity
   end
 
   def eql?(other, delta = 0.1)
-    (self.amount - amount_from(other)).abs <= delta
+    (amount - amount_from(other)).abs <= delta
   end
 
   def ==(other)

@@ -19,10 +19,11 @@ class Workout < ActiveRecord::Base
       if set.present? && sets.where(exercise: exercise).at(set).present?
         sets.where(exercise: exercise).at(set)
       else
+        recommendation = program.recommendation_for(user, exercise)
         sets.build(
           type: WorkSet.name,
           exercise: exercise,
-          target_repetitions: program.recommendation_for(user, exercise).repetitions
+          target_repetitions: recommendation.repetitions
         )
       end
     set.update!(actual_repetitions: repetitions, target_weight: target_weight)

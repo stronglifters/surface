@@ -40,7 +40,8 @@ class WorkoutsController < ApplicationController
   end
 
   def find_routine(routine_id)
-    current_program.routines.find_by(id: routine_id) || current_user.next_routine
+    current_program.routines.find_by(id: routine_id) ||
+      current_user.next_routine
   end
 
   def current_program

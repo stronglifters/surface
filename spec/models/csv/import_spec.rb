@@ -128,7 +128,7 @@ describe Csv::Import do
     end
 
     it "imports the correct number of sets" do
-      row = ["06/05/16", "", "B", "101.93", "225", "Squat", "125", "275", "5", "5", "5", "", "", "Overhead press", "57.5", "125", "5", "5", "5", "5", "5", "Deadlift", "127.5", "285", "5", "", "", "" , "", "", "", "", "", ""]
+      row = ["06/05/16", "", "B", "101.93", "225", "Squat", "125", "275", "5", "5", "5", "", "", "Overhead press", "57.5", "125", "5", "5", "5", "5", "5", "Deadlift", "127.5", "285", "5", "", "", "", "", "", "", "", "", ""]
 
       subject.import(row)
       workout = user.workouts.first

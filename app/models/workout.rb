@@ -10,7 +10,6 @@ class Workout < ActiveRecord::Base
 
   scope :recent, -> { order(occurred_at: :desc) }
 
-
   def body_weight
     Quantity.new(read_attribute(:body_weight), :lbs)
   end

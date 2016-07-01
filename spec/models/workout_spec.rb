@@ -31,14 +31,16 @@ describe Workout, type: :model do
       expect(result).to be_persisted
       expect(result.exercise).to eql(squat)
       expect(subject.progress_for(squat).to_sets).to eql([5, 3])
-      expect(subject.sets.at(0).exercise).to eql(squat)
-      expect(subject.sets.at(0).target_weight).to eql(target_weight.to_f)
-      expect(subject.sets.at(0).target_repetitions).to eql(5)
-      expect(subject.sets.at(0).actual_repetitions).to eql(5)
-      expect(subject.sets.at(1).exercise).to eql(squat)
-      expect(subject.sets.at(1).target_weight).to eql(target_weight.to_f)
-      expect(subject.sets.at(1).target_repetitions).to eql(5)
-      expect(subject.sets.at(1).actual_repetitions).to eql(3)
+      set = subject.sets.in_order.at(0)
+      expect(set.exercise).to eql(squat)
+      expect(set.target_weight).to eql(target_weight.to_f)
+      expect(set.target_repetitions).to eql(5)
+      expect(set.actual_repetitions).to eql(5)
+      set = subject.sets.in_order.at(1)
+      expect(set.exercise).to eql(squat)
+      expect(set.target_weight).to eql(target_weight.to_f)
+      expect(set.target_repetitions).to eql(5)
+      expect(set.actual_repetitions).to eql(3)
     end
 
     it "updates a completed exercise" do

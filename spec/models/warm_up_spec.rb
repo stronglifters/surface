@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe WarmUp do
   describe ".new" do
     describe "squat" do
-      let(:squat) { build(:exercise, name: 'Squat') }
+      let(:squat) { build(:exercise, name: "Squat") }
 
       (45..60).step(5).each do |target_weight|
         it "has zero warm up sets" do
@@ -37,7 +37,7 @@ describe WarmUp do
     end
 
     describe "barbell row" do
-      let(:barbell_row) { build(:exercise, name: 'Barbell Row') }
+      let(:barbell_row) { build(:exercise, name: "Barbell Row") }
 
       (45..100).step(5).each do |target_weight|
         it "has zero warm up sets" do
@@ -67,7 +67,7 @@ describe WarmUp do
     end
 
     describe "deadlift" do
-      let(:deadlift) { build(:exercise, name: 'Deadlift') }
+      let(:deadlift) { build(:exercise, name: "Deadlift") }
 
       (45..150).step(5).each do |target_weight|
         it "has zero warm up sets at #{target_weight} lbs" do

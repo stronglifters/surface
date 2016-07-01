@@ -10,7 +10,9 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    workout = current_user.workouts.create!(secure_params.merge!(occurred_at: DateTime.now))
+    workout = current_user.workouts.create!(
+      secure_params.merge!(occurred_at: DateTime.now)
+    )
     redirect_to edit_workout_path(workout)
   end
 

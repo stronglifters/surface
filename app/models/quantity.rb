@@ -7,7 +7,10 @@ class Quantity
   end
 
   def to(target_unit)
-    Quantity.new(UnitOfMeasure.for(target_unit).convert(amount, unit), target_unit)
+    Quantity.new(
+      UnitOfMeasure.for(target_unit).convert(amount, unit),
+      target_unit
+    )
   end
 
   def to_f

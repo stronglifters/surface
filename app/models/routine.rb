@@ -31,5 +31,6 @@ class Routine < ActiveRecord::Base
     exercises.each do |exercise|
       workout.exercise_sets << program.prepare_sets_for(user, exercise)
     end
+    workout
   end
 end

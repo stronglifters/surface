@@ -90,10 +90,9 @@ class User < ActiveRecord::Base
   end
 
   def next_workout_for(routine = next_routine)
-    last_body_weight = last_workout.try(:body_weight)
-    workouts.build(routine: routine, body_weight: last_body_weight.to(preferred_units)).tap do |workout|
-      routine.prepare_sets_for(self, workout)
-    end
+    last_body_weight = last_workout.try(:body_weight).to(preferred_units)
+    workout = workouts.build(routine: routine, body_weight: last_body_weight)
+    routine.prepare_sets_for(self, workout)
   end
 
   def last_workout(exercise = nil)

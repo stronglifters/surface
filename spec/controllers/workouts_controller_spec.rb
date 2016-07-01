@@ -51,7 +51,7 @@ describe WorkoutsController do
       expect(response).to redirect_to(edit_workout_path(user.workouts.last))
     end
 
-    it 'creates the workout with the selected exercises' do
+    it "creates the workout with the selected exercises" do
       post :create, workout: {
         routine_id: routine_b.id,
         body_weight: body_weight,
@@ -59,7 +59,7 @@ describe WorkoutsController do
           exercise_id: squat.id,
           target_repetitions: 5,
           target_weight: 200,
-          type: 'WorkSet',
+          type: "WorkSet",
         }]
       }
 

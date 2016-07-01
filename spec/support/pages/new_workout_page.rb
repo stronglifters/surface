@@ -7,11 +7,11 @@ class NewWorkoutPage < PageModel
 
   def change_body_weight(weight)
     within "#new_workout" do
-      fill_in 'workout_body_weight', with: weight
+      fill_in "workout_body_weight", with: weight
     end
   end
 
   def click_start
-    click_button 'Start'
+    click_button "Start"
   end
 end

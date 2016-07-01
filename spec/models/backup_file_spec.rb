@@ -22,10 +22,11 @@ describe BackupFile do
 
   describe "#process_later" do
     let(:program) { build(:program) }
+    let(:csv) { fixture_file("spreadsheet-stronglifts.csv") }
 
     it "creates a job to process later" do
       allow(UploadStrongliftsBackupJob).to receive(:perform_later)
-      subject = BackupFile.new(user, fixture_file("spreadsheet-stronglifts.csv"))
+      subject = BackupFile.new(user, csv)
       subject.process_later(program)
       expect(UploadStrongliftsBackupJob).to have_received(:perform_later)
     end

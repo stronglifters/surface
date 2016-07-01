@@ -24,7 +24,7 @@ describe Workout, type: :model do
       expect(subject.sets.at(0).actual_repetitions).to eql(5)
     end
 
-    it 'records the next set' do
+    it "records the next set" do
       subject.train(squat, target_weight, repetitions: 5)
       result = subject.train(squat, target_weight, repetitions: 3)
 

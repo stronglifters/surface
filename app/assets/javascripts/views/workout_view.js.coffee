@@ -29,7 +29,8 @@ class Stronglifters.WorkoutView extends Ractive
     model.save()
 
     if model.successful()
-      @displayMessage("If it was easy break for 1:30, otherwise rest for 3:00.", 'radius')
+      message = "If it was easy break for 1:30, otherwise rest for 3:00."
+      @displayMessage(message, 'radius')
     else
       @displayMessage("Take a 5:00 break.", 'alert')
     @clock.start()

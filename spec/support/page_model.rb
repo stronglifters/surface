@@ -34,6 +34,17 @@ class PageModel
     Nokogiri::HTML(page.html)
   end
 
+  def record_failure(dir = Rails.root.join("tmp", "screenshots"))
+    puts pretty_print
+    FileUtils.mkdir_p(dir)
+    now = DateTime.now
+    path = File.join(dir, "#{now.to_s.parameterize}.png")
+    puts "saving screenshot to: #{path}"
+    page.save_screenshot(path, full: true)
+  rescue => error
+    puts error.inspect
+  end
+
   private
 
   def translate(key)

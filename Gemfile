@@ -53,14 +53,12 @@ source "https://rubygems.org" do
   gem "sass-rails", "~> 5.0"
   gem "scale"
   gem "sdoc", "~> 0.4", group: :doc
-  gem "sequel"
   gem "sidekiq"
   gem "spring", group: [:development, :test]
   gem "spring-commands-cucumber", group: :test
   gem "spring-commands-rspec", group: :test
   gem "spring-commands-teaspoon", group: :test
   gem "sprockets-rails", "2.3.3"
-  gem "sqlite3"
   gem "stackprof", group: :development
   gem "teaspoon-jasmine", group: :test
   gem "therubyracer", platforms: :ruby
@@ -73,7 +71,10 @@ source "https://rubygems.org" do
 end
 
 source "https://rails-assets.org" do
+  gem "rails-assets-backbone"
   gem "rails-assets-clipboard"
   gem "rails-assets-lodash"
+  gem "rails-assets-moment"
   gem "rails-assets-ractive"
+  gem "rails-assets-ractive-backbone"
 end

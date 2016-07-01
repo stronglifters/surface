@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   include Flippable
   has_secure_password
-  has_many :training_sessions
-  has_many :exercise_sessions, through: :training_sessions
+  has_many :workouts
+  has_many :exercise_sets, through: :workouts
   has_many :user_sessions, dependent: :destroy
   has_one :profile
   has_many :received_emails
@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   after_create :create_profile!
   before_validation :lowercase_account_fields
+  alias_method :sets, :exercise_sets
 
   def time_zone
     @time_zone ||= ActiveSupport::TimeZone[profile.read_attribute(:time_zone)]
@@ -23,8 +24,8 @@ class User < ActiveRecord::Base
     "Etc/UTC" == time_zone.name
   end
 
-  def first_training_session
-    training_sessions.order(occurred_at: :asc).first
+  def first_workout
+    workouts.order(occurred_at: :asc).first
   end
 
   def gravatar_id
@@ -59,21 +60,55 @@ class User < ActiveRecord::Base
     TrainingHistory.new(self, exercise)
   end
 
-  def begin_workout(workout, date, body_weight)
-    matching_workouts = training_sessions.where(occurred_at: date)
+  def begin_workout(routine, date, body_weight)
+    matching_workouts = workouts.where(occurred_at: date)
     if matching_workouts.any?
       matching_workouts.first
     else
-      training_sessions.create!(
-        workout: workout,
+      workouts.create!(
+        routine: routine,
         occurred_at: date,
         body_weight: body_weight.to_f
       )
     end
   end
 
-  def google_drive
-    GoogleDrive.new(self)
+  def last_routine
+    if workouts.any?
+      last_workout.routine
+    else
+      current_program.routines.order(name: :desc).first
+    end
+  end
+
+  def next_routine
+    last_routine.next_routine
+  end
+
+  def preferred_units
+    :lbs
+  end
+
+  def next_workout_for(routine = next_routine)
+    last_body_weight = last_workout.try(:body_weight).to(preferred_units)
+    workout = workouts.build(routine: routine, body_weight: last_body_weight)
+    routine.prepare_sets_for(self, workout)
+  end
+
+  def last_workout(exercise = nil)
+    if exercise.present?
+      workouts.
+        joins(:exercises).
+        where(exercises: { id: exercise.id }).
+        order(:created_at).
+        last
+    else
+      workouts.order(:created_at).last
+    end
+  end
+
+  def current_program
+    Program.stronglifts
   end
 
   class << self

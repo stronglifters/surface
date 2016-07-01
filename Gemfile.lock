@@ -276,9 +276,14 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.6)
       sprockets-rails
+    rails-assets-backbone (1.3.3)
+      rails-assets-underscore (>= 1.8.3)
     rails-assets-clipboard (1.5.10)
     rails-assets-lodash (4.13.1)
+    rails-assets-moment (2.13.0)
     rails-assets-ractive (0.7.3)
+    rails-assets-ractive-backbone (0.3.0)
+    rails-assets-underscore (1.8.3)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -348,7 +353,6 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    sequel (4.33.0)
     sexp_processor (4.7.0)
     sidekiq (4.1.1)
       concurrent-ruby (~> 1.0)
@@ -377,7 +381,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.11)
     sshkit (1.10.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -480,9 +483,12 @@ DEPENDENCIES
   rack_session_access!
   ractive-rails!
   rails (~> 4.2)!
+  rails-assets-backbone!
   rails-assets-clipboard!
   rails-assets-lodash!
+  rails-assets-moment!
   rails-assets-ractive!
+  rails-assets-ractive-backbone!
   rails-erd!
   rails-i18n (~> 4.0.0)!
   rails_12factor!
@@ -491,14 +497,12 @@ DEPENDENCIES
   sass-rails (~> 5.0)!
   scale!
   sdoc (~> 0.4)!
-  sequel!
   sidekiq!
   spring!
   spring-commands-cucumber!
   spring-commands-rspec!
   spring-commands-teaspoon!
   sprockets-rails (= 2.3.3)!
-  sqlite3!
   stackprof!
   teaspoon-jasmine!
   therubyracer!

@@ -2,12 +2,18 @@ FactoryGirl.define do
   factory :exercise do
     name { FFaker::Internet.user_name }
   end
+  factory :exercise_set do
+    association :exercise
+    association :workout
+    target_repetitions { rand(12) }
+    target_weight { rand(400) }
+  end
   factory :program do
     name { FFaker::Internet.user_name }
   end
-  factory :training_session do
+  factory :workout do
     association :user
-    association :workout
+    association :routine
     occurred_at { DateTime.now }
     body_weight { rand(250) }
   end
@@ -18,7 +24,7 @@ FactoryGirl.define do
     password_confirmation "password"
     terms_and_conditions "1"
   end
-  factory :workout do
+  factory :routine do
     association :program
     name { FFaker::Internet.user_name }
   end

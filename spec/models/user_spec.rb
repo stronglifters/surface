@@ -110,60 +110,49 @@ describe User do
   describe "#personal_record_for" do
     include_context "stronglifts_program"
     let(:user) { create(:user) }
-    let(:exercise_workout) { workout_a.exercise_workouts.first }
-    let(:exercise) { exercise_workout.exercise }
+    let(:recommendation) { routine_a.recommendations.find_by(exercise: squat) }
 
     before :each do
-      training_session = user.training_sessions.create!(
-        workout: workout_a,
+      workout = user.workouts.create!(
+        routine: routine_a,
         occurred_at: DateTime.now.utc
       )
-      1.upto(5) do |n|
-        training_session.exercise_sessions.create!(
-          target_weight: (200 + n),
-          exercise_workout: exercise_workout,
-          sets: [5, 5, 5, 5, 5]
-        )
-      end
+      workout.train(squat, 201, repetitions: recommendation.repetitions)
+      workout.train(squat, 202, repetitions: recommendation.repetitions)
+      workout.train(squat, 210, repetitions: recommendation.repetitions - 1)
+      workout.train(squat, 204, repetitions: recommendation.repetitions)
+      workout.train(squat, 205, repetitions: recommendation.repetitions)
     end
 
     it "returns the users maximum amount of weight lifted" do
-      expect(user.personal_record_for(exercise)).to eql(205.0)
+      expect(user.personal_record_for(squat)).to eql(205.0)
     end
   end
 
   describe "#begin_workout" do
     subject { create(:user) }
-    let(:workout) { create(:workout) }
+    let(:routine) { create(:routine) }
     let(:today) { DateTime.now }
 
     it "creates a new training session" do
-      result = subject.begin_workout(workout, today, 200)
+      result = subject.begin_workout(routine, today, 200)
       expect(result).to be_persisted
-      expect(subject.training_sessions.count).to eql(1)
-      expect(subject.training_sessions.first).to eql(result)
-      expect(result.workout).to eql(workout)
+      expect(subject.workouts.count).to eql(1)
+      expect(subject.workouts.first).to eql(result)
+      expect(result.routine).to eql(routine)
       expect(result.occurred_at).to eql(today.utc)
-      expect(result.body_weight).to eql(200.0)
+      expect(result.body_weight).to eql(200.lbs)
     end
 
     it "returns the existing workout for that day" do
-      result = subject.begin_workout(workout, today, 200)
-      expect(subject.begin_workout(workout, today, 200)).to eql(result)
+      result = subject.begin_workout(routine, today, 200)
+      expect(subject.begin_workout(routine, today, 200)).to eql(result)
     end
 
     it "returns different sessions for different days" do
-      todays_result = subject.begin_workout(workout, today, 200)
-      tomorrows_result = subject.begin_workout(workout, DateTime.tomorrow, 200)
+      todays_result = subject.begin_workout(routine, today, 200)
+      tomorrows_result = subject.begin_workout(routine, DateTime.tomorrow, 200)
       expect(todays_result).to_not eql(tomorrows_result)
-    end
-  end
-
-  describe "#google_drive" do
-    it "returns the users google drive" do
-      result = subject.google_drive
-      expect(result).to be_instance_of(GoogleDrive)
-      expect(result.user).to eql(subject)
     end
   end
 
@@ -172,13 +161,17 @@ describe User do
     subject { create(:user) }
 
     it "removes all the associations" do
-      training_session = subject.begin_workout(workout_a, Date.today, 200)
-      training_session.train(squat, 200, [5, 5, 5, 5, 5])
+      workout = subject.begin_workout(routine_a, Date.today, 200)
+      workout.train(squat, 200, repetitions: 5)
+      workout.train(squat, 200, repetitions: 5)
+      workout.train(squat, 200, repetitions: 5)
+      workout.train(squat, 200, repetitions: 5)
+      workout.train(squat, 200, repetitions: 5)
 
-      subject.training_sessions.destroy_all
+      subject.workouts.destroy_all
 
-      expect(TrainingSession.all).to be_empty
-      expect(ExerciseSession.all).to be_empty
+      expect(Workout.all).to be_empty
+      expect(ExerciseSet.all).to be_empty
     end
   end
 
@@ -231,6 +224,75 @@ describe User do
       expect(received_email.from.symbolize_keys).to eql(email.from)
       expect(received_email.subject).to eql(email.subject)
       expect(received_email.body).to eql(email.body)
+    end
+  end
+
+  describe "#next_workout_for" do
+    subject { create(:user) }
+    let(:routine) { create(:routine) }
+    let(:body_weight) { rand(300) }
+
+    it "includes the body weight from the previous workout" do
+      create(:workout, user: subject, body_weight: body_weight)
+
+      workout = subject.next_workout_for(routine)
+      expect(workout.body_weight).to eql(body_weight)
+    end
+
+    it "uses the correct routine" do
+      workout = subject.next_workout_for(routine)
+      expect(workout.routine).to eql(routine)
+    end
+
+    it "prepares the correct number of sets" do
+      squat = create(:exercise)
+      routine.add_exercise(squat, sets: 3)
+      workout = subject.next_workout_for(routine)
+      expect(workout.exercise_sets.length).to eql(3)
+    end
+  end
+
+  describe "#next_routine" do
+    include_context "stronglifts_program"
+    subject { create(:user) }
+
+    it "routines the next workout" do
+      create(:workout, routine: routine_a, user: subject)
+      expect(subject.next_routine).to eql(routine_b)
+    end
+
+    it "returns the first routine in the program" do
+      expect(subject.next_routine).to eql(routine_a)
+    end
+  end
+
+  describe "#last_workout" do
+    include_context "stronglifts_program"
+    subject { create(:user) }
+
+    it "returns the last workout" do
+      workout = create(:workout, user: subject, routine: routine_a)
+      expect(subject.last_workout).to eql(workout)
+    end
+
+    it "returns the last workout that included a specific exercise" do
+      deadlift_workout = create(:workout, user: subject, routine: routine_b)
+      deadlift_workout.train(deadlift, 315.lbs, repetitions: 5)
+      bench_workout = create(:workout, user: subject, routine: routine_a)
+      bench_workout.train(bench_press, 195.lbs, repetitions: 5)
+
+      expect(subject.last_workout(deadlift)).to eql(deadlift_workout)
+    end
+
+    it "returns nil when no workouts have been completed" do
+      expect(subject.last_workout).to be_nil
+    end
+
+    it "returns nil when the exercise has not been performed" do
+      bench_workout = create(:workout, user: subject, routine: routine_a)
+      bench_workout.train(bench_press, 195.lbs, repetitions: 5)
+
+      expect(subject.last_workout(deadlift)).to be_nil
     end
   end
 end

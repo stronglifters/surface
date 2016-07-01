@@ -11,29 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528140323) do
+ActiveRecord::Schema.define(version: 20160630154702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "exercise_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "training_session_id",              null: false
-    t.uuid     "exercise_workout_id",              null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.text     "sets",                default: [],              array: true
-    t.float    "target_weight"
+  create_table "exercise_sets", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer  "target_repetitions", null: false
+    t.integer  "actual_repetitions"
+    t.float    "target_weight",      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.uuid     "exercise_id",        null: false
+    t.uuid     "workout_id"
+    t.string   "type",               null: false
   end
 
-  create_table "exercise_workouts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "exercise_id", null: false
-    t.uuid     "workout_id",  null: false
-    t.integer  "sets",        null: false
-    t.integer  "repetitions", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
+  add_index "exercise_sets", ["exercise_id", "workout_id"], name: "index_exercise_sets_on_exercise_id_and_workout_id", using: :btree
+  add_index "exercise_sets", ["exercise_id"], name: "index_exercise_sets_on_exercise_id", using: :btree
 
   create_table "exercises", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name",       null: false
@@ -100,16 +96,23 @@ ActiveRecord::Schema.define(version: 20160528140323) do
 
   add_index "received_emails", ["user_id"], name: "index_received_emails_on_user_id", using: :btree
 
-  create_table "training_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "user_id",     null: false
+  create_table "recommendations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "exercise_id", null: false
+    t.uuid     "routine_id",  null: false
+    t.integer  "sets",        null: false
+    t.integer  "repetitions", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.uuid     "workout_id",  null: false
-    t.datetime "occurred_at", null: false
-    t.float    "body_weight"
   end
 
-  add_index "training_sessions", ["user_id"], name: "index_training_sessions_on_user_id", using: :btree
+  create_table "routines", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "program_id", null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "routines", ["program_id"], name: "index_routines_on_program_id", using: :btree
 
   create_table "user_sessions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "user_id",     null: false
@@ -131,12 +134,20 @@ ActiveRecord::Schema.define(version: 20160528140323) do
     t.datetime "updated_at",      null: false
   end
 
+  add_index "users", ["username", "email"], name: "index_users_on_username_and_email", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
+
   create_table "workouts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.uuid     "program_id", null: false
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.uuid     "user_id",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.uuid     "routine_id",  null: false
+    t.datetime "occurred_at", null: false
+    t.float    "body_weight"
   end
+
+  add_index "workouts", ["routine_id"], name: "index_workouts_on_routine_id", using: :btree
+  add_index "workouts", ["user_id"], name: "index_workouts_on_user_id", using: :btree
 
   add_foreign_key "profiles", "gyms"
   add_foreign_key "received_emails", "users"

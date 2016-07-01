@@ -7,12 +7,12 @@ CodeClimate::TestReporter.start
 require "spec_helper"
 require File.expand_path("../../config/environment", __FILE__)
 require "rspec/rails"
+# Add additional requires below this line. Rails is not loaded until this point!
 require "capybara/poltergeist"
 require "rack_session_access/capybara"
 require "sidekiq/testing"
 
 Sidekiq::Testing.inline!
-# Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -52,12 +52,14 @@ RSpec.configure do |config|
   config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
     page.driver.browser.url_blacklist = [
-      "http://apis.google.com",
+      "https://apis.google.com",
       "http://fonts.googleapis.com",
-      "http://www.google.com",
+      "https://www.google.com",
       "https://accounts.google.com",
       "https://maps.google.com",
+      "https://s.ytimg.com",
       "https://secure.gravatar.com",
+      "https://www.youtube-nocookie.com",
     ]
   end
 
@@ -71,7 +73,7 @@ RSpec.configure do |config|
 
   config.after(:each) do |example|
     if example.metadata[:type] == :feature && example.exception.present?
-      puts subject.pretty_print
+      subject.record_failure
     end
   end
 end

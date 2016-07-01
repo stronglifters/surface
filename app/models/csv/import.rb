@@ -14,7 +14,7 @@ class Csv::Import
 
   def import_from(directory)
     ActiveRecord::Base.transaction do
-      ::CSV.foreach(database_file(directory)).drop(1).each do |row|
+      csv_rows_from(database_file(directory)) do |row|
         import(row)
       end
     end
@@ -23,20 +23,24 @@ class Csv::Import
   def import(row)
     workout_row = Csv::Workout.map_from(row, user)
 
-    workout = program.workouts.find_by(name: workout_row.workout)
-    training_session = user.begin_workout(
-      workout,
+    routine = program.routines.find_by(name: workout_row.workout)
+    workout = user.begin_workout(
+      routine,
       workout_row.date,
       workout_row.body_weight_lb
     )
-    workout.exercises.each do |exercise|
+    routine.exercises.each do |exercise|
       exercise_row = workout_row.find(exercise)
       next if exercise_row.nil?
-      training_session.train(
-        exercise,
-        exercise_row.weight_lb,
-        exercise_row.sets
-      )
+      exercise_row.sets.compact.each_with_index do |completed_reps, index|
+        next if completed_reps.blank?
+        workout.train(
+          exercise,
+          exercise_row.weight_lb,
+          repetitions: completed_reps,
+          set: index
+        )
+      end
     end
   end
 
@@ -44,5 +48,15 @@ class Csv::Import
 
   def database_file(dir)
     Dir.glob("#{dir}/*csv*").first
+  end
+
+  def csv_rows_from(file)
+    previous = nil
+    ::CSV.foreach(file).drop(1).each do |row|
+      duplicate = previous.present? && row == previous
+      next if duplicate
+      yield row
+      previous = row
+    end
   end
 end

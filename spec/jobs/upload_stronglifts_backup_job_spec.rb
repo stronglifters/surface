@@ -5,30 +5,6 @@ describe UploadStrongliftsBackupJob, type: :job do
   let(:user) { create(:user) }
 
   describe "#perform" do
-    context "android backup" do
-      let(:backup_file) do
-        Rails.root.join("spec", "fixtures", "backup.android.stronglifts").to_s
-      end
-
-      it "adds each workout to the list of training sessions for the user" do
-        subject.perform(user, backup_file, program)
-
-        expect(user.training_sessions.count).to eql(31)
-      end
-    end
-
-    context "ios backup" do
-      let(:backup_file) do
-        Rails.root.join("spec", "fixtures", "backup.ios.stronglifts").to_s
-      end
-
-      it "adds each workout to the list of training sessions for the user" do
-        subject.perform(user, backup_file, program)
-
-        expect(user.training_sessions.count).to eql(9)
-      end
-    end
-
     context "csv export" do
       let(:backup_file) do
         Rails.root.join("spec", "fixtures", "spreadsheet-stronglifts.csv").to_s
@@ -37,7 +13,7 @@ describe UploadStrongliftsBackupJob, type: :job do
       it "adds each workout to the list of training sessions for the user" do
         subject.perform(user, backup_file, program)
 
-        expect(user.training_sessions.count).to eql(168)
+        expect(user.workouts.count).to eql(168)
       end
     end
 

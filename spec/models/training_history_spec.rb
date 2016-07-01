@@ -11,14 +11,18 @@ describe TrainingHistory do
     let(:body_weight) { 210 }
 
     before :each do
-      session = user.begin_workout(workout_a, date, body_weight)
-      session.train(squat, target_weight, [5, 5, 5, 5, 5])
+      session = user.begin_workout(routine_a, date, body_weight)
+      5.times do
+        session.train(squat, target_weight, repetitions: 5)
+        session.train(bench_press, target_weight + 10, repetitions: 5)
+      end
     end
 
     it "returns the history in the format required for the chart" do
       result = subject.to_line_chart
       expect(result).to_not be_nil
       expect(result.keys.first.to_i).to eql(date.to_i)
+      expect(result.keys.count).to eql(1)
       expect(result.values.first).to eql(target_weight.to_f)
     end
   end
@@ -32,8 +36,10 @@ describe TrainingHistory do
 
     describe "when the exercise has been performed at least once" do
       it "returns true" do
-        session = user.begin_workout(workout_a, DateTime.now, 225)
-        session.train(squat, 310, [5, 5, 5])
+        session = user.begin_workout(routine_a, DateTime.now, 225)
+        3.times do
+          session.train(squat, 310, repetitions: 5)
+        end
         expect(subject.completed_any?).to be_truthy
       end
     end

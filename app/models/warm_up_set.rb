@@ -1,0 +1,2 @@
+class WarmUpSet < ExerciseSet
+end

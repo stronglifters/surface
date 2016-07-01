@@ -12,11 +12,14 @@
 //
 //= require clipboard
 //= require lodash
+//= require moment
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
 //= require ractive
+//= require backbone
+//= require ractive-backbone
 //= require_self
 //= require_tree .
 //= require turbolinks

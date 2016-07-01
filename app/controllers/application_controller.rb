@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  helper_method :feature_available?
+  helper_method :feature_enabled?
 
-  def feature_available?(feature)
+  def feature_enabled?(feature)
     return true if Rails.env.test?
     $flipper[feature.to_sym].enabled?(current_user)
   end

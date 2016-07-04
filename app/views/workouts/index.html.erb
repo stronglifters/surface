@@ -17,11 +17,10 @@
             </p>
           </a>
           <div id="panel-<%= workout.id %>" class="content">
-            <% workout.exercises.order(:created_at).uniq.each do |exercise| %>
-              <% progress = workout.progress_for(exercise) %>
+            <% workout.each_exercise do |exercise| %>
               <p class="text-center">
               <strong><%= exercise.name %></strong>
-              <%= progress.to_sets.join("/") %> @ <%= progress.max_weight %> lbs
+              <%= workout.progress_for(exercise).status %>
               </p>
             <% end %>
           </div>

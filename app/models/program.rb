@@ -1,7 +1,7 @@
-class Program < ActiveRecord::Base
+class Program < ApplicationRecord
   STRONG_LIFTS = "StrongLifts 5×5"
   has_many :exercises, through: :routines
-  has_many :routines
+  has_many :routines, inverse_of: :program
   has_many :recommendations, through: :routines
 
   before_save do

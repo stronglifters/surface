@@ -1,4 +1,4 @@
-class ExerciseSet < ActiveRecord::Base
+class ExerciseSet < ApplicationRecord
   belongs_to :exercise
   belongs_to :workout
   scope :for, ->(exercise) { where(exercise: exercise).in_order }

@@ -18,11 +18,13 @@ describe RegistrationsController do
 
       before :each do
         allow(UserMailer).to receive(:registration_email).and_return(mailer)
-        post :create, user: {
-          username: username,
-          password: password,
-          email: email,
-          terms_and_conditions: "1"
+        post :create, params: {
+          user: {
+            username: username,
+            password: password,
+            email: email,
+            terms_and_conditions: "1"
+          }
         }
       end
 
@@ -59,11 +61,13 @@ describe RegistrationsController do
 
     context "when the parameters provided are invalid" do
       before :each do
-        post :create, user: {
-          username: "",
-          password: password,
-          email: email,
-          terms_and_conditions: "1"
+        post :create, params: {
+          user: {
+            username: "",
+            password: password,
+            email: email,
+            terms_and_conditions: "1"
+          }
         }
       end
 

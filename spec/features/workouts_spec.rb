@@ -59,19 +59,19 @@ feature "Workouts", type: :feature do
     end
 
     it "saves the successful set" do
-      first_squat_set = workout.sets.for(squat).at(0)
+      first_squat_set = workout.sets.for(squat).to_a.at(0)
       subject.complete(set: first_squat_set)
       expect(first_squat_set.reload.actual_repetitions).to eql(5)
     end
 
     it "saves the failed set" do
-      second_squat_set = workout.sets.for(squat).at(1)
+      second_squat_set = workout.sets.for(squat).to_a.at(1)
       subject.complete(set: second_squat_set, repetitions: 4)
       expect(second_squat_set.reload.actual_repetitions).to eql(4)
     end
 
     it "does not change an incomplete set" do
-      third_squat_set = workout.sets.for(squat).at(2)
+      third_squat_set = workout.sets.for(squat).to_a.at(2)
       expect(third_squat_set.reload.actual_repetitions).to be_nil
     end
   end

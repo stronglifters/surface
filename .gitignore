@@ -22,3 +22,6 @@ pkg
 public/assets
 erd.pdf
 db/data
+
+# Ignore Byebug command history file.
+.byebug_history

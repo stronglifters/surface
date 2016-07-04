@@ -1,4 +1,4 @@
-class Gym < ActiveRecord::Base
+class Gym < ApplicationRecord
   validates_presence_of :name
   has_one :location, as: :locatable, dependent: :destroy
   accepts_nested_attributes_for :location

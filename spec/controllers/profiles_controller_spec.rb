@@ -13,14 +13,14 @@ describe ProfilesController do
       let(:other_user) { create(:user) }
 
       it "loads the user's profile" do
-        get :show, id: user.to_param
+        get :show, params: { id: user.to_param }
         expect(assigns(:user)).to eql(user)
         expect(assigns(:profile)).to eql(user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
 
       it "loads the other user's profile" do
-        get :show, id: other_user.to_param
+        get :show, params: { id: other_user.to_param }
         expect(assigns(:user)).to eql(other_user)
         expect(assigns(:profile)).to eql(other_user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
@@ -31,13 +31,13 @@ describe ProfilesController do
       let(:other_user) { create(:user) }
 
       it "loads the user's profile into an edit view" do
-        get :edit, id: user.to_param
+        get :edit, params: { id: user.to_param }
         expect(assigns(:profile)).to eql(user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
 
       it "will not load the other user's profile into an edit view" do
-        get :edit, id: other_user.to_param
+        get :edit, params: { id: other_user.to_param }
         expect(assigns(:profile)).to eql(user.profile)
         expect(assigns(:program)).to eql(Program.stronglifts)
       end
@@ -45,7 +45,9 @@ describe ProfilesController do
 
     describe "#update" do
       it "updates the user profile" do
-        patch :update, id: user.to_param, profile: { gender: "male" }
+        patch :update, params: {
+          id: user.to_param, profile: { gender: "male" }
+        }
         user.reload
         expect(user.profile.male?).to be_truthy
         expect(response).to redirect_to(profile_path(user.profile))
@@ -54,7 +56,9 @@ describe ProfilesController do
       it 'saves the users home gym' do
         gym = create(:gym)
 
-        patch :update, id: user.to_param, profile: { gym_id: gym.id }
+        patch :update, params: {
+          id: user.to_param, profile: { gym_id: gym.id }
+        }
 
         expect(user.reload.profile.gym).to eql(gym)
       end
@@ -67,7 +71,7 @@ describe ProfilesController do
 
     describe "#show" do
       it "loads the user's profile" do
-        get :show, id: user.to_param
+        get :show, params: { id: user.to_param }
         expect(assigns(:user)).to be_nil
         expect(assigns(:program)).to be_nil
       end
@@ -75,7 +79,7 @@ describe ProfilesController do
 
     describe "#edit" do
       it "loads the user's profile into an edit view" do
-        get :edit, id: user.to_param
+        get :edit, params: { id: user.to_param }
         expect(assigns(:user)).to be_nil
         expect(assigns(:program)).to be_nil
       end

@@ -1,4 +1,4 @@
-class UserSession < ActiveRecord::Base
+class UserSession < ApplicationRecord
   has_one :location, as: :locatable
   belongs_to :user
   scope :active, -> do

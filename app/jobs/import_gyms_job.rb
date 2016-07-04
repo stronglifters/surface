@@ -1,4 +1,4 @@
-class ImportGymsJob < ActiveJob::Base
+class ImportGymsJob < ApplicationJob
   queue_as :default
 
   def perform(location)

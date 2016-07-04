@@ -21,7 +21,7 @@ describe GymsController do
     end
 
     it "returns matching results" do
-      get :index, q: "sait"
+      get :index, params: { q: "sait" }
 
       expect(assigns(:gyms)).to match_array([sait])
       expect(response).to be_ok
@@ -32,7 +32,7 @@ describe GymsController do
       yelp = double
       allow(Search).to receive(:yelp).and_return(yelp)
       allow(yelp).to receive(:for).and_return(Kaminari.paginate_array([gym]))
-      get :index, q: "sait", source: "yelp"
+      get :index, params: { q: "sait", source: "yelp" }
 
       expect(assigns(:gyms)).to match_array([gym])
       expect(response).to be_ok
@@ -58,14 +58,16 @@ describe GymsController do
     context "valid params" do
       before :each do
         VCR.use_cassette("geo-location-sait") do
-          post :create, gym: {
-            name: "SAIT",
-            location_attributes: {
-              address: "1301 16 Ave NW",
-              city: "Calgary",
-              region: "AB",
-              country: "CA",
-              postal_code: "T2M 0L4",
+          post :create, params: {
+            gym: {
+              name: "SAIT",
+              location_attributes: {
+                address: "1301 16 Ave NW",
+                city: "Calgary",
+                region: "AB",
+                country: "CA",
+                postal_code: "T2M 0L4",
+              }
             }
           }
         end
@@ -101,7 +103,7 @@ describe GymsController do
       end
 
       it "returns a json response" do
-        xhr :post, :create, yelp_id: yelp_id
+        post :create, params: { yelp_id: yelp_id }, xhr: true
         json = JSON.parse(response.body)
         expect(json["yelp_id"]).to eql(yelp_id)
         expect(json["name"]).to eql(gym.name)
@@ -111,7 +113,7 @@ describe GymsController do
 
     context "invalid params" do
       before :each do
-        post :create, gym: { name: "" }
+        post :create, params: { gym: { name: "" } }
       end
 
       it "displays an error" do
@@ -128,7 +130,7 @@ describe GymsController do
   describe "#show" do
     it "loads the gym" do
       gym = create(:gym)
-      get :show, id: gym.id
+      get :show, params: { id: gym.id }
       expect(assigns(:gym)).to eql(gym)
     end
   end

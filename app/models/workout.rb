@@ -19,19 +19,16 @@ class Workout < ApplicationRecord
 
   def train(exercise, target_weight, repetitions:, set: nil)
     all_sets = sets.for(exercise).to_a
-    if set.present? && (exercise_set = all_sets.to_a.at(set)).present?
-      exercise_set.update!(actual_repetitions: repetitions, target_weight: target_weight)
-      exercise_set
-    else
+    if set.blank? || (exercise_set = all_sets.to_a.at(set)).blank?
       recommendation = program.recommendation_for(user, exercise)
       exercise_set = sets.build(
         type: WorkSet.name,
         exercise: exercise,
         target_repetitions: recommendation.repetitions
       )
-      exercise_set.update!(actual_repetitions: repetitions, target_weight: target_weight)
-      exercise_set
     end
+    exercise_set.update!(actual_repetitions: repetitions, target_weight: target_weight)
+    exercise_set
   end
 
   def progress_for(exercise)

@@ -12,7 +12,9 @@ module Authenticatable
   end
 
   def current_user
-    @current_user ||= current_session.try(:user)
+    @current_user ||= User.find(current_session.try(:user_id))
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 
   def authenticate!

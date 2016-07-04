@@ -23,7 +23,7 @@ class UserSession < ApplicationRecord
 
   class << self
     def authenticate(id)
-      active.includes(user: :profile).find_by(id: id)
+      active.find_by(id: id)
     end
   end
 end

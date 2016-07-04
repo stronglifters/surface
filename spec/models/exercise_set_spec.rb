@@ -21,7 +21,7 @@ describe ExerciseSet do
 
     it "returns all sets for the exercise only" do
       squat_set = create(:work_set, exercise: squat)
-      dip_set = create(:work_set, exercise: dip)
+      _ = create(:work_set, exercise: dip)
 
       expect(ExerciseSet.for(squat)).to match_array([squat_set])
     end

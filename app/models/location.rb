@@ -1,5 +1,5 @@
 class Location < ApplicationRecord
-  belongs_to :locatable, polymorphic: true
+  belongs_to :locatable, polymorphic: true, optional: true
   before_save :assign_coordinates
   acts_as_mappable default_units: :kms,
     distance_field_name: :distance,

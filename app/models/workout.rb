@@ -3,7 +3,7 @@ class Workout < ApplicationRecord
   belongs_to :routine
   has_one :program, through: :routine
   has_many :exercises, through: :exercise_sets
-  has_many :exercise_sets, dependent: :destroy
+  has_many :exercise_sets, dependent: :destroy, inverse_of: :workout
   accepts_nested_attributes_for :exercise_sets
   delegate :name, to: :routine
   alias_method :sets, :exercise_sets
@@ -27,7 +27,10 @@ class Workout < ApplicationRecord
         target_repetitions: recommendation.repetitions
       )
     end
-    exercise_set.update!(actual_repetitions: repetitions, target_weight: target_weight)
+    exercise_set.update!(
+      actual_repetitions: repetitions,
+      target_weight: target_weight
+    )
     exercise_set
   end
 

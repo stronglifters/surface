@@ -45,7 +45,9 @@ describe ProfilesController do
 
     describe "#update" do
       it "updates the user profile" do
-        patch :update, params: { id: user.to_param, profile: { gender: "male" } }
+        patch :update, params: {
+          id: user.to_param, profile: { gender: "male" }
+        }
         user.reload
         expect(user.profile.male?).to be_truthy
         expect(response).to redirect_to(profile_path(user.profile))
@@ -54,7 +56,9 @@ describe ProfilesController do
       it 'saves the users home gym' do
         gym = create(:gym)
 
-        patch :update, params: { id: user.to_param, profile: { gym_id: gym.id } }
+        patch :update, params: {
+          id: user.to_param, profile: { gym_id: gym.id }
+        }
 
         expect(user.reload.profile.gym).to eql(gym)
       end

@@ -1,6 +1,6 @@
 class Routine < ApplicationRecord
   belongs_to :program
-  has_many :recommendations
+  has_many :recommendations, inverse_of: :routine
   has_many :exercises, through: :recommendations
 
   def slug

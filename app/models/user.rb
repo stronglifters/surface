@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   include Flippable
   has_secure_password
-  has_many :workouts
+  has_many :workouts, inverse_of: :user
   has_many :exercise_sets, through: :workouts
-  has_many :user_sessions, dependent: :destroy
+  has_many :user_sessions, dependent: :destroy, inverse_of: :user
   has_one :profile
   has_many :received_emails
   USERNAME_REGEX=/\A[-a-z0-9_.]*\z/i

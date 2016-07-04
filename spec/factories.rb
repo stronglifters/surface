@@ -7,7 +7,7 @@ FactoryGirl.define do
     association :workout
     target_repetitions { rand(12) }
     target_weight { rand(400) }
-    factory :work_set, class: 'WorkSet'
+    factory :work_set, class: "WorkSet"
   end
   factory :program do
     name { FFaker::Internet.user_name }

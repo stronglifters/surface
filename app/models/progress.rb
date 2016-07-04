@@ -19,6 +19,6 @@ class Progress
   end
 
   def status
-    "#{to_sets.join("/")} @ #{max_weight} lbs"
+    "#{to_sets.join('/')} @ #{max_weight} lbs"
   end
 end

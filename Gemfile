@@ -2,7 +2,7 @@ source "https://rubygems.org" do
   gem "bcrypt", "~> 3.1.7"
   gem "brakeman", group: :development, require: false
   gem "bullet", group: [:development, :test]
-  gem "byebug", group: [:development, :test]
+  gem "byebug", group: [:development, :test], platform: :mri
   gem "capistrano", "3.4.1"
   gem "capistrano-bundler", "~> 1.1", require: false, group: :development
   gem "capistrano-rails", group: :development
@@ -10,7 +10,7 @@ source "https://rubygems.org" do
   gem "carmen"
   gem "chartkick"
   gem "codeclimate-test-reporter", require: nil, group: :test
-  gem "coffee-rails", "~> 4.1"
+  gem "coffee-rails", "~> 4.2"
   gem "coveralls", require: false, group: :test
   gem "cucumber-rails", require: false, group: :test
   gem "dalli"
@@ -32,40 +32,43 @@ source "https://rubygems.org" do
   gem "groupdate"
   gem "http_accept_language"
   gem "i18n-tasks", group: :development
-  gem "jbuilder", "~> 2.0"
+  gem "jbuilder", "~> 2.5"
   gem "jquery-rails"
   gem "jquery-turbolinks"
+  gem "listen", "~> 3.0.5"
   gem "kaminari"
   gem "meta_request", group: :development
   gem "pg"
   gem "poltergeist", group: :test
-  gem "puma"
+  gem "puma", '~> 3.0'
   gem "rack-mini-profiler", group: :development
   gem "rack-timeout"
   gem "rack_session_access", group: :test
   gem "ractive-rails"
-  gem "rails", "~> 4.2"
+  gem "rails", "~> 5.0.0"
   gem "rails-erd", group: :development
   gem "rails-i18n", "~> 4.0.0"
   gem "rails_12factor", group: :production
+  gem "redis", "~> 3.0"
   gem "rspec-rails", group: :test
   gem "rubyzip", require: "zip"
   gem "sass-rails", "~> 5.0"
   gem "scale"
   gem "sdoc", "~> 0.4", group: :doc
   gem "sidekiq"
-  gem "spring", group: [:development, :test]
+  gem "spring", group: [:development]
   gem "spring-commands-cucumber", group: :test
   gem "spring-commands-rspec", group: :test
   gem "spring-commands-teaspoon", group: :test
+  gem "spring-watcher-listen", "~> 2.0.0"
   gem "sprockets-rails", "2.3.3"
   gem "stackprof", group: :development
   gem "teaspoon-jasmine", group: :test
   gem "therubyracer", platforms: :ruby
-  gem "turbolinks"
+  gem "turbolinks", '~> 5'
   gem "uglifier", ">= 1.3.0"
   gem "vcr", group: :test
-  gem "web-console", "~> 2.0", group: :development
+  gem "web-console", group: :development
   gem "webmock", group: :test
   gem "yelp"
 end

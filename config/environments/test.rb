@@ -42,10 +42,10 @@ Rails.application.configure do
 
   config.action_mailer.default_options = { from: "from@example.com" }
   config.middleware.use RackSessionAccess::Middleware
-  config.after_intialize do
+  config.after_initialize do
     Bullet.enable = true
     Bullet.bullet_logger = true
-    Bullet.raise = true
+    #Bullet.raise = true
   end
   config.log_level = :fatal
 end

@@ -1,4 +1,4 @@
-class Program < ActiveRecord::Base
+class Program < ApplicationRecord
   STRONG_LIFTS = "StrongLifts 5×5"
   has_many :exercises, through: :routines
   has_many :routines

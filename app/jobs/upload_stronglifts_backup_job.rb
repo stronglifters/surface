@@ -1,4 +1,4 @@
-class UploadStrongliftsBackupJob < ActiveJob::Base
+class UploadStrongliftsBackupJob < ApplicationJob
   queue_as :default
 
   def perform(user, backup_file, program)

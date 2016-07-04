@@ -46,6 +46,7 @@ source "https://rubygems.org" do
   gem "rack_session_access", group: :test
   gem "ractive-rails"
   gem "rails", "~> 5.0.0"
+  gem "rails-controller-testing", group: :test
   gem "rails-erd", group: :development
   gem "rails-i18n", "~> 4.0.0"
   gem "rails_12factor", group: :production

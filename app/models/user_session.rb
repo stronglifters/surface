@@ -1,4 +1,4 @@
-class UserSession < ActiveRecord::Base
+class UserSession < ApplicationRecord
   has_one :location, as: :locatable
   belongs_to :user
   scope :active, -> do
@@ -23,7 +23,7 @@ class UserSession < ActiveRecord::Base
 
   class << self
     def authenticate(id)
-      active.find_by(id: id)
+      active.includes(user: :profile).find_by(id: id)
     end
   end
 end

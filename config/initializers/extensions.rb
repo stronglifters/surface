@@ -15,3 +15,9 @@ class NilClass
     0.0.lbs.to(units)
   end
 end
+
+class ActiveRecord::AssociationRelation
+  def at(index)
+    to_a.at(index)
+  end
+end

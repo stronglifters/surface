@@ -18,10 +18,11 @@ describe Workout, type: :model do
       expect(result).to be_persisted
       expect(result.exercise).to eql(squat)
       expect(subject.progress_for(squat).to_sets).to eql([5])
-      expect(subject.sets.at(0).exercise).to eql(squat)
-      expect(subject.sets.at(0).target_weight).to eql(target_weight.to_f)
-      expect(subject.sets.at(0).target_repetitions).to eql(5)
-      expect(subject.sets.at(0).actual_repetitions).to eql(5)
+      sets = subject.sets.to_a
+      expect(sets.at(0).exercise).to eql(squat)
+      expect(sets.at(0).target_weight).to eql(target_weight.to_f)
+      expect(sets.at(0).target_repetitions).to eql(5)
+      expect(sets.at(0).actual_repetitions).to eql(5)
     end
 
     it "records the next set" do

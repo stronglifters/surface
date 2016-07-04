@@ -1,4 +1,4 @@
-class Workout < ActiveRecord::Base
+class Workout < ApplicationRecord
   belongs_to :user
   belongs_to :routine
   has_one :program, through: :routine
@@ -9,6 +9,9 @@ class Workout < ActiveRecord::Base
   alias_method :sets, :exercise_sets
 
   scope :recent, -> { order(occurred_at: :desc) }
+  scope :with_exercise, ->(exercise) do
+    joins(:exercises).where(exercises: { id: exercise.id })
+  end
 
   def body_weight
     Quantity.new(read_attribute(:body_weight), :lbs)
@@ -16,8 +19,8 @@ class Workout < ActiveRecord::Base
 
   def train(exercise, target_weight, repetitions:, set: nil)
     set =
-      if set.present? && sets.where(exercise: exercise).at(set).present?
-        sets.where(exercise: exercise).at(set)
+      if set.present? && sets.for(exercise).at(set).present?
+        sets.for(exercise).at(set)
       else
         recommendation = program.recommendation_for(user, exercise)
         sets.build(

@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include Flippable
   has_secure_password
   has_many :workouts
@@ -97,13 +97,9 @@ class User < ActiveRecord::Base
 
   def last_workout(exercise = nil)
     if exercise.present?
-      workouts.
-        joins(:exercises).
-        where(exercises: { id: exercise.id }).
-        order(:created_at).
-        last
+      workouts.recent.with_exercise(exercise).first
     else
-      workouts.order(:created_at).last
+      workouts.recent.first
     end
   end
 

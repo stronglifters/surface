@@ -1,4 +1,4 @@
-class Routine < ActiveRecord::Base
+class Routine < ApplicationRecord
   belongs_to :program
   has_many :recommendations
   has_many :exercises, through: :recommendations

@@ -41,9 +41,11 @@ describe WorkoutsController do
     let(:body_weight) { rand(250.0).lbs }
 
     it "creates a new workout" do
-      post :create, workout: {
-        routine_id: routine_b.id,
-        body_weight: body_weight
+      post :create, params: {
+        workout: {
+          routine_id: routine_b.id,
+          body_weight: body_weight
+        }
       }
       expect(user.reload.workouts.count).to eql(1)
       expect(user.last_routine).to eql(routine_b)
@@ -52,15 +54,17 @@ describe WorkoutsController do
     end
 
     it "creates the workout with the selected exercises" do
-      post :create, workout: {
-        routine_id: routine_b.id,
-        body_weight: body_weight,
-        exercise_sets_attributes: [{
-          exercise_id: squat.id,
-          target_repetitions: 5,
-          target_weight: 200,
-          type: "WorkSet",
-        }]
+      post :create, params: {
+        workout: {
+          routine_id: routine_b.id,
+          body_weight: body_weight,
+          exercise_sets_attributes: [{
+            exercise_id: squat.id,
+            target_repetitions: 5,
+            target_weight: 200,
+            type: "WorkSet",
+          }]
+        }
       }
 
       expect(user.reload.workouts.count).to eql(1)
@@ -77,7 +81,7 @@ describe WorkoutsController do
     let(:workout) { create(:workout, user: user) }
 
     it "loads the workouts" do
-      get :edit, id: workout.id
+      get :edit, params: { id: workout.id }
       expect(assigns(:workout)).to eql(workout)
     end
   end

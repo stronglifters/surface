@@ -3,7 +3,7 @@ require "rails_helper"
 describe ApplicationController, type: :controller do
   controller do
     def index
-      render text: "WHAT?"
+      render body: "WHAT?"
     end
   end
 

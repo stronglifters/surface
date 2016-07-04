@@ -15,9 +15,12 @@ describe SetsController do
       workout.update!(occurred_at: DateTime.now, body_weight: 225)
       set = workout.sets.first
 
-      xhr :patch, :update, id: set.id, set: {
-        actual_weight: 315,
-        actual_repetitions: 5,
+      patch :update, xhr: true, params: {
+        id: set.id,
+        set: {
+          actual_weight: 315,
+          actual_repetitions: 5,
+        }
       }
       expect(response).to have_http_status(:ok)
       expect(set.reload.actual_repetitions).to eql(5)

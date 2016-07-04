@@ -14,4 +14,20 @@ describe ExerciseSet do
       expect(subject.weight_per_side).to eql("25.0 lb/side")
     end
   end
+
+  describe ".for" do
+    let(:squat) { create(:exercise) }
+    let(:dip) { create(:exercise) }
+
+    it "returns all sets for the exercise only" do
+      squat_set = create(:work_set, exercise: squat)
+      dip_set = create(:work_set, exercise: dip)
+
+      expect(ExerciseSet.for(squat)).to match_array([squat_set])
+    end
+
+    it "returns nil" do
+      expect(ExerciseSet.for(squat)).to be_empty
+    end
+  end
 end

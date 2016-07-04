@@ -18,22 +18,29 @@ class Workout < ApplicationRecord
   end
 
   def train(exercise, target_weight, repetitions:, set: nil)
-    set =
-      if set.present? && sets.for(exercise).at(set).present?
-        sets.for(exercise).at(set)
-      else
-        recommendation = program.recommendation_for(user, exercise)
-        sets.build(
-          type: WorkSet.name,
-          exercise: exercise,
-          target_repetitions: recommendation.repetitions
-        )
-      end
-    set.update!(actual_repetitions: repetitions, target_weight: target_weight)
-    set
+    all_sets = sets.for(exercise).to_a
+    if set.present? && (exercise_set = all_sets.to_a.at(set)).present?
+      exercise_set.update!(actual_repetitions: repetitions, target_weight: target_weight)
+      exercise_set
+    else
+      recommendation = program.recommendation_for(user, exercise)
+      exercise_set = sets.build(
+        type: WorkSet.name,
+        exercise: exercise,
+        target_repetitions: recommendation.repetitions
+      )
+      exercise_set.update!(actual_repetitions: repetitions, target_weight: target_weight)
+      exercise_set
+    end
   end
 
   def progress_for(exercise)
     Progress.new(self, exercise)
+  end
+
+  def each_exercise
+    exercises.order(:created_at).distinct.each do |exercise|
+      yield exercise
+    end
   end
 end

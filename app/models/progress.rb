@@ -15,6 +15,10 @@ class Progress
   end
 
   def sets
-    workout.sets.work.where(exercise: exercise).order(:created_at)
+    workout.sets.work.for(exercise).in_order
+  end
+
+  def status
+    "#{to_sets.join("/")} @ #{max_weight} lbs"
   end
 end

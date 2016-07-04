@@ -76,18 +76,19 @@ describe Csv::Import do
       subject.import_from(directory)
 
       workout = user.workouts.order(:occurred_at).first
-      row_session = workout.progress_for(barbell_row)
-      expect(row_session.to_sets).to eql([5, 5, 5, 5, 5])
-      expect(row_session.sets.at(0).target_weight).to eql(65.0)
-      expect(row_session.sets.at(0).actual_repetitions).to eql(5)
-      expect(row_session.sets.at(1).target_weight).to eql(65.0)
-      expect(row_session.sets.at(1).actual_repetitions).to eql(5)
-      expect(row_session.sets.at(2).target_weight).to eql(65.0)
-      expect(row_session.sets.at(2).actual_repetitions).to eql(5)
-      expect(row_session.sets.at(3).target_weight).to eql(65.0)
-      expect(row_session.sets.at(3).actual_repetitions).to eql(5)
-      expect(row_session.sets.at(4).target_weight).to eql(65.0)
-      expect(row_session.sets.at(4).actual_repetitions).to eql(5)
+      progress = workout.progress_for(barbell_row)
+      expect(progress.to_sets).to eql([5, 5, 5, 5, 5])
+      sets = progress.sets.to_a
+      expect(sets.at(0).target_weight).to eql(65.0)
+      expect(sets.at(0).actual_repetitions).to eql(5)
+      expect(sets.at(1).target_weight).to eql(65.0)
+      expect(sets.at(1).actual_repetitions).to eql(5)
+      expect(sets.at(2).target_weight).to eql(65.0)
+      expect(sets.at(2).actual_repetitions).to eql(5)
+      expect(sets.at(3).target_weight).to eql(65.0)
+      expect(sets.at(3).actual_repetitions).to eql(5)
+      expect(sets.at(4).target_weight).to eql(65.0)
+      expect(sets.at(4).actual_repetitions).to eql(5)
     end
 
     it "excludes items that have already been imported" do
@@ -116,15 +117,16 @@ describe Csv::Import do
       progress = workout.progress_for(chinups)
       expect(progress).to_not be_nil
       expect(progress.to_sets).to eql([5, 3, 2])
-      expect(progress.sets.at(0).target_weight).to eql(0.0)
-      expect(progress.sets.at(0).target_repetitions).to eql(5)
-      expect(progress.sets.at(0).actual_repetitions).to eql(5)
-      expect(progress.sets.at(1).target_weight).to eql(0.0)
-      expect(progress.sets.at(1).target_repetitions).to eql(5)
-      expect(progress.sets.at(1).actual_repetitions).to eql(3)
-      expect(progress.sets.at(2).target_weight).to eql(0.0)
-      expect(progress.sets.at(2).target_repetitions).to eql(5)
-      expect(progress.sets.at(2).actual_repetitions).to eql(2)
+      sets = progress.sets.to_a
+      expect(sets.at(0).target_weight).to eql(0.0)
+      expect(sets.at(0).target_repetitions).to eql(5)
+      expect(sets.at(0).actual_repetitions).to eql(5)
+      expect(sets.at(1).target_weight).to eql(0.0)
+      expect(sets.at(1).target_repetitions).to eql(5)
+      expect(sets.at(1).actual_repetitions).to eql(3)
+      expect(sets.at(2).target_weight).to eql(0.0)
+      expect(sets.at(2).target_repetitions).to eql(5)
+      expect(sets.at(2).actual_repetitions).to eql(2)
     end
 
     it "imports the correct number of sets" do
@@ -132,11 +134,13 @@ describe Csv::Import do
 
       subject.import(row)
       workout = user.workouts.first
-      expect(workout.progress_for(squat).sets.count).to eql(3)
-      expect(workout.progress_for(squat).to_sets).to eql([5, 5, 5])
+      progress = workout.progress_for(squat)
+      expect(progress.sets.count).to eql(3)
+      expect(progress.to_sets).to eql([5, 5, 5])
 
-      expect(workout.progress_for(deadlift).sets.count).to eql(1)
-      expect(workout.progress_for(deadlift).to_sets).to eql([5])
+      progress = workout.progress_for(deadlift)
+      expect(progress.sets.count).to eql(1)
+      expect(progress.to_sets).to eql([5])
     end
   end
 end

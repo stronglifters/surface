@@ -1,12 +1,12 @@
 class ProfilesController < ApplicationController
   def show
-    @user = User.includes(:workouts, profile: :gym).find_by(username: params[:id])
+    @user = User.find_by(username: params[:id])
     @profile = @user.profile
     @program = Program.stronglifts
   end
 
   def edit
-    @profile = Profile.includes(:user, :gym).find_by(user: current_user)
+    @profile = current_user.profile
     @program = Program.stronglifts
   end
 

@@ -24,7 +24,7 @@ source "https://rubygems.org" do
   gem "flipper-redis"
   gem "font-awesome-rails"
   gem "foreman", group: :development
-  gem "foundation-rails", "~> 5.5"
+  gem "foundation-rails", "~> 6.2"
   gem "geocoder"
   gem "geokit-rails"
   gem "griddler"

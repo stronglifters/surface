@@ -55,7 +55,7 @@ en:
           log_out: "Log out"
           profile_edit: "Edit profile"
           profile_view: "View profile"
-      title: Stronglifters
+      title: Strong Lifters
   gyms:
     index:
       title: Gyms

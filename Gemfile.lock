@@ -277,6 +277,7 @@ GEM
       rails-assets-underscore (>= 1.8.3)
     rails-assets-clipboard (1.5.12)
     rails-assets-lodash (4.13.1)
+    rails-assets-modernizr (3.3.1)
     rails-assets-moment (2.13.0)
     rails-assets-ractive (0.7.3)
     rails-assets-ractive-backbone (0.3.0)
@@ -486,6 +487,7 @@ DEPENDENCIES
   rails-assets-backbone!
   rails-assets-clipboard!
   rails-assets-lodash!
+  rails-assets-modernizr!
   rails-assets-moment!
   rails-assets-ractive!
   rails-assets-ractive-backbone!

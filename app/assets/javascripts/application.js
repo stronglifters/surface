@@ -17,6 +17,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
+//= require modernizr
 //= require ractive
 //= require backbone
 //= require ractive-backbone
@@ -28,3 +29,5 @@ var Stronglifters = Stronglifters || {};
 $(function(){
   new Stronglifters.Startup().start();
 });
+
+$(function(){ $(document).foundation(); });

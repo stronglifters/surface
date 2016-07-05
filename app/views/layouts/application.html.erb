@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= t('.title') %> <%= content_for?(:title) ? "| #{yield(:title)}" : "" %></title>
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
     <%= javascript_include_tag "https://apis.google.com/js/api.js" %>
@@ -25,7 +24,7 @@
               <ul class="title-area">
                 <!-- Title Area -->
                 <li class="name">
-                  <h1><%= link_to "Strong Lifters", dashboard_path %></h1>
+                  <h1><%= link_to "Stronglifters", dashboard_path %></h1>
                 </li>
                 <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
               </ul>
@@ -72,7 +71,7 @@
               </div>
               <div class="large-6 columns">
                 <ul class="inline-list right">
-                  <li><a href="https://twitter.com/StrongLifters/">Twitter</a></li>
+                  <li><a href="https://twitter.com/Stronglifters/">Twitter</a></li>
                   <li><a href="https://github.com/stronglifters">Github</a></li>
                 </ul>
               </div>

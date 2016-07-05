@@ -78,6 +78,7 @@ source "https://rails-assets.org" do
   gem "rails-assets-backbone"
   gem "rails-assets-clipboard"
   gem "rails-assets-lodash"
+  gem "rails-assets-modernizr"
   gem "rails-assets-moment"
   gem "rails-assets-ractive"
   gem "rails-assets-ractive-backbone"

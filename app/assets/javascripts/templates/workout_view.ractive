@@ -1,5 +1,5 @@
 {{#if clock}}
-  <div data-alert="" class="alert-box {{alertStatus}}">
+  <div class="alert callout warning">
     <p> {{message}} </p>
     <p> Rest Clock: {{clock}} </p>
   </div>

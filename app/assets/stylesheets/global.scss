@@ -36,7 +36,7 @@ header {
 /* ---------------------------------------------- */
 /* Buttons -------------------------------------- */
 /* ---------------------------------------------- */
-.button.bare {
+.button.secondary.bare {
   &:link,
 	&:hover,
   &:active,
@@ -44,13 +44,12 @@ header {
   &:focus {
     background-color: transparent;
     border-color: transparent;
+    color: $black;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 
-  &:hover {
-    text-decoration: underline;
-  }
+  &:hover { text-decoration: underline; }
 }
 /* ---------------------------------------------- */
 /* Avatars -------------------------------------- */
@@ -62,9 +61,9 @@ a[class^="social_"] {
 	background: #ffff00;
 }
 /* ---------------------------------------------- */
-/* Alerts --------------------------------------- */
+/* Callouts ------------------------------------- */
 /* ---------------------------------------------- */
-.alert-box ul {
+.alert.callout ul {
 	margin: 0;
 	li {
 		list-style-type: none;

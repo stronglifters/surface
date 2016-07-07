@@ -1,31 +1,25 @@
-<div class="row">
+<div class="row align-center">
 <%= form_for @user, url: registrations_path do |f| %>
-  <div class="small-12 columns">
+  <div class="columns">
     <label><%= t('.username') %>
       <%= f.text_field :username, placeholder: t('.username') %>
     </label>
-  </div> <!-- /.small-12 -->
-  <div class="small-12 columns">
     <label><%= t('.email') %>
       <%= f.email_field :email, placeholder: t('.email') %>
     </label>
-  </div> <!-- /.small-12 -->
-  <div class="small-12 columns">
-    <label><% t('.password') %>
-      <%= f.password_field :password, placeholder: t('.password') %>
+    <label><%= t('.password') %>
+      <%= f.email_field :password, placeholder: t('.password') %>
     </label>
-  </div> <!-- /.small-12 -->
-  <div class="small-12 columns">
-    <%= f.label :terms_and_conditions do %>
-      <%= f.check_box :terms_and_conditions %> 
-      <%= t('.terms_and_conditions') %>.
-      <p><a data-open="terms_modal"><%= t('.terms_and_conditions_link') %></a></p>
-    <% end %>
-  </div> <!-- /.small-12 -->
-  <div class="small-12 columns">
+    <div class="text-center">
+      <%= f.label :terms_and_conditions do %>
+        <%= f.check_box :terms_and_conditions %> 
+        <%= t('.terms_and_conditions') %>.
+        <p><a data-open="terms_modal"><%= t('.terms_and_conditions_link') %></a></p>
+      <% end %>
+    </div>
     <%= f.submit t('.register_button'), class: "button"  %>
     <%= link_to t('.login_link'), new_session_path, class: "button secondary bare" %>
-  </div> <!-- /.small-12 -->
+  </div>
 <% end %>
 </div> <!-- /.row -->
 <div id="terms_modal" class="reveal" data-reveal>

@@ -18,7 +18,8 @@
   <div class="small-12 columns">
     <%= f.label :terms_and_conditions do %>
       <%= f.check_box :terms_and_conditions %> 
-      <%= t('.terms_and_conditions') %>  <a href="#" data-reveal-id="terms_modal"><%= t('.terms_and_conditions_link') %></a>.
+      <%= t('.terms_and_conditions') %>.
+      <p><a data-open="terms_modal"><%= t('.terms_and_conditions_link') %></a></p>
     <% end %>
   </div> <!-- /.small-12 -->
   <div class="small-12 columns">
@@ -27,7 +28,9 @@
   </div> <!-- /.small-12 -->
 <% end %>
 </div> <!-- /.row -->
-<div id="terms_modal" class="reveal-modal" data-reveal>
+<div id="terms_modal" class="reveal" data-reveal>
   <%= render 'layouts/terms_content' %>
-  <a class="close-reveal-modal">&#215;</a>
+  <button class="close-button" data-close aria-label="<% t('.close') %>" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>

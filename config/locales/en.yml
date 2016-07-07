@@ -51,6 +51,7 @@ en:
       gyms: Gyms
       loading: "Loading..."
       nav:
+        menu: Menu
         user:
           workouts: "Workouts"
           log_out: "Log out"

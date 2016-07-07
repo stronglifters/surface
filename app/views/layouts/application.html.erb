@@ -16,38 +16,34 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render partial: 'layouts/flash' %>
     <!-- Navigation -->
-    <nav class="top-bar" data-topbar role="navigation">
+    <div class="title-bar" data-responsive-toggle="site-menu" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle></button>
+      <div class="title-bar-title">t(".menu")</div>
+    </div>
+    <div class="top-bar" id="site-menu">
       <div class="top-bar-left">
-      <ul class="title-area">
-        <!-- Title Area -->
-        <li class="name">
-          <h1><%= link_to t(".title"), dashboard_path %></h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span><%= t(".menu") %></span></a></li>
-      </ul>
-      <section class="top-bar-section">
-        <!-- Right Nav Section -->
-        <ul class="right">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text"><%= link_to t(".title"), dashboard_path %></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="dropdown menu" data-dropdown-menu>
           <% if feature_enabled?(:gym) %>
           <li> <%= search_form %> </li>
-          <li class="divider"></li>
           <li><%= link_to t(".gyms"), gyms_path %></li>
           <% end %>
-          <li class="divider"></li>
-          <li class="has-dropdown">
+          <li>
             <a href="#"><%= gravatar_for(current_user, size: 16) %> <%= current_user.username %></a>
-            <ul class="dropdown">
+            <ul class="menu vertical">
               <li><%= link_to t(".nav.user.workouts"), workouts_path %></li>
               <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
               <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>
-              <li class="divider"></li>
               <li><%= link_to t(".nav.user.log_out"), session_path('me'), method: :delete %></li>
             </ul>
           </li>
         </ul>
-      </section>
-    </nav>
-    <!-- End Top Bar -->
+      </div>
+    </div>
   <!-- End Navigation -->
   <!-- START CONTENT -->
   <div class="row loading-indicator hide">

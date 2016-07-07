@@ -15,72 +15,64 @@
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render partial: 'layouts/flash' %>
-    <div class="row">
-      <div class="columns">
-      <!-- Navigation -->
-        <div class="row">
-          <div class="columns">
-            <nav class="top-bar" data-topbar role="navigation">
-              <div class="top-bar-left">
-              <ul class="title-area">
-                <!-- Title Area -->
-                <li class="name">
-                  <h1><%= link_to t(".title"), dashboard_path %></h1>
-                </li>
-                <li class="toggle-topbar menu-icon"><a href="#"><span><%= t(".menu") %></span></a></li>
-              </ul>
-              <section class="top-bar-section">
-                <!-- Right Nav Section -->
-                <ul class="right">
-                  <% if feature_enabled?(:gym) %>
-                  <li> <%= search_form %> </li>
-                  <li class="divider"></li>
-                  <li><%= link_to t(".gyms"), gyms_path %></li>
-                  <% end %>
-                  <li class="divider"></li>
-                  <li class="has-dropdown">
-                    <a href="#"><%= gravatar_for(current_user, size: 16) %> <%= current_user.username %></a>
-                    <ul class="dropdown">
-                      <li><%= link_to t(".nav.user.workouts"), workouts_path %></li>
-                      <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
-                      <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>
-                      <li class="divider"></li>
-                      <li><%= link_to t(".nav.user.log_out"), session_path('me'), method: :delete %></li>
-                    </ul>
-                  </li>
-                </ul>
-              </section>
-            </nav>
-            <!-- End Top Bar -->
-          </div>
+    <!-- Navigation -->
+    <nav class="top-bar" data-topbar role="navigation">
+      <div class="top-bar-left">
+      <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+          <h1><%= link_to t(".title"), dashboard_path %></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span><%= t(".menu") %></span></a></li>
+      </ul>
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <% if feature_enabled?(:gym) %>
+          <li> <%= search_form %> </li>
+          <li class="divider"></li>
+          <li><%= link_to t(".gyms"), gyms_path %></li>
+          <% end %>
+          <li class="divider"></li>
+          <li class="has-dropdown">
+            <a href="#"><%= gravatar_for(current_user, size: 16) %> <%= current_user.username %></a>
+            <ul class="dropdown">
+              <li><%= link_to t(".nav.user.workouts"), workouts_path %></li>
+              <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
+              <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>
+              <li class="divider"></li>
+              <li><%= link_to t(".nav.user.log_out"), session_path('me'), method: :delete %></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    <!-- End Top Bar -->
+  <!-- End Navigation -->
+  <!-- START CONTENT -->
+  <div class="row loading-indicator hide">
+    <div class="columns text-center">
+      <p><i class="fa fa-spinner fa-pulse"></i> <%= t('.loading') %></p>
+    </div>
+  </div>
+  <%= yield %>
+  <!-- END CONTENT -->
+  <!-- Footer -->
+  <footer class="row">
+    <div class="columns"><hr />
+      <div class="row">
+        <div class="columns">
+          <p><%= t("footer.copyright") %></p>
         </div>
-      <!-- End Navigation -->
-      <!-- START CONTENT -->
-      <div class="row loading-indicator hide">
-        <div class="columns text-center">
-          <p><i class="fa fa-spinner fa-pulse"></i> <%= t('.loading') %></p>
+        <div class="columns">
+          <ul class="inline-list right">
+            <li><a href="https://twitter.com/Stronglifters/">Twitter</a></li>
+            <li><a href="https://github.com/stronglifters">Github</a></li>
+          </ul>
         </div>
-      </div>
-      <%= yield %>
-      <!-- END CONTENT -->
-      <!-- Footer -->
-        <footer class="row">
-          <div class="columns"><hr />
-            <div class="row">
-              <div class="columns">
-                <p><%= t("footer.copyright") %></p>
-              </div>
-              <div class="columns">
-                <ul class="inline-list right">
-                  <li><a href="https://twitter.com/Stronglifters/">Twitter</a></li>
-                  <li><a href="https://github.com/stronglifters">Github</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </footer>
-      <!-- End Footer -->
       </div>
     </div>
+  </footer>
+  <!-- End Footer -->
   </body>
 </html>

@@ -72,7 +72,7 @@ en:
       register_button: "Register"
       login_link: "Already have an account?"
     create:
-      success: "Thank you for registering."
+      success: "Thank you for registering. Welcome."
   profiles:
     edit:
       choose_home_gym: 'Choose Home Gym'

@@ -16,17 +16,18 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render partial: 'layouts/flash' %>
     <div class="row">
-      <div class="large-12 columns">
+      <div class="columns">
       <!-- Navigation -->
         <div class="row">
-          <div class="large-12 columns">
+          <div class="columns">
             <nav class="top-bar" data-topbar role="navigation">
+              <div class="top-bar-left">
               <ul class="title-area">
                 <!-- Title Area -->
                 <li class="name">
-                  <h1><%= link_to "Stronglifters", dashboard_path %></h1>
+                  <h1><%= link_to t(".title"), dashboard_path %></h1>
                 </li>
-                <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span><%= t(".menu") %></span></a></li>
               </ul>
               <section class="top-bar-section">
                 <!-- Right Nav Section -->
@@ -56,7 +57,7 @@
       <!-- End Navigation -->
       <!-- START CONTENT -->
       <div class="row loading-indicator hide">
-        <div class="large-12 columns small-text-center">
+        <div class="columns text-center">
           <p><i class="fa fa-spinner fa-pulse"></i> <%= t('.loading') %></p>
         </div>
       </div>
@@ -64,12 +65,12 @@
       <!-- END CONTENT -->
       <!-- Footer -->
         <footer class="row">
-          <div class="large-12 columns"><hr />
+          <div class="columns"><hr />
             <div class="row">
-              <div class="large-6 columns">
+              <div class="columns">
                 <p><%= t("footer.copyright") %></p>
               </div>
-              <div class="large-6 columns">
+              <div class="columns">
                 <ul class="inline-list right">
                   <li><a href="https://twitter.com/Stronglifters/">Twitter</a></li>
                   <li><a href="https://github.com/stronglifters">Github</a></li>

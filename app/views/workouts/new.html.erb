@@ -17,22 +17,23 @@
           <legend><%= exercise.name %></legend>
           <% sets.find_all(&:work?).each.with_index(1) do |set, index| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
-              <fieldset name="<%= exercise.slug %>-<%= index %>" class="panel callout">
-                <div class="row">
-                  <div class="small-6 columns">
-                    <%= s.label :target_repetitions %>
-                    <%= s.number_field :target_repetitions %>
-                  </div>
-
-                  <div class="small-6 columns">
-                    <%= s.label :target_weight %>
-                    <%= s.number_field :target_weight %>
-                  </div>
+              <div name="<%= exercise.slug %>" class="row">
+                <div class="small-3 columns">
+                  <%= s.label :target_repetitions %>
+                  <%= s.number_field :target_repetitions %>
                 </div>
-                <p class="text-right"><a class="skip" href="#">skip</a></p>
-                <%= s.hidden_field :type %>
-                <%= s.hidden_field :exercise_id %>
-              </fieldset>
+
+                <div class="small-6 columns">
+                  <%= s.label :target_weight %>
+                  <%= s.number_field :target_weight %>
+                </div>
+                <div class="small-3 columns">
+                  <br />
+                  <a class="skip button tiny" href="#">skip</a>
+                  <%= s.hidden_field :type %>
+                  <%= s.hidden_field :exercise_id %>
+                </div>
+              </div>
             <% end %>
           <% end %>
         </fieldset>

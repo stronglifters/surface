@@ -26,6 +26,9 @@ en:
       warm_up_set: Warm Up Set
       work_set: Work Set
     attributes:
+      exercise_set:
+        target_repetitions: Reps
+        target_weight: Weight
       profile:
         female: Female
         gender: Gender

@@ -35,11 +35,11 @@
                   <li class="show-for-medium-up"> <%= search_form %> </li>
                   <li class="divider"></li>
                   <li><%= link_to t(".gyms"), gyms_path %></li>
+                  <li><%= link_to t(".nav.user.workouts"), workouts_path %></li>
                   <li class="divider"></li>
                   <li class="has-dropdown">
                     <a><%= gravatar_for(current_user, size: 16) %> <%= current_user.username %></a>
                     <ul class="dropdown">
-                      <li><%= link_to t(".nav.user.workouts"), workouts_path %></li>
                       <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
                       <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>
                       <li class="divider"></li>

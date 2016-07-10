@@ -18,7 +18,7 @@ class ExerciseSet < ApplicationRecord
   def weight_per_side
     remaining_weight = target_weight - 45.lbs
     if remaining_weight > 0
-      "#{remaining_weight / 2}/side"
+      "#{(remaining_weight / 2).pretty_print}/side"
     end
   end
 end

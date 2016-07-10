@@ -62,6 +62,10 @@ class Quantity
   end
 
   def to_s
+    to_f.to_s
+  end
+
+  def pretty_print
     "#{to_f} #{unit}"
   end
 

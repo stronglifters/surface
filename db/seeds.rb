@@ -14,13 +14,15 @@ routine_a.add_exercise(bench_press, sets: 5, repetitions: 5)
 routine_a.add_exercise(barbell_row, sets: 5, repetitions: 5)
 routine_a.add_exercise(dips, sets: 3, repetitions: 5)
 routine_a.add_exercise(paused_bench_press, sets: 3, repetitions: 5)
-#routine_a.add_exercise(planks, sets: 3, time: 60.seconds)
+routine_a.add_exercise(planks, sets: 3, duration: 60.seconds)
 
 overhead_press = Exercise.find_or_create_by!(name: "Overhead Press")
 deadlift = Exercise.find_or_create_by!(name: "Deadlift")
 chin_ups = Exercise.find_or_create_by!(name: "Chinups")
 pull_ups = Exercise.find_or_create_by!(name: "Pull Ups")
-close_grip_bench_press = Exercise.find_or_create_by!(name: "Close Grip Bench Press")
+close_grip_bench_press = Exercise.find_or_create_by!(
+  name: "Close Grip Bench Press"
+)
 
 routine_b = program.routines.find_or_create_by(name: "B")
 routine_b.add_exercise(squat, sets: 5, repetitions: 5)

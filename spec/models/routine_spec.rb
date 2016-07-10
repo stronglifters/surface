@@ -34,7 +34,7 @@ describe Routine do
       expect(subject.recommendations.count).to eql(1)
     end
 
-    it 'adds a timed exercise' do
+    it "adds a timed exercise" do
       subject.add_exercise(exercise, sets: 3, duration: 60.seconds)
       expect(subject.exercises).to match_array([exercise])
       expect(subject.recommendations.count).to eql(1)

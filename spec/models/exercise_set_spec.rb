@@ -32,13 +32,13 @@ describe ExerciseSet do
   end
 
   describe "#target_weight" do
-    it 'saves lbs' do
+    it "saves lbs" do
       subject.target_weight = 45.lbs
       subject.save!
       expect(subject.reload.target_weight).to eql(45.lbs)
     end
 
-    it 'saves kgs' do
+    it "saves kgs" do
       subject.target_weight = 20.kg
       subject.save!
       expect(subject.reload.target_weight).to eql(20.kg)

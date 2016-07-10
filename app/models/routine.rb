@@ -15,11 +15,13 @@ class Routine < ApplicationRecord
     name
   end
 
-  def add_exercise(exercise, sets: 5, repetitions: 5)
+  def add_exercise(exercise, sets: 5, repetitions: 5, duration: nil)
+    repetitions = 1 if duration.present?
     recommendations.create!(
+      duration: duration,
       exercise: exercise,
+      repetitions: repetitions,
       sets: sets,
-      repetitions: repetitions
     ) unless exercises.include?(exercise)
   end
 

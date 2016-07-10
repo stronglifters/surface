@@ -49,6 +49,10 @@ class Quantity
     [self, other]
   end
 
+  def hash
+    amount.hash + unit.class.hash
+  end
+
   def eql?(other, delta = 0.1)
     (amount - amount_from(other)).abs <= delta
   end

@@ -36,7 +36,7 @@ class UserRecommendation
 
   def next_weight
     last_weight = user.history_for(exercise).last_weight
-    if last_weight > 0
+    if last_weight.present? && last_weight > 0
       5.lbs + last_weight
     else
       45.lbs

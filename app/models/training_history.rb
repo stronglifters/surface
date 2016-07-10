@@ -23,7 +23,7 @@ class TrainingHistory
 
   def last_weight
     last_successful_set = sets.successful.last
-    last_successful_set.try(:target_weight).to_i
+    last_successful_set.try(:target_weight)
   end
 
   def to_line_chart

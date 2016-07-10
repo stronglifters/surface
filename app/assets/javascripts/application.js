@@ -29,5 +29,3 @@ var Stronglifters = Stronglifters || {};
 $(function(){
   new Stronglifters.Startup().start();
 });
-
-$(function(){ $(document).foundation(); });

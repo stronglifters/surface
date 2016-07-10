@@ -6,6 +6,7 @@ shared_context "stronglifts_program" do
   let!(:bench_press) { create(:exercise, name: "Bench Press") }
   let!(:barbell_row) { create(:exercise, name: "Barbell Row") }
   let!(:dips) { create(:exercise, name: "Dips") }
+  let!(:planks) { create(:exercise, name: "Planks") }
   let!(:squat_workout) do
     routine_a.add_exercise(squat, sets: 5, repetitions: 5)
   end
@@ -16,6 +17,9 @@ shared_context "stronglifts_program" do
     routine_a.add_exercise(barbell_row, sets: 5, repetitions: 5)
   end
   let!(:dips_workout) { routine_a.add_exercise(dips, sets: 3, repetitions: 5) }
+  let!(:planks_workout) do
+    routine_a.add_exercise(planks, sets: 3, duration: 60.seconds)
+  end
 
   let!(:routine_b) { program.routines.create name: "B" }
   let!(:overhead_press) { create(:exercise, name: "Overhead Press") }

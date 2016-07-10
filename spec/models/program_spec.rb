@@ -149,5 +149,17 @@ describe Program do
         expect(worksets.map(&:target_repetitions)).to match_array([5])
       end
     end
+
+    describe "planks" do
+      let(:user) { build(:user) }
+
+      it "returns 3 set with 1 rep at 60 seconds" do
+        sets = subject.prepare_sets_for(user, planks)
+        worksets = sets.select(&:work?)
+        expect(worksets.length).to eql(3)
+        expect(worksets.map(&:target_repetitions)).to match_array([1])
+        expect(worksets.map(&:duration)).to match_array([60])
+      end
+    end
   end
 end

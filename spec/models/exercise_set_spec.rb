@@ -11,7 +11,7 @@ describe ExerciseSet do
 
     it "returns 25 lbs/side" do
       subject.target_weight = 95.lbs
-      expect(subject.weight_per_side).to eql("25.0 lb/side")
+      expect(subject.weight_per_side).to eql("25.0 lbs/side")
     end
   end
 

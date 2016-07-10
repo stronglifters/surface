@@ -19,7 +19,7 @@
         </div>
         <div class="columns small-5">
           <p class="text-center">
-            {{target_repetitions}} x {{target_weight}} lbs
+            {{target_repetitions}} x {{target_weight}}
           </p>
         </div>
         <div class="columns small-4">

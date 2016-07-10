@@ -62,7 +62,7 @@ class Quantity
   end
 
   def to_s
-    to_f.to_s
+    "#{to_f} #{unit}"
   end
 
   private
@@ -93,6 +93,10 @@ class Quantity
         amount
       end
     end
+
+    def to_s
+      "lbs"
+    end
   end
 
   class Kilogram < UnitOfMeasure
@@ -103,6 +107,10 @@ class Quantity
       else
         amount
       end
+    end
+
+    def to_s
+      "kg"
     end
   end
 end

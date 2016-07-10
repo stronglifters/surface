@@ -2,8 +2,8 @@ class Stronglifters.Startup
   start: ->
     Ractive.DEBUG = false
     new Clipboard('.clipboard-button')
-    $(document).on 'page:fetch', ->
+    $(document).on 'turbolinks:request-start', ->
       $(".loading-indicator").show()
-    $(document).on 'page:change', ->
+    $(document).on 'turbolinks:request-end', ->
       $(".loading-indicator").hide()
     $(document).foundation()

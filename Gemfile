@@ -40,7 +40,7 @@ source "https://rubygems.org" do
   gem "meta_request", group: :development
   gem "pg"
   gem "poltergeist", group: :test
-  gem "puma", '~> 3.0'
+  gem "puma", "~> 3.0"
   gem "rack-mini-profiler", group: :development
   gem "rack-timeout"
   gem "rack_session_access", group: :test
@@ -62,11 +62,11 @@ source "https://rubygems.org" do
   gem "spring-commands-rspec", group: :test
   gem "spring-commands-teaspoon", group: :test
   gem "spring-watcher-listen", "~> 2.0.0"
-  gem "sprockets-rails", "2.3.3"
+  gem "sprockets-rails", require: "sprockets/railtie"
   gem "stackprof", group: :development
   gem "teaspoon-jasmine", group: :test
   gem "therubyracer", platforms: :ruby
-  gem "turbolinks", '~> 5'
+  gem "turbolinks", "~> 5"
   gem "uglifier", ">= 1.3.0"
   gem "vcr", group: :test
   gem "web-console", group: :development

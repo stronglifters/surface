@@ -48,5 +48,5 @@ var ready = function() {
   window.currentView = new Stronglifters.NewWorkoutView({ el: $('#new_workout') });
 };
 $(document).ready(ready);
-$(document).on('page:load', ready);
+$(document).on('turbolinks:load', ready);
 </script>

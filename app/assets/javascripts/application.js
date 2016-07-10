@@ -26,6 +26,8 @@
 //= require turbolinks
 
 var Stronglifters = Stronglifters || {};
-$(function(){
+var ready = function() {
   new Stronglifters.Startup().start();
-});
+};
+$(document).ready(ready);
+$(document).on('turbolinks:load', ready);

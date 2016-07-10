@@ -3,7 +3,7 @@
     <div class="large-12 columns">
       <% if feature_enabled?(:csv_import) %>
         <p class="text-center">
-          <a href="#" data-reveal-id="sendToStrongLiftsModal">
+          <a data-open="sendToStrongLiftsModal">
             <%= User.human_attribute_name(:import_address) %>
           </a>
         </p>

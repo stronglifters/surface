@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="small-12 medium-4 columns small-text-center medium-text-left">
+  
+  <div class="shrink columns">
     <%= link_to profile_path(@user), class: "th [radius] gender_#{@profile.gender} social_#{@profile.social_tolerance}" do %>
       <%= gravatar_for(@user, size: 128) %>
     <% end %>
@@ -15,7 +16,7 @@
     <p><%= @user.time_zone %></p>
   </div>
 
-  <div class="small-12 medium-8 columns small-text-center medium-text-left">
+  <div class="columns">
     <h2><%= t('.personal_records') %></h2>
     <table role="grid">
       <thead>
@@ -33,10 +34,11 @@
       </tbody>
     </table>
   </div>
+  
 </div>
 
-<div>
-  <div class="small-12 columns small-text-center medium-text-left">
+<div class="row">
+  <div class="columns">
     <% @program.each_exercise do |exercise| %>
       <%= render @user.history_for(exercise) %>
     <% end %>

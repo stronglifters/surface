@@ -59,26 +59,22 @@
         <!-- original content goes in this container -->
         <div class="off-canvas-content" data-off-canvas-content>
           <!-- start main content -->
-          <div class="row column">
-            <%= render partial: 'layouts/flash' %>
-            <div class="align-middle loading-indicator hide">
-              <p><i class="fa fa-spinner fa-pulse"></i> <%= t('.loading') %></p>
+          <div class="row">
+            <div class="columns">
+              <%= render partial: 'layouts/flash' %>
+              <div class="align-middle loading-indicator hide">
+                <p><i class="fa fa-spinner fa-pulse"></i> <%= t('.loading') %></p>
+              </div>
+              <%= yield %>
             </div>
-            <%= yield %>
           </div>
           <footer class="row">
-            <div class="columns"><hr />
-              <div class="row">
-                <div class="columns">
-                  <p><%= t("footer.copyright") %></p>
-                </div>
-                <div class="columns">
-                  <ul class="inline-list right">
-                    <li><a href="https://twitter.com/Stronglifters/">Twitter</a></li>
-                    <li><a href="https://github.com/stronglifters">Github</a></li>
-                  </ul>
-                </div>
-              </div>
+            <div class="columns">
+              <p><%= t("footer.copyright") %></p>
+              <ul class="menu align-center">
+                <li><a href="https://twitter.com/StrongLifters/">Twitter</a></li>
+                <li><a href="https://github.com/stronglifters">Github</a></li>
+              </ul>
             </div>
           </footer>
           <!-- end main content -->

@@ -21,7 +21,7 @@
         <div class="title-bar" data-responsive-toggle="widemenu" data-hide-for="medium">
           <div class="title-bar-left">
             <button class="menu-icon" type="button" data-open="offCanvas"></button>
-            <span class="title-bar-title"><%= t('.title') %></span>
+            <span class="title-bar-title"><%= link_to t(".title"), dashboard_path %></span>
           </div>
         </div>
 
@@ -43,7 +43,7 @@
         <div id="widemenu" class="top-bar">
           <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-              <li class="menu-text"><%= t('.title') %></li>
+              <li class="title-bar-title"><%= link_to t(".title"), dashboard_path %></li>
               <li><%= link_to t(".nav.user.workouts"), workouts_path %></li>
               <% if feature_enabled?(:gym) %>
               <li> <%= search_form %> </li>

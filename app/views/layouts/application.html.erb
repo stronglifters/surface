@@ -49,14 +49,9 @@
               <li> <%= search_form %> </li>
               <li><%= link_to t(".gyms"), gyms_path %></li>
               <% end %>
-              <li class="has-submenu">
-                <a href="#"><%= gravatar_for(current_user, size: 16) %> <%= current_user.username %></a>
-                <ul class="menu submenu vertical" data-submenu>
-                  <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
-                  <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>
-                  <li><%= link_to t(".nav.user.log_out"), session_path('me'), method: :delete %></li>
-                </ul>
-              </li>
+              <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
+              <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>
+              <li><%= link_to t(".nav.user.log_out"), session_path('me'), method: :delete %></li>
             </ul>
           </div>
         </div>

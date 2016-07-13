@@ -3,7 +3,6 @@ class ProfilesController < ApplicationController
     @user = User.find_by(username: params[:id])
     @profile = @user.profile
     @program = Program.stronglifts
-    flash[:notice] = t("profiles.edit.profile_update_success")
   end
 
   def edit

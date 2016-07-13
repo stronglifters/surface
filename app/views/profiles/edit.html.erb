@@ -3,25 +3,25 @@
     <%= gravatar_for(@current_user, size: 128) %>
     <h1><%= @current_user.username %></h1>
     <%= form_for(@profile) do |f| %>
-      <fieldset>
+      <fieldset class="fieldset">
         <legend><%= Profile.human_attribute_name(:gender) %></legend>
         <% Profile.genders.keys.each do |gender| %>
           <%= f.radio_button(:gender, gender) %>
           <%= f.label("gender_#{gender}", Profile.human_attribute_name(gender)) %>
         <% end %>
       </fieldset>
-      <fieldset>
+      <fieldset class="fieldset">
         <legend><%= Profile.human_attribute_name(:social_tolerance) %></legend>
         <% Profile.social_tolerances.keys.each do |social_tolerance| %>
           <%= f.radio_button(:social_tolerance, social_tolerance) %>
           <%= f.label("social_tolerance_#{social_tolerance}", Profile.human_attribute_name(social_tolerance)) %>
         <% end %>
       </fieldset>
-      <fieldset>
+      <fieldset class="fieldset">
         <legend><%= Profile.human_attribute_name(:time_zone) %></legend>
         <%= f.time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones) %>
       </fieldset>
-      <fieldset>
+      <fieldset class="fieldset">
         <legend><%= Profile.human_attribute_name(:home_gym) %></legend>
         <p id="home-gym-name"><%= @profile.gym.try(:name) %></p>
         <%= f.hidden_field(:gym_id) %>

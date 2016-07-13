@@ -8,16 +8,16 @@
     <% end %>
     <%= form_for @workout do |f| %>
       <%= f.hidden_field :routine_id %>
-      <fieldset>
+      <fieldset class="fieldset">
         <legend><%= Workout.human_attribute_name(:body_weight) %></legend>
         <%= f.number_field :body_weight %>
       </fieldset>
       <% @workout.sets.group_by(&:exercise).each do |exercise, sets| %>
-        <fieldset>
+        <fieldset class="fieldset">
           <legend><%= exercise.name %></legend>
           <% sets.each.with_index(1) do |set, index| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
-              <fieldset name="<%= exercise.slug %>-<%= index %>" class="panel <%= set.work? ? "callout" : "" %>">
+              <fieldset name="<%= exercise.slug %>-<%= index %>" class="panel <%= set.work? ? "callout" : "" %>" class="fieldset">
                 <legend><%= set.model_name.human %></legend>
                 <div class="row">
                   <div class="columns">

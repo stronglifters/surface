@@ -25,7 +25,7 @@
         <legend><%= Profile.human_attribute_name(:home_gym) %></legend>
         <p id="home-gym-name"><%= @profile.gym.try(:name) %></p>
         <%= f.hidden_field(:gym_id) %>
-        <a data-open="homeGymModal"><%= t('.choose_home_gym') %></a>
+        <button data-open="homeGymModal" class="button" type="button"><%= t('.choose_home_gym') %></button>
       </fieldset>
       <%= f.submit t(".save"), class: "button"  %>
     <% end %>

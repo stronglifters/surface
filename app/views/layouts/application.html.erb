@@ -30,6 +30,7 @@
           <ul class="vertical dropdown menu" data-dropdown-menu>
             <li> <%= search_form(id: "mobile-search-form") %> </li>
             <li><%= link_to t(".nav.user.workouts"), workouts_path %></li>
+            <li><%= link_to t(".new_workout"), new_workout_path %></li>
             <li><%= link_to t(".gyms"), gyms_path %></li>
             <li><%= link_to t(".nav.user.profile_edit"), edit_profile_path(current_user) %></li>
             <li><%= link_to t(".nav.user.profile_view"), profile_path(current_user) %></li>

@@ -48,6 +48,7 @@ en:
   layouts:
     application:
       gyms: Gyms
+      new_workout: 'Next Workout'
       loading: "Loading..."
       nav:
         user:

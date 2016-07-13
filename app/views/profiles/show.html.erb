@@ -1,18 +1,22 @@
 <div class="row">
   <div class="shrink columns">
-    <%= link_to profile_path(@user), class: "th [radius] gender_#{@profile.gender} social_#{@profile.social_tolerance}" do %>
-      <%= gravatar_for(@user, size: 128) %>
-    <% end %>
-    <h1><%= link_to @user.username, profile_path(@user) %></h1>
+    <p class="text-center">
+      <%= link_to profile_path(@user) do %>
+        <%= gravatar_for(@user, size: 128) %>
+      <% end %>
+    </p>
+    <h1 class="text-center"><%= link_to @user.username, profile_path(@user) %></h1>
     <% if @user.workouts.any? %>
-      <p><%= t('.workouts_completed', count: @user.workouts.count, first_session: l(@user.workouts.order(occurred_at: :asc).first.occurred_at, format: :long)) %></p>
+      <p class="text-center">
+        <%= t('.workouts_completed', count: @user.workouts.count, first_session: l(@user.workouts.order(occurred_at: :asc).first.occurred_at, format: :long)) %>
+      </p>
     <% else %>
-      <p><%= t('.no_workouts_completed') %></p>
+      <p class="text-center"><%= t('.no_workouts_completed') %></p>
     <% end %>
     <% if @profile.gym.present? %>
-      <p><%= link_to @profile.gym.name, @profile.gym %></p>
+      <p class="text-center"><%= link_to @profile.gym.name, @profile.gym %></p>
     <% end %>
-    <p><%= @user.time_zone %></p>
+    <p class="text-center"><%= @user.time_zone %></p>
   </div>
 
   <div class="columns">
@@ -33,7 +37,6 @@
       </tbody>
     </table>
   </div>
-  
 </div>
 
 <div class="row">

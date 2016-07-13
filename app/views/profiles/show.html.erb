@@ -1,5 +1,4 @@
 <div class="row">
-  
   <div class="shrink columns">
     <%= link_to profile_path(@user), class: "th [radius] gender_#{@profile.gender} social_#{@profile.social_tolerance}" do %>
       <%= gravatar_for(@user, size: 128) %>

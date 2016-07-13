@@ -58,6 +58,11 @@ en:
           profile_edit: "Edit profile"
           profile_view: "View profile"
       title: Strong Lifters
+    flash:
+      notice: 'Yay!'
+      warning: 'Uh oh!'
+      error: 'Oops...'
+      success: 'Yeah Buddy!'
   gyms:
     index:
       title: Gyms

@@ -51,7 +51,7 @@ Stronglifters.HomeGym = Ractive.extend
     "/gyms?#{params.join("&")}"
 
   closeModal: ->
-    $('#homeGymModal').foundation('reveal', 'close')
+    $('#homeGymModal').foundation('close')
 
   enableSearchButton: ->
     @set('search.button.disabled': false)

@@ -1,6 +1,8 @@
-<div id="<%= id %>" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+<div id="<%= id %>" class="reveal" data-reveal>
   <h2 id="modalTitle"><%= t('.title') %></h2>
   <p class="lead"><%= t('.lead') %></p>
   <div id="gym-search"></div>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>

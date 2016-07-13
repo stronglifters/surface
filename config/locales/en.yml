@@ -42,7 +42,6 @@ en:
     formats:
       short: "%a, %d %b %Y"
   add: Add
-  close: Close
   done: "I'm Done"
   save: Save
   search: Search
@@ -51,7 +50,6 @@ en:
       gyms: Gyms
       loading: "Loading..."
       nav:
-        menu: Menu
         user:
           workouts: "Workouts"
           log_out: "Log out"

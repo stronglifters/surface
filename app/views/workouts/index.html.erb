@@ -8,7 +8,7 @@
           </a>
         </p>
       <% end %>
-      <ul class="accordion" data-accordion>
+      <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
         <% @workouts.each.with_index do |workout, index| %>
         <li class="accordion-item <%= index == 0 ? "is-active" : "" %>" data-accordion-item>
           <a href="#" class="accordion-title">

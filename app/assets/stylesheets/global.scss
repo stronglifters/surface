@@ -81,6 +81,26 @@ a[class^="social_"] {
     color: $white;
   }
 }
+input[type=search] {
+  background: #222;
+  border-color: $dark-gray;
+  color: $medium-gray;
+  width: 85px;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
+}
+input[type=search]:focus {
+  background-color: $white;
+  color: $black;
+  width: 150px;
+  -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+  -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+  box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
 /* ---------------------------------------------- */
 /* Footer --------------------------------------- */
 /* ---------------------------------------------- */

@@ -48,6 +48,7 @@ en:
   layouts:
     application:
       gyms: Gyms
+      new_workout: 'Next Workout'
       loading: "Loading..."
       nav:
         user:
@@ -55,7 +56,12 @@ en:
           log_out: "Log out"
           profile_edit: "Edit profile"
           profile_view: "View profile"
-      title: Stronglifters
+      title: Strong Lifters
+    flash:
+      notice: 'Yay!'
+      warning: 'Uh oh!'
+      error: 'Oops...'
+      success: 'Yeah Buddy!'
   gyms:
     index:
       title: Gyms
@@ -63,15 +69,16 @@ en:
       title: New Gym
   registrations:
     new:
-      username: "Username"
+      close: 'Close'
       email: "Email"
-      password: "Password"
-      terms_and_conditions: "I agree to the"
-      terms_and_conditions_link: "Terms and Conditions of Use"
-      register_button: "Register"
       login_link: "Already have an account?"
+      password: "Password"
+      register_button: "Register"
+      terms_and_conditions: "I agree to the Terms and Conditions of Use"
+      terms_and_conditions_link: "Read the Terms and Conditions of Use"
+      username: "Username"
     create:
-      success: "Thank you for registering."
+      success: "Thank you for registering. Welcome."
   profiles:
     edit:
       choose_home_gym: 'Choose Home Gym'

@@ -44,7 +44,7 @@ feature "Profiles", type: :feature do
       allow(Gym).to receive(:create_from_yelp!).and_return(gym)
 
       VCR.use_cassette("home_gym") do
-        subject.click_link(I18n.t("profiles.edit.choose_home_gym"))
+        subject.click_button(I18n.t("profiles.edit.choose_home_gym"))
         subject.choose_home_gym(city: "calgary", name: "sait")
         subject.save_changes
 

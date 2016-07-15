@@ -6,5 +6,4 @@ class Stronglifters.Startup
       $(".loading-indicator").show()
     $(document).on 'turbolinks:request-end', ->
       $(".loading-indicator").hide()
-    Foundation.global.namespace = ''
     $(document).foundation()

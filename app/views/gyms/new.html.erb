@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="row">
-  <div class="large-6 columns">
+  <div class="columns">
     <h1><%= t(:search) %></h1>
     <%= form_tag gyms_path(source: 'yelp'), method: :get, remote: true do %>
       <%= hidden_field_tag :city, current_session.location.try(:city) %>
@@ -13,11 +13,10 @@
       <%= hidden_field_tag :per_page, 10 %>
       <%= hidden_field_tag :source, 'yelp' %>
       <%= search_field_tag :q, params[:q], placeholder: t(:search) %>
+      <%= submit_tag t(:search), class: "button" %>
     <% end %>
     <div id="results"></div>
-  </div>
 
-  <div class="large-6 columns">
     <h1><%= t(".title") %></h1>
     <%= form_for(@gym) do |form| %>
       <%= form.label :name %>

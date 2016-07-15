@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= content_for?(:title) ? yield(:title) : "Stronglifters" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Strong Lifters" %></title>
     <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
@@ -13,8 +12,8 @@
     <%= render partial: 'layouts/flash' %>
     <header>
       <div class="row">
-        <div class="small-12 columns text-center">
-          <h1><span>Stronglifters</span></h1>
+        <div class="columns text-center">
+          <h1><span>Strong Lifters</span></h1>
         </div>
       </div>
     </header>

@@ -27,4 +27,17 @@ module ApplicationHelper
     iframe = content_tag(:iframe, "", width: 560, height: 315, src: "https://www.youtube-nocookie.com/embed/#{video}", frameborder: 0, allowfullscreen: true)
     content_tag(:div, iframe, class: "flex-video")
   end
+
+  def class_for_flash(type)
+    case type.to_sym
+    when :notice
+      "primary"
+    when :error
+      "alert"
+    when :warning
+      "warning"
+    when :success
+      "success"
+    end
+  end
 end

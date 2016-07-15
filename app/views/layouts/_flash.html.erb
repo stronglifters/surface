@@ -1,14 +1,17 @@
 <% if flash.any? %>
-  <div class="row">
-    <% flash.each do |name, errors| %>
-      <div data-alert class="alert-box <%= name %>">
-        <ul>
-          <% Array(errors).each do |error| %>
-            <%= content_tag :li, error %>
+  <div class="row align-center">
+    <div class="columns">
+      <% flash.each do |type, messages| %>
+        <div class="callout <%= class_for_flash(type) %>" data-closable>
+          <h5><%= t(".#{type}") %></h5>
+          <% Array(messages).each do |message| %>
+            <%= content_tag :p, message %>
           <% end %>
-        </ul>
-        <a href="#" class="close">&times;</a>
-      </div>
-    <% end %>
+          <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+    </div>
   </div>
 <% end %>

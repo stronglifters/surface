@@ -57,13 +57,4 @@ describe UserSession do
       expect(UserSession.authenticate("blah")).to be_nil
     end
   end
-
-  describe "#after_create" do
-    it "schedules a job to import gyms in city" do
-      allow(ImportGymsJob).to receive(:perform_later)
-      subject.location = location = create(:portland)
-      subject.save!
-      expect(ImportGymsJob).to have_received(:perform_later).with(location)
-    end
-  end
 end

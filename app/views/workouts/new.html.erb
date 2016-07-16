@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="small-12 columns">
+  <div class="columns">
     <h1>Routine <%= @routine.name %></h1>
     <% @all_routines.each do |routine| %>
       <p class="text-right">
@@ -8,30 +8,27 @@
     <% end %>
     <%= form_for @workout do |f| %>
       <%= f.hidden_field :routine_id %>
-      <fieldset>
+      <fieldset class="fieldset">
         <legend><%= Workout.human_attribute_name(:body_weight) %></legend>
         <%= f.number_field :body_weight %>
       </fieldset>
       <% @workout.sets.group_by(&:exercise).each do |exercise, sets| %>
-        <fieldset>
+        <fieldset class="fieldset">
           <legend><%= exercise.name %></legend>
           <% sets.find_all(&:work?).each.with_index(1) do |set, index| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
-              <div name="<%= exercise.slug %>" class="row">
-                <div class="small-3 columns">
+              <div name="<%= set.id %>" class="row">
+                <div class="small-4 columns">
                   <%= s.label :target_repetitions %>
                   <%= s.number_field :target_repetitions %>
                 </div>
-
-                <div class="small-6 columns">
+                <div class="small-5 columns">
                   <%= s.label :target_weight %>
                   <%= s.number_field :target_weight %>
                 </div>
-                <div class="small-3 columns">
+                <div class="columns">
                   <br />
-                  <a class="skip button tiny" href="#">skip</a>
-                  <%= s.hidden_field :type %>
-                  <%= s.hidden_field :exercise_id %>
+                  <a href="#" class="button skip">skip</a>
                 </div>
               </div>
             <% end %>

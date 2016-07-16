@@ -1,9 +1,9 @@
 <form on-submit="search">
-  <fieldset>
+  <fieldset class="fieldset">
     <legend>City</legend>
     <input type="text" name="city" value='{{city}}' />
   </fieldset>
-  <fieldset>
+  <fieldset class="fieldset">
     <legend>Gym</legend>
     <input on-submit="search" type="text" name="q" value='{{gym}}' />
   </fieldset>

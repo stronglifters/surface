@@ -40,7 +40,7 @@ describe "WorkoutView", ->
 
   it "indicates no progress recorded", ->
     result = @subject.get('workout.exercises.0.sets.0.status')
-    expect(result).toEqual('secondary')
+    expect(result).toEqual('secondary hollow')
 
   describe "updating progress", ->
     describe "when no reps are completed", ->

@@ -5,10 +5,6 @@ class UserSession < ApplicationRecord
     where("accessed_at > ?", 2.weeks.ago).where(revoked_at: nil)
   end
 
-  after_create do
-    ImportGymsJob.perform_later(location)
-  end
-
   def revoke!
     update_attribute(:revoked_at, Time.current)
   end

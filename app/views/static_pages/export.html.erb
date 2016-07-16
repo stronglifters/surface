@@ -1,30 +1,32 @@
 <div class="row">
-  <div class="small-12 columns">
-    <ul data-orbit>
-      <li data-orbit-slide="headline-1">
-      <div>
-        <h2>Step 1: Go to Settings</h2>
-        <p> <%= image_tag "sl5x5-android-settings.png" %> </p>
-      </div>
-      </li>
-      <li data-orbit-slide="headline-2">
-      <div>
-        <h2>Step 2: Choose Export</h2>
-        <p> <%= image_tag "sl5x5-android-export.png" %> </p>
-      </div>
-      </li>
-      <li data-orbit-slide="headline-3">
-      <div>
-        <h2>Step 3: Choose Send</h2>
-        <p> <%= image_tag "sl5x5-android-send.png" %> </p>
-      </div>
-      </li>
-      <li data-orbit-slide="headline-4">
-      <div>
-        <h2>Step 4: Paste the email address provided</h2>
-        <p> <%= image_tag "sl5x5-android-compose.png" %> </p>
-      </div>
-      </li>
-    </ul>
+  <div class="columns">
+    <div class="orbit" role="region" aria-label="Send to Stronglifters" data-orbit>
+      <ul class="orbit-container">
+        <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+        <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+        <li class="is-active orbit-slide">
+          <%= image_tag "sl5x5-android-settings.png", class: "orbit-image" %>
+          <figcaption class="orbit-caption">Step 1: Go to Settings</figcaption>
+        </li>
+        <li class="orbit-slide">
+          <%= image_tag "sl5x5-android-export.png", class: "orbit-image" %>
+          <figcaption class="orbit-caption">Step 2: Choose Export</figcaption>
+        </li>
+        <li class="orbit-slide">
+          <%= image_tag "sl5x5-android-send.png", class: "orbit-image" %>
+          <figcaption class="orbit-caption">Step 3: Choose Send</figcaption>
+        </li>
+        <li class="orbit-slide">
+          <%= image_tag "sl5x5-android-compose.png", class: "orbit-image" %>
+          <figcaption class="orbit-caption">Step 4: Paste the email address provided</figcaption>
+        </li>
+      </ul>
+      <nav class="orbit-bullets">
+        <button class="is-active" data-slide="0"><span class="show-for-sr">Step 1: Go to Settings</span><span class="show-for-sr">Current Slide</span></button>
+        <button data-slide="1"><span class="show-for-sr">Step 2: Choose Export</span></button>
+        <button data-slide="2"><span class="show-for-sr">Step 3: Choose Send</span></button>
+        <button data-slide="3"><span class="show-for-sr">Step 4: Paste the email address provided</span></button>
+      </nav>
+    </div>
   </div>
 </div>

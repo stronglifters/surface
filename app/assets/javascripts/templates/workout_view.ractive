@@ -1,28 +1,28 @@
 {{#if clock}}
-  <div data-alert="" class="alert-box {{alertStatus}}">
+  <div class="callout {{alertStatus}}">
     <p> {{message}} </p>
     <p> Rest Clock: {{clock}} </p>
   </div>
 {{/if}}
 
-<ul class="accordion" data-accordion>
+<ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
   {{#each workout.exercises}}
-  <li class="accordion-navigation">
-    <a href="#panel-{{id}}">{{name}}</a>
-    <div id="panel-{{id}}" class="content">
+  <li class="accordion-item" data-accordion-item>
+    <a href="#" class="accordion-title">{{name}}</a>
+    <div class="accordion-content" data-tab-content>
       {{#each sets}}
       <div class="row">
-        <div class="columns small-3">
-          <button id='{{id}}' on-click="updateProgress" class="button round {{status}}">
+        <div class="columns">
+          <button id='{{id}}' on-click="updateProgress" class="button {{status}}">
             {{actual_repetitions}}
           </button>
         </div>
-        <div class="columns small-5">
+        <div class="columns">
           <p class="text-center">
             {{target_repetitions}} x {{target_weight}}
           </p>
         </div>
-        <div class="columns small-4">
+        <div class="columns">
           <p class="text-center">
             {{weight_per_side}}
           </p>

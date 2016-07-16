@@ -5,7 +5,7 @@ RSpec.describe UserMailer, type: :mailer do
     let(:user) { double User, username: "blah", email:"blah@example.com" }
     let(:mail) { UserMailer.registration_email(user) }
     it "renders the subject" do
-      expect(mail.subject).to eql("Welcome to Stronglifters.")
+      expect(mail.subject).to eql("Welcome to Strong Lifters.")
     end
     it "renders the recipient email" do
       expect(mail.to).to eql([user.email])

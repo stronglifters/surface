@@ -15,9 +15,9 @@
       <% @workout.sets.group_by(&:exercise).each do |exercise, sets| %>
         <fieldset class="fieldset">
           <legend><%= exercise.name %></legend>
-          <% sets.find_all(&:work?).each.with_index(1) do |set, index| %>
+          <% sets.each do |set| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
-              <div name="<%= set.id %>" class="row">
+              <div name="<%= set.id %>" class="row <%= set.warm_up? ? "hide" : "" %>">
                 <div class="small-4 columns">
                   <%= s.label :target_repetitions %>
                   <%= s.number_field :target_repetitions %>
@@ -28,7 +28,9 @@
                 </div>
                 <div class="columns">
                   <br />
-                  <a href="#" class="button skip">skip</a>
+                  <%= s.hidden_field :exercise_id %>
+                  <%= s.hidden_field :type %>
+                  <button type="button" class="button skip">skip</button>
                 </div>
               </div>
             <% end %>

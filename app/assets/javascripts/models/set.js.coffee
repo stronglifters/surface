@@ -12,3 +12,6 @@ class Stronglifters.Set extends Backbone.Model
 
   successful: ->
     @get("target_repetitions") == @get("actual_repetitions")
+
+  workSet: ->
+    @get("type") == "WorkSet"

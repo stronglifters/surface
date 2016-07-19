@@ -28,6 +28,7 @@ class WorkoutsController < ApplicationController
       :body_weight,
       exercise_sets_attributes: [
         :exercise_id,
+        :target_duration,
         :target_repetitions,
         :target_weight,
         :type,

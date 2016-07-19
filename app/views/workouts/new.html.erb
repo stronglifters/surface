@@ -18,14 +18,23 @@
           <% sets.each do |set| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
               <div name="<%= set.id %>" class="row <%= set.warm_up? ? "hide" : "" %>">
-                <div class="small-4 columns">
-                  <%= s.label :target_repetitions %>
-                  <%= s.number_field :target_repetitions %>
-                </div>
-                <div class="small-5 columns">
-                  <%= s.label :target_weight %>
-                  <%= s.number_field :target_weight %>
-                </div>
+                <% if set.target_duration.present? %>
+                  <div class="small-5 columns">
+                    <%= s.label :target_duration %>
+                    <%= s.number_field :target_duration %>
+                    <%= s.hidden_field :target_repetitions %>
+                    <%= s.hidden_field :target_weight %>
+                  </div>
+                <% else %>
+                  <div class="small-4 columns">
+                    <%= s.label :target_repetitions %>
+                    <%= s.number_field :target_repetitions %>
+                  </div>
+                  <div class="small-5 columns">
+                    <%= s.label :target_weight %>
+                    <%= s.number_field :target_weight %>
+                  </div>
+                <% end %>
                 <div class="columns">
                   <br />
                   <%= s.hidden_field :exercise_id %>

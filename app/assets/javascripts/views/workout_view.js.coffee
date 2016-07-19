@@ -11,10 +11,11 @@ class Stronglifters.WorkoutView extends Ractive
 
     @observe 'workout.exercises.*.sets.*', (newValue, oldValue, keypath) ->
       @withModel keypath, (model) =>
-        @refreshStatus(model, keypath)
+        @refreshStatus model, keypath
 
   withModel: (keypath, callback) ->
     model = new Stronglifters.Set(@get(keypath))
+    model.set 'keypath', keypath
     callback(model)
     prefix = (x, key) ->
       x["#{keypath}.#{key}"] = model.changed[key]
@@ -22,6 +23,10 @@ class Stronglifters.WorkoutView extends Ractive
     @set(_.reduce(_.keys(model.changed), prefix, {}))
 
   updateProgress: (model) ->
+    if model.timed()
+      @startTimerFor(model)
+      return
+
     if !model.started()
       model.complete()
     else
@@ -33,21 +38,28 @@ class Stronglifters.WorkoutView extends Ractive
         message = "If it was easy break for 1:30, otherwise rest for 3:00."
       else
         message = "No rest for the wicked. Let's do this!"
-      @displayMessage(message, 'success')
+      @displayMessage message, 'success'
     else
-      @displayMessage("Take a 5:00 break.", 'alert')
+      @displayMessage "Take a 5:00 break.", 'alert'
     @clock.start()
 
   refreshStatus: (model, keypath) ->
+    if model.timed()
+      return
+
     if !model.started()
-      @set("#{keypath}.status", "secondary hollow")
+      @set "#{keypath}.status", "secondary hollow"
       return
 
     if model.successful()
-      @set("#{keypath}.status", "success")
+      @set "#{keypath}.status", "success"
     else
-      @set("#{keypath}.status", "alert")
+      @set "#{keypath}.status", "alert"
 
   displayMessage: (message, status) ->
-    @set('message', message)
-    @set('alertStatus', status)
+    @set 'message', message
+    @set 'alertStatus', status
+
+  startTimerFor: (model) ->
+    @setTimer ?= new Stronglifters.Timer(@, "#{model.get('keypath')}.actual_duration", 60000)
+    @setTimer.start()

@@ -15,3 +15,6 @@ class Stronglifters.Set extends Backbone.Model
 
   workSet: ->
     @get("type") == "WorkSet"
+
+  timed: ->
+    @get("target_duration")?

@@ -24,8 +24,9 @@ class UserRecommendation
   def work_set(target_weight)
     WorkSet.new(
       exercise: exercise,
-      target_repetitions: repetitions,
-      target_weight: target_weight,
+      target_repetitions: recommendation.duration.present? ? 1 : repetitions,
+      target_weight: recommendation.duration.present? ? 0.lbs : target_weight,
+      target_duration: recommendation.duration,
     )
   end
 

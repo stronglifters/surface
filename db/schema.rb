@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160710010020) do
+ActiveRecord::Schema.define(version: 20160719020232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160710010020) do
     t.uuid     "exercise_id",        null: false
     t.uuid     "workout_id"
     t.string   "type",               null: false
+    t.integer  "target_duration"
     t.index ["exercise_id", "workout_id"], name: "index_exercise_sets_on_exercise_id_and_workout_id", using: :btree
     t.index ["exercise_id"], name: "index_exercise_sets_on_exercise_id", using: :btree
   end

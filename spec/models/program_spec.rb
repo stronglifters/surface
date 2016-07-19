@@ -157,8 +157,9 @@ describe Program do
         sets = subject.prepare_sets_for(user, planks)
         worksets = sets.select(&:work?)
         expect(worksets.length).to eql(3)
-        expect(worksets.map(&:target_repetitions)).to match_array([1])
-        expect(worksets.map(&:duration)).to match_array([60])
+        expect(worksets.map(&:target_repetitions)).to match_array([1,1,1])
+        expect(worksets.map(&:target_weight).uniq).to match_array([0.lbs])
+        expect(worksets.map(&:target_duration).uniq).to match_array([60])
       end
     end
   end

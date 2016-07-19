@@ -19,7 +19,11 @@
         </div>
         <div class="columns">
           <p class="text-center">
-            {{target_repetitions}} x {{target_weight}}
+            {{#if target_duration}}
+              {{target_duration}} seconds
+            {{else}}
+              {{target_repetitions}} x {{target_weight}}
+            {{/if}}
           </p>
         </div>
         <div class="columns">

@@ -5,7 +5,7 @@ class Stronglifters.WorkoutView extends Ractive
 
   oninit: ->
     @clock = new Stronglifters.Timer
-      databag: @
+      databag: this
       key: 'clock'
 
     @timers = { }
@@ -77,7 +77,7 @@ class Stronglifters.WorkoutView extends Ractive
     else
       targetMilliseconds = model.get('target_duration') * 1000
       timer = new Stronglifters.Timer
-        databag: @
+        databag: this
         format: 'ss'
         key: "#{keypath}.actual_duration"
         maxMilliseconds: targetMilliseconds

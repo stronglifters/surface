@@ -1,7 +1,8 @@
 class Stronglifters.Timer
   constructor: (options) ->
     @databag = options['databag']
-    @format = options['format'] || 'mm:ss'
+    @format = options['format'] || (timer) ->
+      moment.utc(timer).format('mm:ss')
     @interval = 1000
     @key = options['key'] || 'clock'
     @maxMilliseconds = options['maxMilliseconds'] || 600000
@@ -15,7 +16,8 @@ class Stronglifters.Timer
 
   refreshTimer: =>
     @databag.add('timer', @interval)
-    @databag.set(@key, moment.utc(@databag.get('timer')).format(@format))
+    formattedValue = @format(@databag.get('timer'))
+    @databag.set(@key, formattedValue)
     if @databag.get('timer') >= @maxMilliseconds
       @stop()
       @success()

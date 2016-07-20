@@ -78,11 +78,12 @@ class Stronglifters.WorkoutView extends Ractive
       targetMilliseconds = model.get('target_duration') * 1000
       timer = new Stronglifters.Timer
         databag: this
-        format: 'ss'
+        format: (timer) ->
+          (moment.utc(timer).minutes() * 60) + moment.utc(timer).seconds()
         key: "#{keypath}.actual_duration"
         maxMilliseconds: targetMilliseconds
-        success: ->
-          console.log("SAVING")
+        success: =>
+          model.set('actual_duration', @get("#{keypath}.actual_duration"))
           model.save()
       @timers[keypath] = timer
       timer.start()

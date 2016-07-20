@@ -1,12 +1,13 @@
 class Stronglifters.Timer
-  constructor: (databag, key = 'clock', maxMilliseconds = 600000) ->
-    @databag = databag
-    @format = 'mm:ss'
+  constructor: (options) ->
+    @databag = options['databag']
+    @format = options['format'] || 'mm:ss'
     @interval = 1000
-    @key = key
-    @maxMilliseconds = maxMilliseconds
+    @key = options['key'] || 'clock'
+    @maxMilliseconds = options['maxMilliseconds'] || 600000
+    @success = options['success'] || -> { }
 
-  start: ->
+  start: (options) ->
     @stop()
 
     @databag.set('timer', 0)
@@ -17,6 +18,7 @@ class Stronglifters.Timer
     @databag.set(@key, moment.utc(@databag.get('timer')).format(@format))
     if @databag.get('timer') >= @maxMilliseconds
       @stop()
+      @success()
 
   stop: =>
     if @running()

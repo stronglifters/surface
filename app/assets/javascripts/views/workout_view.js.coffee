@@ -4,7 +4,10 @@ class Stronglifters.WorkoutView extends Ractive
   template: RactiveTemplates["templates/workout_view"]
 
   oninit: ->
-    @clock = new Stronglifters.Timer(@)
+    @clock = new Stronglifters.Timer
+      databag: @
+      key: 'clock'
+
     @timers = { }
     @on 'updateProgress', (event) ->
       @withModel event.keypath, (model) =>
@@ -70,7 +73,16 @@ class Stronglifters.WorkoutView extends Ractive
     timer = @timers[keypath]
     if timer?
       timer.stop()
+      model.save()
     else
-      timer = new Stronglifters.Timer(@, "#{keypath}.actual_duration", 60000)
+      targetMilliseconds = model.get('target_duration') * 1000
+      timer = new Stronglifters.Timer
+        databag: @
+        format: 'ss'
+        key: "#{keypath}.actual_duration"
+        maxMilliseconds: targetMilliseconds
+        success: ->
+          console.log("SAVING")
+          model.save()
       @timers[keypath] = timer
       timer.start()

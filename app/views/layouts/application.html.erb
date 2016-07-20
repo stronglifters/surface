@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= t('.title') %> <%= content_for?(:title) ? "| #{yield(:title)}" : "" %></title>
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
     <%= javascript_include_tag "https://apis.google.com/js/api.js" %>
     <%= javascript_include_tag "https://apis.google.com/js/client.js" %>

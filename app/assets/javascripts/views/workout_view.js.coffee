@@ -5,6 +5,7 @@ class Stronglifters.WorkoutView extends Ractive
 
   oninit: ->
     @clock = new Stronglifters.Timer(@)
+    @timers = { }
     @on 'updateProgress', (event) ->
       @withModel event.keypath, (model) =>
         @updateProgress(model)
@@ -23,6 +24,9 @@ class Stronglifters.WorkoutView extends Ractive
     @set(_.reduce(_.keys(model.changed), prefix, {}))
 
   updateProgress: (model) ->
+    @set('clock', null)
+    @clock.stop()
+
     if model.timed()
       @startTimerFor(model)
       return
@@ -41,6 +45,7 @@ class Stronglifters.WorkoutView extends Ractive
       @displayMessage message, 'success'
     else
       @displayMessage "Take a 5:00 break.", 'alert'
+
     @clock.start()
 
   refreshStatus: (model, keypath) ->
@@ -61,5 +66,11 @@ class Stronglifters.WorkoutView extends Ractive
     @set 'alertStatus', status
 
   startTimerFor: (model) ->
-    @setTimer ?= new Stronglifters.Timer(@, "#{model.get('keypath')}.actual_duration", 60000)
-    @setTimer.start()
+    keypath = model.get('keypath')
+    timer = @timers[keypath]
+    if timer?
+      timer.stop()
+    else
+      timer = new Stronglifters.Timer(@, "#{keypath}.actual_duration", 60000)
+      @timers[keypath] = timer
+      timer.start()

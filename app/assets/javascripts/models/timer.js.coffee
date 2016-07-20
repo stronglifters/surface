@@ -15,14 +15,13 @@ class Stronglifters.Timer
   refreshTimer: =>
     @databag.add('timer', @interval)
     @databag.set(@key, moment.utc(@databag.get('timer')).format(@format))
-    if @databag.get('timer') > @maxMilliseconds
+    if @databag.get('timer') >= @maxMilliseconds
       @stop()
 
   stop: =>
     if @running()
       clearTimeout @intervalId
       @intervalId = null
-      @databag.set(@key, null)
 
   running: ->
     @intervalId?

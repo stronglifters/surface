@@ -1,5 +1,6 @@
 class ExerciseSet < ApplicationRecord
-  attr_accessor :actual_duration
+  attribute :actual_repetitions, :integer
+  attribute :actual_duration, :integer
   attribute :target_weight, :quantity
   belongs_to :exercise
   belongs_to :workout

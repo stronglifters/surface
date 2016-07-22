@@ -6,7 +6,7 @@
         <%= link_to "Switch to Routine #{routine.name}", new_workout_path(routine_id: routine.id) %>
       </p>
     <% end %>
-    <%= form_for @workout do |f| %>
+    <%= form_for @workout, remote: true do |f| %>
       <%= f.hidden_field :routine_id %>
       <fieldset class="fieldset">
         <legend><%= Workout.human_attribute_name(:body_weight) %></legend>
@@ -46,7 +46,7 @@
           <% end %>
         </fieldset>
       <% end %>
-      <%= f.submit "Start", class: "button round right" %>
+      <%= f.submit "Start", class: "button round right", data: { disable_with: 'Saving' } %>
     <% end %>
   </div>
 </div>

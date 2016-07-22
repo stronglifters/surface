@@ -29,5 +29,4 @@ var Stronglifters = Stronglifters || {};
 var ready = function() {
   new Stronglifters.Startup().start();
 };
-$(document).ready(ready);
 $(document).on('turbolinks:load', ready);

@@ -1,4 +1,7 @@
 class ExerciseSet < ApplicationRecord
+  attribute :actual_repetitions, :integer
+  attribute :actual_duration, :integer
+  attribute :target_weight, :quantity
   belongs_to :exercise
   belongs_to :workout
   scope :for, ->(exercise) { where(exercise: exercise).in_order }
@@ -15,9 +18,9 @@ class ExerciseSet < ApplicationRecord
   end
 
   def weight_per_side
-    remaining_weight = target_weight.lbs - 45.lbs
+    remaining_weight = target_weight - 45.lbs
     if remaining_weight > 0
-      "#{remaining_weight / 2} lb/side"
+      "#{(remaining_weight / 2).pretty_print}/side"
     end
   end
 end

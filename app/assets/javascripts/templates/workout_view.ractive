@@ -14,12 +14,20 @@
       <div class="row">
         <div class="columns">
           <button id='{{id}}' on-click="updateProgress" class="button {{status}}">
-            {{actual_repetitions}}
+            {{#if target_duration}}
+              {{actual_duration}}
+            {{else}}
+              {{actual_repetitions}}
+            {{/if}}
           </button>
         </div>
         <div class="columns">
           <p class="text-center">
-            {{target_repetitions}} x {{target_weight}} lbs
+            {{#if target_duration}}
+              {{target_duration}} seconds
+            {{else}}
+              {{target_repetitions}} x {{target_weight}}
+            {{/if}}
           </p>
         </div>
         <div class="columns">

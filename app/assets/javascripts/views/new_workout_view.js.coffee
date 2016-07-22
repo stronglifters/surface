@@ -1,6 +1,6 @@
 class Stronglifters.NewWorkoutView extends Backbone.View
   initialize: (options) ->
-    @$el.find('fieldset[name]').each (index, fieldset) ->
+    @$el.find('div[name]').each (index, fieldset) ->
       view = new Stronglifters.NewSetView
         el: $(fieldset)
 

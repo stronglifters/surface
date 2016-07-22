@@ -7,6 +7,6 @@ class SetsController < ApplicationController
   private
 
   def secure_params
-    params.require(:set).permit(:actual_repetitions)
+    params.require(:set).permit(:actual_repetitions, :actual_duration)
   end
 end

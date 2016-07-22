@@ -1,6 +1,6 @@
 <%= paginator.render do %>
-  <ul aria-label="Pagination" class="pagination" role="pagination">
-    <%= first_page_tag unless current_page.first? %>
+  <ul aria-label="Pagination" class="pagination text-center" role="navigation">
+    <% first_page_tag unless current_page.first? %>
     <%= prev_page_tag unless current_page.first? %>
     <% each_page do |page| %>
       <% if page.left_outer? || page.right_outer? || page.inside_window? %>
@@ -9,7 +9,7 @@
         <%= gap_tag %>
       <% end %>
     <% end %>
-    <%= next_page_tag unless current_page.last? %>
-    <%= last_page_tag unless current_page.last? %>
+    <%= next_page_tag %>
+    <% last_page_tag unless current_page.last? %>
   </ul>
 <% end %>

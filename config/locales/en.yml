@@ -26,6 +26,9 @@ en:
       warm_up_set: Warm Up Set
       work_set: Work Set
     attributes:
+      exercise_set:
+        target_repetitions: Reps
+        target_weight: Weight
       profile:
         female: Female
         gender: Gender
@@ -111,3 +114,9 @@ en:
       warning: To ensure your workouts are imported correctly we suggest that you update your timezone.
   footer:
     copyright: "© Copyright www.stronglifters.com. All rights reserved."
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "Previous"
+      next: "Next"

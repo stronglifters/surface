@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704162352) do
+ActiveRecord::Schema.define(version: 20160720022923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20160704162352) do
     t.uuid     "exercise_id",        null: false
     t.uuid     "workout_id"
     t.string   "type",               null: false
+    t.integer  "target_duration"
+    t.integer  "actual_duration"
     t.index ["exercise_id", "workout_id"], name: "index_exercise_sets_on_exercise_id_and_workout_id", using: :btree
     t.index ["exercise_id"], name: "index_exercise_sets_on_exercise_id", using: :btree
   end
@@ -60,7 +62,7 @@ ActiveRecord::Schema.define(version: 20160704162352) do
 
   create_table "profiles", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid     "user_id",                          null: false
-    t.integer  "gender",           default: 0
+    t.integer  "gender",           default: 0,     null: false
     t.integer  "social_tolerance"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 20160704162352) do
     t.integer  "repetitions", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "duration"
   end
 
   create_table "routines", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

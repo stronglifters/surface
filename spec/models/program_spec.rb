@@ -81,9 +81,9 @@ describe Program do
             sets = subject.prepare_sets_for(user, squat)
             warmup_sets = sets.select(&:warm_up?)
             expect(warmup_sets.length).to eql(2)
-            expect(warmup_sets.at(0).target_weight.lbs).to eql(45.lbs)
+            expect(warmup_sets.at(0).target_weight.to(:lbs)).to eql(45.lbs)
             expect(warmup_sets.at(0).target_repetitions).to eql(5)
-            expect(warmup_sets.at(1).target_weight.lbs).to eql(45.lbs)
+            expect(warmup_sets.at(1).target_weight.to(:lbs)).to eql(45.lbs)
             expect(warmup_sets.at(1).target_repetitions).to eql(5)
           end
         end
@@ -96,7 +96,7 @@ describe Program do
             sets = subject.prepare_sets_for(user, squat)
             warmup_sets = sets.select(&:warm_up?)
             expect(warmup_sets.length).to eql(3)
-            expect(warmup_sets.at(2).target_weight.lbs).to eql(65.lbs)
+            expect(warmup_sets.at(2).target_weight.to(:lbs)).to eql(65.lbs)
             expect(warmup_sets.at(2).target_repetitions).to eql(3)
           end
         end
@@ -108,7 +108,7 @@ describe Program do
 
             warmup_sets = subject.prepare_sets_for(user, squat).select(&:warm_up?)
             expect(warmup_sets.length).to eql(3)
-            expect(warmup_sets.last.target_weight.lbs).to eql(75.lbs)
+            expect(warmup_sets.last.target_weight.to(:lbs)).to eql(75.lbs)
             expect(warmup_sets.last.target_repetitions).to eql(3)
           end
         end
@@ -120,7 +120,7 @@ describe Program do
 
             warmup_sets = subject.prepare_sets_for(user, squat).select(&:warm_up?)
             expect(warmup_sets.length).to eql(3)
-            expect(warmup_sets.last.target_weight.lbs).to eql(85.lbs)
+            expect(warmup_sets.last.target_weight.to(:lbs)).to eql(85.lbs)
             expect(warmup_sets.last.target_repetitions).to eql(3)
           end
         end
@@ -132,7 +132,7 @@ describe Program do
 
             warmup_sets = subject.prepare_sets_for(user, squat).select(&:warm_up?)
             expect(warmup_sets.length).to eql(4)
-            expect(warmup_sets.last.target_weight.lbs).to eql(115.lbs)
+            expect(warmup_sets.last.target_weight.to(:lbs)).to eql(115.lbs)
             expect(warmup_sets.last.target_repetitions).to eql(3)
           end
         end
@@ -147,6 +147,19 @@ describe Program do
         worksets = sets.select(&:work?)
         expect(worksets.length).to eql(1)
         expect(worksets.map(&:target_repetitions)).to match_array([5])
+      end
+    end
+
+    describe "planks" do
+      let(:user) { build(:user) }
+
+      it "returns 3 set with 1 rep at 60 seconds" do
+        sets = subject.prepare_sets_for(user, planks)
+        worksets = sets.select(&:work?)
+        expect(worksets.length).to eql(3)
+        expect(worksets.map(&:target_repetitions)).to match_array([1,1,1])
+        expect(worksets.map(&:target_weight).uniq).to match_array([0.lbs])
+        expect(worksets.map(&:target_duration).uniq).to match_array([60])
       end
     end
   end

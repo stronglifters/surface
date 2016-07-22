@@ -14,7 +14,6 @@
 //= require lodash
 //= require moment
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
 //= require modernizr
@@ -26,8 +25,6 @@
 //= require turbolinks
 
 var Stronglifters = Stronglifters || {};
-var ready = function() {
+$(document).on('turbolinks:load', function(){
   new Stronglifters.Startup().start();
-};
-$(document).ready(ready);
-$(document).on('turbolinks:load', ready);
+});

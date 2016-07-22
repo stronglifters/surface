@@ -6,7 +6,7 @@
         <%= link_to "Switch to Routine #{routine.name}", new_workout_path(routine_id: routine.id) %>
       </p>
     <% end %>
-    <%= form_for @workout do |f| %>
+    <%= form_for @workout, remote: true do |f| %>
       <%= f.hidden_field :routine_id %>
       <fieldset class="fieldset">
         <legend><%= Workout.human_attribute_name(:body_weight) %></legend>
@@ -15,37 +15,42 @@
       <% @workout.sets.group_by(&:exercise).each do |exercise, sets| %>
         <fieldset class="fieldset">
           <legend><%= exercise.name %></legend>
-          <% sets.each.with_index(1) do |set, index| %>
+          <% sets.each do |set| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
-              <fieldset name="<%= exercise.slug %>-<%= index %>" class="panel <%= set.work? ? "callout" : "" %>" class="fieldset">
-                <legend><%= set.model_name.human %></legend>
-                <div class="row">
-                  <div class="columns">
+              <div name="<%= set.id %>" class="row <%= set.warm_up? ? "hide" : "" %>">
+                <% if set.target_duration.present? %>
+                  <div class="small-5 columns">
+                    <%= s.label :target_duration %>
+                    <%= s.number_field :target_duration %>
+                    <%= s.hidden_field :target_repetitions %>
+                    <%= s.hidden_field :target_weight %>
+                  </div>
+                <% else %>
+                  <div class="small-4 columns">
                     <%= s.label :target_repetitions %>
                     <%= s.number_field :target_repetitions %>
                   </div>
-                  <div class="columns">
+                  <div class="small-5 columns">
                     <%= s.label :target_weight %>
                     <%= s.number_field :target_weight %>
                   </div>
+                <% end %>
+                <div class="columns">
+                  <br />
+                  <%= s.hidden_field :exercise_id %>
+                  <%= s.hidden_field :type %>
+                  <button type="button" class="button skip">skip</button>
                 </div>
-                <p class="text-right"><a class="skip" href="#">skip</a></p>
-                <%= s.hidden_field :type %>
-                <%= s.hidden_field :exercise_id %>
-              </fieldset>
+              </div>
             <% end %>
           <% end %>
         </fieldset>
       <% end %>
-      <%= f.submit "Start", class: "button round right" %>
+      <%= f.submit "Start", class: "button round right", data: { disable_with: 'Saving' } %>
     <% end %>
   </div>
 </div>
 
 <script type="text/javascript" charset="utf-8">
-var ready = function() {
   window.currentView = new Stronglifters.NewWorkoutView({ el: $('#new_workout') });
-};
-$(document).ready(ready);
-$(document).on('turbolinks:load', ready);
 </script>

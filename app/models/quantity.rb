@@ -49,6 +49,10 @@ class Quantity
     [self, other]
   end
 
+  def hash
+    amount.hash + unit.class.hash
+  end
+
   def eql?(other, delta = 0.1)
     (amount - amount_from(other)).abs <= delta
   end
@@ -59,6 +63,10 @@ class Quantity
 
   def to_s
     to_f.to_s
+  end
+
+  def pretty_print
+    "#{to_f} #{unit}"
   end
 
   private
@@ -89,6 +97,10 @@ class Quantity
         amount
       end
     end
+
+    def to_s
+      "lbs"
+    end
   end
 
   class Kilogram < UnitOfMeasure
@@ -99,6 +111,10 @@ class Quantity
       else
         amount
       end
+    end
+
+    def to_s
+      "kg"
     end
   end
 end

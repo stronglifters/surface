@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe ExerciseSet do
-  subject { build(:exercise_set) }
+  subject { build(:work_set) }
 
   describe "#weight_per_side" do
     it "returns empty bar" do
@@ -11,7 +11,7 @@ describe ExerciseSet do
 
     it "returns 25 lbs/side" do
       subject.target_weight = 95.lbs
-      expect(subject.weight_per_side).to eql("25.0 lb/side")
+      expect(subject.weight_per_side).to eql("25.0 lbs/side")
     end
   end
 
@@ -28,6 +28,20 @@ describe ExerciseSet do
 
     it "returns nil" do
       expect(ExerciseSet.for(squat)).to be_empty
+    end
+  end
+
+  describe "#target_weight" do
+    it "saves lbs" do
+      subject.target_weight = 45.lbs
+      subject.save!
+      expect(subject.reload.target_weight).to eql(45.lbs)
+    end
+
+    it "saves kgs" do
+      subject.target_weight = 20.kg
+      subject.save!
+      expect(subject.reload.target_weight).to eql(20.kg)
     end
   end
 end

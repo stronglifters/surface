@@ -10,7 +10,7 @@ class UserRecommendation
   def prepare_sets
     target_weight = next_weight
     work_sets = recommended_sets.times.map do
-      work_set(target_weight, repetitions)
+      work_set(target_weight)
     end
     (WarmUp.new(exercise, target_weight).sets + work_sets).compact
   end
@@ -21,11 +21,12 @@ class UserRecommendation
 
   private
 
-  def work_set(target_weight, repetitions)
+  def work_set(target_weight)
     WorkSet.new(
       exercise: exercise,
-      target_repetitions: repetitions,
-      target_weight: target_weight
+      target_repetitions: recommendation.duration.present? ? 1 : repetitions,
+      target_weight: recommendation.duration.present? ? 0.lbs : target_weight,
+      target_duration: recommendation.duration,
     )
   end
 
@@ -36,7 +37,7 @@ class UserRecommendation
 
   def next_weight
     last_weight = user.history_for(exercise).last_weight
-    if last_weight > 0
+    if last_weight.present? && last_weight > 0
       5.lbs + last_weight
     else
       45.lbs

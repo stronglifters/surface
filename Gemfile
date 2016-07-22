@@ -34,7 +34,6 @@ source "https://rubygems.org" do
   gem "i18n-tasks", group: :development
   gem "jbuilder", "~> 2.5"
   gem "jquery-rails"
-  gem "jquery-turbolinks"
   gem "listen", "~> 3.0.5"
   gem "kaminari"
   gem "meta_request", group: :development

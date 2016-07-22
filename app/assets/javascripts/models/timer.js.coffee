@@ -1,24 +1,31 @@
 class Stronglifters.Timer
-  constructor: (view) ->
-    @view = view
+  constructor: (options) ->
+    @databag = options['databag']
+    @format = options['format'] || (timer) ->
+      moment.utc(timer).format('mm:ss')
+    @interval = 1000
+    @key = options['key'] || 'clock'
+    @maxMilliseconds = options['maxMilliseconds'] || 600000
+    @success = options['success'] || -> { }
 
-  start: ->
+  start: (options) ->
     @stop()
 
-    @view.set('timer', 0)
-    @intervalId = setInterval @refreshTimer, 1000
+    @databag.set('timer', 0)
+    @intervalId = setInterval @refreshTimer, @interval
 
   refreshTimer: =>
-    @view.add('timer', 1000)
-    @view.set('clock', moment.utc(@view.get('timer')).format('mm:ss'))
-    if @view.get('timer') > 600000
+    @databag.add('timer', @interval)
+    formattedValue = @format(@databag.get('timer'))
+    @databag.set(@key, formattedValue)
+    if @databag.get('timer') >= @maxMilliseconds
       @stop()
+      @success()
 
   stop: =>
     if @running()
       clearTimeout @intervalId
       @intervalId = null
-      @view.set('clock', null)
 
   running: ->
     @intervalId?

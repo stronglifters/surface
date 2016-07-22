@@ -17,7 +17,7 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-  new Stronglifters.GoogleMap("googleMap").present({
+  window.currentView = new Stronglifters.GoogleMap("googleMap").present({
     name: '<%= @gym.name %>',
     latitude: <%= @gym.location.latitude %>,
     longitude: <%= @gym.location.longitude %>,

@@ -14,7 +14,6 @@
 //= require lodash
 //= require moment
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
 //= require modernizr

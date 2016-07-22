@@ -114,3 +114,10 @@ en:
       warning: To ensure your workouts are imported correctly we suggest that you update your timezone.
   footer:
     copyright: "© Copyright www.stronglifters.com. All rights reserved."
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "Previous"
+      next: "Next"
+      truncate: "&hellip;"

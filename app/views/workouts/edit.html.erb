@@ -5,13 +5,11 @@
   </div>
 </div>
 
-
 <script type="text/javascript" charset="utf-8">
-var json = <%= raw render partial: 'edit.json.jbuilder', locals: { workout: @workout } %>;
 window.currentView = new Stronglifters.WorkoutView({
   el: 'workout-view',
   data: function() {
-    return json;
+    return <%= raw render partial: 'edit.json.jbuilder', locals: { workout: @workout } %>;
   }
 })
 </script>

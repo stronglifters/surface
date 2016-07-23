@@ -34,11 +34,9 @@ class TrainingHistory
 
   def last_weight(successfull_only: false)
     if successfull_only
-      last_successful_set = sets.successful.last
-      last_successful_set.try(:target_weight)
+      sets.successful.last.try(:target_weight)
     else
-      last_successful_set = sets.last
-      last_successful_set.try(:target_weight)
+      sets.last.try(:target_weight)
     end
   end
 

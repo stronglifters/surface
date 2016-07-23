@@ -35,12 +35,24 @@ class UserRecommendation
     recommended_sets > 0 ? recommended_sets : recommendation.sets
   end
 
-  def next_weight
-    last_weight = user.history_for(exercise).last_weight
-    if last_weight.present? && last_weight > 0
-      5.lbs + last_weight
+  def next_weight(deload_percentage: 0.10)
+    history = user.history_for(exercise)
+    if history.deload?
+      last_weight = history.last_weight
+      ten_percent_decrease = (last_weight * deload_percentage).to(:lbs).amount
+      weight_to_deduct = if (ten_percent_decrease % 5) > 0
+        ten_percent_decrease - (ten_percent_decrease % 5) + 5
+      else
+        ten_percent_decrease - (ten_percent_decrease % 5)
+      end
+      last_weight - weight_to_deduct.lbs
     else
-      45.lbs
+      last_weight = history.last_weight(successfull_only: true)
+      if last_weight.present? && last_weight > 0
+        5.lbs + last_weight
+      else
+        45.lbs
+      end
     end
   end
 

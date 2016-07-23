@@ -1,7 +1,7 @@
 {{#if clock}}
   <div class="callout {{alertStatus}}">
-    <p> {{message}} </p>
-    <p> Rest Clock: {{clock}} </p>
+    <p class="text-center"> {{message}} </p>
+    <p class="text-center"> Rest Clock: {{clock}} </p>
   </div>
 {{/if}}
 

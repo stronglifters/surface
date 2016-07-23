@@ -64,6 +64,16 @@ describe Program do
         expect(sets.map(&:target_weight).uniq).to match_array([45.lbs])
       end
 
+      it 'deloads you by 10% after 3 consecutive failed workouts' do
+        3.times do
+          workout = create(:workout, user: user, routine: routine_a)
+          5.times { |n| workout.train(squat, 310, repetitions: n) }
+        end
+
+        sets = subject.prepare_sets_for(user, squat).select(&:work?)
+        expect(sets.map(&:target_weight).uniq).to match_array([275.lbs])
+      end
+
       describe "warmup" do
         describe "when the workset is less than 65 lbs" do
           it "returns zero warmup sets" do

@@ -1,4 +1,5 @@
 class Workout < ApplicationRecord
+  attribute :body_weight, :quantity
   belongs_to :user
   belongs_to :routine
   has_one :program, through: :routine
@@ -10,11 +11,7 @@ class Workout < ApplicationRecord
 
   scope :recent, -> { order(occurred_at: :desc) }
   scope :with_exercise, ->(exercise) do
-    joins(:exercises).where(exercises: { id: exercise.id })
-  end
-
-  def body_weight
-    Quantity.new(read_attribute(:body_weight), :lbs)
+    joins(:exercises).where(exercises: { id: exercise.id }).distinct
   end
 
   def train(exercise, target_weight, repetitions:, set: nil)
@@ -36,6 +33,10 @@ class Workout < ApplicationRecord
 
   def progress_for(exercise)
     Progress.new(self, exercise)
+  end
+
+  def add_set(set)
+    exercise_sets.push(set)
   end
 
   def each_exercise

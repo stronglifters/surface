@@ -21,9 +21,25 @@ class TrainingHistory
     sets.where(workout: last_workout).count
   end
 
-  def last_weight
-    last_successful_set = sets.successful.last
-    last_successful_set.try(:target_weight)
+  def deload?
+    recent_workouts = user.workouts.recent.with_exercise(exercise)
+    if recent_workouts.count >= 3
+      recent_workouts.any? do |workout|
+        workout.sets.work.any?(&:failed?)
+      end
+    else
+      false
+    end
+  end
+
+  def last_weight(successfull_only: false)
+    if successfull_only
+      last_successful_set = sets.successful.last
+      last_successful_set.try(:target_weight)
+    else
+      last_successful_set = sets.last
+      last_successful_set.try(:target_weight)
+    end
   end
 
   def to_line_chart

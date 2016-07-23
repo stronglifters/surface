@@ -21,10 +21,10 @@ class TrainingHistory
     sets.where(workout: last_workout).count
   end
 
-  def deload?
+  def deload?(number_of_workouts: 3)
     recent_workouts = user.workouts.recent.with_exercise(exercise)
-    if recent_workouts.count >= 3
-      recent_workouts.any? do |workout|
+    if recent_workouts.count >= number_of_workouts
+      recent_workouts.last(number_of_workouts).any? do |workout|
         workout.sets.work.any?(&:failed?)
       end
     else

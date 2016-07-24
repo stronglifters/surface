@@ -36,7 +36,19 @@ class UserRecommendation
   end
 
   def next_weight
-    last_weight = user.history_for(exercise).last_weight
+    history = user.history_for(exercise)
+    if history.deload?
+      deload(history.last_weight)
+    else
+      increase_weight(history.last_weight(successfull_only: true))
+    end
+  end
+
+  def recommendation
+    @recommendation ||= program.recommendations.find_by(exercise: exercise)
+  end
+
+  def increase_weight(last_weight)
     if last_weight.present? && last_weight > 0
       5.lbs + last_weight
     else
@@ -44,7 +56,13 @@ class UserRecommendation
     end
   end
 
-  def recommendation
-    @recommendation ||= program.recommendations.find_by(exercise: exercise)
+  def deload(last_weight, percentage: 0.10)
+    ten_percent_decrease = (last_weight * percentage).to(:lbs).amount
+    weight_to_deduct = if (ten_percent_decrease % 5) > 0
+                         ten_percent_decrease - (ten_percent_decrease % 5) + 5
+                       else
+                         ten_percent_decrease - (ten_percent_decrease % 5)
+                       end
+    last_weight - weight_to_deduct.lbs
   end
 end

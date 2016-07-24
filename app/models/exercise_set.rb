@@ -23,4 +23,12 @@ class ExerciseSet < ApplicationRecord
       "#{(remaining_weight / 2).pretty_print}/side"
     end
   end
+
+  def success?
+    actual_repetitions == target_repetitions
+  end
+
+  def failed?
+    !success?
+  end
 end

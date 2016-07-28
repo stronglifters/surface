@@ -58,4 +58,5 @@ Rails.application.configure do
     Bullet.console = true
   end
   config.web_console.whitelisted_ips = "172.16.0.0/16"
+  config.react.variant = :development
 end

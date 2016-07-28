@@ -20,6 +20,9 @@
 //= require ractive
 //= require backbone
 //= require ractive-backbone
+//= require react
+//= require react_ujs
+//= require components
 //= require_self
 //= require_tree .
 //= require turbolinks

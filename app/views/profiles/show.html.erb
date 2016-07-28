@@ -31,7 +31,11 @@
       <tbody>
         <% @program.each_exercise do |exercise| %>
           <tr>
-            <td> <strong><%= exercise.name %></strong></td><td><%= @user.personal_record_for(exercise) %> lbs</td>
+            <% if @user.personal_record_for(exercise) %>
+              <td><strong><%= exercise.name %></strong></td><td><%= "#{@user.personal_record_for(exercise)} lbs" %></td>
+            <% else %>
+              <td><strong><%= exercise.name %></strong></td><td><%= t('.not_available') %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>

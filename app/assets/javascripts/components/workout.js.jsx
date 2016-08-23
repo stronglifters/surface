@@ -1,20 +1,26 @@
 var Set = React.createClass({
   getInitialState: function() {
+    console.log(this.props.actual_repetitions);
     return { actual_repetitions: this.props.actual_repetitions };
   },
   handleClick: function() {
     console.log([this.props.set.target_repetitions, this.state.actual_repetitions]);
-    if (this.props.set.target_repetitions == this.state.actual_repetitions) {
-      this.setState({ actual_repetitions: 0 });
+
+    if (this.state.actual_repetitions == null) {
+      this.setState({ actual_repetitions: this.props.set.target_repetitions });
     } else {
-      this.setState({ actual_repetitions: this.state.actual_repetitions + 1 });
+      if (this.state.actual_repetitions == 0) {
+        this.setState({ actual_repetitions: this.props.set.target_repetitions });
+      } else {
+        this.setState({ actual_repetitions: this.state.actual_repetitions - 1 });
+      }
     }
   },
   render: function(){
     return (
       <tr>
         <td>{this.props.set.type}</td>
-        <td><button onClick={this.handleClick} type="button">{this.state.actual_repetitions}</button></td>
+        <td><button onClick={this.handleClick} type="button" className="button">{this.state.actual_repetitions}</button></td>
         <td>{this.props.set.target_repetitions} x {this.props.set.target_weight}</td>
         <td>{this.props.set.weight_per_side}</td>
       </tr>

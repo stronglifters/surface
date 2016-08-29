@@ -92,7 +92,8 @@ en:
       lead: Search for your regular gym.
     show:
       exercise_header: Exercise
-      maximum_achieved: Maximum Achieved
+      maximum_achieved: Personal Record
+      not_available: N/A
       no_workouts_completed: 0 workouts completed
       personal_records: Personal Records
       workouts_completed: "%{count} workouts completed since %{first_session}."

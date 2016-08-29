@@ -6,9 +6,9 @@ var Exercises = React.createClass({
       );
     });
     return (
-      <div>
+      <ul className="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
         {exerciseNodes}
-      </div>
+      </ul>
     );
   }
 });

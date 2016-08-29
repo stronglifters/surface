@@ -7,14 +7,12 @@ var Exercise = React.createClass({
       );
     });
     return (
-      <div>
-        <p>{this.props.exercise.name}</p>
-        <table>
-          <tbody>
+      <li className="accordion-item" data-accordion-item>
+        <a href="#" className="accordion-title">{this.props.exercise.name}</a>
+        <div className="accordion-content" data-tab-content>
           {setNodes}
-          </tbody>
-        </table>
-      </div>
+        </div>
+      </li>
     );
   }
 });

@@ -6,6 +6,7 @@
 
   <div class="columns">
     <%= react_component('Workout', render(partial: "edit.json.jbuilder", locals: { workout: @workout })) %>
+    <%= link_to t(:done), workouts_path, class: 'button float-right' %>
   </div>
 </div>
 

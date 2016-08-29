@@ -8,7 +8,7 @@ var Set = React.createClass({
     }
     model.save();
 
-    this.setState({ actual_repetitions: this.props.model.get('actual_repetitions') });
+    this.setState({ actual_repetitions: model.get('actual_repetitions') });
   },
   render: function(){
     return (

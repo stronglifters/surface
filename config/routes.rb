@@ -14,4 +14,8 @@ Rails.application.routes.draw do
 
   get "/email/incoming", to: proc { [200, {}, ["OK"]] }
   post "/email/incoming" => "griddler/emails#create"
+
+  namespace :api, defaults: { format: 'json' }  do
+    resources :sessions, only: [:create]
+  end
 end

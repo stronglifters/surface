@@ -71,6 +71,7 @@ source "https://rubygems.org" do
   gem "web-console", group: :development
   gem "webmock", group: :test
   gem "yelp"
+  gem "jwt"
 end
 
 source "https://rails-assets.org" do

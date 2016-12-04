@@ -21,7 +21,7 @@ class Api::Controller < ActionController::Base
   def authenticate!
     return if current_user.present?
     return render json: { errors: ['Not Authenticated'] }, status: :unauthorized
-  rescue JWT::VerificationError, JWT::DecodeError
+  rescue
     return render json: { errors: ['Not Authenticated'] }, status: :unauthorized
   end
 

@@ -1,4 +1,6 @@
 class Api::SessionsController < Api::Controller
+  skip_before_action :authenticate!
+
   def create
     user_session = User.login(params[:username], params[:password])
     token = tokenize(user_session.access(request))

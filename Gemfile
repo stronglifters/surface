@@ -44,6 +44,7 @@ source "https://rubygems.org" do
   gem "rack-timeout"
   gem "rack_session_access", group: :test
   gem "ractive-rails"
+  gem "react-rails"
   gem "rails", "~> 5.0.0"
   gem "rails-controller-testing", group: :test
   gem "rails-erd", group: :development

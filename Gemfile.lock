@@ -314,6 +314,13 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    react-rails (1.8.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     redis (3.3.0)
     ref (2.0.0)
     rspec-core (3.5.1)
@@ -494,6 +501,7 @@ DEPENDENCIES
   rails-erd!
   rails-i18n (~> 4.0.0)!
   rails_12factor!
+  react-rails!
   redis (~> 3.0)!
   rspec-rails!
   rubyzip!

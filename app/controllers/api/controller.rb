@@ -20,9 +20,13 @@ class Api::Controller < ActionController::Base
 
   def authenticate!
     return if current_user.present?
-    return render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+    not_authenticated!
   rescue
-    return render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+    not_authenticated!
+  end
+
+  def not_authenticated!
+    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
   end
 
   def auth_token

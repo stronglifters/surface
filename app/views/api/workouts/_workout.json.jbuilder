@@ -1,5 +1,6 @@
 json.id workout.id
 json.body_weight workout.body_weight
+json.occurred_at workout.occurred_at
 json.routine_name workout.routine.name
 json.exercises workout.sets.includes(:exercise).order(:created_at).group_by(&:exercise) do |exercise, sets|
   json.id exercise.id

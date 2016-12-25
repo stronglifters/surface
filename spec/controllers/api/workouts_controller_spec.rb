@@ -30,13 +30,19 @@ describe Api::WorkoutsController do
       json = JSON.parse(response.body, symbolize_names: true)
 
       expect(json[:body_weight]).to eql({ amount: 0.0, unit: 'lbs' })
+      expect(json[:routine]).to eql({ id: routine_a.id, name: routine_a.name })
       expect(json[:exercises]).to match_array([
-        { id: barbell_row.id, name: barbell_row.name, },
+        { id: barbell_row.id, name: barbell_row.name },
         { id: bench_press.id, name: bench_press.name, },
         { id: dips.id, name: dips.name, },
         { id: planks.id, name: planks.name, },
         { id: squat.id, name: squat.name, },
       ])
+      #expect(json[:sets]).to eql({
+        #squat.id => [
+          #{ id: nil, type: 'WorkSet', target: { amount: 315, unit: 'lbs' }, actual: nil }
+        #]
+      #})
     end
   end
 end

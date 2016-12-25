@@ -17,6 +17,6 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' }  do
     resources :sessions, only: [:create]
-    resources :workouts, only: [:index]
+    resources :workouts, only: [:index, :new]
   end
 end

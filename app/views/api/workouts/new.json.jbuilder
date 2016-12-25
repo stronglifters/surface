@@ -7,6 +7,6 @@ json.exercises @workout.sets.group_by(&:exercise) do |exercise, sets|
   json.id exercise.id
   json.name exercise.name
 end
-#json.sets @workout.sets.group_by(&:exercise) do |exercise, set|
-  #json.partial! 'sets/set', set: set
-#end
+json.sets @workout.sets do |set|
+  json.partial! 'api/sets/set', set: set
+end

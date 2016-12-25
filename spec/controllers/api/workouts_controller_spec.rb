@@ -38,11 +38,29 @@ describe Api::WorkoutsController do
         { id: planks.id, name: planks.name, },
         { id: squat.id, name: squat.name, },
       ])
-      #expect(json[:sets]).to eql({
-        #squat.id => [
-          #{ id: nil, type: 'WorkSet', target: { amount: 315, unit: 'lbs' }, actual: nil }
-        #]
-      #})
+      expect(json[:sets]).to match_array([
+        { id: nil, exercise_id: squat.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: squat.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: squat.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: squat.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: squat.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: bench_press.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: bench_press.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: bench_press.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: bench_press.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: bench_press.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: barbell_row.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: barbell_row.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: barbell_row.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: barbell_row.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: barbell_row.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: dips.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: dips.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: dips.id, type: 'WorkSet', target_weight: 45.lbs.to_h, target_repetitions: 5, actual_repetitions: nil, target_duration: nil, actual_duration: nil },
+        { id: nil, exercise_id: planks.id, type: 'WorkSet', target_weight: 0.lbs.to_h, target_repetitions: 1, actual_repetitions: nil, target_duration: 60, actual_duration: nil },
+        { id: nil, exercise_id: planks.id, type: 'WorkSet', target_weight: 0.lbs.to_h, target_repetitions: 1, actual_repetitions: nil, target_duration: 60, actual_duration: nil },
+        { id: nil, exercise_id: planks.id, type: 'WorkSet', target_weight: 0.lbs.to_h, target_repetitions: 1, actual_repetitions: nil, target_duration: 60, actual_duration: nil },
+      ])
     end
   end
 end

@@ -69,6 +69,10 @@ class Quantity
     "#{to_f} #{unit}"
   end
 
+  def to_json
+    { amount: amount, unit: unit.to_s }.to_json
+  end
+
   private
 
   def amount_from(quantity)

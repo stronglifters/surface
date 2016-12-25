@@ -173,4 +173,13 @@ describe Quantity do
       expect(other).to be < quantity
     end
   end
+
+  describe "#to_json" do
+    it 'format the amount and unit to json' do
+      expect(100.lbs.to_json).to eql({
+        amount: 100.0,
+        unit: 'lbs',
+      }.to_json)
+    end
+  end
 end

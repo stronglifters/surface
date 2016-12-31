@@ -6,6 +6,6 @@ json.exercises workout.sets.includes(:exercise).order(:created_at).group_by(&:ex
   json.id exercise.id
   json.name exercise.name
   json.sets sets.sort_by(&:created_at) do |set|
-    json.partial! 'sets/set', set: set
+    json.partial! 'api/sets/set', set: set
   end
 end

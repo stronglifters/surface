@@ -63,4 +63,32 @@ describe Api::WorkoutsController do
       ])
     end
   end
+
+  describe "#create" do
+    include_context "stronglifts_program"
+    let(:body_weight) { rand(250.0).lbs }
+
+    it "creates the workout with the selected exercises" do
+      post :create, params: {
+        workout: {
+          routine_id: routine_b.id,
+          body_weight: body_weight,
+          exercise_sets_attributes: [{
+            exercise_id: squat.id,
+            target_repetitions: 5,
+            target_weight: 200,
+            type: "WorkSet",
+          }]
+        }
+      }, format: :json
+
+      expect(response).to have_http_status(:created)
+      expect(user.reload.workouts.count).to eql(1)
+      expect(user.last_routine).to eql(routine_b)
+      workout = user.workouts.last
+      expect(workout.body_weight).to eql(body_weight)
+      expect(workout.routine).to eql(routine_b)
+      expect(workout.sets.count).to eql(1)
+    end
+  end
 end

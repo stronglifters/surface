@@ -8,10 +8,10 @@ class Api::WorkoutsController < Api::Controller
   end
 
   def create
-    workout = current_user.workouts.build(secure_params)
-    workout.occurred_at = DateTime.now
-    workout.save!
-    render nothing: true, status: :created
+    @workout = current_user.workouts.build(secure_params)
+    @workout.occurred_at = DateTime.now
+    @workout.save!
+    render status: :created
   end
 
   private
@@ -19,13 +19,13 @@ class Api::WorkoutsController < Api::Controller
   def secure_params
     params.require(:workout).permit(
       :routine_id,
-      :body_weight,
+      body_weight: [:amount, :unit],
       exercise_sets_attributes: [
         :exercise_id,
         :target_duration,
         :target_repetitions,
-        :target_weight,
         :type,
+        target_weight: [:amount, :unit],
       ]
     )
   end

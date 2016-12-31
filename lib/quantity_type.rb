@@ -4,6 +4,8 @@ class QuantityType < ActiveRecord::Type::Float
 
     if value.is_a? Quantity
       value.to(:lbs)
+    elsif value.is_a? Hash
+      Quantity.new(value[:amount].to_f, value[:unit].to_sym)
     else
       Quantity.new(value.to_f, :lbs)
     end

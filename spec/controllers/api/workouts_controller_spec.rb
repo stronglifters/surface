@@ -72,11 +72,11 @@ describe Api::WorkoutsController do
       post :create, params: {
         workout: {
           routine_id: routine_b.id,
-          body_weight: body_weight,
+          body_weight: { amount: body_weight.amount, unit: body_weight.unit },
           exercise_sets_attributes: [{
             exercise_id: squat.id,
             target_repetitions: 5,
-            target_weight: 200,
+            target_weight: { amount: 200, unit: 'lbs' },
             type: "WorkSet",
           }]
         }

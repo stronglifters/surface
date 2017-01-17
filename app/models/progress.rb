@@ -7,7 +7,7 @@ class Progress
   end
 
   def to_sets
-    sets.pluck(:actual_repetitions).compact
+    @sets ||= sets.pluck(:actual_repetitions).compact
   end
 
   def max_weight
@@ -19,6 +19,6 @@ class Progress
   end
 
   def status
-    "#{to_sets.join('/')} @ #{max_weight} lbs"
+    "#{to_sets.join('/')} @ #{max_weight} lbs" if to_sets.any?
   end
 end

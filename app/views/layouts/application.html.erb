@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="rails-env" content="<%= Rails.env %>" />
     <%= csrf_meta_tags %>
     <title><%= t('.title') %> <%= content_for?(:title) ? "| #{yield(:title)}" : "" %></title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>

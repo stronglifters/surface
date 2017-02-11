@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= content_for?(:title) ? yield(:title) : "Strong Lifters" %></title>
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "application" %>
+
+    <%= stylesheet_link_tag :application %>
     <%= csrf_meta_tags %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <%= render partial: 'layouts/flash' %>
     <header>
-      <div class="row">
-        <div class="columns text-center">
+      <div class="columns">
+        <div class="column is-4 is-offset-4">
           <h1><span>Strong Lifters</span></h1>
         </div>
       </div>
     </header>
+    <%= render partial: 'layouts/flash' %>
     <%= yield %>
+    <%= javascript_include_tag :application %>
   </body>
 </html>

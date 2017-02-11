@@ -31,13 +31,13 @@ module ApplicationHelper
   def class_for_flash(type)
     case type.to_sym
     when :notice
-      "primary"
+      "is-info"
     when :error
-      "alert"
+      "is-danger"
     when :warning
-      "warning"
+      "is-warning"
     when :success
-      "success"
+      "is-success"
     end
   end
 end

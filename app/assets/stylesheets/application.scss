@@ -11,10 +11,25 @@
  * file per style scope.
  *
  *= require font-awesome
+ *= require bulma
  *= require_self
-//= require foundation_and_overrides
-
  */
 
-@import "**/*";
-@include foundation-everything(true);
+//@import "**/*";
+header {
+  padding: 0.5em 0;
+  h1 {
+    background: asset-url('logos.svg');
+    height: 150px;
+    background-position: 0 -676px;
+    background-repeat: no-repeat;
+    margin: 5px auto 0 auto;
+    width: 150px;
+    span {
+      display: block;
+      overflow: hidden;
+      text-indent: 100%;
+      white-space: nowrap;
+    }
+  }
+}

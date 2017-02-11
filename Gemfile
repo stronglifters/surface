@@ -24,7 +24,6 @@ source "https://rubygems.org" do
   gem "flipper-redis"
   gem "font-awesome-rails"
   gem "foreman", group: :development
-  gem "foundation-rails", "~> 6.2"
   gem "geocoder"
   gem "geokit-rails"
   gem "griddler"
@@ -40,7 +39,7 @@ source "https://rubygems.org" do
   gem "pg"
   gem "poltergeist", group: :test
   gem "puma", "~> 3.0"
-  gem "rack-mini-profiler", group: :development
+  gem "rack-mini-profiler", group: :development, require: false
   gem "rack-timeout"
   gem "rack_session_access", group: :test
   gem "ractive-rails"

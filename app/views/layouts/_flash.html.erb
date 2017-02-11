@@ -1,17 +1,14 @@
 <% if flash.any? %>
-  <div class="row align-center">
+  <% flash.each do |type, messages| %>
     <div class="columns">
-      <% flash.each do |type, messages| %>
-        <div class="callout <%= class_for_flash(type) %>" data-closable>
-          <h5><%= t(".#{type}") %></h5>
+      <div class="column is-8 is-offset-2">
+        <div class="notification <%= class_for_flash(type) %>">
+          <button class="delete"></button>
           <% Array(messages).each do |message| %>
             <%= content_tag :p, message %>
           <% end %>
-          <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

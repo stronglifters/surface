@@ -38,4 +38,3 @@ deploy:
   on:
     repo: stronglifters/surface
     branch: master
-after_deploy: ./bin/deploy.sh

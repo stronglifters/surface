@@ -1,4 +1,6 @@
 class RegistrationsController < PublicController
+  around_action :within_transaction, only: :create
+
   def new
     @user = User.new
   end

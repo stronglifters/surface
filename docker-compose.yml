@@ -1,12 +1,53 @@
 version: '2'
 services:
-  app:
+  haproxy:
+    image: haproxy:latest
+    volumes:
+      - ./config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./config/server.pem:/usr/local/etc/haproxy/server.pem
+    links:
+      - www1
+      - www2
+    ports:
+      - "80:80"
+      - "443:443"
+  www1:
+    image: nginx:latest
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./public:/var/www/public
+      - ./config/server.crt:/etc/nginx/server.crt
+      - ./config/server.key:/etc/nginx/server.key
+    links:
+      - web
+  www2:
+    image: nginx:latest
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - ./public:/var/www/public
+      - ./config/server.crt:/etc/nginx/server.crt
+      - ./config/server.key:/etc/nginx/server.key
+    links:
+      - web
+  web:
     build: .
-    command: foreman start
+    command: bundle exec foreman start web
     volumes:
       - .:/app
-    ports:
-      - "3000:3000"
+    links:
+      - redis
+      - db
+    depends_on:
+      - redis
+      - db
+    environment:
+      - REDIS_URL=redis://redis:6379/12
+      - RAILS_LOG_TO_STDOUT=true
+  worker:
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/app
     links:
       - redis
       - db

@@ -69,6 +69,14 @@ class Quantity
     "#{to_f} #{unit}"
   end
 
+  def to_h
+    { amount: amount, unit: unit.to_s }
+  end
+
+  def to_hash
+    to_h
+  end
+
   private
 
   def amount_from(quantity)

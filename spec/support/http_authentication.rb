@@ -5,4 +5,8 @@ module HttpAuthentication
     allow(controller).to receive(:current_session).and_return(user_session)
     session[:user_id] = user_session.id
   end
+
+  def api_login(user)
+    http_login(user)
+  end
 end

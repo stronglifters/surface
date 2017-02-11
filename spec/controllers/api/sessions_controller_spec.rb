@@ -9,6 +9,7 @@ describe Api::SessionsController do
 
       json = JSON.parse(response.body)
       expect(json['authentication_token']).to be_present
+      expect(json['username']).to eql(user.username)
     end
   end
 end

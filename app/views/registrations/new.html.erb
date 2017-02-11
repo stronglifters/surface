@@ -1,30 +1,65 @@
-<div class="row align-center">
-<%= form_for @user, url: registrations_path do |f| %>
+<div class="container">
   <div class="columns">
-    <label><%= t('.username') %>
-      <%= f.text_field :username, placeholder: t('.username') %>
-    </label>
-    <label><%= t('.email') %>
-      <%= f.email_field :email, placeholder: t('.email') %>
-    </label>
-    <label><%= t('.password') %>
-      <%= f.password_field :password, placeholder: t('.password') %>
-    </label>
-    <div class="text-center">
-      <%= f.label :terms_and_conditions do %>
-        <%= f.check_box :terms_and_conditions %> 
-        <%= t('.terms_and_conditions') %>.
-        <p><a data-open="terms_modal"><%= t('.terms_and_conditions_link') %></a></p>
+    <div class="column is-6 is-offset-3">
+      <%= form_for @user, url: registrations_path do |f| %>
+        <p class="control has-icon">
+          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large' %>
+          <span class="icon is-small">
+            <i class="fa fa-envelope"></i>
+          </span>
+        </p>
+        <p class="control has-icon">
+          <%= f.email_field :email, placeholder: t('.email'), class: 'input is-large' %>
+          <span class="icon is-small">
+            <i class="fa fa-envelope"></i>
+          </span>
+        </p>
+        <p class="control has-icon">
+          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large' %>
+          <span class="icon is-small">
+            <i class="fa fa-lock"></i>
+          </span>
+        </p>
+        <%= f.label :terms_and_conditions do %>
+          <%= f.check_box :terms_and_conditions %>
+          <%= t('.terms_and_conditions') %>
+        <% end %>
+        <button id="terms-modal" type="button" class="button is-link"><%= t('.terms_and_conditions_link') %></button>
+        <p class="control">
+          <%= f.submit t('.register_button'), class: "button is-success is-large"  %>
+          <%= link_to t('.login_link'), new_session_path, class: "button is-large" %>
+        </p>
       <% end %>
     </div>
-    <%= f.submit t('.register_button'), class: "button"  %>
-    <%= link_to t('.login_link'), new_session_path, class: "button secondary bare" %>
   </div>
-<% end %>
-</div> <!-- /.row -->
-<div id="terms_modal" class="reveal" data-reveal>
-  <%= render 'layouts/terms_content' %>
-  <button class="close-button" data-close aria-label="<% t('.close') %>" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
+
+  <div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Modal title</p>
+        <button class="delete"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class=content>
+          <%= render 'layouts/terms_content' %>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <a class="button is-success">Okay</a>
+      </footer>
+    </div>
+  </div>
 </div>
+
+<% content_for :javascript do %>
+$(function(){
+  $('#terms-modal').click(function(){
+    $('.modal').addClass('is-active');
+  });
+
+  $('.delete').click(function(){
+    $('.modal').removeClass('is-active');
+  });
+});
+<% end %>

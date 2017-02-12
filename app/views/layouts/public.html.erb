@@ -5,9 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= content_for?(:title) ? yield(:title) : "Strong Lifters" %></title>
-
-    <%= stylesheet_link_tag :application %>
     <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag :application %>
+    <%= javascript_include_tag :application %>
+    <script type="text/javascript" charset="utf-8">
+      <%= content_for :javascript %>
+    </script>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <header>
@@ -19,9 +22,5 @@
     </header>
     <%= render partial: 'layouts/flash' %>
     <%= yield %>
-    <%= javascript_include_tag :application %>
-    <script type="text/javascript" charset="utf-8">
-      <%= content_for :javascript %>
-    </script>
   </body>
 </html>

@@ -45,6 +45,8 @@ en:
     navigation:
       home: Home
       profile: Profile
+    footer:
+      copyright: "© Copyright www.stronglifters.com. All rights reserved."
   time:
     formats:
       short: "%a, %d %b %Y"
@@ -117,8 +119,6 @@ en:
       lead: Your custom email address.
       title: Send-to-Stronglifters.
       warning: To ensure your workouts are imported correctly we suggest that you update your timezone.
-  footer:
-    copyright: "© Copyright www.stronglifters.com. All rights reserved."
   views:
     pagination:
       first: "&laquo; First"

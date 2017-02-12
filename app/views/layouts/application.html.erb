@@ -16,27 +16,8 @@
     <%= render partial: "navigation" %>
     <%= render partial: 'layouts/flash' %>
 
-    <div class="container">
-      <div class="columns">
-        <div class="column is-2 is-offset-5">
-          <div class="align-middle loading-indicator hide">
-            <p><i class="fa fa-spinner fa-pulse"></i> <%= t('.loading') %></p>
-          </div>
-        </div>
-      </div>
-    </div>
     <%= yield %>
-    <footer class="footer">
-      <div class="container">
-        <div class="content has-text-centered">
-          <p><%= t("footer.copyright") %></p>
-          <p>
-            <a class="icon" href="https://github.com/stronglifters">
-              <i class="fa fa-github"></i>
-            </a>
-          </p>
-        </div>
-      </div>
-    </footer>
+    <%= render partial: 'loading' %>
+    <%= render partial: 'footer' %>
   </body>
 </html>

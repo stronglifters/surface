@@ -102,7 +102,7 @@ en:
       not_available: N/A
       no_workouts_completed: 0 workouts completed
       personal_records: Personal Records
-      workouts_completed: "%{count} workouts completed since %{first_session}."
+      workouts_completed_html: "<strong>%{count}</strong> workouts completed since <strong>%{first_session}</strong>."
   sessions:
     create:
       invalid_login: "Sorry, we cannot find that account."

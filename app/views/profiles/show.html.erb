@@ -1,52 +1,43 @@
 <% names = ["Squat", "Bench Press", "Barbell Row", "Overhead Press", "Deadlift"]  %>
 <div class="container">
   <div class="columns">
-    <div class="column is-4">
-      <p>
-      <%= link_to profile_path(@user) do %>
-        <%= gravatar_for(@user, size: 128) %>
-      <% end %>
-      </p>
-      <h1><%= link_to @user.username, profile_path(@user) %></h1>
-      <% if @user.workouts.any? %>
-        <p>
-        <%= t('.workouts_completed', count: @user.workouts.count, first_session: l(@user.workouts.order(occurred_at: :asc).limit(1).first.occurred_at, format: :long)) %>
-        </p>
-      <% else %>
-        <p><%= t('.no_workouts_completed') %></p>
-      <% end %>
-      <% if @profile.gym.present? %>
-        <p><%= link_to @profile.gym.name, @profile.gym %></p>
-      <% end %>
-      <p><%= @user.time_zone %></p>
-    </div>
-
-    <div class="column is-8">
-      <h2><%= t('.personal_records') %></h2>
-      <table class="table is-striped">
-        <thead>
-          <tr>
-            <th><%= t('.exercise_header') %></th>
-            <th><%= t('.maximum_achieved') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @program.each_exercise(exercise_names: names) do |exercise| %>
-            <tr>
-              <% if @user.personal_record_for(exercise) %>
-                <td><strong><%= exercise.name %></strong></td><td><%= "#{@user.personal_record_for(exercise)} lbs" %></td>
-              <% else %>
-                <td><strong><%= exercise.name %></strong></td><td><%= t('.not_available') %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="column is-6 is-offset-3 content">
+      <div class="has-text-centered">
+        <figure class="image is-square">
+          <%= gravatar_for(@user, size: 128) %>
+        </figure>
+        <h1 class="title"><%= link_to @user.username, profile_path(@user) %></h1>
+        <% if @user.workouts.any? %>
+          <p> <%= t('.workouts_completed_html', count: @user.workouts.count, first_session: l(@user.workouts.order(occurred_at: :asc).limit(1).first.occurred_at, format: :long)) %> </p>
+        <% else %>
+          <p><%= t('.no_workouts_completed') %></p>
+        <% end %>
+        <% if @profile.gym.present? %>
+          <p><%= link_to @profile.gym.name, @profile.gym %></p>
+        <% end %>
+        <p><%= @user.time_zone %></p>
+      </div>
     </div>
   </div>
 
   <div class="columns">
-    <div class="column is-12">
+    <div class="column is-8 is-offset-2">
+      <div class="level">
+        <% @program.each_exercise(exercise_names: names) do |exercise| %>
+          <% personal_record = @user.personal_record_for(exercise) %>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading"><%= exercise.name %></p>
+              <p class="title"><%= personal_record ? "#{personal_record} lbs" : t('.not_available') %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-12 content">
       <% @program.each_exercise(exercise_names: names) do |exercise| %>
         <%= render @user.history_for(exercise) %>
       <% end %>

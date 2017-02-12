@@ -21,8 +21,12 @@
               <th><abbr title="Routine"></abbr>Routine</th>
               <th><abbr title="Date"></abbr>Date</th>
               <th><abbr title="Body weight"></abbr>Body weight</th>
-              <% exercises.each do |exercise_name| %>
-                <th><abbr title="<%= exercise_name %>"></abbr><%= exercise_name %></th>
+              <% if @exercise.present? %>
+                  <th><abbr title="<%= @exercise.name %>"></abbr><%= @exercise.name %></th>
+              <% else %>
+                <% exercises.each do |exercise_name| %>
+                  <th><abbr title="<%= exercise_name %>"></abbr><%= exercise_name %></th>
+                <% end %>
               <% end %>
             </tr>
           </thead>
@@ -32,12 +36,19 @@
                 <td> <%= workout.name %> </td>
                 <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
                 <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
+              <% if @exercise.present? %>
+                  <td>
+                    <% progress = workout.progress_for(@exercise) %>
+                    <%= progress.status %>
+                  </td>
+              <% else %>
                 <% exercises.each do |exercise_name| %>
                   <td>
                     <% progress = workout.progress_for(Exercise.find_by(name: exercise_name)) %>
                     <%= progress.status %>
                   </td>
                 <% end %>
+              <% end %>
               </tr>
             <% end %>
           </tbody>

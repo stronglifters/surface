@@ -1,4 +1,4 @@
 <% if training_history.completed_any? %>
-  <p> <%= training_history.exercise.name %> </p>
+  <p class="has-text-centered"> <%= training_history.exercise.name %> </p>
   <%= line_chart training_history.to_line_chart %>
 <% end %>

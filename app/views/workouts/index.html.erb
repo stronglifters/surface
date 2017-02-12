@@ -3,6 +3,18 @@
     <div class="columns">
       <div class="column is-12">
         <% exercises = ["Squat", "Bench Press", "Barbell Row", "Overhead Press", "Deadlift"]  %>
+        <div class="tabs">
+          <ul>
+            <li class="<%= 'is-active' if @exercise.nil? %>">
+              <%= link_to 'All', workouts_path %>
+            </li>
+            <% exercises.each do |name| %>
+              <li class="<%= 'is-active' if name == @exercise.try(:name) %>">
+                <%= link_to name, workouts_path(exercise: name) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
         <table class="table is-striped">
           <thead>
             <tr>

@@ -1,6 +1,7 @@
 class WorkoutsController < ApplicationController
   def index
-    @workouts = paginate(recent_workouts, per_page: 24)
+    @exercise = Exercise.find_by(name: params[:exercise])
+    @workouts = paginate(recent_workouts(@exercise), per_page: 24)
   end
 
   def new
@@ -36,8 +37,12 @@ class WorkoutsController < ApplicationController
     )
   end
 
-  def recent_workouts
-    current_user.workouts.recent.includes(:routine)
+  def recent_workouts(exercise)
+    if exercise.present?
+      current_user.workouts.recent.includes(:routine).with_exercise(exercise)
+    else
+      current_user.workouts.recent.includes(:routine)
+    end
   end
 
   def find_routine(routine_id)

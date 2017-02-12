@@ -20,32 +20,23 @@
               <th><abbr title="Routine"></abbr>Routine</th>
               <th><abbr title="Date"></abbr>Date</th>
               <th><abbr title="Body weight"></abbr>Body weight</th>
-              <% if @exercise.present? %>
-                  <th><abbr title="<%= @exercise.name %>"></abbr><%= @exercise.name %></th>
-              <% else %>
-                <% Exercise::PRIMARY_LIFTS.each do |exercise_name| %>
-                  <th><abbr title="<%= exercise_name %>"></abbr><%= exercise_name %></th>
-                <% end %>
+              <% Exercise::PRIMARY_LIFTS.each do |exercise_name| %>
+                <th><abbr title="<%= exercise_name %>"></abbr><%= exercise_name %></th>
               <% end %>
             </tr>
           </thead>
           <tbody>
-            <% @workouts.each do |workout| %>
-              <tr>
-                <td> <%= workout.name %> </td>
-                <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
-                <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
-              <% if @exercise.present? %>
-                  <td>
-                    <% progress = workout.progress_for(@exercise) %>
-                    <%= progress.status %>
-                  </td>
-              <% else %>
-                <% Exercise.primary.find_each do |exercise| %>
-                  <td> <%= workout.progress_for(exercise).status %> </td>
-                <% end %>
+            <%= cache @workouts do %>
+              <% @workouts.each do |workout| %>
+                <tr>
+                  <td> <%= workout.name %> </td>
+                  <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
+                  <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
+                  <% Exercise.primary.find_each do |exercise| %>
+                    <td> <%= workout.progress_for(exercise).status %> </td>
+                  <% end %>
+                </tr>
               <% end %>
-              </tr>
             <% end %>
           </tbody>
         </table>

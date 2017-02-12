@@ -24,10 +24,10 @@
           <%= f.check_box :terms_and_conditions, required: 'required' %>
           <%= t('.terms_and_conditions') %>
         <% end %>
-        <button id="terms-modal" type="button" class="button is-link"><%= t('.terms_and_conditions_link') %></button>
         <p class="control">
-          <%= f.submit t('.register_button'), class: "button is-success is-large"  %>
-          <%= link_to t('.login_link'), new_session_path, class: "button is-large" %>
+          <%= f.submit t('.register_button'), class: "button is-success is-large is-fullwidth"  %>
+          <button id="terms-modal" type="button" class="button is-link is-pulled-left"><%= t('.terms_and_conditions_link') %></button>
+          <%= link_to t('.login_link'), new_session_path, class: "button is-link is-pulled-right" %>
         </p>
       <% end %>
     </div>
@@ -37,8 +37,8 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Modal title</p>
-        <button class="delete"></button>
+        <p class="modal-card-title"><%= t('.terms_and_conditions_link') %></p>
+        <button class="delete close-modal"></button>
       </header>
       <section class="modal-card-body">
         <div class=content>
@@ -46,7 +46,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <a class="button is-success">Okay</a>
+        <a class="button is-success close-modal">Okay</a>
       </footer>
     </div>
   </div>
@@ -54,11 +54,11 @@
 
 <% content_for :javascript do %>
 $(function(){
-  $('#terms-modal').click(function(){
+  $('#terms-modal').on('click', function(){
     $('.modal').addClass('is-active');
   });
 
-  $('.delete').click(function(){
+  $('.close-modal').on('click', function(){
     $('.modal').removeClass('is-active');
   });
 });

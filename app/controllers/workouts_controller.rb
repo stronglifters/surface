@@ -1,6 +1,7 @@
 class WorkoutsController < ApplicationController
   def index
     @exercise = Exercise.find_by(name: params[:exercise])
+    @primary_exercises = Exercise.primary.order_by_name.to_a
     @workouts = paginate(recent_workouts(@exercise), per_page: 24)
   end
 

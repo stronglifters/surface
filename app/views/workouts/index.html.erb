@@ -2,26 +2,53 @@
   <div class="container">
     <div class="columns">
       <div class="column is-12">
-        <div class="tabs">
-          <ul>
-            <li class="<%= 'is-active' if @exercise.nil? %>">
-              <%= link_to 'All', workouts_path %>
-            </li>
+        <nav class="level">
+          <!-- Left side -->
+          <div class="level-left">
+            <div class="level-item">
+              <%= search_form %>
+            </div>
+            <div class="level-item">
+              <p class="subtitle is-5">
+                <strong><%= @workouts.total_count %></strong> workouts
+              </p>
+            </div>
+          </div>
+
+          <!-- Right side -->
+          <div class="level-right">
+            <p class="level-item">
+              <% if @exercise.nil? %>
+                <strong> <%= link_to 'All', workouts_path %> </strong>
+              <% else %>
+                <%= link_to 'All', workouts_path %>
+              <% end %>
+            </p>
             <% Exercise::PRIMARY_LIFTS.each do |name| %>
-              <li class="<%= 'is-active' if name == @exercise.try(:name) %>">
+              <p class="level-item">
+              <% if name == @exercise.try(:name) %>
+                <strong><%= link_to name, workouts_path(exercise: name) %></strong>
+              <% else %>
                 <%= link_to name, workouts_path(exercise: name) %>
-              </li>
+              <% end %>
+              </p>
             <% end %>
-          </ul>
-        </div>
+            <p class="level-item"><a class="button is-success">New</a></p>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-12">
         <table class="table is-striped">
           <thead>
             <tr>
               <th><abbr title="Routine"></abbr>Routine</th>
               <th><abbr title="Date"></abbr>Date</th>
               <th><abbr title="Body weight"></abbr>Body weight</th>
-              <% Exercise::PRIMARY_LIFTS.each do |exercise_name| %>
-                <th><abbr title="<%= exercise_name %>"></abbr><%= exercise_name %></th>
+              <% @primary_exercises.each do |exercise| %>
+                <th><abbr title="<%= exercise.name %>"></abbr><%= exercise.name %></th>
               <% end %>
             </tr>
           </thead>
@@ -32,7 +59,7 @@
                   <td> <%= workout.name %> </td>
                   <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
                   <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
-                  <% Exercise.primary.find_each do |exercise| %>
+                  <% @primary_exercises.each do |exercise| %>
                     <td> <%= workout.progress_for(exercise).status %> </td>
                   <% end %>
                 </tr>

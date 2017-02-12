@@ -18,7 +18,7 @@ module ApplicationHelper
     remote: @remote_search
   )
     form_tag path, id: id, method: :get, remote: remote do
-      search_field_tag :q, params[:q], placeholder: t(:search)
+      search_field_tag :q, params[:q], placeholder: t(:search), class: 'input'
     end
   end
 

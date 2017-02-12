@@ -16,8 +16,8 @@ class RegistrationsController < PublicController
       flash[:notice] = translate(".success")
       redirect_to edit_profile_path(@user.username)
     else
-      flash.now[:error] = @user.errors.full_messages
-      render :new
+      flash[:error] = @user.errors.full_messages
+      redirect_to new_registration_path
     end
   end
 

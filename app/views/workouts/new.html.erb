@@ -1,56 +1,58 @@
-<div class="row">
+<div class="container">
   <div class="columns">
-    <h1>Routine <%= @routine.name %></h1>
-    <% @all_routines.each do |routine| %>
-      <p class="text-right">
-        <%= link_to "Switch to Routine #{routine.name}", new_workout_path(routine_id: routine.id) %>
-      </p>
-    <% end %>
-    <%= form_for @workout, remote: true do |f| %>
-      <%= f.hidden_field :routine_id %>
-      <fieldset class="fieldset">
-        <legend><%= Workout.human_attribute_name(:body_weight) %></legend>
-        <%= f.number_field :body_weight %>
-      </fieldset>
-      <% @workout.sets.group_by(&:exercise).each do |exercise, sets| %>
-        <fieldset class="fieldset">
-          <legend><%= exercise.name %></legend>
+    <div class="column is-8 is-offset-2 content">
+      <% @all_routines.each do |routine| %>
+        <%= link_to "Switch to Routine #{routine.name}", new_workout_path(routine_id: routine.id), class: 'button is-link is-pulled-right' %>
+      <% end %>
+      <h1 class="title">Routine <%= @routine.name %></h1>
+      <%= form_for @workout, remote: true do |f| %>
+        <%= f.hidden_field :routine_id %>
+        <%= f.label :body_weight, class: 'label' %>
+        <%= f.number_field :body_weight, class: 'input' %>
+        <% @workout.sets.group_by(&:exercise).each do |exercise, sets| %>
+          <h2 class="subtitle"><%= exercise.name %></h2>
           <% sets.each do |set| %>
             <%= f.fields_for :exercise_sets, set do |s| %>
-              <div name="<%= set.id %>" class="row <%= set.warm_up? ? "hide" : "" %>">
+              <div name="<%= set.id %>" class="columns" style="<%= "display:none;" if set.warm_up? %>">
                 <% if set.target_duration.present? %>
-                  <div class="small-5 columns">
-                    <%= s.label :target_duration %>
-                    <%= s.number_field :target_duration %>
-                    <%= s.hidden_field :target_repetitions %>
-                    <%= s.hidden_field :target_weight %>
+                  <div class="column">
+                    <%= s.label :target_duration, class: 'label' %>
+                    <p class="control">
+                      <%= s.number_field :target_duration, class: 'input' %>
+                    </p>
+                    <%= s.hidden_field :target_repetitions, class: 'input' %>
+                    <%= s.hidden_field :target_weight, class: 'input' %>
                   </div>
                 <% else %>
-                  <div class="small-4 columns">
-                    <%= s.label :target_repetitions %>
-                    <%= s.number_field :target_repetitions %>
+                  <div class="column">
+                    <%= s.label :target_repetitions, class: 'label' %>
+                    <p class="control">
+                      <%= s.number_field :target_repetitions, class: 'input' %>
+                    </p>
                   </div>
-                  <div class="small-5 columns">
-                    <%= s.label :target_weight %>
-                    <%= s.number_field :target_weight %>
+                  <div class="column">
+                    <%= s.label :target_weight, class: 'label' %>
+                    <p class="control">
+                      <%= s.number_field :target_weight, class: 'input' %>
+                    </p>
                   </div>
                 <% end %>
-                <div class="columns">
+                <div class="column">
                   <br />
                   <%= s.hidden_field :exercise_id %>
                   <%= s.hidden_field :type %>
-                  <button type="button" class="button skip">skip</button>
+                  <button type="button" class="button delete skip"></button>
                 </div>
               </div>
             <% end %>
           <% end %>
-        </fieldset>
+        <% end %>
+        <%= f.submit "Start", class: "button is-primary is-pulled-right", data: { disable_with: 'Saving' } %>
       <% end %>
-      <%= f.submit "Start", class: "button round right", data: { disable_with: 'Saving' } %>
-    <% end %>
+    </div>
   </div>
 </div>
 
-<script type="text/javascript" charset="utf-8">
+<% content_for :javascript do %>
   window.currentView = new Stronglifters.NewWorkoutView({ el: $('#new_workout') });
-</script>
+<% end %>

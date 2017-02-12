@@ -18,5 +18,8 @@
     <%= render partial: 'loading' %>
     <%= yield %>
     <%= render partial: 'footer' %>
+    <script type="text/javascript" charset="utf-8">
+      <%= content_for :javascript %>
+    </script>
   </body>
 </html>

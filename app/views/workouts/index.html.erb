@@ -23,7 +23,7 @@
                 <% exercises.each do |exercise_name| %>
                   <td>
                     <% progress = workout.progress_for(Exercise.find_by(name: exercise_name)) %>
-                    <p class="text-center"> <%= progress.status %> </p>
+                    <%= progress.status %>
                   </td>
                 <% end %>
               </tr>

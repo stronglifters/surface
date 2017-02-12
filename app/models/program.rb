@@ -12,8 +12,8 @@ class Program < ApplicationRecord
     slug
   end
 
-  def each_exercise
-    exercises.uniq.each do |exercise|
+  def each_exercise(exercise_names: [])
+    exercises.where(name: exercise_names).order(name: :asc).uniq.each do |exercise|
       yield exercise
     end
   end

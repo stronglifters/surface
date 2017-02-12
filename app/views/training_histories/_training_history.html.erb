@@ -1,6 +1,4 @@
 <% if training_history.completed_any? %>
-  <div class="panel">
-    <p class="medium-text-center"><%= training_history.exercise.name %> </p>
-    <%= line_chart training_history.to_line_chart %>
-  </div>
+  <p> <%= training_history.exercise.name %> </p>
+  <%= line_chart training_history.to_line_chart %>
 <% end %>

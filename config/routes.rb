@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :programs, only: [:show]
   resources :profiles, only: [:new, :create, :show, :edit, :update], constraints: { id: /[^\/]+/ }
   resources :gyms, only: [:index, :show, :new, :create]
+  resources :graphs, only: [:show]
   get "/u/:id" => "profiles#show", constraints: { id: /[^\/]+/ }
   get "/dashboard" => "workouts#index", as: :dashboard
   get "/terms" => "static_pages#terms"

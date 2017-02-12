@@ -7,6 +7,10 @@ class TrainingHistory
     @exercise = exercise
   end
 
+  def cache_key
+    [ user.to_param, exercise.to_param, sets.count ]
+  end
+
   def personal_record
     sets.successful.maximum(:target_weight)
   end

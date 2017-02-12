@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <aside class="menu">
+        <p class="menu-label">
+        General
+        </p>
+        <ul class="menu-list">
+          <li><%= link_to t(".dashboard"), dashboard_path, class: 'is-active' %></li>
+        </ul>
+        <p class="menu-label">
+        Administration
+        </p>
+        <ul class="menu-list">
+          <li><%= link_to "Edit Profile", edit_profile_path(current_user) %></li>
+        </ul>
+      </aside>
+    </div>
+    <div class="column is-9">
+      <%= yield :content %>
+    </div>
+  </div>
+</div>
+

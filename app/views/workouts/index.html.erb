@@ -43,26 +43,7 @@
       <%= paginate @workouts, remote: false %>
     </div>
   </div>
-  <% if feature_enabled?(:csv_import) %>
-  <div class="row">
-    <div class="columns">
-      <p class="text-center">
-        <a data-open="sendToStrongLiftsModal">
-          <%= User.human_attribute_name(:import_address) %>
-        </a>
-      </p>
-    </div>
-  </div>
-  <% end %>
 <% else %>
-  <div class="row">
-    <div class="columns">
-      <% if feature_enabled?(:csv_import) %>
-      <p class="text-center"> <a href="#" data-reveal-id="sendToStrongLiftsModal"><%= User.human_attribute_name(:import_address) %></a> </p>
-      <% end %>
-      <%= random_video %>
-    </div>
-  </div>
+  <%= render partial: 'import_address_modal' %>
 <% end %>
 
-<%= render partial: 'import_address_modal' %>

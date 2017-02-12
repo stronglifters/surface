@@ -1,0 +1,44 @@
+<div class="container">
+  <nav class="nav">
+    <div class="nav-left">
+      <a class="nav-item is-brand" href="https://www.stronglifters.com">
+        <%= image_tag("logos.svg") %>
+      </a>
+      <%= link_to t(".home"), dashboard_path, class: 'nav-item' %>
+      <a class="nav-item" href="http://slog.stronglifters.com">
+        Blog
+      </a>
+    </div>
+    <div class="nav-center">
+      <a class="nav-item" href="https://github.com/stronglifters/">
+        <span class="icon">
+          <i class="fa fa-github"></i>
+        </span>
+      </a>
+      <a class="nav-item" href="https://twitter.com/stronglifters">
+        <span class="icon">
+          <i class="fa fa-twitter"></i>
+        </span>
+      </a>
+    </div>
+    <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
+    <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
+    <span class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+
+    <!-- This "nav-menu" is hidden on mobile -->
+    <!-- Add the modifier "is-active" to display it on mobile -->
+    <div class="nav-right nav-menu">
+      <%= link_to profile_path(current_user), class: 'nav-item is-tab' do %>
+        <figure class="image is-16x16" style="margin-right: 8px;">
+          <%= gravatar_for(current_user, size: 16) %>
+        </figure>
+        <%= t(".profile") %>
+      <% end %>
+      <%= link_to t(".nav.user.log_out"), session_path('me'), method: :delete, class: 'nav-item is-tab' %>
+    </div>
+  </nav>
+</div>

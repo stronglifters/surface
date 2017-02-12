@@ -41,6 +41,10 @@ en:
         social_tolerance: Social Tolerance
       user:
         import_address: Send-to-Stronglifters
+  application:
+    navigation:
+      home: Home
+      profile: Profile
   time:
     formats:
       short: "%a, %d %b %Y"
@@ -107,7 +111,7 @@ en:
       register_link: "Create an account"
   workouts:
     import_address_modal:
-      blurb: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
+      blurb_html: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
       copy: Copy
       help: I need help.
       lead: Your custom email address.

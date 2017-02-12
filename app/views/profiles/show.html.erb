@@ -1,4 +1,3 @@
-<% names = ["Squat", "Bench Press", "Barbell Row", "Overhead Press", "Deadlift"]  %>
 <div class="container">
   <div class="columns">
     <div class="column is-6 is-offset-3 content">
@@ -23,11 +22,11 @@
   <div class="columns">
     <div class="column is-8 is-offset-2">
       <div class="level">
-        <% @program.each_exercise(exercise_names: names) do |exercise| %>
-          <% personal_record = @user.personal_record_for(exercise) %>
+        <% @training_histories.each do |history| %>
+          <% personal_record = history.personal_record %>
           <div class="level-item has-text-centered">
             <div>
-              <p class="heading"><%= exercise.name %></p>
+              <p class="heading"><%= history.exercise.name %></p>
               <p class="title"><%= personal_record ? "#{personal_record} lbs" : t('.not_available') %></p>
             </div>
           </div>
@@ -38,9 +37,7 @@
 
   <div class="columns">
     <div class="column is-12 content">
-      <% @program.each_exercise(exercise_names: names) do |exercise| %>
-        <%= render @user.history_for(exercise) %>
-      <% end %>
+      <%= render @training_histories %>
     </div>
   </div>
 </div>

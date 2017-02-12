@@ -2,13 +2,12 @@
   <div class="container">
     <div class="columns">
       <div class="column is-12">
-        <% exercises = ["Squat", "Bench Press", "Barbell Row", "Overhead Press", "Deadlift"]  %>
         <div class="tabs">
           <ul>
             <li class="<%= 'is-active' if @exercise.nil? %>">
               <%= link_to 'All', workouts_path %>
             </li>
-            <% exercises.each do |name| %>
+            <% Exercise::PRIMARY_LIFTS.each do |name| %>
               <li class="<%= 'is-active' if name == @exercise.try(:name) %>">
                 <%= link_to name, workouts_path(exercise: name) %>
               </li>
@@ -24,7 +23,7 @@
               <% if @exercise.present? %>
                   <th><abbr title="<%= @exercise.name %>"></abbr><%= @exercise.name %></th>
               <% else %>
-                <% exercises.each do |exercise_name| %>
+                <% Exercise::PRIMARY_LIFTS.each do |exercise_name| %>
                   <th><abbr title="<%= exercise_name %>"></abbr><%= exercise_name %></th>
                 <% end %>
               <% end %>
@@ -42,11 +41,8 @@
                     <%= progress.status %>
                   </td>
               <% else %>
-                <% exercises.each do |exercise_name| %>
-                  <td>
-                    <% progress = workout.progress_for(Exercise.find_by(name: exercise_name)) %>
-                    <%= progress.status %>
-                  </td>
+                <% Exercise.primary.find_each do |exercise| %>
+                  <td> <%= workout.progress_for(exercise).status %> </td>
                 <% end %>
               <% end %>
               </tr>

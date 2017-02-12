@@ -3,25 +3,25 @@
     <div class="column is-6 is-offset-3">
       <%= form_for @user, url: registrations_path do |f| %>
         <p class="control has-icon">
-          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large' %>
+          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large', required: 'required' %>
           <span class="icon is-small">
             <i class="fa fa-envelope"></i>
           </span>
         </p>
         <p class="control has-icon">
-          <%= f.email_field :email, placeholder: t('.email'), class: 'input is-large' %>
+          <%= f.email_field :email, placeholder: t('.email'), class: 'input is-large', required: 'required' %>
           <span class="icon is-small">
             <i class="fa fa-envelope"></i>
           </span>
         </p>
         <p class="control has-icon">
-          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large' %>
+          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large', required: 'required' %>
           <span class="icon is-small">
             <i class="fa fa-lock"></i>
           </span>
         </p>
         <%= f.label :terms_and_conditions do %>
-          <%= f.check_box :terms_and_conditions %>
+          <%= f.check_box :terms_and_conditions, required: 'required' %>
           <%= t('.terms_and_conditions') %>
         <% end %>
         <button id="terms-modal" type="button" class="button is-link"><%= t('.terms_and_conditions_link') %></button>

@@ -38,11 +38,8 @@ class WorkoutsController < ApplicationController
   end
 
   def recent_workouts(exercise)
-    if exercise.present?
-      current_user.workouts.recent.includes(:routine).with_exercise(exercise)
-    else
-      current_user.workouts.recent.includes(:routine)
-    end
+    workouts = current_user.workouts.recent.includes(:routine, :exercise_sets)
+    exercise ? workouts.with_exercise(exercise) : workouts
   end
 
   def find_routine(routine_id)

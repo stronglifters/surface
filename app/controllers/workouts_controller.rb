@@ -1,6 +1,6 @@
 class WorkoutsController < ApplicationController
   def index
-    @workouts = paginate(recent_workouts)
+    @workouts = paginate(recent_workouts, per_page: 24)
   end
 
   def new

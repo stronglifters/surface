@@ -1,81 +1,76 @@
-<% if @workouts.any? %>
-  <div class="container">
-    <div class="columns">
-      <div class="column is-12">
-        <nav class="level">
-          <!-- Left side -->
-          <div class="level-left">
-            <div class="level-item">
-              <%= search_form %>
-            </div>
-            <div class="level-item">
-              <p class="subtitle is-5">
-                <strong><%= @workouts.total_count %></strong> workouts
-              </p>
-            </div>
+<div class="container">
+  <div class="columns">
+    <div class="column is-12">
+      <nav class="level">
+        <!-- Left side -->
+        <div class="level-left">
+          <div class="level-item">
+            <%= search_form %>
           </div>
-
-          <!-- Right side -->
-          <div class="level-right">
-            <p class="level-item">
-              <% if @exercise.nil? %>
-                <strong> <%= link_to 'All', workouts_path %> </strong>
-              <% else %>
-                <%= link_to 'All', workouts_path %>
-              <% end %>
+          <div class="level-item">
+            <p class="subtitle is-5">
+            <strong><%= @workouts.total_count %></strong> workouts
             </p>
-            <% Exercise::PRIMARY_LIFTS.each do |name| %>
-              <p class="level-item">
-              <% if name == @exercise.try(:name) %>
-                <strong><%= link_to name, workouts_path(exercise: name) %></strong>
-              <% else %>
-                <%= link_to name, workouts_path(exercise: name) %>
-              <% end %>
-              </p>
-            <% end %>
-            <p class="level-item"><%= link_to "New", new_workout_path, class: 'button is-success' %></p>
           </div>
-        </nav>
-      </div>
-    </div>
+        </div>
 
-    <div class="columns">
-      <div class="column is-12">
-        <table class="table is-striped">
-          <thead>
-            <tr>
-              <th><abbr title="Routine"></abbr>Routine</th>
-              <th><abbr title="Date"></abbr>Date</th>
-              <th><abbr title="Body weight"></abbr>Body weight</th>
-              <% @primary_exercises.each do |exercise| %>
-                <th><abbr title="<%= exercise.name %>"></abbr><%= exercise.name %></th>
-              <% end %>
-            </tr>
-          </thead>
-          <tbody>
-            <%= cache @workouts do %>
-              <% @workouts.each do |workout| %>
-                <tr>
-                  <td> <%= workout.name %> </td>
-                  <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
-                  <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
-                  <% @primary_exercises.each do |exercise| %>
-                    <td> <%= workout.progress_for(exercise).status %> </td>
-                  <% end %>
-                </tr>
-              <% end %>
+        <!-- Right side -->
+        <div class="level-right">
+          <p class="level-item">
+          <% if @exercise.nil? %>
+            <strong> <%= link_to 'All', workouts_path %> </strong>
+          <% else %>
+            <%= link_to 'All', workouts_path %>
+          <% end %>
+          </p>
+          <% Exercise::PRIMARY_LIFTS.each do |name| %>
+            <p class="level-item">
+            <% if name == @exercise.try(:name) %>
+              <strong><%= link_to name, workouts_path(exercise: name) %></strong>
+            <% else %>
+              <%= link_to name, workouts_path(exercise: name) %>
             <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column is-12">
-        <%= paginate @workouts, remote: false %>
-      </div>
+            </p>
+          <% end %>
+          <p class="level-item"><%= link_to "New", new_workout_path, class: 'button is-success' %></p>
+        </div>
+      </nav>
     </div>
   </div>
-<% else %>
-  <%= render partial: 'import_address_modal' %>
-<% end %>
 
+  <div class="columns">
+    <div class="column is-12">
+      <table class="table is-striped">
+        <thead>
+          <tr>
+            <th><abbr title="Routine"></abbr>Routine</th>
+            <th><abbr title="Date"></abbr>Date</th>
+            <th><abbr title="Body weight"></abbr>Body weight</th>
+            <% @primary_exercises.each do |exercise| %>
+              <th><abbr title="<%= exercise.name %>"></abbr><%= exercise.name %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <%= cache @workouts do %>
+            <% @workouts.each do |workout| %>
+              <tr>
+                <td> <%= workout.name %> </td>
+                <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
+                <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
+                <% @primary_exercises.each do |exercise| %>
+                  <td> <%= workout.progress_for(exercise).status %> </td>
+                <% end %>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-12">
+      <%= paginate @workouts, remote: false %>
+    </div>
+  </div>
+</div>

@@ -111,7 +111,7 @@ en:
       password: "Password"
       login_button: "Login"
       register_link: "Create an account"
-  workouts:
+  dashboards:
     import_address_modal:
       blurb_html: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
       copy: Copy

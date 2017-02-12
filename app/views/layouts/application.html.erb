@@ -15,9 +15,8 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render partial: "navigation" %>
     <%= render partial: 'layouts/flash' %>
-
-    <%= yield %>
     <%= render partial: 'loading' %>
+    <%= yield %>
     <%= render partial: 'footer' %>
   </body>
 </html>

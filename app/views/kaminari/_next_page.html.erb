@@ -1,7 +1,5 @@
 <% if current_page.last? %>
-   <li class="pagination-next disabled"><%= raw(t 'views.pagination.next')%></li>
+  <%= link_to raw(t 'views.pagination.next'), url, :remote => remote, class: 'pagination-next disabled' %>
 <% else %>
-  <li class="pagination-next">
-    <%= link_to raw(t 'views.pagination.next'), url, :rel => 'next', :remote => remote %>
-  </li>
+  <%= link_to raw(t 'views.pagination.next'), url, :remote => remote, class: 'pagination-next' %>
 <% end %>

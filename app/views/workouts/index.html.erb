@@ -1,46 +1,41 @@
 <% if @workouts.any? %>
-  <div class="row show-for-small-only">
+  <div class="container">
     <div class="columns">
-      <%= paginate @workouts, remote: false %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="columns">
-      <% exercises = ["Squat", "Bench Press", "Barbell Row", "Overhead Press", "Deadlift"]  %>
-      <table class="table-scroll">
-        <thead>
-          <tr>
-            <th>Routine</th>
-            <th>Date</th>
-            <th>Body weight</th>
-            <% exercises.each do |exercise_name| %>
-              <th><%= exercise_name %></th>
+      <div class="column is-12">
+        <% exercises = ["Squat", "Bench Press", "Barbell Row", "Overhead Press", "Deadlift"]  %>
+        <table class="table is-striped">
+          <thead>
+            <tr>
+              <th><abbr title="Routine"></abbr>Routine</th>
+              <th><abbr title="Date"></abbr>Date</th>
+              <th><abbr title="Body weight"></abbr>Body weight</th>
+              <% exercises.each do |exercise_name| %>
+                <th><abbr title="<%= exercise_name %>"></abbr><%= exercise_name %></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @workouts.each do |workout| %>
+              <tr>
+                <td> <%= workout.name %> </td>
+                <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
+                <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
+                <% exercises.each do |exercise_name| %>
+                  <td>
+                    <% progress = workout.progress_for(Exercise.find_by(name: exercise_name)) %>
+                    <p class="text-center"> <%= progress.status %> </p>
+                  </td>
+                <% end %>
+              </tr>
             <% end %>
-          </tr>
-        </thead>
-        <tbody>
-        <% @workouts.each do |workout| %>
-          <tr>
-            <td> <%= workout.name %> </td>
-            <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
-            <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
-            <% exercises.each do |exercise_name| %>
-              <td>
-                <% progress = workout.progress_for(Exercise.find_by(name: exercise_name)) %>
-                <p class="text-center"> <%= progress.status %> </p>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-        </tbody>
-        <tfoot>
-        </tfoot>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="row">
     <div class="columns">
-      <%= paginate @workouts, remote: false %>
+      <div class="column is-12">
+        <%= paginate @workouts, remote: false %>
+      </div>
     </div>
   </div>
 <% else %>

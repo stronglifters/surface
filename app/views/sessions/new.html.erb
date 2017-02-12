@@ -3,13 +3,13 @@
     <div class="column is-6 is-offset-3">
       <%= form_for @user, url: sessions_path do |f| %>
         <p class="control has-icon">
-          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large' %>
+          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large', required: 'required' %>
           <span class="icon is-small">
             <i class="fa fa-envelope"></i>
           </span>
         </p>
         <p class="control has-icon">
-          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large' %>
+          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large', required: 'required' %>
           <span class="icon is-small">
             <i class="fa fa-lock"></i>
           </span>

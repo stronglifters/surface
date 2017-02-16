@@ -39,7 +39,7 @@ feature "Profiles", type: :feature do
       )
     end
 
-    it "allows me to choose my home gym", js: true do
+    xit "allows me to choose my home gym", js: true do
       gym = build(:gym)
       allow(Gym).to receive(:create_from_yelp!).and_return(gym)
 

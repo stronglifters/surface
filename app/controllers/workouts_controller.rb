@@ -41,7 +41,7 @@ class WorkoutsController < ApplicationController
   end
 
   def recent_workouts(exercise)
-    workouts = current_user.workouts.recent.includes(:routine, :exercise_sets)
+    workouts = current_user.workouts.recent.includes(:routine)
     exercise ? workouts.with_exercise(exercise) : workouts
   end
 

@@ -6,7 +6,7 @@ class EditWorkoutPage < PageModel
   end
 
   def open_section(exercise)
-    click_link(exercise.name)
+    #click_link(exercise.name)
   end
 
   def complete(set:, repetitions: 5)

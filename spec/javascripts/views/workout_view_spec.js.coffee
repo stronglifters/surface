@@ -52,7 +52,7 @@ describe "WorkoutView", ->
       it "indicates a successful set", ->
         @el.find('button').first().trigger('click')
         result = @subject.get('workout.exercises.0.sets.0.status')
-        expect(result).toEqual('success')
+        expect(result).toEqual('is-success')
 
     describe "when at least one rep is completed", ->
       beforeEach ->
@@ -66,4 +66,4 @@ describe "WorkoutView", ->
       it "indicates a failed set", ->
         @el.find('button').first().trigger('click')
         result = @subject.get('workout.exercises.0.sets.0.status')
-        expect(result).toEqual('alert')
+        expect(result).toEqual('is-danger')

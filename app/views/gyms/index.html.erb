@@ -2,11 +2,12 @@
   <%= t(".title") %>
 <% end %>
 
-<div class="row">
+<div class="container">
   <div class="columns">
-    <h1><%= t(".title") %></h1>
-    <div id="results">
-      <%= render partial: 'index' %>
+    <div class="column is-12">
+      <div id="results">
+        <%= render partial: 'index' %>
+      </div>
     </div>
   </div>
 </div>

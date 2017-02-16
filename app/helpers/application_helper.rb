@@ -28,6 +28,10 @@ module ApplicationHelper
     content_tag(:div, iframe, class: "flex-video")
   end
 
+  def current_layout
+    controller.send(:_layout, []) || :application
+  end
+
   def class_for_flash(type)
     case type.to_sym
     when :notice

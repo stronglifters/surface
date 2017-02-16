@@ -9,7 +9,7 @@
     <%= stylesheet_link_tag :application %>
     <%= javascript_include_tag :application %>
   </head>
-  <body class="<%= controller_name %> <%= action_name %>">
+  <body class="<%= current_layout %> <%= controller_name %> <%= action_name %>">
     <header>
       <div class="columns">
         <div class="column is-4 is-offset-4">
@@ -17,7 +17,7 @@
         </div>
       </div>
     </header>
-    <%= render partial: 'layouts/flash' %>
+    <%= render partial: 'flash' %>
     <%= yield %>
     <script type="text/javascript" charset="utf-8">
       <%= content_for :javascript %>

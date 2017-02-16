@@ -41,6 +41,7 @@ en:
         social_tolerance: Social Tolerance
       user:
         import_address: Send-to-Stronglifters
+  app: 'Stronglifters'
   application:
     navigation:
       home: Home

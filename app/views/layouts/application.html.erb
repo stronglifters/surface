@@ -12,7 +12,7 @@
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}" %>
     <%= yield(:head) %>
   </head>
-  <body class="<%= controller_name %> <%= action_name %>">
+  <body class="<%= current_layout %> <%= controller_name %> <%= action_name %>">
     <%= render partial: "navigation" %>
     <%= render partial: 'flash' %>
     <%= render partial: 'loading' %>

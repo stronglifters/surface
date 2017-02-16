@@ -1,14 +1,10 @@
-<div class="container">
+<header class="container">
   <nav class="nav">
     <div class="nav-left">
-      <a class="nav-item is-brand" href="https://www.stronglifters.com">
-        <%= image_tag("logos.svg") %>
-      </a>
+      <%= link_to t("app"), root_path, class: 'nav-item is-brand' %>
       <%= link_to t(".home"), dashboard_path, class: 'nav-item' %>
       <%= link_to t(".workouts"), workouts_path, class: 'nav-item' %>
-      <a class="nav-item" href="http://slog.stronglifters.com">
-        Blog
-      </a>
+      <%= link_to t(".blog"), "http://slog.stronglifters.com", class: 'nav-item' %>
     </div>
     <div class="nav-center">
       <a class="nav-item" href="https://github.com/stronglifters/">
@@ -42,4 +38,4 @@
       <%= link_to t(".nav.user.log_out"), session_path('me'), method: :delete, class: 'nav-item is-tab' %>
     </div>
   </nav>
-</div>
+</header>

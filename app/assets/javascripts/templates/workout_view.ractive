@@ -9,7 +9,7 @@
 {{/if}}
 
 {{#each workout.exercises}}
-  <div class="columns">
+  <div class="columns content is-small has-text-centered">
     <div class="column is-6 is-offset-3">
       <h2 class="subtitle">{{name}}</h2>
         <div class="level">
@@ -23,7 +23,6 @@
                   {{target_repetitions}} x {{target_weight}}
                 {{/if}}
               </p>
-              <p class="title"> {{weight_per_side}} </p>
               <button id='{{id}}' on-click="updateProgress" class="button is-large {{status}}">
                 {{#if target_duration}}
                   {{actual_duration}}
@@ -31,6 +30,7 @@
                   {{actual_repetitions}}
                 {{/if}}
               </button>
+              <p> {{weight_per_side}} </p>
             </div>
           </div>
         {{/each}}

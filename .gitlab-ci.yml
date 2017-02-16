@@ -18,15 +18,24 @@ before_script:
   - apt-get update -q && apt-get install nodejs -yqq
   - gem install bundler  --no-ri --no-rdoc    # Bundler is not installed with the image
   - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
+  - RAILS_ENV=test bin/rake db:migrate
+  - RAILS_ENV=test bin/rake db:seed
 
 rspec:
-  script:
-  - rspec spec
-
-rails:
   variables:
+    RAILS_ENV=test
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
-  - bundle exec rake db:migrate
-  - bundle exec rake db:seed
-  - bundle exec rake
+  - bin/rspec
+
+teaspoon:
+  script:
+  - bin/teaspoon
+
+cucumber:
+  script:
+  - bin/cucumber
+
+brakeman:
+  script:
+  - bundle exec brakeman

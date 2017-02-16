@@ -1,4 +1,6 @@
 class WorkoutsController < ApplicationController
+  before_action { @search_path = workouts_path }
+
   def index
     @exercise = Exercise.find_by(name: params[:exercise])
     @primary_exercises = Exercise.primary.order_by_name.to_a

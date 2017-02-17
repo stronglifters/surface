@@ -45,11 +45,11 @@ class TrainingHistory
   end
 
   def to_line_chart
-    user.workouts.includes(:exercise_sets).inject({}) do |memo, workout|
-      memo[workout.occurred_at] =
-        workout.sets.for(exercise).maximum(:target_weight)
-      memo
-    end
+    user.workouts.joins(:exercise_sets).
+      where(exercise_sets: { exercise_id: exercise }).
+      group('workouts.occurred_at').
+      order('workouts.occurred_at desc').
+      maximum('target_weight')
   end
 
   private

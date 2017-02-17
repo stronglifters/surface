@@ -10,6 +10,7 @@ variables:
   POSTGRES_DB: database_name
   RAILS_ENV: test
   DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
+  REDIS_URL: "redis://redis:6379/12"
 
 cache:
   paths:

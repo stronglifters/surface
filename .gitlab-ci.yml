@@ -8,6 +8,8 @@ services:
 
 variables:
   POSTGRES_DB: database_name
+  RAILS_ENV: test
+  DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
 
 cache:
   paths:
@@ -24,9 +26,6 @@ before_script:
   - RAILS_ENV=test bin/rake db:seed
 
 rspec:
-  variables:
-    RAILS_ENV: test
-    DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
   - bin/rspec
 

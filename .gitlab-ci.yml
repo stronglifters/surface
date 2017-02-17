@@ -17,13 +17,13 @@ cache:
 
 before_script:
   - ruby -v                                   # Print out ruby version for debugging
+  - curl -sL https://deb.nodesource.com/setup_4.x | bash -
   - apt-get update -q && apt-get install nodejs -yqq
-  - apt-get install npm -yqq
+  - npm install npm -g
   - npm install phantomjs-prebuilt -g
   - gem install bundler  --no-ri --no-rdoc    # Bundler is not installed with the image
   - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
-  - RAILS_ENV=test bin/rake db:migrate
-  - RAILS_ENV=test bin/rake db:seed
+  - bin/rake db:migrate db:seed
 
 rspec:
   script:

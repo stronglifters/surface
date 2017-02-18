@@ -52,7 +52,7 @@
   <% if @exercise %>
     <div class="columns">
       <div class="column is-12">
-        <%= line_chart charts_path(filter_params_hash(exercise: @exercise.to_param)) %>
+        <%= line_chart charts_path(filter_params_hash) %>
       </div>
     </div>
   <% end %>

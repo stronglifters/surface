@@ -2,7 +2,7 @@ class ChartsController < ApplicationController
   def index
     exercise = Exercise.find_by(id: params[:exercise])
     respond_to do |format|
-      format.html { @training_history = current_user.history_for(exercise) }
+      format.js { @training_history = current_user.history_for(exercise) }
       format.json { render json: recent_workouts(exercise).to_line_chart }
     end
   end

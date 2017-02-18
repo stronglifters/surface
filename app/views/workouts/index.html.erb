@@ -23,12 +23,12 @@
             <%= link_to 'All', workouts_path %>
           <% end %>
           </p>
-          <% Exercise::PRIMARY_LIFTS.each do |name| %>
+          <% @primary_exercises.each do |exercise| %>
             <p class="level-item">
-            <% if name == @exercise.try(:name) %>
-              <strong><%= link_to name, workouts_path(exercise: name) %></strong>
+            <% if exercise == @exercise %>
+              <strong><%= link_to exercise.name, workouts_path(exercise: exercise) %></strong>
             <% else %>
-              <%= link_to name, workouts_path(exercise: name) %>
+              <%= link_to exercise.name, workouts_path(exercise: exercise) %>
             <% end %>
             </p>
           <% end %>
@@ -39,7 +39,7 @@
   </div>
   <% if @exercise %>
     <div class="columns">
-      <div class="column is-2 is-offset-5">
+      <div class="column is-12">
         <%= line_chart @workouts.with_exercise(@exercise).to_line_chart %>
       </div>
     </div>

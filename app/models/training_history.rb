@@ -45,7 +45,7 @@ class TrainingHistory
   end
 
   def to_line_chart
-    user.workouts.grouped_by_occurrence(exercise).recent.maximum(:target_weight)
+    user.workouts.to_line_chart(exercise)
   end
 
   private

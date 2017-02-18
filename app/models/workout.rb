@@ -48,4 +48,8 @@ class Workout < ApplicationRecord
       yield exercise
     end
   end
+
+  def display_status_for(exercise)
+    progress_for(exercise).status
+  end
 end

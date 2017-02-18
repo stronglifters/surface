@@ -3,7 +3,7 @@ class WorkoutsController < ApplicationController
 
   def index
     @ranges = [5.years, 1.year, 6.months, 3.months, 1.month, 2.weeks, 1.week].reverse
-    @exercise = Exercise.find_by(name: params[:exercise])
+    @exercise = Exercise.find_by(id: params[:exercise])
     @primary_exercises = Exercise.primary.order_by_name.to_a
     @workouts = recent_workouts(@exercise)
   end
@@ -41,7 +41,8 @@ class WorkoutsController < ApplicationController
     )
   end
 
-  def recent_workouts(exercise, since = (params[:since] || 30.days.to_i).to_i.seconds.ago)
+  def recent_workouts(exercise, since = (params[:since] || 7.days.to_i).to_i.seconds.ago)
+    @since = since.beginning_of_day
     workouts = current_user.workouts.since(since).recent.includes(:routine)
     exercise ? workouts.with_exercise(exercise) : workouts
   end

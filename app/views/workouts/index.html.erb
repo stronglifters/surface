@@ -16,7 +16,7 @@
             <%= form_tag @search_path, method: :get do %>
               <p class="control">
                 <span class="select">
-                  <%= select_tag :since, options_for_select(@ranges.map { |x| [time_ago_in_words(x.ago), x.to_i] }) %>
+                  <%= select_tag :since, options_for_select(@ranges.map { |x| [time_ago_in_words(x.ago), x.to_i] }, params[:since]) %>
                 </span>
               </p>
             <% end %>
@@ -75,7 +75,7 @@
                 <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
                 <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
                 <% @primary_exercises.each do |exercise| %>
-                  <td> <%= workout.progress_for(exercise).status %> </td>
+                  <td> <%= workout.display_status_for(exercise) %> </td>
                 <% end %>
               </tr>
             <% end %>

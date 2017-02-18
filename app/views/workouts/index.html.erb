@@ -19,7 +19,7 @@
                   <%= hidden_field_tag key, value %>
                 <% end %>
                 <span class="select">
-                  <%= select_tag :since, options_for_select(@ranges.map { |x| [time_ago_in_words(x.ago), x.to_i] }, params[:since]) %>
+                  <%= select_tag :since, options_for_select(@ranges.map { |x| [time_ago_in_words(x.ago), x.to_i] }, params[:since]), include_blank: true  %>
                 </span>
               </p>
             <% end %>

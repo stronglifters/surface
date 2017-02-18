@@ -18,7 +18,7 @@ module ApplicationHelper
     remote: @remote_search
   )
     form_tag path, id: id, method: :get, remote: remote do
-      search_field_tag :q, params[:q], placeholder: t(:search)
+      search_field_tag :q, params[:q], placeholder: t(:search), class: 'input'
     end
   end
 
@@ -28,16 +28,20 @@ module ApplicationHelper
     content_tag(:div, iframe, class: "flex-video")
   end
 
+  def current_layout
+    controller.send(:_layout, []) || :application
+  end
+
   def class_for_flash(type)
     case type.to_sym
     when :notice
-      "primary"
+      "is-info"
     when :error
-      "alert"
+      "is-danger"
     when :warning
-      "warning"
+      "is-warning"
     when :success
-      "success"
+      "is-success"
     end
   end
 end

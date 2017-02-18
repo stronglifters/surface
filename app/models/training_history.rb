@@ -7,6 +7,10 @@ class TrainingHistory
     @exercise = exercise
   end
 
+  def cache_key
+    [ user.to_param, exercise.to_param, sets.count ]
+  end
+
   def personal_record
     sets.successful.maximum(:target_weight)
   end
@@ -41,11 +45,7 @@ class TrainingHistory
   end
 
   def to_line_chart
-    user.workouts.inject({}) do |memo, workout|
-      memo[workout.occurred_at] =
-        workout.sets.for(exercise).maximum(:target_weight)
-      memo
-    end
+    user.workouts.with_exercise(exercise).to_line_chart
   end
 
   private

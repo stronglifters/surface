@@ -99,4 +99,33 @@ describe Workout, type: :model do
       expect(result.to_sets).to eql([5, 5])
     end
   end
+
+  describe ".since" do
+    subject { described_class }
+
+    it 'returns workouts that occurred after the date given' do
+      monday = create(:workout, occurred_at: 3.days.ago)
+      wednesday = create(:workout, occurred_at: 1.day.ago)
+
+      expect(subject.since(2.days.ago)).to match_array([wednesday])
+    end
+  end
+
+  describe ".to_line_chart" do
+    let(:routine) { subject.routine }
+    let(:squat) { create(:exercise) }
+
+    before :each do
+      routine.add_exercise(squat)
+    end
+
+    it 'returns a single series' do
+      subject.train(squat, 315, repetitions: 5)
+      subject.reload
+
+      expect(described_class.to_line_chart).to eql({
+        subject.occurred_at => 315.0
+      })
+    end
+  end
 end

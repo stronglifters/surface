@@ -1,15 +1,15 @@
 <%= paginator.render do %>
-  <ul aria-label="Pagination" class="pagination text-center" role="navigation">
-    <% first_page_tag unless current_page.first? %>
-    <%= prev_page_tag unless current_page.first? %>
-    <% each_page do |page| %>
-      <% if page.left_outer? || page.right_outer? || page.inside_window? %>
-        <%= page_tag page %>
-      <% elsif !page.was_truncated? %>
-        <%= gap_tag %>
+  <nav class="pagination is-centered">
+    <%= prev_page_tag %>
+    <ul class="pagination-list">
+      <% each_page do |page| %>
+        <% if page.left_outer? || page.right_outer? || page.inside_window? %>
+          <%= page_tag page %>
+        <% elsif !page.was_truncated? %>
+          <%= gap_tag %>
+        <% end %>
       <% end %>
-    <% end %>
+    </ul>
     <%= next_page_tag %>
-    <% last_page_tag unless current_page.last? %>
-  </ul>
+  </nav>
 <% end %>

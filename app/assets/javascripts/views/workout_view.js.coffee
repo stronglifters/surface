@@ -45,9 +45,9 @@ class Stronglifters.WorkoutView extends Ractive
         message = "If it was easy break for 1:30, otherwise rest for 3:00."
       else
         message = "No rest for the wicked. Let's do this!"
-      @displayMessage message, 'success'
+      @displayMessage message, 'is-success'
     else
-      @displayMessage "Take a 5:00 break.", 'alert'
+      @displayMessage "Take a 5:00 break.", 'is-danger'
 
     @clock.start()
 
@@ -60,9 +60,9 @@ class Stronglifters.WorkoutView extends Ractive
       return
 
     if model.successful()
-      @set "#{keypath}.status", "success"
+      @set "#{keypath}.status", "is-success"
     else
-      @set "#{keypath}.status", "alert"
+      @set "#{keypath}.status", "is-danger"
 
   displayMessage: (message, status) ->
     @set 'message', message

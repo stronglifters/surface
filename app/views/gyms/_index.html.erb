@@ -1,4 +1,17 @@
-<table class="hover stack">
+<nav class="level">
+  <div class="level-left">
+    <div class="level-item">
+      <%= search_form %>
+    </div>
+    <div class="level-item">
+      <p class="subtitle is-5">
+        <strong><%= @gyms.total_count %></strong> gyms
+      </p>
+    </div>
+  </div>
+</nav>
+
+<table class="table">
   <thead>
   <tr>
     <th>Name</th>

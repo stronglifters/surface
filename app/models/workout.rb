@@ -9,9 +9,13 @@ class Workout < ApplicationRecord
   delegate :name, to: :routine
   alias_method :sets, :exercise_sets
 
+  scope :since, ->(date) { where('occurred_at > ?', date) }
   scope :recent, -> { order(occurred_at: :desc) }
   scope :with_exercise, ->(exercise) do
     joins(:exercises).where(exercises: { id: exercise.id }).distinct
+  end
+  scope :to_line_chart, -> do
+    joins(:exercise_sets).group(:occurred_at).recent.maximum('exercise_sets.target_weight')
   end
 
   def train(exercise, target_weight, repetitions:, set: nil)
@@ -43,5 +47,9 @@ class Workout < ApplicationRecord
     exercises.order(:created_at).distinct.each do |exercise|
       yield exercise
     end
+  end
+
+  def display_status_for(exercise)
+    progress_for(exercise).status
   end
 end

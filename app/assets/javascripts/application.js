@@ -15,11 +15,11 @@
 //= require moment
 //= require jquery
 //= require jquery_ujs
-//= require foundation
-//= require modernizr
 //= require ractive
 //= require backbone
 //= require ractive-backbone
+//= require Chart.bundle
+//= require chartkick
 //= require_self
 //= require_tree .
 //= require turbolinks

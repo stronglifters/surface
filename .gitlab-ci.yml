@@ -1,0 +1,43 @@
+# https://hub.docker.com/r/library/ruby/tags/
+image: "ruby:2.3"
+
+# Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-service
+services:
+  - redis:latest
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: database_name
+  RAILS_ENV: test
+  DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
+  REDIS_URL: "redis://redis:6379/12"
+
+cache:
+  paths:
+    - vendor/ruby
+
+before_script:
+  - ruby -v                                   # Print out ruby version for debugging
+  - curl -sL https://deb.nodesource.com/setup_4.x | bash -
+  - apt-get update -q && apt-get install nodejs -yqq
+  - npm install npm -g
+  - npm install phantomjs-prebuilt -g
+  - gem install bundler  --no-ri --no-rdoc    # Bundler is not installed with the image
+  - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
+  - bin/rake db:migrate db:seed
+
+rspec:
+  script:
+  - bin/rspec
+
+teaspoon:
+  script:
+  - bin/teaspoon
+
+cucumber:
+  script:
+  - bin/cucumber
+
+brakeman:
+  script:
+  - bundle exec brakeman

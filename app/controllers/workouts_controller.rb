@@ -1,6 +1,11 @@
 class WorkoutsController < ApplicationController
+  before_action { @search_path = workouts_path }
+
   def index
-    @workouts = paginate(recent_workouts)
+    @ranges = [5.years, 1.year, 6.months, 3.months, 1.month, 2.weeks, 1.week].reverse
+    @exercise = Exercise.find_by(id: params[:exercise])
+    @primary_exercises = Exercise.primary.order_by_name.to_a
+    @workouts = recent_workouts(@exercise)
   end
 
   def new
@@ -36,8 +41,10 @@ class WorkoutsController < ApplicationController
     )
   end
 
-  def recent_workouts
-    current_user.workouts.recent.includes(:routine)
+  def recent_workouts(exercise, since = (params[:since] || 1.month).to_i.seconds.ago)
+    @since = since.beginning_of_day
+    workouts = current_user.workouts.since(since).recent.includes(:routine)
+    exercise ? workouts.with_exercise(exercise) : workouts
   end
 
   def find_routine(routine_id)

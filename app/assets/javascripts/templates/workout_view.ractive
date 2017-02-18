@@ -1,43 +1,40 @@
 {{#if clock}}
-  <div class="callout {{alertStatus}}">
-    <p class="text-center"> {{message}} </p>
-    <p class="text-center"> Rest Clock: {{clock}} </p>
+  <div class="columns">
+    <div class="column is-6 is-offset-3">
+      <div class="notification {{alertStatus}}">
+        {{message}} {{clock}}
+      </div>
+    </div>
   </div>
 {{/if}}
 
-<ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
-  {{#each workout.exercises}}
-  <li class="accordion-item" data-accordion-item>
-    <a href="#" class="accordion-title">{{name}}</a>
-    <div class="accordion-content" data-tab-content>
-      {{#each sets}}
-      <div class="row">
-        <div class="columns">
-          <button id='{{id}}' on-click="updateProgress" class="button {{status}}">
-            {{#if target_duration}}
-              {{actual_duration}}
-            {{else}}
-              {{actual_repetitions}}
-            {{/if}}
-          </button>
+{{#each workout.exercises}}
+  <div class="columns content is-small has-text-centered">
+    <div class="column is-6 is-offset-3">
+      <h2 class="subtitle">{{name}}</h2>
+        <div class="level">
+        {{#each sets}}
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">
+                {{#if target_duration}}
+                  {{target_duration}} seconds
+                {{else}}
+                  {{target_repetitions}} x {{target_weight}}
+                {{/if}}
+              </p>
+              <button id='{{id}}' on-click="updateProgress" class="button is-large {{status}}">
+                {{#if target_duration}}
+                  {{actual_duration}}
+                {{else}}
+                  {{actual_repetitions}}
+                {{/if}}
+              </button>
+              <p> {{weight_per_side}} </p>
+            </div>
+          </div>
+        {{/each}}
         </div>
-        <div class="columns">
-          <p class="text-center">
-            {{#if target_duration}}
-              {{target_duration}} seconds
-            {{else}}
-              {{target_repetitions}} x {{target_weight}}
-            {{/if}}
-          </p>
-        </div>
-        <div class="columns">
-          <p class="text-center">
-            {{weight_per_side}}
-          </p>
-        </div>
-      </div>
-      {{/each}}
     </div>
-  </li>
-  {{/each}}
-</ul>
+  </div>
+{{/each}}

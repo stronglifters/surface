@@ -1,68 +1,99 @@
-<% if @workouts.any? %>
-  <div class="row show-for-small-only">
-    <div class="columns">
-      <%= paginate @workouts, remote: false %>
+<div class="container">
+  <div class="columns">
+    <div class="column is-12">
+      <nav class="level">
+        <!-- Left side -->
+        <div class="level-left">
+          <div class="level-item">
+            <%= search_form %>
+          </div>
+          <div class="level-item">
+            <p class="subtitle is-5">
+            <strong><%= @workouts.count %></strong> workouts
+            </p>
+          </div>
+          <div class="level-item">
+            <%= form_tag workouts_path(filter_params_hash), method: :get do %>
+              <p class="control">
+                <% filter_params_hash.each do |key, value| %>
+                  <%= hidden_field_tag key, value %>
+                <% end %>
+                <span class="select">
+                  <%= select_tag :since, options_for_select(@ranges.map { |x| [time_ago_in_words(x.ago), x.to_i] }, params[:since]), include_blank: true  %>
+                </span>
+              </p>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="level-right">
+          <p class="level-item">
+          <% if @exercise.nil? %>
+            <strong> <%= link_to 'All', workouts_path(filter_params_hash(exercise: nil)) %> </strong>
+          <% else %>
+            <%= link_to 'All', workouts_path(filter_params_hash(exercise: nil)) %>
+          <% end %>
+          </p>
+          <% @primary_exercises.each do |exercise| %>
+            <p class="level-item">
+            <% if exercise == @exercise %>
+              <strong><%= link_to exercise.name, workouts_path(filter_params_hash(exercise: exercise)) %></strong>
+            <% else %>
+              <%= link_to exercise.name, workouts_path(filter_params_hash(exercise: exercise)) %>
+            <% end %>
+            </p>
+          <% end %>
+          <p class="level-item"><%= link_to "New", new_workout_path, class: 'button is-success' %></p>
+        </div>
+      </nav>
     </div>
   </div>
-  <div class="row">
-    <div class="columns">
-      <% exercises = ["Squat", "Bench Press", "Barbell Row", "Overhead Press", "Deadlift"]  %>
-      <table class="table-scroll">
+  <div class="columns">
+    <div class="column is-12">
+      <%= line_chart charts_path(filter_params_hash), download: true %>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-12">
+      <table class="table is-striped">
         <thead>
           <tr>
-            <th>Routine</th>
-            <th>Date</th>
-            <th>Body weight</th>
-            <% exercises.each do |exercise_name| %>
-              <th><%= exercise_name %></th>
+            <th><abbr title="Routine"></abbr>Routine</th>
+            <th><abbr title="Date"></abbr>Date</th>
+            <th><abbr title="Body weight"></abbr>Body weight</th>
+            <% @primary_exercises.each do |exercise| %>
+              <th><abbr title="<%= exercise.name %>"></abbr><%= exercise.name %></th>
             <% end %>
           </tr>
         </thead>
         <tbody>
-        <% @workouts.each do |workout| %>
-          <tr>
-            <td> <%= workout.name %> </td>
-            <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
-            <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
-            <% exercises.each do |exercise_name| %>
-              <td>
-                <% progress = workout.progress_for(Exercise.find_by(name: exercise_name)) %>
-                <p class="text-center"> <%= progress.status %> </p>
-              </td>
+          <%= cache @workouts do %>
+            <% @workouts.each do |workout| %>
+              <tr>
+                <td> <%= workout.name %> </td>
+                <td> <%= I18n.l workout.occurred_at, format: :short %> </td>
+                <td> <%= workout.body_weight.to(:lbs) %> lbs </td>
+                <% @primary_exercises.each do |exercise| %>
+                  <td> <%= workout.display_status_for(exercise) %> </td>
+                <% end %>
+              </tr>
             <% end %>
-          </tr>
-        <% end %>
+          <% end %>
         </tbody>
-        <tfoot>
-        </tfoot>
       </table>
     </div>
   </div>
-  <div class="row">
-    <div class="columns">
-      <%= paginate @workouts, remote: false %>
+  <div class="columns">
+    <div class="column is-12">
+      <%# paginate @workouts, remote: false %>
     </div>
   </div>
-  <% if feature_enabled?(:csv_import) %>
-  <div class="row">
-    <div class="columns">
-      <p class="text-center">
-        <a data-open="sendToStrongLiftsModal">
-          <%= User.human_attribute_name(:import_address) %>
-        </a>
-      </p>
-    </div>
-  </div>
-  <% end %>
-<% else %>
-  <div class="row">
-    <div class="columns">
-      <% if feature_enabled?(:csv_import) %>
-      <p class="text-center"> <a href="#" data-reveal-id="sendToStrongLiftsModal"><%= User.human_attribute_name(:import_address) %></a> </p>
-      <% end %>
-      <%= random_video %>
-    </div>
-  </div>
-<% end %>
+</div>
 
-<%= render partial: 'import_address_modal' %>
+<% content_for :javascript do %>
+  $('.select').on('change', function(event) {
+    $(event.target).parents('form:first').submit();
+  });
+<% end %>

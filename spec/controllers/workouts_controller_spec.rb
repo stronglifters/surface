@@ -9,12 +9,17 @@ describe WorkoutsController do
 
   describe "#index" do
     include_context "stronglifts_program"
-    let!(:workout_a) { create(:workout, user: user, routine: routine_a) }
-    let!(:workout_b) { create(:workout, user: user, routine: routine_b) }
+    let!(:workout_a) { create(:workout, user: user, routine: routine_a, occurred_at: 1.week.ago) }
+    let!(:workout_b) { create(:workout, user: user, routine: routine_b, occurred_at: 1.day.ago) }
 
     it "loads all my workouts" do
       get :index
       expect(assigns(:workouts)).to match_array([workout_a, workout_b])
+    end
+
+    it "loads all works since a given time" do
+      get :index, since: 2.days.to_i
+      expect(assigns(:workouts)).to match_array([workout_b])
     end
   end
 

@@ -1,44 +1,33 @@
-<div class="row">
-  <div class="columns text-center">
+<% content_for :content do %>
+  <figure class="image is-128x128">
     <%= gravatar_for(@current_user, size: 128) %>
-    <h1><%= @current_user.username %></h1>
-    <%= form_for(@profile) do |f| %>
-      <fieldset class="fieldset">
-        <legend><%= Profile.human_attribute_name(:gender) %></legend>
-        <% Profile.genders.keys.each do |gender| %>
-          <%= f.radio_button(:gender, gender) %>
-          <%= f.label("gender_#{gender}", Profile.human_attribute_name(gender)) %>
-        <% end %>
-      </fieldset>
-      <fieldset class="fieldset">
-        <legend><%= Profile.human_attribute_name(:social_tolerance) %></legend>
-        <% Profile.social_tolerances.keys.each do |social_tolerance| %>
-          <%= f.radio_button(:social_tolerance, social_tolerance) %>
-          <%= f.label("social_tolerance_#{social_tolerance}", Profile.human_attribute_name(social_tolerance)) %>
-        <% end %>
-      </fieldset>
-      <fieldset class="fieldset">
-        <legend><%= Profile.human_attribute_name(:time_zone) %></legend>
-        <%= f.time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones) %>
-      </fieldset>
-      <fieldset class="fieldset">
-        <legend><%= Profile.human_attribute_name(:home_gym) %></legend>
-        <p id="home-gym-name"><%= @profile.gym.try(:name) %></p>
-        <%= f.hidden_field(:gym_id) %>
-        <button data-open="homeGymModal" class="button" type="button"><%= t('.choose_home_gym') %></button>
-      </fieldset>
-      <%= f.submit t(".save"), class: "button"  %>
-    <% end %>
-  </div>
-</div>
+  </figure>
+  <h1 class="title"><%= @current_user.username %></h1>
+  <%= form_for @profile do |form| %>
+    <%= form.label :gender, class: 'label' %>
+    <p class="control">
+      <% Profile.genders.keys.each do |gender| %>
+        <%= form.radio_button(:gender, gender, class: 'radio') %>
+        <%= form.label("gender_#{gender}", Profile.human_attribute_name(gender), class: 'radio') %>
+      <% end %>
+    </p>
+    <%= form.label :social_tolerance, class: 'label' %>
+    <p class="control">
+      <% Profile.social_tolerances.keys.each do |social_tolerance| %>
+        <%= form.radio_button(:social_tolerance, social_tolerance, class: 'radio') %>
+        <%= form.label("social_tolerance_#{social_tolerance}", Profile.human_attribute_name(social_tolerance), class: 'radio') %>
+      <% end %>
+    </p>
 
-<%= render partial: "home_gym_modal", locals: { id: 'homeGymModal' } %>
+    <%= form.label :time_zone, class: 'label' %>
+    <p class="control">
+      <%= form.time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones, class: 'input') %>
+    </p>
 
-<script type="text/javascript" charset="utf-8">
-window.currentView = new Stronglifters.HomeGym({
-  el: 'gym-search',
-  data: function() {
-    return { city: '<%= current_session.location.try(:city) %>' };
-  }
-})
-</script>
+    <p class="control">
+      <%= form.submit t(".save"), class: "button is-primary"  %>
+    </p>
+  <% end %>
+<% end %>
+
+<%= render template: "layouts/administration" %>

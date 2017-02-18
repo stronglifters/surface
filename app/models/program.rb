@@ -12,12 +12,6 @@ class Program < ApplicationRecord
     slug
   end
 
-  def each_exercise
-    exercises.uniq.each do |exercise|
-      yield exercise
-    end
-  end
-
   def next_routine_after(routine)
     routines.where.not(name: routine.name).first
   end

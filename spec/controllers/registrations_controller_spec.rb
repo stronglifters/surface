@@ -81,7 +81,7 @@ describe RegistrationsController do
       end
 
       it "renders the registration page" do
-        expect(response).to render_template(:new)
+        expect(response).to redirect_to(new_registration_path)
       end
     end
   end

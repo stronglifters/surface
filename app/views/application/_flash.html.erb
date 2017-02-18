@@ -1,0 +1,14 @@
+<% if flash.any? %>
+  <% flash.each do |type, messages| %>
+    <div class="columns">
+      <div class="column is-8 is-offset-2">
+        <div class="notification <%= class_for_flash(type) %>">
+          <button class="delete"></button>
+          <% Array(messages).each do |message| %>
+            <%= content_tag :p, message %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

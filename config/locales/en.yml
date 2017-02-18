@@ -41,6 +41,16 @@ en:
         social_tolerance: Social Tolerance
       user:
         import_address: Send-to-Stronglifters
+  app: 'Stronglifters'
+  application:
+    navigation:
+      blog: Blog
+      home: Home
+      log_out: Log out
+      profile: Profile
+      workouts: Workouts
+    footer:
+      copyright: "© Copyright www.stronglifters.com. All rights reserved."
   time:
     formats:
       short: "%a, %d %b %Y"
@@ -49,22 +59,10 @@ en:
   save: Save
   search: Search
   layouts:
+    administration:
+      dashboard: Dashboard
     application:
-      gyms: Gyms
-      new_workout: 'Next Workout'
-      loading: "Loading..."
-      nav:
-        user:
-          workouts: "Workouts"
-          log_out: "Log out"
-          profile_edit: "Edit profile"
-          profile_view: "View profile"
       title: Strong Lifters
-    flash:
-      notice: 'Yay!'
-      warning: 'Uh oh!'
-      error: 'Oops...'
-      success: 'Yeah Buddy!'
   gyms:
     index:
       title: Gyms
@@ -72,31 +70,26 @@ en:
       title: New Gym
   registrations:
     new:
-      close: 'Close'
       email: "Email"
       login_link: "Already have an account?"
       password: "Password"
       register_button: "Register"
       terms_and_conditions: "I agree to the Terms and Conditions of Use"
-      terms_and_conditions_link: "Read the Terms and Conditions of Use"
+      terms_and_conditions_link: "Terms and Conditions of Use"
       username: "Username"
     create:
       success: "Thank you for registering. Welcome."
   profiles:
     edit:
-      choose_home_gym: 'Choose Home Gym'
       profile_update_success: "Profile updated. This is how your public profile appears."
       save: Save Profile
     home_gym_modal:
       title: Home Gym
       lead: Search for your regular gym.
     show:
-      exercise_header: Exercise
-      maximum_achieved: Personal Record
       not_available: N/A
       no_workouts_completed: 0 workouts completed
-      personal_records: Personal Records
-      workouts_completed: "%{count} workouts completed since %{first_session}."
+      workouts_completed_html: "<strong>%{count}</strong> workouts completed since <strong>%{first_session}</strong>."
   sessions:
     create:
       invalid_login: "Sorry, we cannot find that account."
@@ -105,16 +98,11 @@ en:
       password: "Password"
       login_button: "Login"
       register_link: "Create an account"
-  workouts:
+  dashboards:
     import_address_modal:
-      blurb: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
+      blurb_html: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
       copy: Copy
-      help: I need help.
-      lead: Your custom email address.
-      title: Send-to-Stronglifters.
       warning: To ensure your workouts are imported correctly we suggest that you update your timezone.
-  footer:
-    copyright: "© Copyright www.stronglifters.com. All rights reserved."
   views:
     pagination:
       first: "&laquo; First"

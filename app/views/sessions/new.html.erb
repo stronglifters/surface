@@ -1,14 +1,24 @@
-<div class="row align-center">
-<%= form_for @user, url: sessions_path do |f| %>
+<div class="container">
   <div class="columns">
-    <label><%= t('.username') %>
-      <%= f.text_field :username, placeholder: t('.username') %>
-    </label>
-    <label><%= t('.password') %>
-      <%= f.password_field :password, placeholder: t('.password') %>
-    </label>
-    <%= f.submit t('.login_button'), class: "button"  %>
-    <%= link_to t('.register_link'), new_registration_path, class: "button secondary bare" %>
+    <div class="column is-6 is-offset-3">
+      <%= form_for @user, url: sessions_path do |f| %>
+        <p class="control has-icon">
+          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large', required: 'required' %>
+          <span class="icon is-small">
+            <i class="fa fa-envelope"></i>
+          </span>
+        </p>
+        <p class="control has-icon">
+          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large', required: 'required' %>
+          <span class="icon is-small">
+            <i class="fa fa-lock"></i>
+          </span>
+        </p>
+        <p class="control">
+          <%= f.submit t('.login_button'), class: "button is-success is-large is-fullwidth"  %>
+          <%= link_to t('.register_link'), new_registration_path, class: "button is-link is-pulled-right" %>
+        </p>
+      <% end %>
+    </div>
   </div>
-<% end %>
-</div> <!-- /.row -->
+</div>

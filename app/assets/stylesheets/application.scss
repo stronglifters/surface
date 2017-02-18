@@ -11,10 +11,10 @@
  * file per style scope.
  *
  *= require font-awesome
+ *= require bulma
  *= require_self
-//= require foundation_and_overrides
-
  */
 
 @import "**/*";
-@include foundation-everything(true);
+.application {
+}

@@ -6,4 +6,5 @@ class Stronglifters.Startup
       $(".loading-indicator").show()
     $(document).on 'turbolinks:request-end', ->
       $(".loading-indicator").hide()
-    $(document).foundation()
+    $('.delete').on 'click', ->
+      $('.delete').parent('div:first').hide()

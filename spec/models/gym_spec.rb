@@ -111,7 +111,7 @@ describe Gym do
         ).map(&:name)).to match_array(["Sait Campus Centre"])
       end
     end
-  end
+  end if ENV['YELP_TOKEN_SECRET'].present?
 
   describe "#full_address" do
     let(:location) { build(:location) }

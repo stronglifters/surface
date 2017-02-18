@@ -26,7 +26,7 @@
           <% personal_record = history.personal_record %>
           <div class="level-item has-text-centered">
             <div>
-              <p class="heading"><%= link_to history.exercise.name, graph_path(history.exercise), remote: true %></p>
+              <p class="heading"><%= link_to history.exercise.name, charts_path(exercise: history.exercise), remote: true %></p>
               <p class="title"><%= personal_record ? "#{personal_record} lbs" : t('.not_available') %></p>
             </div>
           </div>

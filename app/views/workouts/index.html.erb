@@ -13,8 +13,11 @@
             </p>
           </div>
           <div class="level-item">
-            <%= form_tag workouts_path(filter_params_hash.except(:since)), method: :get do %>
+            <%= form_tag workouts_path(filter_params_hash), method: :get do %>
               <p class="control">
+                <% filter_params_hash.each do |key, value| %>
+                  <%= hidden_field_tag key, value %>
+                <% end %>
                 <span class="select">
                   <%= select_tag :since, options_for_select(@ranges.map { |x| [time_ago_in_words(x.ago), x.to_i] }, params[:since]) %>
                 </span>
@@ -49,7 +52,7 @@
   <% if @exercise %>
     <div class="columns">
       <div class="column is-12">
-        <%= line_chart [{ name: @exercise.name, data: @workouts.with_exercise(@exercise).to_line_chart }] %>
+        <%= line_chart charts_path(filter_params_hash(exercise: @exercise.to_param)) %>
       </div>
     </div>
   <% end %>

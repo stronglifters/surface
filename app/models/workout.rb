@@ -9,6 +9,7 @@ class Workout < ApplicationRecord
   delegate :name, to: :routine
   alias_method :sets, :exercise_sets
 
+  scope :since, ->(since) { where('occurred_at > ?', since) }
   scope :recent, -> { order(occurred_at: :desc) }
   scope :with_exercise, ->(exercise) do
     joins(:exercises).where(exercises: { id: exercise.id }).distinct

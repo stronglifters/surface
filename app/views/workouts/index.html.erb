@@ -9,8 +9,17 @@
           </div>
           <div class="level-item">
             <p class="subtitle is-5">
-            <strong><%= @workouts.total_count %></strong> workouts
+            <strong><%= @workouts.count %></strong> workouts
             </p>
+          </div>
+          <div class="level-item">
+            <%= form_tag @search_path, method: :get do %>
+              <p class="control">
+                <span class="select">
+                  <%= select_tag :since, options_for_select(@ranges.map { |x| [time_ago_in_words(x.ago), x.to_i] }) %>
+                </span>
+              </p>
+            <% end %>
           </div>
         </div>
 
@@ -77,7 +86,13 @@
   </div>
   <div class="columns">
     <div class="column is-12">
-      <%= paginate @workouts, remote: false %>
+      <%# paginate @workouts, remote: false %>
     </div>
   </div>
 </div>
+
+<% content_for :javascript do %>
+  $('.select').on('change', function(event) {
+    $(event.target).parents('form:first').submit();
+  });
+<% end %>

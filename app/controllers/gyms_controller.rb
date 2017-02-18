@@ -3,9 +3,7 @@ class GymsController < ApplicationController
   before_action only: [:index] { @remote_search = true }
 
   def index
-    @gyms = paginate(
-      Gym.closest_to(current_session.location).search_with(params)
-    )
+    @gyms = paginate(Gym.search_with(params))
   end
 
   def show

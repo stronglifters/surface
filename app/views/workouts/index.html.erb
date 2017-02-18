@@ -30,9 +30,9 @@
         <div class="level-right">
           <p class="level-item">
           <% if @exercise.nil? %>
-            <strong> <%= link_to 'All', workouts_path(filter_params_hash) %> </strong>
+            <strong> <%= link_to 'All', workouts_path(filter_params_hash(exercise: nil)) %> </strong>
           <% else %>
-            <%= link_to 'All', workouts_path(filter_params_hash) %>
+            <%= link_to 'All', workouts_path(filter_params_hash(exercise: nil)) %>
           <% end %>
           </p>
           <% @primary_exercises.each do |exercise| %>
@@ -49,13 +49,11 @@
       </nav>
     </div>
   </div>
-  <% if @exercise %>
-    <div class="columns">
-      <div class="column is-12">
-        <%= line_chart charts_path(filter_params_hash) %>
-      </div>
+  <div class="columns">
+    <div class="column is-12">
+      <%= line_chart charts_path(filter_params_hash), download: true %>
     </div>
-  <% end %>
+  </div>
 
   <div class="columns">
     <div class="column is-12">

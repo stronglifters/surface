@@ -114,15 +114,31 @@ describe Workout, type: :model do
   describe ".to_line_chart" do
     let(:routine) { subject.routine }
     let(:squat) { create(:exercise) }
+    let(:bench_press) { create(:exercise) }
+
+    before :each do
+      routine.add_exercise(squat)
+      routine.add_exercise(bench_press)
+    end
 
     it 'returns a single series' do
-      routine.add_exercise(squat)
       subject.train(squat, 315, repetitions: 5)
       subject.reload
 
       expect(described_class.to_line_chart).to eql({
         subject.occurred_at => 315.0
       })
+    end
+
+    it 'returns multiple series' do
+      subject.train(squat, 315, repetitions: 5)
+      subject.train(bench_press, 210, repetitions: 5)
+      subject.reload
+
+      expect(described_class.to_line_chart).to match_array([
+        { name: squat.name, data: { subject.occurred_at => 315.0 } },
+        { name: bench_press.name, data: { subject.occurred_at => 210.0 } },
+      ])
     end
   end
 end

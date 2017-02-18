@@ -13,6 +13,11 @@ class Workout < ApplicationRecord
   scope :with_exercise, ->(exercise) do
     joins(:exercises).where(exercises: { id: exercise.id }).distinct
   end
+  scope :grouped_by_occurrence, ->(exercise) {
+    joins(:exercise_sets).
+      where(exercise_sets: { exercise_id: exercise }).
+      group('workouts.occurred_at')
+  }
 
   def train(exercise, target_weight, repetitions:, set: nil)
     all_sets = sets.for(exercise).to_a

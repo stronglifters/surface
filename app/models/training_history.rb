@@ -45,11 +45,7 @@ class TrainingHistory
   end
 
   def to_line_chart
-    user.workouts.joins(:exercise_sets).
-      where(exercise_sets: { exercise_id: exercise }).
-      group('workouts.occurred_at').
-      order('workouts.occurred_at desc').
-      maximum('target_weight')
+    user.workouts.grouped_by_occurrence(exercise).recent.maximum(:target_weight)
   end
 
   private

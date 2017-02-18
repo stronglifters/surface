@@ -110,4 +110,19 @@ describe Workout, type: :model do
       expect(subject.since(2.days.ago)).to match_array([wednesday])
     end
   end
+
+  describe ".to_line_chart" do
+    let(:routine) { subject.routine }
+    let(:squat) { create(:exercise) }
+
+    it 'returns a single series' do
+      routine.add_exercise(squat)
+      subject.train(squat, 315, repetitions: 5)
+      subject.reload
+
+      expect(described_class.to_line_chart).to eql({
+        subject.occurred_at => 315.0
+      })
+    end
+  end
 end

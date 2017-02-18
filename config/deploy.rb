@@ -33,7 +33,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :keep_releases, 5
 set :ssh_options, forward_agent: true
 set :rbenv_type, :system
-set :rbenv_ruby, `cat .rubyversion`.strip
+set :rbenv_ruby, `cat .ruby-version`.strip
 
 namespace :deploy do
   task :restart do

@@ -16,13 +16,6 @@ feature "Gyms", type: :feature do
       create(:gym, name: "nait", location: create(:edmonton))
     end
 
-    it "loads the gyms closest to you" do
-      subject.visit_page
-      expect(subject).to be_on_page
-      expect(subject).to have_content(calgary_gym.name)
-      expect(subject).not_to have_content(edmonton_gym.name)
-    end
-
     it "loads all the gyms" do
       user_session.location.update_attributes(latitude: 0.0, longitude: 0.0)
       subject.visit_page

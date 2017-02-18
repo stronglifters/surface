@@ -1,8 +1,4 @@
 <% content_for :content do %>
-  <% if @completed_workout %>
-    <p>welcome back</p>
-  <% else %>
-    <%= render partial: 'import_address_modal' %>
-  <% end %>
+  <%= render partial: 'import_address_modal' %>
 <% end %>
 <%= render template: "layouts/administration" %>

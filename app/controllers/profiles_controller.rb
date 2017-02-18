@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
     @user = User.find_by(username: params[:id])
     @profile = @user.profile
     @program = Program.stronglifts
-    @training_histories = @program.exercises.where(id: Exercise.primary).uniq.order(name: :asc).map do |exercise|
+    @training_histories = @program.exercises.primary.distinct.order_by_name.map do |exercise|
       @user.history_for(exercise)
     end
   end

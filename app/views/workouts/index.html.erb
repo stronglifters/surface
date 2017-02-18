@@ -49,7 +49,7 @@
   <% if @exercise %>
     <div class="columns">
       <div class="column is-12">
-        <%= line_chart @workouts.with_exercise(@exercise).to_line_chart %>
+        <%= line_chart [{ name: @exercise.name, data: @workouts.with_exercise(@exercise).to_line_chart }] %>
       </div>
     </div>
   <% end %>

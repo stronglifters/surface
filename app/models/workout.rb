@@ -13,11 +13,8 @@ class Workout < ApplicationRecord
   scope :with_exercise, ->(exercise) do
     joins(:exercises).where(exercises: { id: exercise.id }).distinct
   end
-  scope :grouped_by_occurrence, ->(exercise) do
-    joins(:exercise_sets).where(exercise_sets: { exercise_id: exercise }).group(:occurred_at)
-  end
-  scope :to_line_chart, ->(exercise) do
-    grouped_by_occurrence(exercise).recent.maximum(:target_weight)
+  scope :to_line_chart, -> do
+    group(:occurred_at).recent.maximum(:target_weight)
   end
 
   def train(exercise, target_weight, repetitions:, set: nil)

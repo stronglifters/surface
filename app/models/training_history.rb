@@ -45,7 +45,7 @@ class TrainingHistory
   end
 
   def to_line_chart
-    user.workouts.to_line_chart(exercise)
+    user.workouts.with_exercise(exercise).to_line_chart
   end
 
   private

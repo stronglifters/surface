@@ -99,4 +99,15 @@ describe Workout, type: :model do
       expect(result.to_sets).to eql([5, 5])
     end
   end
+
+  describe ".since" do
+    subject { described_class }
+
+    it 'returns workouts that occurred after the date given' do
+      monday = create(:workout, occurred_at: 3.days.ago)
+      wednesday = create(:workout, occurred_at: 1.day.ago)
+
+      expect(subject.since(2.days.ago)).to match_array([wednesday])
+    end
+  end
 end

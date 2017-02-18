@@ -17,6 +17,7 @@ source "https://rubygems.org" do
   gem "database_cleaner", group: :test
   gem "dotenv-rails"
   gem "email_validator"
+  gem "exception_notification"
   gem "factory_girl_rails", group: :test
   gem "ffaker", group: :test
   gem "flamegraph", group: :development
@@ -33,8 +34,9 @@ source "https://rubygems.org" do
   gem "i18n-tasks", group: :development
   gem "jbuilder", "~> 2.5"
   gem "jquery-rails"
-  gem "listen", "~> 3.0.5"
+  gem "jwt"
   gem "kaminari"
+  gem "listen", "~> 3.0.5"
   gem "meta_request", group: :development
   gem "pg"
   gem "poltergeist", group: :test
@@ -70,7 +72,6 @@ source "https://rubygems.org" do
   gem "web-console", group: :development
   gem "webmock", group: :test
   gem "yelp"
-  gem "jwt"
 end
 
 source "https://rails-assets.org" do

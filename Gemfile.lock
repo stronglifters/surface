@@ -140,6 +140,9 @@ GEM
       activemodel
     equalizer (0.0.11)
     erubis (2.7.0)
+    exception_notification (4.2.1)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -445,6 +448,7 @@ DEPENDENCIES
   database_cleaner!
   dotenv-rails!
   email_validator!
+  exception_notification!
   factory_girl_rails!
   ffaker!
   flamegraph!

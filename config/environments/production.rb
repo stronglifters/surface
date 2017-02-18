@@ -98,4 +98,11 @@ Rails.application.configure do
     authentication: :login,
     enable_starttls_auto: true
   }
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack, email: {
+    deliver_with: :deliver_later, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+    email_prefix: "[PRODUCTION] ",
+    sender_address: %{"notifier" <notifier@stronglifters.com>},
+    exception_recipients: ENV['EXCEPTION_NOTIFICATION_EMAILS'].split(',').join(' ') %w{mo@mokhan.ca}
+  }
 end

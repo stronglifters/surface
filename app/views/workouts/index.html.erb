@@ -13,7 +13,7 @@
             </p>
           </div>
           <div class="level-item">
-            <%= form_tag @search_path, method: :get do %>
+            <%= form_tag workouts_path(filter_params_hash.except(:since)), method: :get do %>
               <p class="control">
                 <span class="select">
                   <%= select_tag :since, options_for_select(@ranges.map { |x| [time_ago_in_words(x.ago), x.to_i] }, params[:since]) %>
@@ -27,17 +27,17 @@
         <div class="level-right">
           <p class="level-item">
           <% if @exercise.nil? %>
-            <strong> <%= link_to 'All', workouts_path %> </strong>
+            <strong> <%= link_to 'All', workouts_path(filter_params_hash) %> </strong>
           <% else %>
-            <%= link_to 'All', workouts_path %>
+            <%= link_to 'All', workouts_path(filter_params_hash) %>
           <% end %>
           </p>
           <% @primary_exercises.each do |exercise| %>
             <p class="level-item">
             <% if exercise == @exercise %>
-              <strong><%= link_to exercise.name, workouts_path(exercise: exercise) %></strong>
+              <strong><%= link_to exercise.name, workouts_path(filter_params_hash(exercise: exercise)) %></strong>
             <% else %>
-              <%= link_to exercise.name, workouts_path(exercise: exercise) %>
+              <%= link_to exercise.name, workouts_path(filter_params_hash(exercise: exercise)) %>
             <% end %>
             </p>
           <% end %>

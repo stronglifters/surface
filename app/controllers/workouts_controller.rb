@@ -41,7 +41,7 @@ class WorkoutsController < ApplicationController
     )
   end
 
-  def recent_workouts(exercise, since = (params[:since] || 7.days.to_i).to_i.seconds.ago)
+  def recent_workouts(exercise, since = (params[:since] || 7.days).to_i.seconds.ago)
     @since = since.beginning_of_day
     workouts = current_user.workouts.since(since).recent.includes(:routine)
     exercise ? workouts.with_exercise(exercise) : workouts

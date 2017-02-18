@@ -1,25 +1,27 @@
-<div class="row">
+<div class="container">
   <div class="columns">
-    <h1><%= @gym.name %></h1>
-    <p>
-    <%= @gym.full_address %>
-    <%= link_to @gym.map_url do %>
-      <i class="fa fa-map-marker" aria-hidden="true"></i>
-    <% end %>
-    </p>
+    <div class="column is-12">
+      <h1 class="title"><%= @gym.name %></h1>
+      <p>
+      <%= @gym.full_address %>
+      <%= link_to @gym.map_url do %>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+      <% end %>
+      </p>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-12 map">
+      <div id="googleMap" style="width:100%;height:500px;"></div>
+    </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="columns map no-padding">
-    <div id="googleMap" style="width:100%;height:500px;"></div>
-  </div>
-</div>
-
-<script type="text/javascript" charset="utf-8">
+<% content_for :javascript do %>
   window.currentView = new Stronglifters.GoogleMap("googleMap").present({
     name: '<%= @gym.name %>',
     latitude: <%= @gym.location.latitude %>,
     longitude: <%= @gym.location.longitude %>,
   });
-</script>
+<% end %>

@@ -10,7 +10,7 @@ class ChartsController < ApplicationController
 
   private
 
-  def rolled_up_sets(exercise, since = (params[:since] || 7.days).to_i.seconds.ago)
+  def rolled_up_sets(exercise, since = (params[:since] || 1.month).to_i.seconds.ago)
     ExerciseSet
       .joins(:exercise)
       .where(exercise: exercise)

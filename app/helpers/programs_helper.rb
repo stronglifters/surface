@@ -1,5 +1,5 @@
 module ProgramsHelper
   def rounded(n)
-    n - (n % 5)
+    n.to_i - (n.to_i % 5)
   end
 end

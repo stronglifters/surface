@@ -3,14 +3,6 @@
     <div class="column is-12">
       <h1 class="title">Texas Method</h1>
       <h2 class="subtitle">https://www.t-nation.com/training/texas-method</h2>
-      <%= form_tag texas_method_programs_path, method: :get do %>
-        <%= number_field_tag :bench_press, params[:bench_press], placeholder: 'Bench Press', class: 'input' %>
-        <%= number_field_tag :barbell_row, params[:barbell_row], placeholder: 'Barbell Row', class: 'input' %>
-        <%= number_field_tag :deadlift, params[:deadlift], placeholder: 'Deadlift', class: 'input' %>
-        <%= number_field_tag :overhead_press, params[:overhead_press], placeholder: 'Overhead Press', class: 'input' %>
-        <%= number_field_tag :squat, params[:squat], placeholder: 'Squat', class: 'input' %>
-        <%= submit_tag "Submit", class: 'button is-primary' %>
-      <% end %>
     </div>
   </div>
 
@@ -22,15 +14,15 @@
         <tbody>
           <tr>
             <td><strong>Squat</strong> (5x5 @ 90% 5RM)</td>
-            <td><%= rounded(@maxes[:squat] * 0.9) %> lbs</td>
+            <td><%= rounded(@squat * 0.9) %>lbs</td>
           </tr>
           <tr>
             <td><strong>Bench Press</strong> or <strong>Overhead Press</strong> (5x5 @ 90% 5RM)</td>
-            <td><%= rounded(@maxes[:bench_press] * 0.9) %> lbs</td>
+            <td><%= rounded(@bench_press * 0.9) %>lbs</td>
           </tr>
           <tr>
             <td><strong>Deadlift</strong> (1x5 @ 90% 5RM)</td>
-            <td><%= rounded(@maxes[:deadlift] * 0.9) %> lbs</td>
+            <td><%= rounded(@deadlift * 0.9) %>lbs</td>
           </tr>
         </tbody>
       </table>
@@ -43,11 +35,11 @@
         <tbody>
           <tr>
             <td><strong>Squat</strong> 2x5 @ 80% of Monday's work weight</td>
-            <td><%= rounded(rounded(@maxes[:squat] * 0.9) * 0.8) %> lbs</td>
+            <td><%= rounded(rounded(@squat * 0.9) * 0.8) %>lbs</td>
           </tr>
           <tr>
             <td><strong>Bench Press</strong> or <strong>Overhead Press</strong> 3x5 @ 90% 5RM</td>
-            <td><%= rounded(@maxes[:bench_press] * 0.9) %> lbs</td>
+            <td><%= rounded(@bench_press * 0.9) %>lbs</td>
           </tr>
           <tr>
             <td><strong>Chin-up</strong> 3 x body weight</td>
@@ -68,11 +60,11 @@
         <tbody>
           <tr>
             <td><strong>Squat</strong> (1x5 @ new 5RM)</td>
-            <td><%= @maxes[:squat] + 5 %> lbs</td>
+            <td><%= @squat + 5 %>lbs</td>
           </tr>
           <tr>
             <td><strong>Bench Press</strong> or <strong>Overhead Press</strong> (match exercise from Monday) (1x5 @ new 5RM)</td>
-            <td><%= @maxes[:bench_press] + 5 %> lbs</td>
+            <td><%= @bench_press + 5 %>lbs</td>
           </tr>
           <tr>
             <td><strong>Barbell Row</strong> (5x3 or 6x2)</td>
@@ -80,6 +72,24 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-6 is-offset-3">
+      <%= form_tag texas_method_programs_path, method: :get do %>
+        <%= label_tag :bench_press, nil, class: 'label' %>
+        <%= number_field_tag :bench_press, @bench_press, placeholder: 'Bench Press', class: 'input' %>
+        <%= label_tag :barbell_row, nil, class: 'label' %>
+        <%= number_field_tag :barbell_row, @barbell_row, placeholder: 'Barbell Row', class: 'input' %>
+        <%= label_tag :deadlift, nil, class: 'label' %>
+        <%= number_field_tag :deadlift, @deadlift, placeholder: 'Deadlift', class: 'input' %>
+        <%= label_tag :overhead_press, nil, class: 'label' %>
+        <%= number_field_tag :overhead_press, @overhead_press, placeholder: 'Overhead Press', class: 'input' %>
+        <%= label_tag :squat, nil, class: 'label' %>
+        <%= number_field_tag :squat, @squat, placeholder: 'Squat', class: 'input' %>
+        <%= submit_tag "Submit", class: 'button is-primary is-fullwidth' %>
+      <% end %>
     </div>
   </div>
 </div>

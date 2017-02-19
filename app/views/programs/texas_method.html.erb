@@ -17,8 +17,12 @@
             <td><%= rounded(@squat * 0.9) %>lbs</td>
           </tr>
           <tr>
-            <td><strong>Bench Press</strong> or <strong>Overhead Press</strong> (5x5 @ 90% 5RM)</td>
+            <td>*<strong>Bench Press</strong> (5x5 @ 90% 5RM)</td>
             <td><%= rounded(@bench_press * 0.9) %>lbs</td>
+          </tr>
+          <tr>
+            <td>*<strong>Overhead Press</strong> (5x5 @ 90% 5RM)</td>
+            <td><%= rounded(@overhead_press * 0.9) %>lbs</td>
           </tr>
           <tr>
             <td><strong>Deadlift</strong> (1x5 @ 90% 5RM)</td>
@@ -26,6 +30,7 @@
           </tr>
         </tbody>
       </table>
+      <p class="content is-small">*Complete either Bench Press or Overhead Press.</p>
     </div>
 
     <div class="column is-4">
@@ -38,8 +43,12 @@
             <td><%= rounded(rounded(@squat * 0.9) * 0.8) %>lbs</td>
           </tr>
           <tr>
-            <td><strong>Bench Press</strong> or <strong>Overhead Press</strong> 3x5 @ 90% 5RM</td>
+            <td><strong>*Bench Press</strong> (3x5 @ 90% 5RM)</td>
             <td><%= rounded(@bench_press * 0.9) %>lbs</td>
+          </tr>
+          <tr>
+            <td>*<strong>Overhead Press</strong> 3x5 @ 90% 5RM</td>
+            <td><%= rounded(@overhead_press * 0.9) %>lbs</td>
           </tr>
           <tr>
             <td><strong>Chin-up</strong> 3 x body weight</td>
@@ -51,6 +60,7 @@
           </tr>
         </tbody>
       </table>
+      <p class="content is-small">*Bench press if you overhead pressed on Monday.</p>
     </div>
 
     <div class="column is-4">
@@ -63,8 +73,12 @@
             <td><%= @squat + 5 %>lbs</td>
           </tr>
           <tr>
-            <td><strong>Bench Press</strong> or <strong>Overhead Press</strong> (match exercise from Monday) (1x5 @ new 5RM)</td>
+            <td>*<strong>Bench Press</strong> (1x5 @ new 5RM)</td>
             <td><%= @bench_press + 5 %>lbs</td>
+          </tr>
+          <tr>
+            <td>*<strong>Overhead Press</strong> (1x5 @ new 5RM)</td>
+            <td><%= @overhead_press + 5 %>lbs</td>
           </tr>
           <tr>
             <td><strong>Barbell Row</strong> (5x3 or 6x2)</td>
@@ -72,6 +86,7 @@
           </tr>
         </tbody>
       </table>
+      <p class="content is-small">*Complete either Bench Press or Overhead Press. Match the exercise from Monday.</p>
     </div>
   </div>
 

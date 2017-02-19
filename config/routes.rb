@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :registrations, only: [:new, :create]
   resources :sets, only: [:update]
   resources :workouts, only: [:index, :new, :create, :edit]
-  resources :programs, only: [:show]
+  resources :programs, only: [:show] do
+    collection do
+      get :texas_method
+    end
+  end
   resources :profiles, only: [:new, :create, :show, :edit, :update], constraints: { id: /[^\/]+/ }
   resources :gyms, only: [:index, :show, :new, :create]
   resources :charts, only: [:index]

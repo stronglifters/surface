@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-12">
+      <h1 class="title">Texas Method</h1>
+      <h2 class="subtitle">https://www.t-nation.com/training/texas-method</h2>
+      <%= form_tag texas_method_programs_path, method: :get do %>
+        <%= number_field_tag :bench_press, params[:bench_press], placeholder: 'Bench Press', class: 'input' %>
+        <%= number_field_tag :barbell_row, params[:barbell_row], placeholder: 'Barbell Row', class: 'input' %>
+        <%= number_field_tag :deadlift, params[:deadlift], placeholder: 'Deadlift', class: 'input' %>
+        <%= number_field_tag :overhead_press, params[:overhead_press], placeholder: 'Overhead Press', class: 'input' %>
+        <%= number_field_tag :squat, params[:squat], placeholder: 'Squat', class: 'input' %>
+        <%= submit_tag "Submit", class: 'button' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-12">
+      <h1 class="title">Monday</h1>
+      <h2 class="subtitle">Volume Day</h2>
+      <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Squat</td>
+            <td>5x5 @ 90% 5RM</td>
+            <td><%= rounded(@maxes[:squat] * 0.9) %> lbs</td>
+          </tr>
+          <tr>
+            <td>Bench Press or Overhead Press</td>
+            <td>5x5 @ 90% 5RM</td>
+            <td><%= rounded(@maxes[:bench_press] * 0.9) %> lbs</td>
+          </tr>
+          <tr>
+            <td>Deadlift</td>
+            <td>1x5 @ 90% 5RM</td>
+            <td><%= rounded(@maxes[:deadlift] * 0.9) %> lbs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-12">
+      <h1 class="title">Wednesday</h1>
+      <h2 class="subtitle">Recovery Day</h2>
+      <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Squat</td>
+            <td>2x5 @ 80% of Monday's work weight</td>
+            <td><%= rounded(rounded(@maxes[:squat] * 0.9) * 0.8) %> lbs</td>
+          </tr>
+          <tr>
+            <td>Bench Press or Overhead Press</td>
+            <td>3x5 @ 90% 5RM</td>
+            <td><%= rounded(@maxes[:bench_press] * 0.9) %> lbs</td>
+          </tr>
+          <tr>
+            <td>Chin-up</td>
+            <td>3 x body weight</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Back Extension or Glute Ham Raise</td>
+            <td>5x10</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-12">
+      <h1 class="title">Friday</h1>
+      <h2 class="subtitle">Intensity Day</h2>
+      <table class="table">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Squat</td>
+            <td>1x5 @ new 5RM</td>
+            <td><%= @maxes[:squat] + 5 %> lbs</td>
+          </tr>
+          <tr>
+            <td>Bench Press or Overhead Press (match exercise from Monday)</td>
+            <td>1x5 @ new 5RM</td>
+            <td><%= @maxes[:bench_press] + 5 %> lbs</td>
+          </tr>
+          <tr>
+            <td>Barbell Row</td>
+            <td>5x3 or 6x2</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

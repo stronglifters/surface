@@ -40,8 +40,8 @@ en:
         transgender: Transgender
         social_tolerance: Social Tolerance
       user:
-        import_address: Send-to-Stronglifters
-  app: 'Stronglifters'
+        import_address: Send-to-Strong-Lifters
+  app: Strong Lifters
   application:
     navigation:
       blog: Blog
@@ -62,6 +62,7 @@ en:
   layouts:
     administration:
       dashboard: Dashboard
+      texas_method: Texas method
     application:
       title: Strong Lifters
   gyms:

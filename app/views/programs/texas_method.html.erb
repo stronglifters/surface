@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-12">
+      <h1 class="title">Texas Method</h1>
+      <h2 class="subtitle">https://www.t-nation.com/training/texas-method</h2>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-4">
+      <h1 class="title">Monday</h1>
+      <h2 class="subtitle">Volume Day</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><strong>Squat</strong> (5x5 @ 90% 5RM)</td>
+            <td><%= rounded(@squat * 0.9) %>lbs</td>
+          </tr>
+          <tr>
+            <td>*<strong>Bench Press</strong> (5x5 @ 90% 5RM)</td>
+            <td><%= rounded(@bench_press * 0.9) %>lbs</td>
+          </tr>
+          <tr>
+            <td>*<strong>Overhead Press</strong> (5x5 @ 90% 5RM)</td>
+            <td><%= rounded(@overhead_press * 0.9) %>lbs</td>
+          </tr>
+          <tr>
+            <td><strong>Deadlift</strong> (1x5 @ 90% 5RM)</td>
+            <td><%= rounded(@deadlift * 0.9) %>lbs</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="content is-small">*Complete either Bench Press or Overhead Press.</p>
+    </div>
+
+    <div class="column is-4">
+      <h1 class="title">Wednesday</h1>
+      <h2 class="subtitle">Recovery Day</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><strong>Squat</strong> 2x5 @ 80% of Monday's work weight</td>
+            <td><%= rounded(rounded(@squat * 0.9) * 0.8) %>lbs</td>
+          </tr>
+          <tr>
+            <td><strong>*Bench Press</strong> (3x5 @ 90% 5RM)</td>
+            <td><%= rounded(@bench_press * 0.9) %>lbs</td>
+          </tr>
+          <tr>
+            <td>*<strong>Overhead Press</strong> 3x5 @ 90% 5RM</td>
+            <td><%= rounded(@overhead_press * 0.9) %>lbs</td>
+          </tr>
+          <tr>
+            <td><strong>Chin-up</strong> 3 x body weight</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><strong>Back Extension</strong> or <strong>Glute Ham Raise</strong> 5x10</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="content is-small">*Bench press if you overhead pressed on Monday.</p>
+    </div>
+
+    <div class="column is-4">
+      <h1 class="title">Friday</h1>
+      <h2 class="subtitle">Intensity Day</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><strong>Squat</strong> (1x5 @ new 5RM)</td>
+            <td><%= @squat + 5 %>lbs</td>
+          </tr>
+          <tr>
+            <td>*<strong>Bench Press</strong> (1x5 @ new 5RM)</td>
+            <td><%= @bench_press + 5 %>lbs</td>
+          </tr>
+          <tr>
+            <td>*<strong>Overhead Press</strong> (1x5 @ new 5RM)</td>
+            <td><%= @overhead_press + 5 %>lbs</td>
+          </tr>
+          <tr>
+            <td><strong>Barbell Row</strong> (5x3 or 6x2)</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="content is-small">*Complete either Bench Press or Overhead Press. Match the exercise from Monday.</p>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-6 is-offset-3">
+      <%= form_tag texas_method_programs_path, method: :get do %>
+        <%= label_tag :bench_press, nil, class: 'label' %>
+        <%= number_field_tag :bench_press, @bench_press, placeholder: 'Bench Press', class: 'input' %>
+        <%= label_tag :barbell_row, nil, class: 'label' %>
+        <%= number_field_tag :barbell_row, @barbell_row, placeholder: 'Barbell Row', class: 'input' %>
+        <%= label_tag :deadlift, nil, class: 'label' %>
+        <%= number_field_tag :deadlift, @deadlift, placeholder: 'Deadlift', class: 'input' %>
+        <%= label_tag :overhead_press, nil, class: 'label' %>
+        <%= number_field_tag :overhead_press, @overhead_press, placeholder: 'Overhead Press', class: 'input' %>
+        <%= label_tag :squat, nil, class: 'label' %>
+        <%= number_field_tag :squat, @squat, placeholder: 'Squat', class: 'input' %>
+        <%= submit_tag "Submit", class: 'button is-primary is-fullwidth' %>
+      <% end %>
+    </div>
+  </div>
+</div>

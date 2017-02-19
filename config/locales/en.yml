@@ -62,6 +62,7 @@ en:
   layouts:
     administration:
       dashboard: Dashboard
+      texas_method: Texas method
     application:
       title: Strong Lifters
   gyms:

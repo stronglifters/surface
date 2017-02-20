@@ -1,6 +1,9 @@
 FactoryGirl.define do
   factory :exercise do
     name { FFaker::Internet.user_name }
+    factory :squat do
+      name 'Squat'
+    end
   end
   factory :exercise_set do
     association :exercise

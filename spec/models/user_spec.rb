@@ -245,7 +245,7 @@ describe User do
     end
 
     it "prepares the correct number of sets" do
-      squat = create(:exercise)
+      squat = create(:squat)
       routine.add_exercise(squat, sets: 3)
       workout = subject.next_workout_for(routine)
       expect(workout.exercise_sets.length).to eql(3)

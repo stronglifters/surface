@@ -1,6 +1,6 @@
 <div class="container">
   <div class="columns">
-    <div class="column is-8 is-offset-2 content">
+    <div class="column is-6 is-offset-3 content">
       <% @all_routines.each do |routine| %>
         <%= link_to "Switch to Routine #{routine.name}", new_workout_path(routine_id: routine.id), class: 'button is-link is-pulled-right' %>
       <% end %>
@@ -37,7 +37,7 @@
                     </p>
                   </div>
                 <% end %>
-                <div class="column">
+                <div class="column has-text-centered is-narrow">
                   <br />
                   <%= s.hidden_field :exercise_id %>
                   <%= s.hidden_field :type %>
@@ -47,7 +47,7 @@
             <% end %>
           <% end %>
         <% end %>
-        <%= f.submit "Start", class: "button is-primary is-pulled-right", data: { disable_with: 'Saving' } %>
+        <%= f.submit "Start", class: "button is-primary is-fullwidth", data: { disable_with: 'Saving' } %>
       <% end %>
     </div>
   </div>

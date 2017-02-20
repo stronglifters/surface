@@ -30,7 +30,7 @@ class Routine < ApplicationRecord
   end
 
   def prepare_sets_for(user, workout)
-    exercises.each do |exercise|
+    exercises.primary.each do |exercise|
       program.prepare_sets_for(user, exercise).each do |set|
         workout.add_set(set)
       end

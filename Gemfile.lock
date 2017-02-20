@@ -249,7 +249,6 @@ GEM
       rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rack-timeout (0.4.2)
     rack_session_access (0.1.1)
       builder (>= 2.0.0)
       rack (>= 1.0.0)
@@ -473,7 +472,6 @@ DEPENDENCIES
   poltergeist!
   puma (~> 3.0)!
   rack-mini-profiler!
-  rack-timeout!
   rack_session_access!
   ractive-rails!
   rails (~> 5.0.0)!

@@ -57,14 +57,14 @@
 
   <div class="columns">
     <div class="column is-12">
-      <table class="table is-striped">
+      <table class="table is-bordered is-striped is-narrow">
         <thead>
           <tr>
-            <th><abbr title="Routine"></abbr>Routine</th>
-            <th><abbr title="Date"></abbr>Date</th>
-            <th><abbr title="Body weight"></abbr>Body weight</th>
+            <th><abbr title="Routine">Routine</abbr></th>
+            <th><abbr title="Date">Date</abbr></th>
+            <th><abbr title="Body weight">Body weight</abbr></th>
             <% @primary_exercises.each do |exercise| %>
-              <th><abbr title="<%= exercise.name %>"></abbr><%= exercise.name %></th>
+              <th><%= exercise.name %></th>
             <% end %>
           </tr>
         </thead>

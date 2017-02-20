@@ -27,8 +27,9 @@ en:
       work_set: Work Set
     attributes:
       exercise_set:
-        target_repetitions: Reps
-        target_weight: Weight
+        target_duration: Target duration (seconds)
+        target_repetitions: Repetitions
+        target_weight: Weight (lbs)
       profile:
         female: Female
         gender: Gender
@@ -41,6 +42,8 @@ en:
         social_tolerance: Social Tolerance
       user:
         import_address: Send-to-Strong-Lifters
+      workout:
+        body_weight: Body weight (lbs)
   app: Strong Lifters
   application:
     navigation:

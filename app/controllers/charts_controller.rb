@@ -23,6 +23,6 @@ class ChartsController < ApplicationController
   end
 
   def user
-    User.find_by(id: params[:user_id]) || current_user
+    User.find_by(username: params[:username]) || current_user
   end
 end

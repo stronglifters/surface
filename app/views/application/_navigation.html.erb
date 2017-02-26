@@ -3,6 +3,9 @@
     <div class="nav-left">
       <%= link_to t("app"), root_path, class: 'nav-item is-brand' %>
       <%= link_to t(".workouts"), workouts_path, class: 'nav-item' %>
+      <% if feature_enabled? :athletes %>
+      <%= link_to t(".athletes"), profiles_path, class: 'nav-item' %>
+      <% end %>
       <%= link_to t(".gyms"), gyms_path, class: 'nav-item' %>
       <%= link_to t(".blog"), "http://slog.stronglifters.com", class: 'nav-item' %>
       <%= link_to t(".about"), "http://slog.stronglifters.com/about", class: 'nav-item' %>

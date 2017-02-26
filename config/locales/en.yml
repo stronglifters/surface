@@ -47,9 +47,10 @@ en:
   app: Strong Lifters
   application:
     navigation:
+      about: About
+      athletes: Athletes
       blog: Blog
       gyms: Gyms
-      home: Home
       log_out: Log out
       profile: Profile
       workouts: Workouts

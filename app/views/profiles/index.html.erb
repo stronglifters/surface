@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <% @users.each do |user| %>
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <figure class="image" style="height: 40px; width: 40px;">
+                  <%= link_to profile_path(user) do %>
+                    <%= gravatar_for(user, size: 96) %>
+                  <% end %>
+                </figure>
+              </div>
+              <div class="media-content">
+                <p class="title is-4"><%= link_to user.username, profile_path(user) %></p>
+                <p class="subtitle is-6"><%= user.profile.gender %></p>
+              </div>
+            </div>
+
+            <div class="content">
+              <small><%= user.created_at.strftime("%D at %I:%M%p") %></small>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= paginate @users, remote: false %>
+    </div>
+  </div>
+</div>

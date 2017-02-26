@@ -1,4 +1,8 @@
 class ProfilesController < ApplicationController
+  def index
+    @users = paginate(User.all)
+  end
+
   def show
     @user = User.find_by(username: params[:id])
     @profile = @user.profile

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :texas_method
     end
   end
-  resources :profiles, only: [:new, :create, :show, :edit, :update], constraints: { id: /[^\/]+/ }
+  resources :profiles, only: [:index, :new, :create, :show, :edit, :update], constraints: { id: /[^\/]+/ }
   resources :gyms, only: [:index, :show, :new, :create]
   resources :charts, only: [:index]
   resource :dashboards, only: [:show]

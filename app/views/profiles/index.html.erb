@@ -1,7 +1,7 @@
 <div class="container">
   <div class="columns">
-    <div class="column is-3">
-      <% @users.each do |user| %>
+    <% @users.each do |user| %>
+      <div class="column is-one-quarter">
         <div class="card">
           <div class="card-content">
             <div class="media">
@@ -23,9 +23,8 @@
             </div>
           </div>
         </div>
-      <% end %>
-
-      <%= paginate @users, remote: false %>
-    </div>
+      </div>
+    <% end %>
+    <%= paginate @users, remote: false %>
   </div>
 </div>

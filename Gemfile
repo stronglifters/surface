@@ -25,6 +25,7 @@ source "https://rubygems.org" do
   gem "flipper-redis"
   gem "font-awesome-rails"
   gem "foreman", group: :development
+  gem "gaffe"
   gem "geocoder"
   gem "geokit-rails"
   gem "griddler"

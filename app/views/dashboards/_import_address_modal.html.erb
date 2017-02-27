@@ -1,10 +1,13 @@
-<div class="content is-large">
-  <p> <%= t('.blurb_html') %> </p>
-  <p> <%= text_field_tag :import_address, current_user.import_address, class: 'input is-large' %> </p>
-  <button class="button clipboard-button" data-clipboard-target="#import_address">
-    <i class="fa fa-copy"></i> <%= t('.copy') %>
-  </button>
-  <p> <%= mail_to(current_user.import_address, User.human_attribute_name(:import_address)) %> </p>
+<div class="content">
+  <h1 class="title">Get Started</h1>
+  <p class="has-text-centered"> <%= t('.blurb_html', email: current_user.import_address) %> </p>
+  <p class="control has-addons">
+    <%= text_field_tag :import_address, current_user.import_address, class: 'input is-expanded' %>
+    <button class="button clipboard-button" data-clipboard-target="#import_address">
+      <span class="icon"><i class="fa fa-copy"></i></span>
+    </button>
+  </p>
+  <p class="has-text-centered"> <%= mail_to(current_user.import_address, User.human_attribute_name(:import_address)) %> </p>
   <% if current_user.default_time_zone? %>
     <p> <i class="fa fa-warning"></i> <%= link_to t('.warning'), edit_profile_path(current_user.profile) %> </p>
   <% end %>

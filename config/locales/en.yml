@@ -106,7 +106,7 @@ en:
       register_link: "Create an account"
   dashboards:
     import_address_modal:
-      blurb_html: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
+      blurb_html: Export workouts from <a href="http://stronglifts.com/apps/">StrongLifts 5x5</a> to <strong>%{email}</strong>.
       copy: Copy
       warning: To ensure your workouts are imported correctly we suggest that you update your timezone.
   workouts:

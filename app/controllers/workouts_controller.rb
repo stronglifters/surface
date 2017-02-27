@@ -9,7 +9,19 @@ class WorkoutsController < ApplicationController
   end
 
   def calendar
-    @workouts = current_user.workouts.recent.includes(:routine)
+    respond_to do |format|
+      format.html
+      format.json do
+        workouts = current_user.workouts.recent.before(params[:end]).after(params[:start]).includes(:routine)
+        results = workouts.map do |workout|
+          {
+            title: workout.routine.name,
+            start: workout.occurred_at.strftime("%Y-%m-%d")
+          }
+        end
+        render json: results.to_json
+      end
+    end
   end
 
   def new

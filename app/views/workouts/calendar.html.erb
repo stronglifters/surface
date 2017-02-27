@@ -9,7 +9,7 @@
 <% content_for :javascript do %>
   $(function(){
     $('#calendar').fullCalendar({
-      events: <%= raw @workouts.map { |x| { title: x.routine.name, start: x.occurred_at.strftime("%Y-%m-%d") } }.to_json %>
+      events: '<%= calendar_workouts_path(format: :json) %>'
     });
   });
 <% end %>

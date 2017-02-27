@@ -25,8 +25,8 @@
             <td><%= rounded(@overhead_press * 0.9) %>lbs</td>
           </tr>
           <tr>
-            <td><strong>Deadlift</strong> (1x5 @ 90% 5RM)</td>
-            <td><%= rounded(@deadlift * 0.9) %>lbs</td>
+            <td><strong>Barbell Row</strong> (5x3 or 6x2)</td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -81,8 +81,8 @@
             <td><%= @overhead_press + 5 %>lbs</td>
           </tr>
           <tr>
-            <td><strong>Barbell Row</strong> (5x3 or 6x2)</td>
-            <td></td>
+            <td><strong>Deadlift</strong> (1x5 @ new 5RM)</td>
+            <td><%= rounded(@deadlift + 5) %>lbs</td>
           </tr>
         </tbody>
       </table>

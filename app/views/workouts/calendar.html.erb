@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-12">
+      <div id="calendar"></div>
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript do %>
+  $(function(){
+    $('#calendar').fullCalendar({
+      events: <%= raw @workouts.map { |x| { title: x.routine.name, start: x.occurred_at.strftime("%Y-%m-%d") } }.to_json %>
+    });
+  });
+<% end %>

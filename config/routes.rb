@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :registrations, only: [:new, :create]
   resources :sets, only: [:update]
-  resources :workouts, only: [:index, :new, :create, :edit]
+  resources :workouts, only: [:index, :new, :create, :edit] do
+    collection do
+      get :calendar
+    end
+  end
   resources :programs, only: [:show] do
     collection do
       get :texas_method

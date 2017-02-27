@@ -20,6 +20,7 @@
 //= require ractive-backbone
 //= require Chart.bundle
 //= require chartkick
+//= require fullcalendar
 //= require_self
 //= require_tree .
 //= require turbolinks

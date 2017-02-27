@@ -109,6 +109,9 @@ en:
       blurb_html: This is your custom email address for sending CSV exports from the <a href="http://stronglifts.com/apps/">StrongLifts 5x5 mobile application</a>.
       copy: Copy
       warning: To ensure your workouts are imported correctly we suggest that you update your timezone.
+  workouts:
+    index:
+      calendar: View Calendar
   views:
     pagination:
       first: "&laquo; First"

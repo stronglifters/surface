@@ -8,6 +8,10 @@ class WorkoutsController < ApplicationController
     @workouts = recent_workouts(@exercise)
   end
 
+  def calendar
+    @workouts = current_user.workouts.recent.includes(:routine)
+  end
+
   def new
     @routine = find_routine(params[:routine_id])
     @all_routines = current_program.routines - [@routine]

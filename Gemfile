@@ -77,6 +77,7 @@ end
 source "https://rails-assets.org" do
   gem "rails-assets-backbone"
   gem "rails-assets-clipboard"
+  gem "rails-assets-fullcalendar"
   gem "rails-assets-lodash"
   gem "rails-assets-modernizr"
   gem "rails-assets-moment"

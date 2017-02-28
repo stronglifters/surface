@@ -21,6 +21,7 @@
 //= require Chart.bundle
 //= require chartkick
 //= require fullcalendar
+//= require vue
 //= require_self
 //= require_tree .
 //= require turbolinks

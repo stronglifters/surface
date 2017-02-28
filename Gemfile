@@ -69,6 +69,7 @@ source "https://rubygems.org" do
   gem "turbolinks", "~> 5"
   gem "uglifier", ">= 1.3.0"
   gem "vcr", group: :test
+  gem "vuejs-rails"
   gem "web-console", group: :development
   gem "webmock", group: :test
   gem "yelp"

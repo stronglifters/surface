@@ -1,3 +1,15 @@
+###
+Example usage:
+
+class MyView extends Stronglifters.Autoview
+  @viewName "my-view"
+  template: JST['views/my_view']
+
+  render: () ->
+    @$el.html(@template(message: 'hello'))
+
+<div data-autoview-name="my-view"></div>
+###
 class Stronglifters.Autoview extends Backbone.View
   @views: {}
   @constructors: {}

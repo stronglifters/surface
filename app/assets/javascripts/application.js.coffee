@@ -22,9 +22,6 @@
 #= require chartkick
 #= require fullcalendar
 #= require vue
-#= require react
-#= require react_ujs
-#= require components
 
 #= require_self
 #= require_tree .

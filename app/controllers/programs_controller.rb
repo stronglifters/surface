@@ -4,11 +4,13 @@ class ProgramsController < ApplicationController
   end
 
   def texas_method
-    @barbell_row = personal_record_for(:barbell_row)
-    @bench_press = personal_record_for(:bench_press)
-    @deadlift = personal_record_for(:deadlift)
-    @overhead_press = personal_record_for(:overhead_press)
-    @squat = personal_record_for(:squat)
+    gon.personal_records = {
+      barbell_row: personal_record_for(:barbell_row),
+      bench_press: personal_record_for(:bench_press),
+      deadlift: personal_record_for(:deadlift),
+      overhead_press: personal_record_for(:overhead_press),
+      squat: personal_record_for(:squat),
+    }
   end
 
   private

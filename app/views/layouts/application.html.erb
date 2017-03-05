@@ -8,7 +8,7 @@
     <title><%= t('.title') %> <%= content_for?(:title) ? "| #{yield(:title)}" : "" %></title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}" %>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}" if ENV['GOOGLE_MAPS_API_KEY'].present? %>
     <%= yield(:head) %>
   </head>
   <body class="<%= current_layout %> <%= controller_name %> <%= action_name %>">
@@ -20,5 +20,6 @@
     <script type="text/javascript" charset="utf-8">
       <%= content_for :javascript %>
     </script>
+    <%= include_gon %>
   </body>
 </html>

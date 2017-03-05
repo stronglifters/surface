@@ -16,6 +16,7 @@ source "https://rubygems.org" do
   gem "dalli"
   gem "database_cleaner", group: :test
   gem "dotenv-rails"
+  gem "eco"
   gem "email_validator"
   gem "exception_notification"
   gem "factory_girl_rails", group: :test
@@ -28,6 +29,7 @@ source "https://rubygems.org" do
   gem "gaffe"
   gem "geocoder"
   gem "geokit-rails"
+  gem "gon"
   gem "griddler"
   gem "griddler-sendgrid"
   gem "groupdate"

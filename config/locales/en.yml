@@ -56,6 +56,11 @@ en:
       workouts: Workouts
     footer:
       copyright: "© Copyright www.stronglifters.com. All rights reserved."
+  bench_press: 'Bench Press'
+  barbell_row: 'Barbell Row'
+  squat: 'Squat'
+  deadlift: 'Deadlift'
+  overhead_press: 'Overhead Press'
   time:
     formats:
       short: "%a, %d %b %Y"

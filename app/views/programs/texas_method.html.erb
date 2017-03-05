@@ -6,110 +6,134 @@
     </div>
   </div>
 
-  <div class="columns" >
-    <div class="column is-3">
-      <personal-records v-bind:personal_records="personal_records" inline-template>
-      <%= form_tag texas_method_programs_path, method: :get do %>
-        <%= label_tag :bench_press, nil, class: 'label' %>
-        <%= number_field_tag :bench_press, nil, placeholder: 'Bench Press', class: 'input', 'v-model': 'personal_records.bench_press' %>
-        <%= label_tag :barbell_row, nil, class: 'label' %>
-        <%= number_field_tag :barbell_row, nil, placeholder: 'Barbell Row', class: 'input', 'v-model': 'personal_records.barbell_row' %>
-        <%= label_tag :deadlift, nil, class: 'label' %>
-        <%= number_field_tag :deadlift, nil, placeholder: 'Deadlift', class: 'input', 'v-model': 'personal_records.deadlift' %>
-        <%= label_tag :overhead_press, nil, class: 'label' %>
-        <%= number_field_tag :overhead_press, nil, placeholder: 'Overhead Press', class: 'input', 'v-model': 'personal_records.overhead_press' %>
-        <%= label_tag :squat, nil, class: 'label' %>
-        <%= number_field_tag :squat, nil, placeholder: 'Squat', class: 'input', 'v-model': 'personal_records.squat' %>
-      <% end %>
-      </personal-records>
-    </div>
+  <div class="columns">
+    <personal-records v-bind:personal_records="personal_records" inline-template>
+      <div class="column">
+        <div class="box">
+          <nav class="level">
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading"><%= t('bench_press') %></p>
+                <p class="title"><%= number_field_tag :bench_press, nil, placeholder: t('bench_press'), class: 'input', 'v-model': 'personal_records.bench_press' %></p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading"><%= t('barbell_row') %></p>
+                <p class="title"><%= number_field_tag :barbell_row, nil, placeholder: t('barbell_row'), class: 'input', 'v-model': 'personal_records.barbell_row' %></p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading"><%= t('deadlift') %></p>
+                <p class="title"><%= number_field_tag :deadlift, nil, placeholder: t('deadlift'), class: 'input', 'v-model': 'personal_records.deadlift' %></p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading"><%= t('overhead_press') %></p>
+                <p class="title"><%= number_field_tag :overhead_press, nil, placeholder: t('overhead_press'), class: 'input', 'v-model': 'personal_records.overhead_press' %></p>
+              </div>
+            </div>
+            <div class="level-item has-text-centered">
+              <div>
+                <p class="heading"><%= t('squat') %></p>
+                <p class="title"><%= number_field_tag :squat, nil, placeholder: t('squat'), class: 'input', 'v-model': 'personal_records.squat' %></p>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </personal-records>
+  </div>
 
+  <div class="columns" >
     <volume-day v-bind:personal_records="personal_records" inline-template>
-    <div class="column is-3">
-      <h1 class="title">Monday</h1>
-      <h2 class="subtitle">Volume Day</h2>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><strong>Squat</strong> (5x5 @ 90% 5RM)</td>
-            <td>{{squat}}lbs</td>
-          </tr>
-          <tr>
-            <td>*<strong>Bench Press</strong> (5x5 @ 90% 5RM)</td>
-            <td>{{bench_press}}lbs</td>
-          </tr>
-          <tr>
-            <td>*<strong>Overhead Press</strong> (5x5 @ 90% 5RM)</td>
-            <td>{{overhead_press}}lbs</td>
-          </tr>
-          <tr>
-            <td><strong>Barbell Row</strong> (5x3 or 6x2)</td>
-            <td>{{barbell_row}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="content is-small">*Complete either Bench Press or Overhead Press.</p>
-    </div>
+      <div class="column is-4">
+        <h1 class="title">Monday</h1>
+        <h2 class="subtitle">Volume Day</h2>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><strong>Squat</strong> (5x5 @ 90% 5RM)</td>
+              <td>{{squat}}lbs</td>
+            </tr>
+            <tr>
+              <td>*<strong>Bench Press</strong> (5x5 @ 90% 5RM)</td>
+              <td>{{bench_press}}lbs</td>
+            </tr>
+            <tr>
+              <td>*<strong>Overhead Press</strong> (5x5 @ 90% 5RM)</td>
+              <td>{{overhead_press}}lbs</td>
+            </tr>
+            <tr>
+              <td><strong>Barbell Row</strong> (5x3 or 6x2)</td>
+              <td>{{barbell_row}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="content is-small">*Complete either Bench Press or Overhead Press.</p>
+      </div>
     </volume-day>
 
     <recovery-day v-bind:personal_records="personal_records" inline-template>
-    <div class="column is-3">
-      <h1 class="title">Wednesday</h1>
-      <h2 class="subtitle">Recovery Day</h2>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><strong>Squat</strong> 2x5 @ 80% of Monday's work weight</td>
-            <td>{{squat}}lbs</td>
-          </tr>
-          <tr>
-            <td><strong>*Bench Press</strong> (3x5 @ 90% 5RM)</td>
-            <td>{{bench_press}}lbs</td>
-          </tr>
-          <tr>
-            <td>*<strong>Overhead Press</strong> 3x5 @ 90% 5RM</td>
-            <td>{{overhead_press}}lbs</td>
-          </tr>
-          <tr>
-            <td><strong>Chin-up</strong> 3 x body weight</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><strong>Back Extension</strong> or <strong>Glute Ham Raise</strong> 5x10</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="content is-small">*Bench press if you overhead pressed on Monday.</p>
-    </div>
+      <div class="column is-4">
+        <h1 class="title">Wednesday</h1>
+        <h2 class="subtitle">Recovery Day</h2>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><strong>Squat</strong> 2x5 @ 80% of Monday's work weight</td>
+              <td>{{squat}}lbs</td>
+            </tr>
+            <tr>
+              <td><strong>*Bench Press</strong> (3x5 @ 90% 5RM)</td>
+              <td>{{bench_press}}lbs</td>
+            </tr>
+            <tr>
+              <td>*<strong>Overhead Press</strong> 3x5 @ 90% 5RM</td>
+              <td>{{overhead_press}}lbs</td>
+            </tr>
+            <tr>
+              <td><strong>Chin-up</strong> 3 x body weight</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><strong>Back Extension</strong> or <strong>Glute Ham Raise</strong> 5x10</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="content is-small">*Bench press if you overhead pressed on Monday.</p>
+      </div>
     </recovery-day>
 
     <intensity-day v-bind:personal_records="personal_records" inline-template>
-    <div class="column is-3">
-      <h1 class="title">Friday</h1>
-      <h2 class="subtitle">Intensity Day</h2>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><strong>Squat</strong> (1x5 @ new 5RM)</td>
-            <td>{{squat}}lbs</td>
-          </tr>
-          <tr>
-            <td>*<strong>Bench Press</strong> (1x5 @ new 5RM)</td>
-            <td>{{bench_press}}lbs</td>
-          </tr>
-          <tr>
-            <td>*<strong>Overhead Press</strong> (1x5 @ new 5RM)</td>
-            <td>{{overhead_press}}lbs</td>
-          </tr>
-          <tr>
-            <td><strong>Deadlift</strong> (1x5 @ new 5RM)</td>
-            <td>{{deadlift}}lbs</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="content is-small">*Complete either Bench Press or Overhead Press. Match the exercise from Monday.</p>
-    </div>
-    </volume-day>
+      <div class="column is-4">
+        <h1 class="title">Friday</h1>
+        <h2 class="subtitle">Intensity Day</h2>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><strong>Squat</strong> (1x5 @ new 5RM)</td>
+              <td>{{squat}}lbs</td>
+            </tr>
+            <tr>
+              <td>*<strong>Bench Press</strong> (1x5 @ new 5RM)</td>
+              <td>{{bench_press}}lbs</td>
+            </tr>
+            <tr>
+              <td>*<strong>Overhead Press</strong> (1x5 @ new 5RM)</td>
+              <td>{{overhead_press}}lbs</td>
+            </tr>
+            <tr>
+              <td><strong>Deadlift</strong> (1x5 @ new 5RM)</td>
+              <td>{{deadlift}}lbs</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="content is-small">*Complete either Bench Press or Overhead Press. Match the exercise from Monday.</p>
+      </div>
+      </volume-day>
   </div>
 </div>

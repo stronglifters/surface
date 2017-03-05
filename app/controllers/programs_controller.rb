@@ -16,7 +16,10 @@ class ProgramsController < ApplicationController
   private
 
   def personal_record_for(name)
-    pr = params[name] || current_user.history_for(Exercise.find_by(name: name.to_s.titleize)).personal_record
-    pr.to_i
+    current_user.history_for(exercise(name)).personal_record.to_i
+  end
+
+  def exercise(name)
+    Exercise.find_by(name: name.to_s.titleize)
   end
 end

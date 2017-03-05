@@ -32,9 +32,3 @@ window.Stronglifters ?= {}
 $(document).on 'turbolinks:load', () =>
   new Stronglifters.Startup().start()
   Stronglifters.Behaviour.install()
-  for element in $("[data-autovue]")
-    window.app = new Vue
-      el: element
-      data: gon
-  for element in $("[data-autoview-name]")
-    Stronglifters.Autoview.install(element)

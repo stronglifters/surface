@@ -31,3 +31,7 @@ window.Stronglifters ?= {}
 
 $(document).on 'turbolinks:load', () =>
   new Stronglifters.Startup().start()
+  for element in $("[data-autovue]")
+    window.app = new Vue
+      el: element
+      data: gon

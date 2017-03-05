@@ -40,9 +40,3 @@ Vue.component "intensity-day",
       @personal_records.overhead_press + 5
     deadlift: ->
       @personal_records.deadlift + 5
-
-document.addEventListener "turbolinks:load", ->
-  for element in $("[data-autovue]")
-    window.app = new Vue
-      el: element
-      data: gon

@@ -25,7 +25,3 @@ class Stronglifters.Autoview extends Backbone.View
       el: element
       $el: $element
     view.render()
-
-document.addEventListener "turbolinks:load", ->
-  for element in $("[data-autoview-name]")
-    Stronglifters.Autoview.install(element)

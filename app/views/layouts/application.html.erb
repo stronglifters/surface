@@ -17,9 +17,9 @@
     <%= render partial: 'loading' %>
     <%= yield %>
     <%= render partial: 'footer' %>
+    <%= include_gon %>
     <script type="text/javascript" charset="utf-8">
       <%= content_for :javascript %>
     </script>
-    <%= include_gon %>
   </body>
 </html>

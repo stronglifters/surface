@@ -1,8 +1,9 @@
-class Autovue extends Stronglifters.Behaviour
+class Stronglifters.Autovue extends Stronglifters.Behaviour
   @on "turbolinks:load"
 
   execute: ->
     for element in $("[data-autovue]")
-      window.vue = new Vue
+      window.views ?= []
+      window.views.push new Vue
         el: element
         data: gon

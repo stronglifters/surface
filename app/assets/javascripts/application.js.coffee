@@ -29,6 +29,11 @@
 
 window.Stronglifters ?= {}
 
-$(document).on 'turbolinks:load', () =>
+document.addEventListener "turbolinks:load", () =>
   new Stronglifters.Startup().start()
+
+$(document).ready () =>
   Stronglifters.Behaviour.install()
+  for event in [ "before-cache", "before-render", "before-visit", "click", "load", "render", "request-end", "request-start", "visit" ]
+    $(document).on "turbolinks:#{event}", =>
+      console.log "Triggered: #{event}"

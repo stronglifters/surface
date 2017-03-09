@@ -5,7 +5,8 @@ class Stronglifters.Behaviour
     @events[event] ?= []
     @events[event].push(this)
 
-  @install: () ->
+  @install: ->
     for event of @events
-      for behaviour in @events[event]
-        new behaviour().execute()
+      document.addEventListener event, () =>
+        for behaviour in @events[event]
+          new behaviour().execute()

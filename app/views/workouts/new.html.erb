@@ -5,7 +5,7 @@
         <%= link_to "Switch to Routine #{routine.name}", new_workout_path(routine_id: routine.id), class: 'button is-link is-pulled-right' %>
       <% end %>
       <h1 class="title">Routine <%= @routine.name %></h1>
-      <%= form_for @workout, remote: true do |f| %>
+      <%= form_for @workout, remote: true, data: { 'autoview-name': 'new-workout-view' } do |f| %>
         <%= f.hidden_field :routine_id %>
         <%= f.label :body_weight, class: 'label' %>
         <%= f.number_field :body_weight, class: 'input' %>
@@ -52,7 +52,3 @@
     </div>
   </div>
 </div>
-
-<% content_for :javascript do %>
-  window.currentView = new Stronglifters.NewWorkoutView({ el: $('#new_workout') });
-<% end %>

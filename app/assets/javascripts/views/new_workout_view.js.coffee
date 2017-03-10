@@ -1,4 +1,6 @@
-class Stronglifters.NewWorkoutView extends Backbone.View
+class Stronglifters.NewWorkoutView extends Stronglifters.Autoview
+  @viewName "new-workout-view"
+
   initialize: (options) ->
     @$el.find('div[name]').each (index, fieldset) ->
       view = new Stronglifters.NewSetView

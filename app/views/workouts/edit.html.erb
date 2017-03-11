@@ -1,23 +1,32 @@
 <div class="container" data-autovue="workout-view">
-  <div class="columns content is-small has-text-centered" v-for="exercise in exercises">
+  <div class="columns content is-small has-text-centered" v-for="exercise in workout.exercises">
     <div class="column is-12">
       <h2 class="subtitle">{{ exercise.name }}</h2>
         <div class="level">
-          <div class="level-item has-text-centered" v-for="set in workout.sets">
+          <div class="level-item has-text-centered" v-for="set in exercise.sets">
+            <exercise-set v-bind:set="set" inline-template>
             <div>
               <p class="heading">
                 {{ set.target_repetitions }} x {{ set.target_weight }}
               </p>
-              <button on-click="updateProgress" class="button is-large">
-                {{ set.actual_repetitions }}
-              </button>
+                <button on-click="updateProgress" class="button is-large">
+                  {{ set.actual_repetitions }}
+                </button>
               <p> {{ set.weight_per_side }} &nbsp; </p>
             </div>
+            </exercise-set>
           </div>
         </div>
     </div>
   </div>
 
+  <div class="columns">
+    <div class="column is-6 is-offset-3">
+      <%= link_to t(:done), workouts_path, class: 'button is-large is-fullwidth is-primary' %>
+    </div>
+  </div>
+
+  <div id="workout-view"></div>
 <% @workout.exercises.primary.order_by_name.distinct.find_each do |exercise| %>
   <div class="columns content is-small has-text-centered">
     <div class="column is-12">
@@ -40,14 +49,6 @@
     </div>
   </div>
 <% end %>
-
-  <div class="columns">
-    <div class="column is-6 is-offset-3">
-      <%= link_to t(:done), workouts_path, class: 'button is-large is-fullwidth is-primary' %>
-    </div>
-  </div>
-
-  <div id="workout-view"></div>
 </div>
 
 <% content_for :javascript do %>

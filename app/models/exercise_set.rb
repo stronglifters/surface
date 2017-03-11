@@ -37,11 +37,12 @@ class ExerciseSet < ApplicationRecord
       id: id,
       exercise_id: exercise.id,
       type: type,
-      target_weight: target_weight.to_h,
-      target_repetitions: target_repetitions,
-      actual_repetitions: actual_repetitions,
       actual_duration: actual_duration,
+      actual_repetitions: actual_repetitions,
       target_duration: target_duration,
+      target_repetitions: target_repetitions,
+      target_weight: target_weight.to_s,
+      weight_per_side: weight_per_side,
     }
   end
 end

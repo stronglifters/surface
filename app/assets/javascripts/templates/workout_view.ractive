@@ -10,7 +10,7 @@
 
 {{#each workout.exercises}}
   <div class="columns content is-small has-text-centered">
-    <div class="column is-6 is-offset-3">
+    <div class="column is-12">
       <h2 class="subtitle">{{name}}</h2>
         <div class="level">
         {{#each sets}}
@@ -30,7 +30,7 @@
                   {{actual_repetitions}}
                 {{/if}}
               </button>
-              <p> {{weight_per_side}} </p>
+              <p> {{weight_per_side}} &nbsp; </p>
             </div>
           </div>
         {{/each}}

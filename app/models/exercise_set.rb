@@ -31,4 +31,17 @@ class ExerciseSet < ApplicationRecord
   def failed?
     !success?
   end
+
+  def to_hash
+    {
+      id: id,
+      exercise_id: exercise.id,
+      type: type,
+      target_weight: target_weight.to_h,
+      target_repetitions: target_repetitions,
+      actual_repetitions: actual_repetitions,
+      actual_duration: actual_duration,
+      target_duration: target_duration,
+    }
+  end
 end

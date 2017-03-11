@@ -54,4 +54,20 @@ class Workout < ApplicationRecord
   def display_status_for(exercise)
     progress_for(exercise).status
   end
+
+  def to_hash
+    exercises_hash = sets.includes(:exercise).order(:created_at).group_by(&:exercise).map do |exercise, sets|
+      {
+        id: exercise.id,
+        name: exercise.name,
+        sets: sets.sort_by(&:created_at).map(&:to_hash)
+      }
+    end
+
+    {
+      id: id,
+      body_weight: body_weight,
+      exercises: exercises_hash
+    }
+  end
 end

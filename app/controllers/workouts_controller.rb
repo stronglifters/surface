@@ -39,6 +39,7 @@ class WorkoutsController < ApplicationController
 
   def edit
     @workout = current_user.workouts.find(params[:id])
+    gon.workout = @workout.to_hash
   end
 
   private

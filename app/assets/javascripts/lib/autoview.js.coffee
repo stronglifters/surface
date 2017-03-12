@@ -21,7 +21,17 @@ class Stronglifters.Autoview extends Backbone.View
   @install: (element) ->
     $element = $(element)
     name = $element.data("autoview-name")
+
     view = new @constructors[name]
       el: element
       $el: $element
+      model: @createModel($element.data('model'), $element.data('model-attributes'))
     view.render()
+    @views[name] ?= []
+    @views[name].push(view)
+
+  @createModel: (name, attributes) ->
+    Stronglifters.AutoModel.createModel(name, attributes)
+
+  render: ->
+    console.log(@$el.html())

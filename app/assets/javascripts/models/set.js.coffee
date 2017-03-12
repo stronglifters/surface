@@ -1,4 +1,5 @@
-class Stronglifters.Set extends Backbone.Model
+class Stronglifters.Set extends Stronglifters.AutoModel
+  @modelName "set"
   urlRoot: '/sets'
   started: ->
     completed = @get("actual_repetitions")

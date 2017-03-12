@@ -1,4 +1,4 @@
-class Autoview extends Stronglifters.Behaviour
+class Stronglifters.AutoviewSetup extends Stronglifters.Behaviour
   @on "turbolinks:load"
 
   execute: ->

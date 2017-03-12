@@ -32,6 +32,10 @@ class ExerciseSet < ApplicationRecord
     !success?
   end
 
+  def started?
+    !actual_repetitions.nil?
+  end
+
   def to_hash
     {
       id: id,

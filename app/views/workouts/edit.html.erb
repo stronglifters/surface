@@ -9,7 +9,7 @@
               <p class="heading">
                 {{ set.target_repetitions }} x {{ set.target_weight }}
               </p>
-                <button on-click="updateProgress" class="button is-large">
+                <button v-on:click="updateProgress" class="button is-large">
                   {{ set.actual_repetitions }}
                 </button>
               <p> {{ set.weight_per_side }} &nbsp; </p>
@@ -26,7 +26,6 @@
     </div>
   </div>
 
-  <div id="workout-view"></div>
 <% @workout.exercises.primary.order_by_name.distinct.find_each do |exercise| %>
   <div class="columns content is-small has-text-centered">
     <div class="column is-12">
@@ -34,11 +33,11 @@
         <div class="level">
         <% @workout.sets.for(exercise).each do |set| %>
           <div class="level-item has-text-centered">
-            <div>
+            <div data-autoview-name="exercise-set-view" data-model="set" data-model-attributes="<%= set.to_json %>">
               <p class="heading">
                 <%= set.target_repetitions %> x <%= set.target_weight %>
               </p>
-              <button on-click="updateProgress" class="button is-large">
+              <button class="button is-large <%= set.success? ? "is-success" : set.started? ? "is-danger" : '' %>">
                 <%= set.actual_repetitions %>
               </button>
               <p> <%= set.weight_per_side %> &nbsp; </p>
@@ -52,11 +51,6 @@
 </div>
 
 <% content_for :javascript do %>
-window.currentView = new Stronglifters.WorkoutView({
-  el: 'workout-view',
-  data: function() {
-    return <%= raw render partial: 'edit.json.jbuilder', locals: { workout: @workout } %>;
-  }
-})
 new Stronglifters.Autovue().execute();
+new Stronglifters.AutoviewSetup().execute();
 <% end %>

@@ -7,6 +7,10 @@ class Stronglifters.Behaviour
 
   @install: ->
     for event of @events
+      @installBehavioursFor(event)
       document.addEventListener event, () =>
-        for behaviour in @events[event]
-          new behaviour().execute()
+        @installBehavioursFor(event)
+
+  @installBehavioursFor: (event) ->
+    for behaviour in @events[event]
+      new behaviour().execute()

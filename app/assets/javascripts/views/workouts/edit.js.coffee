@@ -1,36 +1,18 @@
 Vue.component "exercise-set",
   props: ['set']
+  data: ->
+    model: new Stronglifters.Set(@set)
   methods:
-    updateProgress: ->
-      @actual_repetitions = 1
-      console.log(@set)
-      console.log('update')
-
-class ExerciseSetView extends Stronglifters.Autoview
-  @viewName "exercise-set-view"
-  events:
-    'click button': 'updateProgress'
-
-  updateProgress: ->
-    if !@model.started()
-      @model.complete()
-    else
-      @model.decrement()
-    @model.save()
-    @$('button').html(@model.get('actual_repetitions'))
-
-    if @model.successful()
-      @$('button').addClass('is-success')
-      @$('button').removeClass('is-danger')
-      if @model.workSet()
-        message = "If it was easy break for 1:30, otherwise rest for 3:00."
+    updateProgress: (set) ->
+      if !@model.started()
+        @model.complete()
       else
-        message = "No rest for the wicked. Let's do this!"
-      @displayMessage message, 'is-success'
-    else
-      @$('button').removeClass('is-success')
-      @$('button').addClass('is-danger')
-      @displayMessage "Take a 5:00 break.", 'is-danger'
-
-  displayMessage: (message) ->
-    console.log(message)
+        @model.decrement()
+      @model.save()
+      set.actual_repetitions = @model.get('actual_repetitions')
+  computed:
+    isCompleted: () ->
+      @set.actual_repetitions == @set.target_repetitions
+    classObject: () ->
+      "is-success": @set.actual_repetitions == @set.target_repetitions,
+      'is-danger': @set.actual_repetitions && (@set.actual_repetitions != @set.target_repetitions),

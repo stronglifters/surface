@@ -9,6 +9,7 @@ class MyView extends Stronglifters.Autoview
     @$el.html(@template(message: 'hello'))
 
 <div data-autoview-name="my-view"></div>
+<div data-autoview-name="my-view" data-model="user" data-model-attributes="<%= user.to_json %>">
 ###
 class Stronglifters.Autoview extends Backbone.View
   @views: {}
@@ -33,5 +34,4 @@ class Stronglifters.Autoview extends Backbone.View
   @createModel: (name, attributes) ->
     Stronglifters.AutoModel.createModel(name, attributes)
 
-  render: ->
-    console.log(@$el.html())
+  render: -> { }

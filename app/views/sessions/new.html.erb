@@ -1,24 +1,26 @@
 <div class="container" data-autovue="login-view">
   <div class="columns">
     <div class="column is-6 is-offset-3">
+    <login inline-template>
       <%= form_for @user, url: sessions_path do |f| %>
         <p class="control has-icon">
-          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large', required: 'required' %>
+          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large', required: 'required', "v-model.trim": "username"  %>
           <span class="icon is-small">
             <i class="fa fa-envelope"></i>
           </span>
         </p>
         <p class="control has-icon">
-          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large', required: 'required' %>
+          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large', required: 'required', "v-model.trim": "password"  %>
           <span class="icon is-small">
             <i class="fa fa-lock"></i>
           </span>
         </p>
         <p class="control">
-          <%= f.submit t('.login_button'), class: "button is-success is-large is-fullwidth"  %>
+          <%= f.submit t('.login_button'), class: "button is-success is-large is-fullwidth", ":disabled": "!canSubmit" %>
           <%= link_to t('.register_link'), new_registration_path, class: "button is-link is-pulled-right" %>
         </p>
       <% end %>
+    </login>
     </div>
   </div>
 </div>

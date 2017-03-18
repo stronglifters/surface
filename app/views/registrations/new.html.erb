@@ -1,7 +1,7 @@
 <div class="container" data-autovue="registration-view">
   <div class="columns">
     <div class="column is-6 is-offset-3">
-      <registration inline-template>
+      <registration v-bind:usernames="usernames" inline-template>
       <%= form_for @user, url: registrations_path do |f| %>
         <p class="control has-icon has-icon-right">
           <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large', required: 'required', "v-model.trim": "username", "v-bind:class": "{ 'is-danger': !validation.username, 'is-success': validation.username }" %>

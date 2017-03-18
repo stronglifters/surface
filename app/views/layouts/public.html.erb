@@ -19,6 +19,7 @@
     </header>
     <%= render partial: 'flash' %>
     <%= yield %>
+    <%= include_gon %>
     <script type="text/javascript" charset="utf-8">
       <%= content_for :javascript %>
     </script>

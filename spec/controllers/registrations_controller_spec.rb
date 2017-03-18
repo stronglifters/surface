@@ -2,9 +2,17 @@ require "rails_helper"
 
 describe RegistrationsController do
   describe "#new" do
+    let(:gon) { RequestStore.store[:gon].gon }
+
     it "loads a new user" do
       get :new
       expect(assigns(:user)).to be_new_record
+    end
+
+    it 'loads the used usernames' do
+      user = create(:user)
+      get :new
+      expect(gon).to match_array([["usernames", [user.username]]])
     end
   end
 

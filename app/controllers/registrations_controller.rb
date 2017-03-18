@@ -3,6 +3,7 @@ class RegistrationsController < PublicController
 
   def new
     @user = User.new
+    gon.usernames = User.pluck(:username).sort
   end
 
   def create

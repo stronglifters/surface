@@ -1,35 +1,37 @@
-<div class="container">
+<div class="container" data-autovue="registration-view">
   <div class="columns">
     <div class="column is-6 is-offset-3">
+      <registration inline-template>
       <%= form_for @user, url: registrations_path do |f| %>
-        <p class="control has-icon">
-          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large', required: 'required' %>
+        <p class="control has-icon has-icon-right">
+          <%= f.text_field :username, placeholder: t('.username'), class: 'input is-large', required: 'required', "v-model.trim": "username", "v-bind:class": "{ 'is-danger': !validation.username, 'is-success': validation.username }" %>
           <span class="icon is-small">
             <i class="fa fa-envelope"></i>
           </span>
         </p>
-        <p class="control has-icon">
-          <%= f.email_field :email, placeholder: t('.email'), class: 'input is-large', required: 'required' %>
+        <p class="control has-icon has-icon-right">
+          <%= f.email_field :email, placeholder: t('.email'), class: 'input is-large', required: 'required', "v-model.trim": "email", "v-bind:class": "{ 'is-danger': !validation.email, 'is-success': validation.email }"  %>
           <span class="icon is-small">
             <i class="fa fa-envelope"></i>
           </span>
         </p>
-        <p class="control has-icon">
-          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large', required: 'required' %>
+        <p class="control has-icon has-icon-right">
+          <%= f.password_field :password, placeholder: t('.password'), class: 'input is-large', required: 'required', "v-model": "password", "v-bind:class": "{ 'is-danger': !validation.password, 'is-success': validation.password }"  %>
           <span class="icon is-small">
             <i class="fa fa-lock"></i>
           </span>
         </p>
         <%= f.label :terms_and_conditions do %>
-          <%= f.check_box :terms_and_conditions, required: 'required' %>
+          <%= f.check_box :terms_and_conditions, required: 'required', "v-model": "terms_and_conditions", "v-bind:class": "{ 'is-danger': !validation.terms_and_conditions, 'is-success': validation.terms_and_conditions }" %>
           <%= t('.terms_and_conditions') %>
         <% end %>
         <p class="control">
-          <%= f.submit t('.register_button'), class: "button is-success is-large is-fullwidth"  %>
+          <%= f.submit t('.register_button'), class: "button is-success is-large is-fullwidth", ":disabled": "!isValid"  %>
           <button id="terms-modal" type="button" class="button is-link is-pulled-left"><%= t('.terms_and_conditions_link') %></button>
           <%= link_to t('.login_link'), new_session_path, class: "button is-link is-pulled-right" %>
         </p>
       <% end %>
+      </registration>
     </div>
   </div>
 

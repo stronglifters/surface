@@ -22,12 +22,12 @@
           </span>
         </p>
         <%= f.label :terms_and_conditions do %>
-          <%= f.check_box :terms_and_conditions, required: 'required', "v-model": "terms_and_conditions", "v-bind:class": "{ 'is-danger': !validation.terms_and_conditions, 'is-success': validation.terms_and_conditions }" %>
+          <%= f.check_box :terms_and_conditions, required: 'required', "v-model": "terms_and_conditions" %>
           <%= t('.terms_and_conditions') %>
         <% end %>
         <p class="control">
           <%= f.submit t('.register_button'), class: "button is-success is-large is-fullwidth", ":disabled": "!isValid"  %>
-          <button id="terms-modal" type="button" class="button is-link is-pulled-left"><%= t('.terms_and_conditions_link') %></button>
+          <%= button_tag t('.terms_and_conditions_link'), type: :button, class: "button is-link is-pulled-left", data: { modal: ".modal" } %>
           <%= link_to t('.login_link'), new_session_path, class: "button is-link is-pulled-right" %>
         </p>
       <% end %>
@@ -53,11 +53,3 @@
     </div>
   </div>
 </div>
-
-<% content_for :javascript do %>
-$(function(){
-  $('#terms-modal').on('click', function(){
-    $('.modal').addClass('is-active');
-  });
-});
-<% end %>

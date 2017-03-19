@@ -46,7 +46,6 @@ source "https://rubygems.org" do
   gem "puma", "~> 3.0"
   gem "rack-mini-profiler", group: :development, require: false
   gem "rack_session_access", group: :test
-  gem "ractive-rails"
   gem "rails", "~> 5.0.0"
   gem "rails-controller-testing", group: :test
   gem "rails-erd", group: :development
@@ -84,6 +83,4 @@ source "https://rails-assets.org" do
   gem "rails-assets-lodash"
   gem "rails-assets-modernizr"
   gem "rails-assets-moment"
-  gem "rails-assets-ractive"
-  gem "rails-assets-ractive-backbone"
 end

@@ -18,7 +18,7 @@ describe WorkoutsController do
     end
 
     it "loads all works since a given time" do
-      get :index, since: 2.days.to_i
+      get :index, params: { since: 2.days.to_i }
       expect(assigns(:workouts)).to match_array([workout_b])
     end
   end

@@ -37,10 +37,10 @@ set :rbenv_ruby, `cat .ruby-version`.strip
 
 namespace :deploy do
   task :restart do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
+    on roles(:web) do
       sudo :sv, "restart puma"
     end
-    on roles(:app), in: :groups, limit: 3, wait: 10 do
+    on roles(:app) do
       sudo :sv, "restart sidekiq"
     end
   end

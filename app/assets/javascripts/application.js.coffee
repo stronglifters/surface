@@ -15,9 +15,7 @@
 #= require moment
 #= require jquery
 #= require jquery_ujs
-#= require ractive
 #= require backbone
-#= require ractive-backbone
 #= require Chart.bundle
 #= require chartkick
 #= require fullcalendar

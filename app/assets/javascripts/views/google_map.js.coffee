@@ -3,7 +3,6 @@ class Stronglifters.GoogleMap
     @div = document.getElementById(div)
 
   present: (options) ->
-    console.log("presenting")
     coordinates = new google.maps.LatLng(options.latitude, options.longitude)
     map = new google.maps.Map(@div, {
       center: coordinates,

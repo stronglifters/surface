@@ -9,7 +9,7 @@
               <p class="heading">
                 {{ set.target_repetitions }} x {{ set.target_weight }}
               </p>
-                <button v-on:click="updateProgress(set)" class="button is-large" v-bind:class="classObject">
+                <button :id="set.id" v-on:click="updateProgress(set)" class="button is-large" v-bind:class="classObject">
                   {{ set.actual_repetitions }}
                 </button>
               <p> {{ set.weight_per_side }} &nbsp; </p>

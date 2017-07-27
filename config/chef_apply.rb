@@ -1,87 +1,38 @@
 execute "apt-get update -y"
-execute "apt-get upgrade -y"
+execute "curl -sL https://deb.nodesource.com/setup | bash -"
 
 packages = %w{
-  bison
   build-essential
   curl
-  exuberant-ctags
-  flex
-  g++
   git-core
-  gperf
   libcurl4-openssl-dev
   libffi-dev
-  libfontconfig1-dev
-  libfreetype6
-  libicu-dev
-  libjpeg-dev
-  libpng-dev
   libreadline-dev
-  libsqlite3-dev
   libssl-dev
-  libx11-dev
-  libxext-dev
   libxml2-dev
   libxslt1-dev
   libyaml-dev
-  memcached
-  perl
-  python
+  nodejs
+  phantomjs
+  postgresql
+  postgresql-client-common
+  postgresql-contrib
   python-software-properties
   redis-server
-  software-properties-common
-  sqlite3
-  unzip
   zlib1g-dev
 }
 
 package packages
 
-phantomjs = "phantomjs-1.9.8-linux-x86_64"
-remote_file "/tmp/#{phantomjs}.tar.bz2" do
-  source "https://bitbucket.org/ariya/phantomjs/downloads/#{phantomjs}.tar.bz2"
-  action :create
-end
-
-bash "install_phantomjs" do
-  cwd "/tmp"
-  not_if { ::Dir.exist?("/usr/local/share/#{phantomjs}") }
-  code <<-SCRIPT
-    tar xvjf #{phantomjs}.tar.bz2
-    mv #{phantomjs} /usr/local/share
-  SCRIPT
-end
-
-link "/usr/local/bin/phantomjs" do
-  to "/usr/local/share/#{phantomjs}/bin/phantomjs"
-end
-
-bash "install postgres" do
-  user "root"
-  not_if { ::File.exist?("/etc/apt/sources.list.d/pgdg.list") }
-  code <<-SCRIPT
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc \
-      | apt-key add -
-    apt-get update -y
-    apt-get install -y postgresql-9.4 libpq-dev \
-      postgresql-contrib-9.4 postgresql-client-common
-  SCRIPT
-end
-
-execute "curl -sL https://deb.nodesource.com/setup | bash -"
-package "nodejs"
-
-sql = "SELECT 1 FROM pg_roles WHERE rolname='vagrant'"
-create_user = "createuser -s -e -w vagrant"
+sql = "SELECT 1 FROM pg_roles WHERE rolname='ubuntu'"
+create_user = "createuser -s -e -w ubuntu"
 execute "psql postgres -tAc \"#{sql}\" | grep -q 1 || #{create_user}" do
   user "postgres"
 end
 
-sql = "SELECT 1 FROM pg_roles WHERE rolname='vagrant'"
+sql = "SELECT 1 FROM pg_roles WHERE rolname='ubuntu'"
 execute "createdb" do
-  user "vagrant"
+  user "ubuntu"
   not_if { "psql postgres -tAc \"#{sql}\" | grep -q 1" }
 end
 
@@ -122,7 +73,7 @@ EOH
 end
 
 execute "cp .env.example .env.local" do
-  user "vagrant"
+  user "ubuntu"
   cwd "/vagrant"
   not_if { ::File.exist?("/vagrant/.env.local") }
 end

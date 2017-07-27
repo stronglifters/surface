@@ -26,6 +26,7 @@ class Location < ApplicationRecord
   class << self
     def build_from_ip(ip)
       result = search(ip)
+      return nil if result.nil?
       new(
         address: result.address,
         city: result.city,

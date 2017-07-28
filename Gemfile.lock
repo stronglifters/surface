@@ -248,7 +248,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     parser (2.3.1.2)
       ast (~> 2.2)
-    pg (0.18.4)
+    pg (0.21.0)
     poltergeist (1.10.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -524,4 +524,4 @@ DEPENDENCIES
   yelp!
 
 BUNDLED WITH
-   1.14.6
+   1.15.3

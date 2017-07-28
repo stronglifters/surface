@@ -7,6 +7,7 @@ packages = %w{
   git-core
   libcurl4-openssl-dev
   libffi-dev
+  libpq-dev
   libreadline-dev
   libssl-dev
   libxml2-dev

@@ -24,22 +24,13 @@ class Csv::Import
     workout_row = Csv::Workout.map_from(row, user)
 
     routine = program.routines.find_by(name: workout_row.workout)
-    workout = user.begin_workout(
-      routine,
-      workout_row.date,
-      workout_row.body_weight_lb
-    )
+    workout = user.begin_workout(routine, workout_row.date, workout_row.body_weight_lb)
     routine.exercises.each do |exercise|
       exercise_row = workout_row.find(exercise)
       next if exercise_row.nil?
       exercise_row.sets.compact.each_with_index do |completed_reps, index|
         next if completed_reps.blank?
-        workout.train(
-          exercise,
-          exercise_row.weight_lb,
-          repetitions: completed_reps,
-          set: index
-        )
+        workout.train(exercise, exercise_row.weight_lb, repetitions: completed_reps, set: index)
       end
     end
   end

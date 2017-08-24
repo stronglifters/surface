@@ -9,6 +9,6 @@ class Csv::Exercise
   end
 
   def matches?(exercise)
-    name.downcase == exercise.name.downcase
+    name.downcase == exercise.name&.downcase
   end
 end

@@ -5,7 +5,7 @@ shared_context "stronglifts_program" do
   let!(:routine_a) { program.routines.create name: "A" }
   let!(:bench_press) { create(:exercise, name: "Bench Press") }
   let!(:barbell_row) { create(:exercise, name: "Barbell Row") }
-  let!(:dips) { create(:exercise, name: "Dips") }
+  let!(:dips) { create(:exercise, name: "Weighted Dips") }
   let!(:planks) { create(:exercise, name: "Planks") }
   let!(:squat_workout) do
     routine_a.add_exercise(squat, sets: 5, repetitions: 5)

@@ -4,7 +4,7 @@ program = Program.find_or_create_by!(name: Program::STRONG_LIFTS)
 squat = Exercise.find_or_create_by!(name: "Squat")
 bench_press = Exercise.find_or_create_by!(name: "Bench Press")
 barbell_row = Exercise.find_or_create_by!(name: "Barbell Row")
-dips = Exercise.find_or_create_by!(name: "Dips")
+dips = Exercise.find_or_create_by!(name: "Weighted Dips")
 paused_bench_press = Exercise.find_or_create_by!(name: "Paused Bench Press")
 planks = Exercise.find_or_create_by!(name: "Planks")
 

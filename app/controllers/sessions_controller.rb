@@ -1,17 +1,4 @@
 class SessionsController < PublicController
-  def create
-    if user_session = User.login(
-        params[:user][:username],
-        params[:user][:password]
-    )
-      session[:user_id] = user_session.access(request)
-      redirect_to dashboard_path
-    else
-      flash[:warning] = t("sessions.create.invalid_login")
-      redirect_to new_session_path
-    end
-  end
-
   def new
     if current_user.present?
       redirect_to dashboard_path
@@ -20,9 +7,23 @@ class SessionsController < PublicController
     end
   end
 
+  def create
+    if user_session = User.login(
+        params[:user][:username],
+        params[:user][:password]
+    )
+      reset_session
+      session[:user_id] = user_session.access(request)
+      redirect_to dashboard_path
+    else
+      flash[:warning] = t("sessions.create.invalid_login")
+      redirect_to new_session_path
+    end
+  end
+
   def destroy
     UserSession.authenticate(session[:user_id]).try(:revoke!)
-    reset_session()
+    reset_session
     redirect_to root_path
   end
 end

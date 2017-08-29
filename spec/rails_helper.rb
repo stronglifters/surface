@@ -2,8 +2,6 @@
 ENV["RAILS_ENV"] ||= "test"
 require "coveralls"
 Coveralls.wear!("rails")
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
 require "spec_helper"
 require File.expand_path("../../config/environment", __FILE__)
 require "rspec/rails"

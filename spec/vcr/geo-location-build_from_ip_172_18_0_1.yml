@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://freegeoip.io/json/172.18.0.1
+    uri: https://freegeoip.io/json/172.18.0.1
   response:
     status:
       code: 200

@@ -21,7 +21,9 @@ class Csv::Workout
   end
 
   def self.map_from(row, user)
-    workout = new(date: Date.strptime(row[0], "%m/%d/%y"), note: row[1], body_weight_kg: row[2], body_weight_lb: row[3])
+    date = user.time_zone.local_to_utc(Date.strptime(row[0], "%m/%d/%y").to_time)
+
+    workout = new(date: date, note: row[1], body_weight_kg: row[2], body_weight_lb: row[3])
     # skip additional exercises for now
     row[4..-1].take(3 * 8).each_slice(8) do |slice|
       workout.exercises << Csv::Exercise.new(

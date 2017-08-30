@@ -14,7 +14,7 @@ Vue.component "volume-day",
     overhead_press: ->
       @rounded(@personal_records.overhead_press * 0.9)
     barbell_row: ->
-      0
+      @rounded(@personal_records.barbell_row * 0.9)
 
 Vue.component "recovery-day",
   props: ['personal_records']

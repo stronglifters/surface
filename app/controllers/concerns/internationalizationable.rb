@@ -6,12 +6,6 @@ module Internationalizationable
     around_action :with_locale
   end
 
-  protected
-
-  def translate(key)
-    I18n.translate("#{params[:controller]}.#{params[:action]}#{key}")
-  end
-
   private
 
   def with_time_zone

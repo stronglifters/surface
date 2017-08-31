@@ -15,12 +15,12 @@
         <tbody>
           <% @emails.each do |email| %>
             <tr>
-              <td><%= mail_to email.to[0]["email"] %></td>
+              <td><%= email.to.map { |x| mail_to(x["full"]) }.join(",").html_safe %></td>
               <td><%= mail_to email.from["full"] %></td>
               <td><%= email.subject %></td>
               <td><%= email.body %></td>
-              <td><%= email.created_at %></td>
-              <td><%= email.updated_at %></td>
+              <td><%= l email.created_at, format: :short %></td>
+              <td><%= l email.updated_at, format: :short %></td>
             </tr>
           <% end %>
         </tbody>

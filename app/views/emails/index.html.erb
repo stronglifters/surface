@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-12">
+      <table class="table is-bordered is-striped is-narrow">
+        <thead>
+          <tr>
+            <th>to</th>
+            <th>from</th>
+            <th>subject</th>
+            <th>body</th>
+            <th>created at</th>
+            <th>updated at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @emails.each do |email| %>
+            <tr>
+              <td><%= mail_to email.to[0]["email"] %></td>
+              <td><%= mail_to email.from["full"] %></td>
+              <td><%= email.subject %></td>
+              <td><%= email.body %></td>
+              <td><%= email.created_at %></td>
+              <td><%= email.updated_at %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-12">
+      <%= paginate @emails, remote: false %>
+    </div>
+  </div>
+</div>

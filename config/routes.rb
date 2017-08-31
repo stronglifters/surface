@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end
   end
   resources :profiles, only: [:index, :new, :create, :show, :edit, :update], constraints: { id: /[^\/]+/ }
+  resources :emails, only: [:index]
   resources :gyms, only: [:index, :show, :new, :create]
   resources :charts, only: [:index]
   resource :dashboards, only: [:show]
